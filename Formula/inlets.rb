@@ -116,10 +116,10 @@ class Inlets < Formula
 
       # Client websocket ping-pong test
       sleep 3 # wait for server to start
-      output = shell_output("#{bin}/inlets client -r 127.0.0.1:#{port} -u http://127.0.0.1:8080 -p 1s 2>&1")
+      output = shell_output("#{bin}/inlets client -r 127.0.0.1:#{port} -u http://127.0.0.1:8080 2>&1")
       assert_match %r{\sUpstream:  => http://127.0.0.1:8080$}, output
-      assert_match %r{\sconnecting to ws://127\.0\.0\.1:#{port}/tunnel with ping=1s$}, output
-      assert_match /\sPing duration: 1.000000s$/, output
+      assert_match %r{\sconnecting to ws://127\.0\.0\.1:#{port}/tunnel with ping=10s$}, output
+      assert_match /\sPing duration: 10.000000s$/, output
       assert_match /\sConnected to websocket: 127.0.0.1/, output
 
       ping_ping_count = output.scan(/PongHandler\. Extend deadline/).size
