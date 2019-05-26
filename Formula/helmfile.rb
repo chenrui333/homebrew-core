@@ -34,7 +34,12 @@ class Helmfile < Formula
     - name: test
     EOS
     system Formula["kubernetes-helm"].opt_bin/"helm", "init", "--client-only"
-    system "#{bin}/helmfile -f helmfile.yaml repos"
+
+    system "#{bin}/helmfile -f helmfile.yaml sync"
+
+    sync_output = "#{bin}/helmfile syn"
+    assert_match sync_output, "#{bin}/helmfile sync"
+
     output = "helmfile version"
     assert_match output, shell_output("#{bin}/helmfile -v")
   end
