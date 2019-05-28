@@ -21,14 +21,6 @@ class Postgrest < Formula
   depends_on "ghc@8.2" => :build
   depends_on "postgresql"
 
-  # Fix build failure with protolude 0.2.2 and hasql-transaction 0.6
-  # Upstream PR 14 May 2018 "postgrest.cabal: fix constraints on protolude and
-  # hasql-transaction"
-  patch do
-    url "https://github.com/PostgREST/postgrest/pull/1111.patch?full_index=1"
-    sha256 "c740da96fb0dfb4a920d9f5091ec34fafcf9d8fe53b4eadda3cbdc80b02d09cd"
-  end
-
   def install
     install_cabal_package :using => ["happy"]
   end
