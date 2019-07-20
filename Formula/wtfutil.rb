@@ -2,8 +2,8 @@ class Wtfutil < Formula
   desc "The personal information dashboard for your terminal"
   homepage "https://wtfutil.com"
   url "https://github.com/wtfutil/wtf.git",
-    :tag      => "v0.17.1",
-    :revision => "eca0d0bf48310c389150cb4225c45ceebce4926c"
+    :tag      => "v0.18.0",
+    :revision => "ab94bd34acb01c10e19e0c0128075e5c0d91a019"
 
   depends_on "go" => :build
 
@@ -16,7 +16,7 @@ class Wtfutil < Formula
     dir.install buildpath.children
 
     cd dir do
-      system "go", "build", "-o", bin/"wtf"
+      system "go", "build", "-o", bin/"wtfutil"
       prefix.install_metafiles
     end
   end
@@ -58,6 +58,6 @@ class Wtfutil < Formula
       term: "xterm-256color"
     EOS
 
-    system "#{bin}/wtf", "--config=#{testconfig}"
+    system "#{bin}/wtfutil", "--config=#{testconfig}"
   end
 end
