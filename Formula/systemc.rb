@@ -1,8 +1,8 @@
 class Systemc < Formula
   desc "Core SystemC language and examples"
   homepage "https://accellera.org/"
-  url "https://www.accellera.org/images/downloads/standards/systemc/systemc-2.3.2.tar.gz"
-  sha256 "a28eeee00189f0e39f51461dcd7dbed7fb38e4e07dbd9e723473000ce6ef73c5"
+  url "https://www.accellera.org/images/downloads/standards/systemc/systemc-2.3.3.tar.gz"
+  sha256 "5781b9a351e5afedabc37d145e5f7edec08f3fd5de00ffeb8fa1f3086b1f7b3f"
 
   bottle do
     cellar :any
@@ -24,12 +24,19 @@ class Systemc < Formula
   test do
     (testpath/"test.cpp").write <<~EOS
       #include "systemc.h"
+      // Hello_world is module name
+      SC_MODULE (hello_world) {
+        SC_CTOR (hello_world) {
+        }
+      };
 
-      int sc_main(int argc, char *argv[]) {
-        return 0;
+      // sc_main in top level function like in C++ main
+      int sc_main(int argc, char* argv[]) {
+        hello_world hello("HELLO");
+        return(0);
       }
     EOS
-    system ENV.cxx, "-L#{lib}", "-lsystemc", "test.cpp"
-    system "./a.out"
+    system ENV.cxx, "-I #{include}", "-L#{lib}", "-o", "sim", "test.cpp", "-lsystemc"
+    system "./sim"
   end
 end
