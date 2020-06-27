@@ -1,8 +1,8 @@
 class Ldc < Formula
   desc "Portable D programming language compiler"
   homepage "https://wiki.dlang.org/LDC"
-  url "https://github.com/ldc-developers/ldc/releases/download/v1.20.1/ldc-1.20.1-src.tar.gz"
-  sha256 "2b21dfffb6efd2c2158bc83422765335aae34b709ebdc406bb026c21967a1aaf"
+  url "https://github.com/ldc-developers/ldc/releases/download/v1.22.0/ldc-1.22.0-src.tar.gz"
+  sha256 "866becac61fb225b0d55847fb5f206ff042d6a3ff63b671a474aa8b6a93d8988"
   head "https://github.com/ldc-developers/ldc.git", :shallow => false
 
   bottle do
@@ -22,9 +22,9 @@ class Ldc < Formula
   end
 
   resource "ldc-bootstrap" do
-    url "https://github.com/ldc-developers/ldc/releases/download/v1.20.1/ldc2-1.20.1-osx-x86_64.tar.xz"
-    version "1.20.1"
-    sha256 "b0e711b97d7993ca77fed0f49a7d2cf279249406d46e9cf005dd77d5a4e23956"
+    url "https://github.com/ldc-developers/ldc/releases/download/v1.22.0/ldc2-1.22.0-osx-x86_64.tar.xz"
+    version "1.22.0"
+    sha256 "05e3a6048aadcfc2ba8f81b236e6da9c1f36c538a0f4e5e6ae22667328c7e8f2"
   end
 
   def install
