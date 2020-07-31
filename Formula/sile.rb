@@ -108,8 +108,8 @@ class Sile < Formula
   def install
     luapath = libexec/"vendor"
     ENV["LUA_PATH"] =
-      "#{luapath}/share/lua/5.3/?.lua;#{luapath}/share/lua/5.3/?/init.lua;#{luapath}/share/lua/5.3/lxp/?.lua"
-    ENV["LUA_CPATH"] = "#{luapath}/lib/lua/5.3/?.so"
+      "#{luapath}/share/lua/5.4/?.lua;#{luapath}/share/lua/5.4/?/init.lua;#{luapath}/share/lua/5.4/lxp/?.lua"
+    ENV["LUA_CPATH"] = "#{luapath}/lib/lua/5.4/?.so"
 
     resources.each do |r|
       r.stage do
