@@ -5,6 +5,7 @@ class Vim < Formula
   url "https://github.com/vim/vim/archive/v8.2.1300.tar.gz"
   sha256 "aca316c45342061fa5103abc1771f6c8124d9fe4f2f95d2fd4e4be4a76e9048e"
   license "Vim"
+  revision 1
   head "https://github.com/vim/vim.git"
 
   bottle do
