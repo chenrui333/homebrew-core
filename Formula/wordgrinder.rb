@@ -3,7 +3,7 @@ class Wordgrinder < Formula
   homepage "https://cowlark.com/wordgrinder"
   url "https://github.com/davidgiven/wordgrinder/archive/0.7.2.tar.gz"
   sha256 "4e1bc659403f98479fe8619655f901c8c03eb87743374548b4d20a41d31d1dff"
-  revision 1
+  revision 2
   head "https://github.com/davidgiven/wordgrinder.git"
 
   bottle do
