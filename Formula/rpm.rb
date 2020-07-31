@@ -3,7 +3,7 @@ class Rpm < Formula
   homepage "https://rpm.org/"
   url "http://ftp.rpm.org/releases/rpm-4.15.x/rpm-4.15.1.tar.bz2"
   sha256 "ddef45f9601cd12042edfc9b6e37efcca32814e1e0f4bb8682d08144a3e2d230"
-  revision 1
+  revision 2
   version_scheme 1
 
   bottle do
