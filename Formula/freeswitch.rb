@@ -5,6 +5,7 @@ class Freeswitch < Formula
       tag:      "v1.10.3",
       revision: "129de34d845098b7864a49281f3eb946e0b50314"
   license "MPL-1.1"
+  revision 1
   head "https://github.com/signalwire/freeswitch.git"
 
   bottle do
