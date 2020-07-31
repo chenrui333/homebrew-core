@@ -4,7 +4,7 @@ class OsrmBackend < Formula
   url "https://github.com/Project-OSRM/osrm-backend/archive/v5.22.0.tar.gz"
   sha256 "df0987a04bcf65d74f9c4e18f34a01982bf3bb97aa47f9d86cfb8b35f17a6a55"
   license "BSD-2-Clause"
-  revision 2
+  revision 3
   head "https://github.com/Project-OSRM/osrm-backend.git"
 
   bottle do
