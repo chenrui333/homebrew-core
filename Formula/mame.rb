@@ -5,6 +5,7 @@ class Mame < Formula
   version "0.222"
   sha256 "3380b86d1bc5bc09f5bb4099f3833b6fba924a8bd189aac4dab149afba799ce7"
   license "GPL-2.0"
+  revision 1
   head "https://github.com/mamedev/mame.git"
 
   bottle do
