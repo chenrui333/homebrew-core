@@ -4,7 +4,7 @@ class Widelands < Formula
   url "https://launchpad.net/widelands/build21/build21/+download/widelands-build21-source.tar.gz"
   version "21"
   sha256 "601e0e4c6f91b3fb0ece2cd1b83ecfb02344a1b9194fbb70ef3f70e06994e357"
-  revision 1
+  revision 2
 
   bottle do
     sha256 "f41944d59a82424ef8242035d60db6ad270bc101f628b299e7d27a345b9a9c33" => :catalina
