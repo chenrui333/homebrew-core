@@ -4,8 +4,8 @@ class Semgrep < Formula
   desc "Easily detect and prevent bugs and anti-patterns in your codebase"
   homepage "https://semgrep.dev"
   url "https://github.com/returntocorp/semgrep.git",
-    tag:      "v0.25.0",
-    revision: "bf2aa3721d13a812b09a18be8fa3774473ae0799"
+    tag:      "v0.26.0",
+    revision: "ccecd30aec3696f7dfa8504bc1bdbe0852a3de95"
   license "LGPL-2.1-only"
   head "https://github.com/returntocorp/semgrep.git", branch: "develop"
 
