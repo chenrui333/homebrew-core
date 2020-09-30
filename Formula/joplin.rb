@@ -3,8 +3,8 @@ require "language/node"
 class Joplin < Formula
   desc "Note taking and to-do application with synchronisation capabilities"
   homepage "https://joplin.cozic.net/"
-  url "https://registry.npmjs.org/joplin/-/joplin-1.0.164.tgz"
-  sha256 "d4292ee33a108dd917d951644d0be7fe63b50d8108504758b1ad7c0b798c0539"
+  url "https://registry.npmjs.org/joplin/-/joplin-1.2.2.tgz"
+  sha256 "1169acca44ef09557a9953e0984e59d7c1a8edcef7907a281fdd97e1cb634059"
   license "MIT"
 
   livecheck do
