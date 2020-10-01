@@ -2,8 +2,8 @@ class Packer < Formula
   desc "Tool for creating identical machine images for multiple platforms"
   homepage "https://packer.io"
   url "https://github.com/hashicorp/packer.git",
-      tag:      "v1.6.3",
-      revision: "49969afd2f3cf2cbf5fbb53c448c767e870df54b"
+      tag:      "v1.6.4",
+      revision: "f61a8c09ad96f64f6b01be14f961a57304bccc0f"
   license "MPL-2.0"
   head "https://github.com/hashicorp/packer.git"
 
