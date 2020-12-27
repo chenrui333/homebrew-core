@@ -4,6 +4,7 @@ class Mpd < Formula
   url "https://www.musicpd.org/download/mpd/0.22/mpd-0.22.3.tar.xz"
   sha256 "338012037b5e67730529187c555a54cc567a85b15a7e8ddb3a807b1971566ccf"
   license "GPL-2.0-or-later"
+  revision 1
   head "https://github.com/MusicPlayerDaemon/MPD.git"
 
   bottle do
@@ -33,9 +34,15 @@ class Mpd < Formula
   depends_on "libshout"
   depends_on "libupnp"
   depends_on "libvorbis"
-  depends_on macos: :mojave # requires C++17 features unavailable in High Sierra
   depends_on "opus"
   depends_on "sqlite"
+
+  if MacOS.version <= :mojave
+    depends_on "gcc"
+    fails_with :clang do
+      cause "'path' is unavailable in c++ < 17: introduced in macOS 10.15"
+    end
+  end
 
   def install
     # mpd specifies -std=gnu++0x, but clang appears to try to build
