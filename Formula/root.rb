@@ -44,12 +44,6 @@ class Root < Formula
 
   skip_clean "bin"
 
-  # Can be removed post 6.22.08
-  patch do
-    url "https://github.com/root-project/root/commit/d113c9fcf7e1d88c573717c676aa4b97f1db2ea2.patch?full_index=1"
-    sha256 "6d0fd5ccd92fbb27a949ea40ed4fd60a5e112a418d124ca99f05f70c9df31cda"
-  end
-
   def install
     # Work around "error: no member named 'signbit' in the global namespace"
     ENV.delete("SDKROOT") if DevelopmentTools.clang_build_version >= 900
