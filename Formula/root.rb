@@ -82,6 +82,10 @@ class Root < Formula
     cxx_version = (MacOS.version < :mojave) ? 14 : 17
     args << "-DCMAKE_CXX_STANDARD=#{cxx_version}"
 
+    # Earlier versions of macOS give a signbit error here
+    runtime_cxxmodules = (MacOS.version >= :big_sur) ? "ON" : "OFF"
+    args << "-Druntime_cxxmodules=#{runtime_cxxmodules}"
+
     # Homebrew now sets CMAKE_INSTALL_LIBDIR to /lib, which is incorrect
     # for ROOT with gnuinstall, so we set it back here.
     args << "-DCMAKE_INSTALL_LIBDIR=lib/root"
