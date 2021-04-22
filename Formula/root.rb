@@ -45,9 +45,6 @@ class Root < Formula
   skip_clean "bin"
 
   def install
-    # Work around "error: no member named 'signbit' in the global namespace"
-    ENV.delete("SDKROOT") if DevelopmentTools.clang_build_version >= 900
-
     # Freetype/afterimage/gl2ps/lz4 are vendored in the tarball, so are fine.
     # However, this is still permitting the build process to make remote
     # connections. As a hack, since upstream support it, we inreplace
