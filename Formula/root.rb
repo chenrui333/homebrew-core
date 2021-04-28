@@ -23,7 +23,6 @@ class Root < Formula
   depends_on "ninja" => :build
   depends_on "cfitsio"
   depends_on "davix"
-  depends_on "expat" if MacOS.version < :big_sur
   depends_on "fftw"
   depends_on "gcc" # for gfortran
   depends_on "gl2ps"
@@ -39,6 +38,7 @@ class Root < Formula
   depends_on "xz" # for LZMA
   depends_on "zstd"
 
+  uses_from_macos "expat", since: :big_sur
   uses_from_macos "libxml2"
 
   conflicts_with "glew", because: "root ships its own copy of glew"
