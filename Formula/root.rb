@@ -23,6 +23,7 @@ class Root < Formula
   depends_on "ninja" => :build
   depends_on "cfitsio"
   depends_on "davix"
+  depends_on "expat" if MacOS.version < :big_sur
   depends_on "fftw"
   depends_on "gcc" # for gfortran
   depends_on "gl2ps"
