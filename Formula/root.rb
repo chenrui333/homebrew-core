@@ -38,7 +38,6 @@ class Root < Formula
   depends_on "xz" # for LZMA
   depends_on "zstd"
 
-  uses_from_macos "expat", since: :big_sur
   uses_from_macos "libxml2"
 
   conflicts_with "glew", because: "root ships its own copy of glew"
@@ -83,8 +82,8 @@ class Root < Formula
     cxx_version = (MacOS.version < :mojave) ? 14 : 17
     args << "-DCMAKE_CXX_STANDARD=#{cxx_version}"
 
-    # Earlier versions of macOS give a signbit error here
-    runtime_cxxmodules = (MacOS.version >= :big_sur) ? "ON" : "OFF"
+    # TODO: probably can be removed
+    runtime_cxxmodules = (MacOS.version >= :catalina) ? "ON" : "OFF"
     args << "-Druntime_cxxmodules=#{runtime_cxxmodules}"
 
     # Homebrew now sets CMAKE_INSTALL_LIBDIR to /lib, which is incorrect
