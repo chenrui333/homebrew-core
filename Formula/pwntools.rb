@@ -3,8 +3,8 @@ class Pwntools < Formula
 
   desc "CTF framework used by Gallopsled in every CTF"
   homepage "https://github.com/Gallopsled/pwntools"
-  url "https://files.pythonhosted.org/packages/b0/3a/00f6dfcb5647acef99ce4dd9f16e557390d2507e60263f16cbfea8873c0a/pwntools-4.4.0.tar.gz"
-  sha256 "c51605b538c6394c6c31bc90bb3436224b497be1fe21a0a2420785ca399087e3"
+  url "https://files.pythonhosted.org/packages/e8/6e/1dc011cf68b3f2913c280e13c88d811a6d69bdfe7cfc2544d0a8c3da5770/pwntools-4.5.0.tar.gz"
+  sha256 "2161cca2b480486fe9a3c89bd70852df13eea145250f4b5b6d6237e432364886"
   license "MIT"
   head "https://github.com/Gallopsled/pwntools.git"
 
