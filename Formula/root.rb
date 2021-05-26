@@ -53,7 +53,10 @@ class Root < Formula
               "http://lcgpackages",
               "https://lcgpackages"
 
-    args = std_cmake_args + %W[
+    puts "std_cmake_args = #{std_cmake_args}"
+    args = std_cmake_args.reject { |x| x.include? "DCMAKE_OSX_SYSROOT" }
+
+    args += %W[
       -DCLING_CXX_PATH=clang++
       -DCMAKE_INSTALL_ELISPDIR=#{elisp}
       -DPYTHON_EXECUTABLE=#{Formula["python@3.9"].opt_bin}/python3
