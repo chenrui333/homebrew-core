@@ -53,7 +53,7 @@ class Root < Formula
               "https://lcgpackages"
 
     puts "std_cmake_args = #{std_cmake_args}"
-    args = std_cmake_args.reject { |x| x.include? "DCMAKE_OSX_SYSROOT" }
+    args = std_cmake_args.reject { |x| x.include? "DCMAKE_FIND_FRAMEWORK" }
 
     args += %W[
       -DCLING_CXX_PATH=clang++
