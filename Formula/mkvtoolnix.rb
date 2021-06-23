@@ -4,6 +4,7 @@ class Mkvtoolnix < Formula
   url "https://mkvtoolnix.download/sources/mkvtoolnix-58.0.0.tar.xz"
   sha256 "1af727fa203e2bd8c54a005f28b635c96a4b80aa4ee8d23b4def0b6800ca6e38"
   license "GPL-2.0-or-later"
+  revision 1
 
   livecheck do
     url "https://mkvtoolnix.download/sources/"
