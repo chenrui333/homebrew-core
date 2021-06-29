@@ -1,8 +1,8 @@
 class Root < Formula
   desc "Object oriented framework for large scale data analysis"
   homepage "https://root.cern.ch/"
-  url "https://root.cern.ch/download/root_v6.24.00.source.tar.gz"
-  sha256 "9da30548a289211c3122d47dacb07e85d35e61067fac2be6c5a5ff7bda979989"
+  url "https://root.cern.ch/download/root_v6.24.02.source.tar.gz"
+  sha256 "0507e1095e279ccc7240f651d25966024325179fa85a1259b694b56723ad7c1c"
   license "LGPL-2.1-or-later"
   head "https://github.com/root-project/root.git"
 
@@ -53,9 +53,8 @@ class Root < Formula
               "https://lcgpackages"
 
     puts "std_cmake_args = #{std_cmake_args}"
-    args = std_cmake_args.reject { |x| x.include? "DCMAKE_FIND_FRAMEWORK" }
 
-    args += %W[
+    args = std_cmake_args + %W[
       -DCLING_CXX_PATH=clang++
       -DCMAKE_INSTALL_ELISPDIR=#{elisp}
       -DPYTHON_EXECUTABLE=#{Formula["python@3.9"].opt_bin}/python3
