@@ -52,9 +52,17 @@ class Root < Formula
               "http://lcgpackages",
               "https://lcgpackages"
 
-    puts "std_cmake_args = #{std_cmake_args}"
+    args = std_cmake_args
 
-    args = std_cmake_args + %W[
+    if MacOS.version < :big_sur
+      args.reject! do |x|
+        x.include?("DCMAKE_FIND_FRAMEWORK") \
+          || x.include?("DCMAKE_OSX_SYSROOT") \
+          || x.include?("DCMAKE_C_FLAGS_RELEASE")
+      end
+    end
+
+    args += %W[
       -DCLING_CXX_PATH=clang++
       -DCMAKE_INSTALL_ELISPDIR=#{elisp}
       -DPYTHON_EXECUTABLE=#{Formula["python@3.9"].opt_bin}/python3
