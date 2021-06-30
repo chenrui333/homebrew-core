@@ -52,11 +52,17 @@ class Root < Formula
               "http://lcgpackages",
               "https://lcgpackages"
 
+    args = std_cmake_args
+
     if MacOS.version < :big_sur
-      ENV.append "CXXFLAGS", "-isystem/Library/Developer/CommandLineTools/usr/include/c++/v1"
+      args.reject! do |x|
+        x.include?("DCMAKE_FIND_FRAMEWORK") \
+          || x.include?("DCMAKE_OSX_SYSROOT") \
+          || x.include?("DCMAKE_C_FLAGS_RELEASE")
+      end
     end
 
-    args = std_cmake_args + %W[
+    args += %W[
       -DCLING_CXX_PATH=clang++
       -DCMAKE_INSTALL_ELISPDIR=#{elisp}
       -DPYTHON_EXECUTABLE=#{Formula["python@3.9"].opt_bin}/python3
