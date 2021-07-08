@@ -1,8 +1,8 @@
 class Liquigraph < Formula
   desc "Migration runner for Neo4j"
   homepage "https://www.liquigraph.org/"
-  url "https://github.com/liquigraph/liquigraph/archive/liquigraph-4.0.2.tar.gz"
-  sha256 "60d17bb39e7c070a99f4669516cae0c1b0939700127758a9e500e210943f0cca"
+  url "https://github.com/liquigraph/liquigraph/archive/liquigraph-4.0.3.tar.gz"
+  sha256 "748ceb4dee52df1edca73570f0ab081ebac2fe93c9c223ea71fa34cbc76553fc"
   license "Apache-2.0"
   head "https://github.com/liquigraph/liquigraph.git"
 
