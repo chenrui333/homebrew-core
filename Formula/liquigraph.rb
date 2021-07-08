@@ -15,10 +15,10 @@ class Liquigraph < Formula
   end
 
   depends_on "maven" => :build
-  depends_on "openjdk"
+  depends_on "openjdk@11"
 
   def install
-    ENV["JAVA_HOME"] = Formula["openjdk"].opt_prefix
+    ENV["JAVA_HOME"] = Formula["openjdk@11"].opt_prefix
     system "mvn", "-B", "-q", "-am", "-pl", "liquigraph-cli", "clean", "package", "-DskipTests"
     (buildpath/"binaries").mkpath
     system "tar", "xzf", "liquigraph-cli/target/liquigraph-cli-bin.tar.gz", "-C", "binaries"
