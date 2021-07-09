@@ -18,7 +18,7 @@ class Bzt < Formula
   depends_on "cython" => :build
   depends_on "rust" => :build
   depends_on "numpy"
-  depends_on "python@3.9"
+  depends_on "python@3.8"
   depends_on "six"
 
   uses_from_macos "libxml2"
