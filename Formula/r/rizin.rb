@@ -1,8 +1,8 @@
 class Rizin < Formula
   desc "UNIX-like reverse engineering framework and command-line toolset"
   homepage "https://rizin.re"
-  url "https://github.com/rizinorg/rizin/releases/download/v0.6.3/rizin-src-v0.6.3.tar.xz"
-  sha256 "95f64c6ab9e6daa9e9fa5634398eb8f6cdb4ebf2e814da2e4cb969d31f4509c2"
+  url "https://github.com/rizinorg/rizin/releases/download/v0.7.0/rizin-src-v0.7.0.tar.xz"
+  sha256 "fc6734320d88b9e2537296aa0364a3c3b955fecc8d64dda26f1f3ede7c8d6c31"
   license "LGPL-3.0-only"
   head "https://github.com/rizinorg/rizin.git", branch: "dev"
 
@@ -25,35 +25,44 @@ class Rizin < Formula
   depends_on "libzip"
   depends_on "lz4"
   depends_on "openssl@3"
+  depends_on "pcre2"
   depends_on "tree-sitter"
   depends_on "xxhash"
+  depends_on "xz" # for lzma
+  depends_on "zstd"
 
   uses_from_macos "zlib"
 
   def install
-    mkdir "build" do
-      args = [
-        "-Dpackager=#{tap.user}",
-        "-Dpackager_version=#{pkg_version}",
-        "-Duse_sys_libzip=enabled",
-        "-Duse_sys_zlib=enabled",
-        "-Duse_sys_lz4=enabled",
-        "-Duse_sys_tree_sitter=enabled",
-        "-Duse_sys_openssl=enabled",
-        "-Duse_sys_libzip_openssl=true",
-        "-Duse_sys_capstone=enabled",
-        "-Duse_sys_xxhash=enabled",
-        "-Duse_sys_magic=enabled",
-        "-Dextra_prefix=#{HOMEBREW_PREFIX}",
-        "-Denable_tests=false",
-        "-Denable_rz_test=false",
-        "--wrap-mode=nodownload",
-      ]
+    args = %W[
+      -Dpackager=#{tap.user}
+      -Dpackager_version=#{pkg_version}
+      -Duse_sys_capstone=enabled
+      -Duse_sys_libzip_openssl=true
+      -Duse_sys_libzip=enabled
+      -Duse_sys_libzstd=enabled
+      -Duse_sys_lz4=enabled
+      -Duse_sys_lzma=enabled
+      -Duse_sys_magic=enabled
+      -Duse_sys_openssl=enabled
+      -Duse_sys_pcre2=enabled
+      -Duse_sys_xxhash=enabled
+      -Duse_sys_zlib=enabled
+      -Dextra_prefix=#{HOMEBREW_PREFIX}
+      -Denable_tests=false
+      -Denable_rz_test=false
+      --wrap-mode=nodownload
+    ]
 
-      system "meson", *std_meson_args, *args, ".."
-      system "ninja"
-      system "ninja", "install"
+    if OS.mac?
+      args << "--force-fallback-for=rzgdb,rzwinkd,rzar,rzqnx,tree-sitter-c,rzspp,rizin-shell-parser,rzheap"
+    else
+      args << "--force-fallback-for=rzgdb,rzwinkd,rzar,rzqnx,tree-sitter-c,rzspp,rizin-shell-parser,rzheap,ptrace-wrap"
     end
+
+    system "meson", "setup", "build", *args, *std_meson_args
+    system "meson", "compile", "-C", "build", "--verbose"
+    system "meson", "install", "-C", "build"
   end
 
   def post_install
