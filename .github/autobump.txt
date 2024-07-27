@@ -1502,6 +1502,7 @@ libxmu
 libxo
 libxslt
 libxvmc
+libzdb
 libzim
 libzzip
 license-eye

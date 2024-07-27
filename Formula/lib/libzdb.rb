@@ -1,10 +1,9 @@
 class Libzdb < Formula
   desc "Database connection pool library"
   homepage "https://tildeslash.com/libzdb/"
-  url "https://tildeslash.com/libzdb/dist/libzdb-3.2.3.tar.gz"
-  sha256 "a1957826fab7725484fc5b74780a6a7d0d8b7f5e2e54d26e106b399e0a86beb0"
+  url "https://tildeslash.com/libzdb/dist/libzdb-3.3.0.tar.gz"
+  sha256 "b1f979f48f4c52f71821f4b2983ef26cf08fc58337effe5651155cfaa96ce95d"
   license "GPL-3.0-only"
-  revision 4
 
   livecheck do
     url :homepage
@@ -22,16 +21,22 @@ class Libzdb < Formula
   end
 
   depends_on "libpq"
-  depends_on macos: :high_sierra # C++ 17 is required
   depends_on "mysql-client"
   depends_on "openssl@3"
   depends_on "sqlite"
 
-  fails_with gcc: "5"
+  on_macos do
+    depends_on "llvm" => :build if DevelopmentTools.clang_build_version <= 1400
+  end
 
-  patch :DATA # Fix build error my mysql-client 8.3.0 https://bitbucket.org/tildeslash/libzdb/issues/67/build-error-with-mysql-83
+  fails_with :clang do
+    build 1400
+    cause "Requires C++20 support"
+  end
 
   def install
+    ENV.llvm_clang if OS.mac? && DevelopmentTools.clang_build_version <= 1400
+
     system "./configure", *std_configure_args
     system "make", "install"
     (pkgshare/"test").install Dir["test/*.{c,cpp}"]
@@ -39,28 +44,10 @@ class Libzdb < Formula
 
   test do
     cp_r pkgshare/"test", testpath
+
     cd "test" do
       system ENV.cc, "select.c", "-L#{lib}", "-lpthread", "-lzdb", "-I#{include}/zdb", "-o", "select"
       system "./select"
     end
   end
 end
-
-__END__
-diff --git a/src/db/mysql/MysqlConnection.c b/src/db/mysql/MysqlConnection.c
-index 45ae896..7b6c1e3 100644
---- a/src/db/mysql/MysqlConnection.c
-+++ b/src/db/mysql/MysqlConnection.c
-@@ -96,8 +96,10 @@ static MYSQL *_doConnect(Connection_T delegator, char **error) {
-         // Options
-         if (IS(URL_getParameter(url, "compress"), "true"))
-                 clientFlags |= CLIENT_COMPRESS;
--        if (IS(URL_getParameter(url, "use-ssl"), "true"))
--                mysql_ssl_set(db, 0,0,0,0,0);
-+        if (IS(URL_getParameter(url, "use-ssl"), "true")) {
-+                enum mysql_ssl_mode ssl_mode = SSL_MODE_REQUIRED;
-+                mysql_options(db, MYSQL_OPT_SSL_MODE, &ssl_mode);
-+        }
- #if MYSQL_VERSION_ID < 80000
-         if (IS(URL_getParameter(url, "secure-auth"), "true"))
-                 mysql_options(db, MYSQL_SECURE_AUTH, (const char*)&yes);
