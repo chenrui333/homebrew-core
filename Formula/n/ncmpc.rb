@@ -1,8 +1,8 @@
 class Ncmpc < Formula
   desc "Curses Music Player Daemon (MPD) client"
   homepage "https://www.musicpd.org/clients/ncmpc/"
-  url "https://www.musicpd.org/download/ncmpc/0/ncmpc-0.49.tar.xz"
-  sha256 "65bbec0ede9e6bcf62ac647b0c706485beb2bdd5db70ca8d60103f32f162cf29"
+  url "https://www.musicpd.org/download/ncmpc/0/ncmpc-0.51.tar.xz"
+  sha256 "e74be00e69bc3ed1268cafcc87274e78dfbde147f2480ab0aad8260881ec7271"
   license "GPL-2.0-or-later"
 
   livecheck do
@@ -24,15 +24,19 @@ class Ncmpc < Formula
   end
 
   depends_on "boost" => :build
+  depends_on "gettext" => :build
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkg-config" => :build
-  depends_on "gettext"
+  depends_on "fmt"
   depends_on "libmpdclient"
   depends_on "pcre2"
 
+  uses_from_macos "ncurses"
+
   on_macos do
     depends_on "llvm" => :build if DevelopmentTools.clang_build_version <= 1300
+    depends_on "gettext"
   end
 
   fails_with :clang do
