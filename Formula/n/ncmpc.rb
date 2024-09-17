@@ -1,8 +1,8 @@
 class Ncmpc < Formula
   desc "Curses Music Player Daemon (MPD) client"
   homepage "https://www.musicpd.org/clients/ncmpc/"
-  url "https://www.musicpd.org/download/ncmpc/0/ncmpc-0.49.tar.xz"
-  sha256 "65bbec0ede9e6bcf62ac647b0c706485beb2bdd5db70ca8d60103f32f162cf29"
+  url "https://www.musicpd.org/download/ncmpc/0/ncmpc-0.51.tar.xz"
+  sha256 "e74be00e69bc3ed1268cafcc87274e78dfbde147f2480ab0aad8260881ec7271"
   license "GPL-2.0-or-later"
 
   livecheck do
@@ -24,19 +24,23 @@ class Ncmpc < Formula
   end
 
   depends_on "boost" => :build
+  depends_on "gettext" => :build
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkg-config" => :build
-  depends_on "gettext"
+  depends_on "fmt"
   depends_on "libmpdclient"
   depends_on "pcre2"
 
+  uses_from_macos "ncurses"
+
   on_macos do
-    depends_on "llvm" => :build if DevelopmentTools.clang_build_version <= 1300
+    depends_on "llvm" if DevelopmentTools.clang_build_version <= 1500
+    depends_on "gettext"
   end
 
   fails_with :clang do
-    build 1300
+    build 1500
     cause "Requires C++20"
   end
 
@@ -46,7 +50,14 @@ class Ncmpc < Formula
   end
 
   def install
-    ENV.llvm_clang if OS.mac? && (DevelopmentTools.clang_build_version <= 1300)
+    if OS.mac? && (DevelopmentTools.clang_build_version <= 1500)
+      ENV.llvm_clang
+      # Work around failure mixing newer `llvm` headers with older Xcode's libc++:
+      # Undefined symbols for architecture arm64:
+      #   "std::exception_ptr::__from_native_exception_pointer(void*)", referenced from:
+      #       std::exception_ptr std::make_exception_ptr[abi:fe190100]<std::runtime_error>(std::runtime_error)...
+      ENV.prepend_path "HOMEBREW_LIBRARY_PATHS", Formula["llvm"].opt_lib/"c++"
+    end
 
     system "meson", "setup", "build", "-Dcolors=false", "-Dnls=enabled", "-Dregex=enabled", *std_meson_args
     system "meson", "compile", "-C", "build", "--verbose"
