@@ -30,6 +30,7 @@ class Rpm < Formula
   depends_on "python@3.12" => [:build, :test]
 
   depends_on "libarchive"
+  depends_on "libdwarf"
   depends_on "libelf"
   depends_on "libmagic"
   depends_on "lua"
