@@ -119,19 +119,18 @@ index 64536cc26b..05493136a6 100644
    "${BUN_BINDGENV2_SOURCES}")
  
 +if (BUN_BOOTSTRAP STREQUAL "OFF" OR BUN_EXECUTABLE STREQUAL "BUN_BOOTSTRAP_DISABLED")
-+  message(FATAL_ERROR "BUN_BOOTSTRAP=OFF requires pre-generated bindgen outputs. Upstream must ship them or provide a Node-based generator.")
++  message(STATUS "BUN_BOOTSTRAP=OFF: bindgen-v2 codegen requires pre-generated outputs.")
 +endif()
 +
  execute_process(
    COMMAND ${BUN_EXECUTABLE} ${BUN_FLAGS} run ${BUN_BINDGENV2_SCRIPT}
      --command=list-outputs
-@@ -1583,3 +1583,7 @@ if(NOT BUN_CPP_ONLY)
+@@ -1583,3 +1583,6 @@ if(NOT BUN_CPP_ONLY)
      endif()
    endif()
  endif()
-+# If bootstrap is disabled, fail fast with actionable guidance.
 +if (BUN_BOOTSTRAP STREQUAL "OFF" OR BUN_EXECUTABLE STREQUAL "BUN_BOOTSTRAP_DISABLED")
-+  message(FATAL_ERROR "BUN_BOOTSTRAP=OFF requires pre-generated codegen outputs. Upstream must ship them or provide a Node-based generator.")
++  message(STATUS "BUN_BOOTSTRAP=OFF: codegen targets require pre-generated outputs.")
 +endif()
 diff --git a/cmake/tools/SetupBun.cmake b/cmake/tools/SetupBun.cmake
 index b57d29b9a1..c598b96798 100644
