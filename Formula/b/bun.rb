@@ -45,6 +45,25 @@ class Bun < Formula
     bindgen_v2_sources.write("") unless bindgen_v2_sources.exist?
     bindgen_v2_internal_sources = Pathname("cmake/sources/BindgenV2InternalSources.txt")
     bindgen_v2_internal_sources.write("") unless bindgen_v2_internal_sources.exist?
+    inreplace "cmake/targets/BuildBun.cmake",
+              /(\s+OUTPUTS\n\s+\$\{BUN_BINDGENV2_CPP_OUTPUTS\}\n\s+\$\{BUN_BINDGENV2_ZIG_OUTPUTS\}\n)/,
+              "\\1  ALWAYS_RUN\n"
+    webkit_download_block = <<~CMAKE
+      file(
+        DOWNLOAD ${WEBKIT_DOWNLOAD_URL} ${CACHE_PATH}/${WEBKIT_FILENAME} SHOW_PROGRESS
+        STATUS WEBKIT_DOWNLOAD_STATUS
+      )
+    CMAKE
+    webkit_guarded_download_block = <<~CMAKE
+      if (BUN_BOOTSTRAP STREQUAL "OFF")
+        message(FATAL_ERROR "BUN_BOOTSTRAP=OFF: WebKit download disabled. Provide a local WEBKIT_PATH.")
+      endif()
+      file(
+        DOWNLOAD ${WEBKIT_DOWNLOAD_URL} ${CACHE_PATH}/${WEBKIT_FILENAME} SHOW_PROGRESS
+        STATUS WEBKIT_DOWNLOAD_STATUS
+      )
+    CMAKE
+    inreplace "cmake/tools/SetupWebKit.cmake", webkit_download_block, webkit_guarded_download_block
 
     args = %w[
       -GNinja
