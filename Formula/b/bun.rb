@@ -41,6 +41,10 @@ class Bun < Formula
     javascript_codegen_sources.write("") unless javascript_codegen_sources.exist?
     bake_runtime_sources = Pathname("cmake/sources/BakeRuntimeSources.txt")
     bake_runtime_sources.write("") unless bake_runtime_sources.exist?
+    bindgen_v2_sources = Pathname("cmake/sources/BindgenV2Sources.txt")
+    bindgen_v2_sources.write("") unless bindgen_v2_sources.exist?
+    bindgen_v2_internal_sources = Pathname("cmake/sources/BindgenV2InternalSources.txt")
+    bindgen_v2_internal_sources.write("") unless bindgen_v2_internal_sources.exist?
 
     args = %w[
       -GNinja
