@@ -20,8 +20,15 @@ class Bun < Formula
   def install
     # Tarball builds may omit generated source-list manifests expected by CMake.
     mkdir_p "cmake/sources"
-    touch "cmake/sources/BunErrorSources.txt"
-    touch "cmake/sources/NodeFallbacksSources.txt"
+    bun_error_sources = Pathname("cmake/sources/BunErrorSources.txt")
+    unless bun_error_sources.exist?
+      bun_error_sources.write("packages/bun-error/index.tsx\npackages/bun-error/bun-error.css\n")
+    end
+    node_fallbacks_sources = Pathname("cmake/sources/NodeFallbacksSources.txt")
+    if !node_fallbacks_sources.exist? || node_fallbacks_sources.read.strip.empty?
+      fallback_inputs = Dir["src/node-fallbacks/*.js", "src/node-fallbacks/vendor/*.js"].sort
+      node_fallbacks_sources.write("#{fallback_inputs.join("\n")}\n")
+    end
 
     args = %w[
       -GNinja
