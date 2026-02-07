@@ -11,6 +11,11 @@ SUMMARY="$LOGDIR/summary-$TS.txt"
 
 (
   cd "$ROOT"
+  # Clear stale bun lock if no brew process is running (avoid clobbering active brew)
+  if ! pgrep -f "[b]rew" >/dev/null 2>&1; then
+    rm -f /opt/homebrew/var/homebrew/locks/bun.formula.lock || true
+  fi
+
   # Ensure we actually rebuild each iteration (avoid "already installed" short-circuit)
   brew uninstall --formula bun >/dev/null 2>&1 || true
   brew uninstall --formula --zap bun >/dev/null 2>&1 || true
