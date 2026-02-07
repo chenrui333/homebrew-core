@@ -70,9 +70,14 @@ These are based on the **unpatched v1.3.8 tarball** in Homebrew cache:
 - **Implication:** If WebKit headers/derived sources aren’t produced in the expected layout, Bun’s bindings may not match the WebKit build, resulting in class/ABI mismatches.
 
 ## Current Build State (Prototype, downloads allowed)
-- A source build is **in progress** as of **2026-02-07**.
-- Log: `/tmp/bun-build.log`
-- Last observed progress: ~`[600/635]` compilation steps, no failure yet.
+- Latest loop run log: `logs/bun/build-20260207-045240.log` (2026-02-07).
+- The first actionable blocker is still **network activity during configure/build**:
+  - Line `9`: bootstrap bun archive download via `curl ... bun-bootstrap.zip`.
+  - Line `102`: `WEBKIT_DOWNLOAD_URL` points at a remote WebKit tarball.
+  - Lines `366+`: repeated `GitClone.cmake` invocations for vendored deps.
+  - Line `1437`: build step `Downloading zig`.
+  - Line `1438`: `DownloadZig.cmake` invocation.
+- This confirms the loop should keep prioritizing **fail-fast/no-download switches** before pure compile-failure fixes.
 
 ## Next Steps (Prioritized)
 1. **Local WebKit build that matches Bun’s expectations**
@@ -91,4 +96,3 @@ Stop and file upstream issues if any of these remain true after targeted patches
 - **Zig download is hard-coded** with no system-compiler mode.
 - **Core dependencies are only available via git-clone** at build time.
 - **WebKit build cannot produce Bun-compatible headers/derived sources** at the pinned commit.
-
