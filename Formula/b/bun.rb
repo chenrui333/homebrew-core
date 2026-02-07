@@ -141,7 +141,7 @@ index b57d29b9a1..c598b96798 100644
 +
 +if (NOT BUN_BOOTSTRAP)
 +  message(STATUS "BUN_BOOTSTRAP=OFF: skipping bun requirement. Codegen must be pre-generated.")
-+  set(BUN_EXECUTABLE "BUN_BOOTSTRAP_DISABLED")
++  set(BUN_EXECUTABLE "true")
 +  return()
 +endif()
 +
