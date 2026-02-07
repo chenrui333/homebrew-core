@@ -29,6 +29,8 @@ class Bun < Formula
       fallback_inputs = Dir["src/node-fallbacks/*.js", "src/node-fallbacks/vendor/*.js"].sort
       node_fallbacks_sources.write("#{fallback_inputs.join("\n")}\n")
     end
+    zig_generated_classes_sources = Pathname("cmake/sources/ZigGeneratedClassesSources.txt")
+    zig_generated_classes_sources.write("") unless zig_generated_classes_sources.exist?
 
     args = %w[
       -GNinja
