@@ -43,6 +43,8 @@ class Bun < Formula
     bake_runtime_sources.write("") unless bake_runtime_sources.exist?
     bindgen_sources = Pathname("cmake/sources/BindgenSources.txt")
     bindgen_sources.write("") unless bindgen_sources.exist?
+    zig_sources = Pathname("cmake/sources/ZigSources.txt")
+    zig_sources.write("") unless zig_sources.exist?
     bindgen_v2_sources = Pathname("cmake/sources/BindgenV2Sources.txt")
     bindgen_v2_sources.write("") unless bindgen_v2_sources.exist?
     bindgen_v2_internal_sources = Pathname("cmake/sources/BindgenV2InternalSources.txt")
