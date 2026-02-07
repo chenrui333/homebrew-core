@@ -18,6 +18,11 @@ class Bun < Formula
   patch :DATA
 
   def install
+    # Tarball builds may omit generated source-list manifests expected by CMake.
+    mkdir_p "cmake/sources"
+    touch "cmake/sources/BunErrorSources.txt"
+    touch "cmake/sources/NodeFallbacksSources.txt"
+
     args = %w[
       -GNinja
       -DCMAKE_BUILD_TYPE=Release
