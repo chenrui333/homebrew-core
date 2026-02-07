@@ -15,11 +15,14 @@ SUMMARY="$LOGDIR/summary-$TS.txt"
 ) 2>&1 | tee "$LOG"
 STATUS=${PIPESTATUS[0]}
 
-# Guardrail: detect network/download activity in logs
-if rg -n "Downloading|Cloning|bun install|curl |wget |GitClone.cmake|DownloadZig.cmake|WEBKIT_DOWNLOAD_URL" "$LOG" >/dev/null 2>&1; then
+# Guardrail: detect network/download activity in logs (execution, not variable definitions)
+NETWORK_RE='Downloading zig|DownloadZig\.cmake|GitClone\.cmake|register_repository\(|file\(DOWNLOAD|curl |wget |git clone|bun install( |$)|WEBKIT.*download|Fetching|Cloning repository'
+
+if rg -n "$NETWORK_RE" "$LOG" >/dev/null 2>&1; then
   {
     echo "NETWORK_ACTIVITY_DETECTED"
-    rg -n "Downloading|Cloning|bun install|curl |wget |GitClone.cmake|DownloadZig.cmake|WEBKIT_DOWNLOAD_URL" "$LOG" | head -n 50
+    echo "PATTERN: $NETWORK_RE"
+    rg -n "$NETWORK_RE" "$LOG" | head -n 80
   } > "$SUMMARY"
   exit 2
 fi
