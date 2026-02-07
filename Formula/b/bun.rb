@@ -3,11 +3,11 @@ class Bun < Formula
   homepage "https://bun.sh/"
   url "https://github.com/oven-sh/bun/archive/refs/tags/bun-v1.3.8.tar.gz"
   sha256 "9714396b53e340387bb2eeb6a92f34a7176d3e1cb73b1dd301f547bd570edcaf"
-  license "TODO"
+  license "MIT"
 
   depends_on "cmake" => :build
   depends_on "ninja" => :build
-  depends_on "pkg-config" => :build
+  depends_on "pkgconf" => :build
   depends_on "python@3.12" => :build
   depends_on "rust" => :build
   depends_on "zig" => :build
@@ -18,45 +18,21 @@ class Bun < Formula
   patch :DATA
 
   def install
-    # Bootstrap bun (downloads allowed for fast prototype)
-    bootstrap_dir = buildpath/"bootstrap"
-    bootstrap_zip = buildpath/"bun-bootstrap.zip"
-    bootstrap_dir.mkpath
-
-    if OS.mac?
-      if Hardware::CPU.arm?
-        url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.8/bun-darwin-aarch64.zip"
-      else
-        url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.8/bun-darwin-x64.zip"
-      end
-    elsif OS.linux?
-      if Hardware::CPU.arm?
-        url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.8/bun-linux-aarch64.zip"
-      else
-        url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.8/bun-linux-x64.zip"
-      end
-    else
-      odie "Unsupported OS for bootstrap bun"
+    if ENV["HOMEBREW_BUN_ALLOW_BOOTSTRAP"] != "1"
+      odie <<~EOS
+        Bun source build prototype blocks bootstrap bun downloads.
+        Upstream codegen currently requires a Bun executable with no bundled offline alternative.
+      EOS
     end
 
-    system "curl", "-L", "-o", bootstrap_zip, url
-    system "unzip", "-q", bootstrap_zip, "-d", bootstrap_dir
-    bootstrap_bin = Dir[bootstrap_dir/"**/bun"].find { |p| File.file?(p) }
-    odie "Bootstrap bun not found in #{bootstrap_dir}" if bootstrap_bin.nil?
-    chmod "+x", bootstrap_bin
-
-    # Generate cmake/sources/*.txt using bun's glob implementation (brace expansion)
-    (buildpath/"cmake"/"sources").mkpath
-    system bootstrap_bin, "scripts/glob-sources.mjs"
-
-    args = %W[
+    args = %w[
       -GNinja
       -DCMAKE_BUILD_TYPE=Release
       -DCMAKE_AR=/usr/bin/ar
       -DCMAKE_RANLIB=/usr/bin/ranlib
       -DUSE_SYSTEM_ZIG=ON
-      -DBUN_BOOTSTRAP=ON
-      -DBUN_EXECUTABLE=#{bootstrap_bin}
+      -DBUN_BOOTSTRAP=OFF
+      -DBUN_EXECUTABLE=BUN_BOOTSTRAP_DISABLED
       -DUSE_SYSTEM_LIBUV=ON
       -DUSE_SYSTEM_SQLITE=ON
       -DENABLE_BASELINE=ON
