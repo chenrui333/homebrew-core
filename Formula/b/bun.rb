@@ -33,6 +33,8 @@ class Bun < Formula
     zig_generated_classes_sources.write("") unless zig_generated_classes_sources.exist?
     cxx_sources = Pathname("cmake/sources/CxxSources.txt")
     cxx_sources.write("") unless cxx_sources.exist?
+    c_sources = Pathname("cmake/sources/CSources.txt")
+    c_sources.write("") unless c_sources.exist?
 
     args = %w[
       -GNinja
