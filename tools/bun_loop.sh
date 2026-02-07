@@ -11,12 +11,15 @@ SUMMARY="$LOGDIR/summary-$TS.txt"
 
 (
   cd "$ROOT"
+  # Ensure we actually rebuild each iteration (avoid "already installed" short-circuit)
+  brew uninstall --formula bun >/dev/null 2>&1 || true
+  brew uninstall --formula --zap bun >/dev/null 2>&1 || true
   HOMEBREW_NO_INSTALL_FROM_API=1 brew install --build-from-source ./Formula/b/bun.rb -v
 ) 2>&1 | tee "$LOG"
 STATUS=${PIPESTATUS[0]}
 
 # Guardrail: detect network/download activity in logs (execution, not variable definitions)
-NETWORK_RE='Downloading zig|DownloadZig\.cmake|GitClone\.cmake|register_repository\(|file\(DOWNLOAD|curl |wget |git clone|bun install( |$)|WEBKIT.*download|Fetching|Cloning repository'
+NETWORK_RE='Downloading zig|DownloadZig\.cmake|GitClone\.cmake|register_repository\(|file\(DOWNLOAD|curl |wget |git clone|git fetch|FetchContent|ExternalProject_Add|bun install( |$)|WEBKIT.*download|Fetching|Cloning repository'
 
 if rg -n "$NETWORK_RE" "$LOG" >/dev/null 2>&1; then
   {
