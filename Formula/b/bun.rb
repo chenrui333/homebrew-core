@@ -35,6 +35,8 @@ class Bun < Formula
     cxx_sources.write("") unless cxx_sources.exist?
     c_sources = Pathname("cmake/sources/CSources.txt")
     c_sources.write("") unless c_sources.exist?
+    javascript_sources = Pathname("cmake/sources/JavaScriptSources.txt")
+    javascript_sources.write("") unless javascript_sources.exist?
 
     args = %w[
       -GNinja
