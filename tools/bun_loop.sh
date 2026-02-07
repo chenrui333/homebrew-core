@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+LOGDIR="$ROOT/logs/bun"
+mkdir -p "$LOGDIR"
+
+TS="$(date +"%Y%m%d-%H%M%S")"
+LOG="$LOGDIR/build-$TS.log"
+SUMMARY="$LOGDIR/summary-$TS.txt"
+
+(
+  cd "$ROOT"
+  HOMEBREW_NO_INSTALL_FROM_API=1 brew install --build-from-source ./Formula/b/bun.rb -v
+) 2>&1 | tee "$LOG"
+STATUS=${PIPESTATUS[0]}
+
+# Guardrail: detect network/download activity in logs
+if rg -n "Downloading|Cloning|bun install|curl |wget |GitClone.cmake|DownloadZig.cmake|WEBKIT_DOWNLOAD_URL" "$LOG" >/dev/null 2>&1; then
+  {
+    echo "NETWORK_ACTIVITY_DETECTED"
+    rg -n "Downloading|Cloning|bun install|curl |wget |GitClone.cmake|DownloadZig.cmake|WEBKIT_DOWNLOAD_URL" "$LOG" | head -n 50
+  } > "$SUMMARY"
+  exit 2
+fi
+
+if [[ $STATUS -eq 0 ]]; then
+  echo "SUCCESS" > "$SUMMARY"
+  exit 0
+fi
+
+# Extract first fatal error block (up to 30 lines) to summary
+awk '
+  /^FAILED: / { if (!p) { p=1; c=0; print; next } }
+  /^ninja: build stopped/ { if (!p) { p=1; c=0; print } }
+  /^Error: / { if (!p) { p=1; c=0; print; next } }
+  /error: / { if (!p) { p=1; c=0; print; next } }
+  { if (p && c < 30) { print; c++ } if (p && c >= 30) { exit } }
+' "$LOG" > "$SUMMARY" || true
+
+exit 1
