@@ -107,14 +107,24 @@ Date: Fri, 6 Feb 2026 13:09:40 -0500
 Subject: [PATCH 2/4] cmake: add bun bootstrap toggle
 
 ---
- cmake/targets/BuildBun.cmake |  4 ++++
+ cmake/targets/BuildBun.cmake |  9 +++++++++
  cmake/tools/SetupBun.cmake   | 13 +++++++++++++
- 2 files changed, 17 insertions(+)
+ 2 files changed, 22 insertions(+)
 
 diff --git a/cmake/targets/BuildBun.cmake b/cmake/targets/BuildBun.cmake
 index 64536cc26b..05493136a6 100644
 --- a/cmake/targets/BuildBun.cmake
 +++ b/cmake/targets/BuildBun.cmake
+@@ -434,5 +434,9 @@ string(REPLACE ";" "," BUN_BINDGENV2_SOURCES_COMMA_SEPARATED
+   "${BUN_BINDGENV2_SOURCES}")
+ 
++if (BUN_BOOTSTRAP STREQUAL "OFF" OR BUN_EXECUTABLE STREQUAL "BUN_BOOTSTRAP_DISABLED")
++  message(FATAL_ERROR "BUN_BOOTSTRAP=OFF requires pre-generated bindgen outputs. Upstream must ship them or provide a Node-based generator.")
++endif()
++
+ execute_process(
+   COMMAND ${BUN_EXECUTABLE} ${BUN_FLAGS} run ${BUN_BINDGENV2_SCRIPT}
+     --command=list-outputs
 @@ -1583,3 +1583,7 @@ if(NOT BUN_CPP_ONLY)
      endif()
    endif()
