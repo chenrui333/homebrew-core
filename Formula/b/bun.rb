@@ -83,6 +83,22 @@ class Bun < Formula
       -DENABLE_BASELINE=ON
     ]
 
+    webkit_path = ENV["HOMEBREW_BUN_WEBKIT_PATH"].to_s
+    webkit_candidates = if webkit_path.empty?
+      [Pathname("vendor/WebKit/WebKitBuild/Release/lib/libWTF.a")]
+    else
+      args << "-DWEBKIT_PATH=#{webkit_path}"
+      [
+        Pathname(webkit_path)/"lib/libWTF.a",
+        Pathname(webkit_path)/"usr/local/lib/libWTF.a",
+        Pathname(webkit_path)/"WebKitBuild/Release/lib/libWTF.a",
+      ]
+    end
+    if webkit_candidates.none?(&:exist?)
+      odie "WEBKIT_LOCAL=ON requires local WebKit static libs (missing libWTF.a). " \
+           "Set HOMEBREW_BUN_WEBKIT_PATH to a prebuilt WebKit tree."
+    end
+
     system "cmake", "-S", ".", "-B", "build", *args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
