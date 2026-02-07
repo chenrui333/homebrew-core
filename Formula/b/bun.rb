@@ -18,13 +18,6 @@ class Bun < Formula
   patch :DATA
 
   def install
-    if ENV["HOMEBREW_BUN_ALLOW_BOOTSTRAP"] != "1"
-      odie <<~EOS
-        Bun source build prototype blocks bootstrap bun downloads.
-        Upstream codegen currently requires a Bun executable with no bundled offline alternative.
-      EOS
-    end
-
     args = %w[
       -GNinja
       -DCMAKE_BUILD_TYPE=Release
