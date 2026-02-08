@@ -68,6 +68,16 @@ These are based on the **unpatched v1.3.8 tarball** in Homebrew cache:
   - `${WEBKIT_PATH}/JavaScriptCore/Headers`, `${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders`, etc.
   - In the current local build tree, `WebKitBuild/Release/JavaScriptCore/Headers` is missing.
 - **Implication:** If WebKit headers/derived sources aren’t produced in the expected layout, Bun’s bindings may not match the WebKit build, resulting in class/ABI mismatches.
+- **2026-02-07 first-failure status (prototype formula):**
+  - `tools/bun_loop.sh` fails immediately with:
+    - `WEBKIT_LOCAL=ON requires local WebKit static libs (missing libWTF.a). Set HOMEBREW_BUN_WEBKIT_PATH to a prebuilt WebKit tree.`
+  - This guard is intentional to prevent falling back to Bun's WebKit downloader.
+- **Why this currently blocks source-only Homebrew builds:**
+  - `cmake/targets/BuildBun.cmake` links static archives directly:
+    - `${WEBKIT_LIB_PATH}/libWTF.a`
+    - `${WEBKIT_LIB_PATH}/libJavaScriptCore.a`
+  - `cmake/tools/SetupWebKit.cmake` expects Bun-WebKit private header layout (e.g. `JavaScriptCore/PrivateHeaders`, `DerivedSources/inspector`), not macOS system framework layout.
+  - Result: system `JavaScriptCore.framework` is not a drop-in replacement for Bun v1.3.8 in the current build logic.
 
 ## Current Build State (Prototype, downloads allowed)
 - Latest loop run log: `logs/bun/build-20260207-045240.log` (2026-02-07).
