@@ -18,6 +18,7 @@ class Bun < Formula
   depends_on "libdeflate"
   depends_on "libuv"
   depends_on "lol-html"
+  depends_on "mimalloc"
   depends_on "openssl@3"
   depends_on "sqlite"
   depends_on "zstd"
@@ -312,6 +313,20 @@ class Bun < Formula
                   )
                 endif()
               CMAKE
+    inreplace "cmake/targets/BuildMimalloc.cmake",
+              "register_repository(",
+              <<~CMAKE
+                option(USE_SYSTEM_MIMALLOC "Use system mimalloc" OFF)
+                if(USE_SYSTEM_MIMALLOC)
+                  find_library(MIMALLOC_LIBRARY NAMES mimalloc REQUIRED)
+                  find_path(MIMALLOC_INCLUDE_DIR NAMES mimalloc.h REQUIRED)
+                  target_include_directories(${bun} PRIVATE ${MIMALLOC_INCLUDE_DIR})
+                  target_link_libraries(${bun} PRIVATE ${MIMALLOC_LIBRARY})
+                  message(STATUS "Using system mimalloc")
+                  return()
+                endif()
+                register_repository(
+              CMAKE
 
     args = %w[
       -GNinja
@@ -329,6 +344,7 @@ class Bun < Formula
       -DUSE_SYSTEM_HIGHWAY=ON
       -DUSE_SYSTEM_LIBDEFLATE=ON
       -DUSE_SYSTEM_LOLHTML=ON
+      -DUSE_SYSTEM_MIMALLOC=ON
       -DUSE_SYSTEM_ZSTD=ON
       -DWEBKIT_LOCAL=ON
       -DENABLE_BASELINE=ON
