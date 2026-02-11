@@ -83,11 +83,20 @@ class Bun < Formula
               "  register_command(\n    COMMENT\n      ${NPM_COMMENT}\n",
               <<~CMAKE
                 if (BUN_BOOTSTRAP STREQUAL "OFF" OR BUN_EXECUTABLE STREQUAL "BUN_BOOTSTRAP_DISABLED")
-                  message(FATAL_ERROR "BUN_BOOTSTRAP=OFF: JS dependency installation disabled. Pre-populate node_modules for ${NPM_CWD}.")
+                  message(STATUS "BUN_BOOTSTRAP=OFF: skipping JS dependency install for ${NPM_CWD}.")
+                  return()
                 endif()
                 register_command(
                   COMMENT
                     ${NPM_COMMENT}
+              CMAKE
+    inreplace "cmake/Globals.cmake",
+              /function\(register_repository\)/,
+              <<~CMAKE
+                function(register_repository)
+                  if (BUN_BOOTSTRAP STREQUAL "OFF" OR BUN_EXECUTABLE STREQUAL "BUN_BOOTSTRAP_DISABLED")
+                    message(FATAL_ERROR "BUN_BOOTSTRAP=OFF: external repository downloads are disabled.")
+                  endif()
               CMAKE
 
     args = %w[
