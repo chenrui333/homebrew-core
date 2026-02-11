@@ -26,6 +26,10 @@ class Bun < Formula
     url "https://github.com/h2o/picohttpparser/archive/066d2b1e9ab820703db0837a7255d92d30f0c9f5.tar.gz"
     sha256 "637ff2ab6f5c7f7e05a5b5dc393d5cf2fea8d4754fcaceaaf935ffff5c1323ee"
   end
+  resource "ls-hpack" do
+    url "https://github.com/litespeedtech/ls-hpack/archive/8905c024b6d052f083a3d11d0a169b3c2735c8a1.tar.gz"
+    sha256 "07d8bf901bb1b15543f38eabd23938519e1210eebadb52f3d651d6ef130ef973"
+  end
 
   patch :DATA
 
@@ -65,6 +69,11 @@ class Bun < Formula
       mkdir_p buildpath/"vendor/picohttpparser"
       cp "picohttpparser.c", buildpath/"vendor/picohttpparser/picohttpparser.c"
       cp "picohttpparser.h", buildpath/"vendor/picohttpparser/picohttpparser.h"
+    end
+    resource("ls-hpack").stage do
+      rm_r buildpath/"vendor/lshpack" if (buildpath/"vendor/lshpack").exist?
+      mkdir_p buildpath/"vendor/lshpack"
+      cp_r Dir["*"], buildpath/"vendor/lshpack"
     end
     inreplace "cmake/targets/BuildBun.cmake",
               /(\s+OUTPUTS\n\s+\$\{BUN_BINDGENV2_CPP_OUTPUTS\}\n\s+\$\{BUN_BINDGENV2_ZIG_OUTPUTS\}\n)/,
@@ -277,6 +286,31 @@ class Bun < Formula
                   return()
                 endif()
                 register_repository(
+              CMAKE
+    inreplace "cmake/targets/BuildLshpack.cmake",
+              <<~CMAKE,
+                register_repository(
+                  NAME
+                    lshpack
+                  REPOSITORY
+                    litespeedtech/ls-hpack
+                  COMMIT
+                    8905c024b6d052f083a3d11d0a169b3c2735c8a1
+                )
+              CMAKE
+              <<~CMAKE
+                if(EXISTS ${VENDOR_PATH}/lshpack/CMakeLists.txt)
+                  message(STATUS "Using vendored ls-hpack")
+                else()
+                  register_repository(
+                    NAME
+                      lshpack
+                    REPOSITORY
+                      litespeedtech/ls-hpack
+                    COMMIT
+                      8905c024b6d052f083a3d11d0a169b3c2735c8a1
+                  )
+                endif()
               CMAKE
 
     args = %w[
