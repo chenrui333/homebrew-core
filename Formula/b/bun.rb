@@ -6,6 +6,7 @@ class Bun < Formula
   license "MIT"
 
   depends_on "cmake" => :build
+  depends_on "esbuild" => :build
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
   depends_on "python@3.12" => :build
@@ -181,6 +182,17 @@ class Bun < Formula
                   return()
                 endif()
                 register_command(
+              CMAKE
+    inreplace "cmake/tools/SetupEsbuild.cmake",
+              "if(CMAKE_HOST_WIN32)",
+              <<~CMAKE
+                option(USE_SYSTEM_ESBUILD "Use system esbuild from PATH" OFF)
+                if(USE_SYSTEM_ESBUILD)
+                  find_program(ESBUILD_EXECUTABLE esbuild REQUIRED)
+                  message(STATUS "Using system esbuild: ${ESBUILD_EXECUTABLE}")
+                  return()
+                endif()
+                if(CMAKE_HOST_WIN32)
               CMAKE
     inreplace "cmake/targets/BuildZstd.cmake",
               "register_cmake_command(",
@@ -406,6 +418,7 @@ class Bun < Formula
       -DUSE_SYSTEM_LIBDEFLATE=ON
       -DUSE_SYSTEM_LOLHTML=ON
       -DUSE_SYSTEM_MIMALLOC=ON
+      -DUSE_SYSTEM_ESBUILD=ON
       -DUSE_SYSTEM_ZLIB=ON
       -DUSE_SYSTEM_ZSTD=ON
       -DWEBKIT_LOCAL=ON
