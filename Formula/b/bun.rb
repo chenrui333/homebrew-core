@@ -13,6 +13,7 @@ class Bun < Formula
   depends_on "zig" => :build
 
   depends_on "libuv"
+  depends_on "openssl@3"
   depends_on "sqlite"
   depends_on "zstd"
 
@@ -165,6 +166,31 @@ class Bun < Formula
                 endif()
                 register_cmake_command(
               CMAKE
+    inreplace "cmake/targets/BuildBoringSSL.cmake",
+              "register_repository(",
+              <<~CMAKE
+                option(USE_SYSTEM_BORINGSSL "Use system OpenSSL libraries" OFF)
+                if(USE_SYSTEM_BORINGSSL)
+                  find_library(CRYPTO_LIBRARY NAMES crypto REQUIRED)
+                  find_library(SSL_LIBRARY NAMES ssl REQUIRED)
+                  find_path(OPENSSL_INCLUDE_DIR NAMES openssl/ssl.h REQUIRED)
+                  add_library(crypto UNKNOWN IMPORTED GLOBAL)
+                  set_target_properties(crypto PROPERTIES
+                    IMPORTED_LOCATION ${CRYPTO_LIBRARY}
+                    INTERFACE_INCLUDE_DIRECTORIES ${OPENSSL_INCLUDE_DIR}
+                  )
+                  add_library(ssl UNKNOWN IMPORTED GLOBAL)
+                  set_target_properties(ssl PROPERTIES
+                    IMPORTED_LOCATION ${SSL_LIBRARY}
+                    INTERFACE_INCLUDE_DIRECTORIES ${OPENSSL_INCLUDE_DIR}
+                  )
+                  add_library(decrepit INTERFACE IMPORTED GLOBAL)
+                  target_link_libraries(decrepit INTERFACE crypto)
+                  message(STATUS "Using system OpenSSL for BoringSSL targets")
+                  return()
+                endif()
+                register_repository(
+              CMAKE
 
     args = %w[
       -GNinja
@@ -176,6 +202,7 @@ class Bun < Formula
       -DBUN_EXECUTABLE=BUN_BOOTSTRAP_DISABLED
       -DUSE_SYSTEM_LIBUV=ON
       -DUSE_SYSTEM_SQLITE=ON
+      -DUSE_SYSTEM_BORINGSSL=ON
       -DUSE_SYSTEM_ZSTD=ON
       -DWEBKIT_LOCAL=ON
       -DENABLE_BASELINE=ON
