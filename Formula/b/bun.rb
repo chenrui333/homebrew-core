@@ -83,7 +83,7 @@ class Bun < Formula
               "  register_command(\n    COMMENT\n      ${NPM_COMMENT}\n",
               <<~CMAKE
                 if (BUN_BOOTSTRAP STREQUAL "OFF" OR BUN_EXECUTABLE STREQUAL "BUN_BOOTSTRAP_DISABLED")
-                  message(FATAL_ERROR "BUN_BOOTSTRAP=OFF: bun install disabled. Pre-populate node_modules for ${NPM_CWD}.")
+                  message(FATAL_ERROR "BUN_BOOTSTRAP=OFF: JS dependency installation disabled. Pre-populate node_modules for ${NPM_CWD}.")
                 endif()
                 register_command(
                   COMMENT
