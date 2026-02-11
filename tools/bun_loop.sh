@@ -28,9 +28,23 @@ set +e
     done
   fi
 
-  # Clear stale bun lock if no brew process is running (avoid clobbering active brew)
+  # Avoid transient lock contention from other Homebrew operations.
+  # Wait briefly for active brew processes, then clear only stale locks.
+  LOCK_WAIT_SECS="${HOMEBREW_BUN_LOCK_WAIT_SECS:-120}"
+  waited=0
+  while pgrep -f "[b]rew" >/dev/null 2>&1; do
+    if [[ "$waited" -ge "$LOCK_WAIT_SECS" ]]; then
+      echo "Timed out waiting for other brew processes after ${LOCK_WAIT_SECS}s"
+      break
+    fi
+    echo "Waiting for active brew process (${waited}s/${LOCK_WAIT_SECS}s)..."
+    sleep 5
+    waited=$((waited + 5))
+  done
+
   if ! pgrep -f "[b]rew" >/dev/null 2>&1; then
     rm -f /opt/homebrew/var/homebrew/locks/bun.formula.lock || true
+    rm -f /opt/homebrew/var/homebrew/locks/cmake.formula.lock || true
   fi
 
   # Ensure we actually rebuild each iteration (avoid "already installed" short-circuit)
