@@ -327,6 +327,19 @@ class Bun < Formula
                 endif()
                 register_repository(
               CMAKE
+    inreplace "cmake/targets/BuildZlib.cmake",
+              "register_repository(",
+              <<~CMAKE
+                option(USE_SYSTEM_ZLIB "Use system zlib" OFF)
+                if(USE_SYSTEM_ZLIB)
+                  find_package(ZLIB REQUIRED)
+                  add_library(zlib INTERFACE IMPORTED GLOBAL)
+                  target_link_libraries(zlib INTERFACE ZLIB::ZLIB)
+                  message(STATUS "Using system zlib")
+                  return()
+                endif()
+                register_repository(
+              CMAKE
 
     args = %w[
       -GNinja
@@ -345,6 +358,7 @@ class Bun < Formula
       -DUSE_SYSTEM_LIBDEFLATE=ON
       -DUSE_SYSTEM_LOLHTML=ON
       -DUSE_SYSTEM_MIMALLOC=ON
+      -DUSE_SYSTEM_ZLIB=ON
       -DUSE_SYSTEM_ZSTD=ON
       -DWEBKIT_LOCAL=ON
       -DENABLE_BASELINE=ON
