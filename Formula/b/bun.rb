@@ -13,6 +13,7 @@ class Bun < Formula
   depends_on "zig" => :build
 
   depends_on "brotli"
+  depends_on "c-ares"
   depends_on "libuv"
   depends_on "openssl@3"
   depends_on "sqlite"
@@ -208,6 +209,25 @@ class Bun < Formula
                 endif()
                 register_repository(
               CMAKE
+    inreplace "cmake/targets/BuildCares.cmake",
+              "register_repository(",
+              <<~CMAKE
+                option(USE_SYSTEM_CARES "Use system c-ares" OFF)
+                if(USE_SYSTEM_CARES)
+                  find_library(CARES_LIBRARY NAMES cares REQUIRED)
+                  find_path(CARES_INCLUDE_DIR NAMES ares.h REQUIRED)
+                  add_library(cares UNKNOWN IMPORTED GLOBAL)
+                  set_target_properties(cares PROPERTIES
+                    IMPORTED_LOCATION ${CARES_LIBRARY}
+                    INTERFACE_INCLUDE_DIRECTORIES ${CARES_INCLUDE_DIR}
+                  )
+                  add_library(c-ares INTERFACE IMPORTED GLOBAL)
+                  target_link_libraries(c-ares INTERFACE cares)
+                  message(STATUS "Using system c-ares")
+                  return()
+                endif()
+                register_repository(
+              CMAKE
 
     args = %w[
       -GNinja
@@ -221,6 +241,7 @@ class Bun < Formula
       -DUSE_SYSTEM_SQLITE=ON
       -DUSE_SYSTEM_BORINGSSL=ON
       -DUSE_SYSTEM_BROTLI=ON
+      -DUSE_SYSTEM_CARES=ON
       -DUSE_SYSTEM_ZSTD=ON
       -DWEBKIT_LOCAL=ON
       -DENABLE_BASELINE=ON
