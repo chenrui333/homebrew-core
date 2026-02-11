@@ -14,6 +14,7 @@ class Bun < Formula
 
   depends_on "brotli"
   depends_on "c-ares"
+  depends_on "hdrhistogram_c"
   depends_on "highway"
   depends_on "libarchive"
   depends_on "libdeflate"
@@ -290,6 +291,21 @@ class Bun < Formula
                 endif()
                 register_repository(
               CMAKE
+    inreplace "cmake/targets/BuildHdrHistogram.cmake",
+              "register_repository(",
+              <<~CMAKE
+                option(USE_SYSTEM_HDRHISTOGRAM "Use system hdrhistogram_c" OFF)
+                if(USE_SYSTEM_HDRHISTOGRAM)
+                  find_library(HDR_HISTOGRAM_LIBRARY NAMES hdr_histogram hdr_histogram_static REQUIRED)
+                  find_path(HDR_HISTOGRAM_INCLUDE_DIR NAMES hdr/hdr_histogram.h REQUIRED)
+                  add_library(hdrhistogram INTERFACE IMPORTED GLOBAL)
+                  target_link_libraries(hdrhistogram INTERFACE ${HDR_HISTOGRAM_LIBRARY})
+                  target_include_directories(hdrhistogram INTERFACE ${HDR_HISTOGRAM_INCLUDE_DIR})
+                  message(STATUS "Using system hdrhistogram_c")
+                  return()
+                endif()
+                register_repository(
+              CMAKE
     inreplace "cmake/targets/BuildLolHtml.cmake",
               "register_repository(",
               <<~CMAKE
@@ -369,6 +385,7 @@ class Bun < Formula
       -DUSE_SYSTEM_BORINGSSL=ON
       -DUSE_SYSTEM_BROTLI=ON
       -DUSE_SYSTEM_CARES=ON
+      -DUSE_SYSTEM_HDRHISTOGRAM=ON
       -DUSE_SYSTEM_HIGHWAY=ON
       -DUSE_SYSTEM_LIBARCHIVE=ON
       -DUSE_SYSTEM_LIBDEFLATE=ON
