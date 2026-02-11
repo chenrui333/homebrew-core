@@ -1,0 +1,4 @@
+NETWORK_ACTIVITY_DETECTED
+PATTERN: Downloading zig|DownloadZig\.cmake|GitClone\.cmake|register_repository\(|file\(DOWNLOAD|curl |wget |git clone|git fetch|FetchContent|ExternalProject_Add|bun install( |$)|WEBKIT.*download
+273:[24/37] Downloading zig
+274:-- Running script: DownloadZig.cmake

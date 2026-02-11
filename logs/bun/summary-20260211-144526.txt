@@ -1,0 +1,31 @@
+Error: Failed to load cask: ./Formula/b/bun.rb
+Cask 'bun' is unreadable: wrong constant name #<Class:0x000000012a832bd0>
+Warning: Treating ./Formula/b/bun.rb as a formula.
+==> Fetching downloads for: bun
+✔︎ Bottle Manifest lol-html (2.7.1)
+==> Verifying checksum for 'e4ed9fb9160ca47873defd645f6ecf16dfd5dbc348173e5cd0667f3439bb02cd--lol-html--2.7.1.arm64_tahoe.bottle.tar.gz'
+✔︎ Resource bun--picohttpparser
+✔︎ Bottle lol-html (2.7.1)
+✔︎ Formula bun (1.3.8)
+==> Verifying checksum for 'fad59b16ad4752cc63c8a23339da36f57d1851485a7a1c08260daccefaec3961--picohttpparser-066d2b1e9ab820703db0837a7255d92d30f0c9f5.tar.gz'
+==> Verifying checksum for '5893d56c4d1ab1cbd456077a3a5863c0618e4649e194100eec5a1cd3946ae391--bun-bun-v1.3.8.tar.gz'
+==> Installing bun dependency: lol-html
+==> Pouring lol-html--2.7.1.arm64_tahoe.bottle.tar.gz
+==> Finishing up
+ln -s ../Cellar/lol-html/2.7.1/include/lol_html.h lol_html.h
+ln -s ../Cellar/lol-html/2.7.1/lib/liblolhtml.1.3.1.dylib liblolhtml.1.3.1.dylib
+ln -s ../Cellar/lol-html/2.7.1/lib/liblolhtml.1.dylib liblolhtml.1.dylib
+ln -s ../Cellar/lol-html/2.7.1/lib/liblolhtml.a liblolhtml.a
+ln -s ../Cellar/lol-html/2.7.1/lib/liblolhtml.dylib liblolhtml.dylib
+ln -s ../../Cellar/lol-html/2.7.1/lib/pkgconfig/lol-html.pc lol-html.pc
+==> Summary
+🍺  /opt/homebrew/Cellar/lol-html/2.7.1: 12 files, 3.4MB
+mv /private/tmp/homebrew-unpack-20260211-25158-4r1fle/bun-bun-v1.3.8 /private/tmp/bun-20260211-25158-qdu1ph/bun-bun-v1.3.8
+==> Patching
+mv /private/tmp/homebrew-unpack-20260211-25158-4ohi/picohttpparser-066d2b1e9ab820703db0837a7255d92d30f0c9f5 /private/tmp/bun--picohttpparser-20260211-25158-8fnh7/picohttpparser-066d2b1e9ab820703db0837a7255d92d30f0c9f5
+==> cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_AR=/usr/bin/ar -DCMAKE_RANLIB=/usr/bin/ranlib -DUSE_SYSTEM_ZIG=ON -DBUN_BOOTSTRAP=OFF -DBUN_EXECUTABLE=BUN_BOOTSTRAP_DISABLED -DUSE_SYSTEM_LIBUV=ON -DUSE_SYSTEM_SQLITE=ON -DUSE_SYSTEM_BORINGSSL=ON -DUSE_SYSTEM_BROTLI=ON -DUSE_SYSTEM_CARES=ON -DUSE_SYSTEM_HIGHWAY=ON -DUSE_SYSTEM_LIBDEFLATE=ON -DUSE_SYSTEM_LOLHTML=ON -DUSE_SYSTEM_ZSTD=ON -DWEBKIT_LOCAL=ON -DENABLE_BASELINE=ON -DWEBKIT_PATH=/Users/rchen/Downloads/brew/bun-WebKit/WebKitBuild/Release
+-- Configuring Bun
+-- Set CMAKE_VERSION: 4.2.3
+-- Set CMAKE_COMMAND: /opt/homebrew/opt/cmake/bin/cmake
+-- Set CMAKE_HOST_SYSTEM_NAME: Darwin
+-- Set CMAKE_HOST_SYSTEM_PROCESSOR: arm64

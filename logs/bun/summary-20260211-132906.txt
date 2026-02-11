@@ -1,0 +1,3 @@
+NETWORK_ACTIVITY_DETECTED
+PATTERN: Downloading zig|DownloadZig\.cmake|GitClone\.cmake|register_repository\(|file\(DOWNLOAD|curl |wget |git clone|git fetch|FetchContent|ExternalProject_Add|bun install( |$)|WEBKIT.*download
+94:  BUN_BOOTSTRAP=OFF: bun install disabled.  Pre-populate node_modules for

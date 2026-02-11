@@ -3,7 +3,7 @@
 # Docs: https://github.com/mikeyobrien/ralph-orchestrator
 
 cli:
-  backend: "codex"
+  backend: "claude"
 
 event_loop:
   prompt_file: "PROMPT.md"
