@@ -17,6 +17,7 @@ class Bun < Formula
   depends_on "highway"
   depends_on "libdeflate"
   depends_on "libuv"
+  depends_on "lol-html"
   depends_on "openssl@3"
   depends_on "sqlite"
   depends_on "zstd"
@@ -264,6 +265,19 @@ class Bun < Formula
                 endif()
                 register_repository(
               CMAKE
+    inreplace "cmake/targets/BuildLolHtml.cmake",
+              "register_repository(",
+              <<~CMAKE
+                option(USE_SYSTEM_LOLHTML "Use system lol-html" OFF)
+                if(USE_SYSTEM_LOLHTML)
+                  find_package(PkgConfig REQUIRED)
+                  pkg_check_modules(LOLHTML REQUIRED IMPORTED_TARGET lol-html)
+                  target_link_libraries(${bun} PRIVATE PkgConfig::LOLHTML)
+                  message(STATUS "Using system lol-html")
+                  return()
+                endif()
+                register_repository(
+              CMAKE
 
     args = %w[
       -GNinja
@@ -280,6 +294,7 @@ class Bun < Formula
       -DUSE_SYSTEM_CARES=ON
       -DUSE_SYSTEM_HIGHWAY=ON
       -DUSE_SYSTEM_LIBDEFLATE=ON
+      -DUSE_SYSTEM_LOLHTML=ON
       -DUSE_SYSTEM_ZSTD=ON
       -DWEBKIT_LOCAL=ON
       -DENABLE_BASELINE=ON
