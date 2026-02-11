@@ -85,6 +85,24 @@ class Bun < Formula
     inreplace "cmake/targets/BuildBun.cmake",
               "--platform=browser\n      --minify",
               "--platform=browser\n      --minify\n      --external:peechy"
+    bun_error_esbuild_cmd = <<~'CMAKE'.gsub(/^/, "      ")
+      bun-error.css
+      --outdir=${BUN_ERROR_OUTPUT}
+      --define:process.env.NODE_ENV=\"'production'\"
+      --minify
+      --bundle
+      --platform=browser
+      --format=esm
+    CMAKE
+    bun_error_esbuild_replacement = [
+      bun_error_esbuild_cmd,
+      "      --external:preact",
+      "      --external:preact/hooks",
+      "      --external:preact/jsx-runtime",
+    ].join("\n")
+    inreplace "cmake/targets/BuildBun.cmake",
+              bun_error_esbuild_cmd,
+              bun_error_esbuild_replacement
     inreplace "cmake/targets/BuildBun.cmake",
               <<~CMAKE,
                 register_repository(
