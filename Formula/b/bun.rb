@@ -12,6 +12,7 @@ class Bun < Formula
   depends_on "rust" => :build
   depends_on "zig" => :build
 
+  depends_on "brotli"
   depends_on "libuv"
   depends_on "openssl@3"
   depends_on "sqlite"
@@ -191,6 +192,22 @@ class Bun < Formula
                 endif()
                 register_repository(
               CMAKE
+    inreplace "cmake/targets/BuildBrotli.cmake",
+              "register_repository(",
+              <<~CMAKE
+                option(USE_SYSTEM_BROTLI "Use system brotli" OFF)
+                if(USE_SYSTEM_BROTLI)
+                  find_library(BROTLICOMMON_LIBRARY NAMES brotlicommon REQUIRED)
+                  find_library(BROTLIDEC_LIBRARY NAMES brotlidec REQUIRED)
+                  find_library(BROTLIENC_LIBRARY NAMES brotlienc REQUIRED)
+                  find_path(BROTLI_INCLUDE_DIR NAMES brotli/decode.h REQUIRED)
+                  target_include_directories(${bun} PRIVATE ${BROTLI_INCLUDE_DIR})
+                  target_link_libraries(${bun} PRIVATE ${BROTLICOMMON_LIBRARY} ${BROTLIDEC_LIBRARY} ${BROTLIENC_LIBRARY})
+                  message(STATUS "Using system brotli")
+                  return()
+                endif()
+                register_repository(
+              CMAKE
 
     args = %w[
       -GNinja
@@ -203,6 +220,7 @@ class Bun < Formula
       -DUSE_SYSTEM_LIBUV=ON
       -DUSE_SYSTEM_SQLITE=ON
       -DUSE_SYSTEM_BORINGSSL=ON
+      -DUSE_SYSTEM_BROTLI=ON
       -DUSE_SYSTEM_ZSTD=ON
       -DWEBKIT_LOCAL=ON
       -DENABLE_BASELINE=ON
