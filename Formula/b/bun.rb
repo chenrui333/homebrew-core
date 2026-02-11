@@ -394,6 +394,7 @@ class Bun < Formula
       -DUSE_SYSTEM_ZLIB=ON
       -DUSE_SYSTEM_ZSTD=ON
       -DWEBKIT_LOCAL=ON
+      -DENABLE_TINYCC=OFF
       -DENABLE_BASELINE=ON
     ]
 
