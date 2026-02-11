@@ -34,6 +34,10 @@ class Bun < Formula
     url "https://github.com/litespeedtech/ls-hpack/archive/8905c024b6d052f083a3d11d0a169b3c2735c8a1.tar.gz"
     sha256 "07d8bf901bb1b15543f38eabd23938519e1210eebadb52f3d651d6ef130ef973"
   end
+  resource "nodejs-headers" do
+    url "https://nodejs.org/dist/v24.3.0/node-v24.3.0-headers.tar.gz"
+    sha256 "045e9bf477cd5db0ec67f8c1a63ba7f784dedfe2c581e3d0ed09b88e9115dd07"
+  end
 
   patch :DATA
 
@@ -79,6 +83,44 @@ class Bun < Formula
       mkdir_p buildpath/"vendor/lshpack"
       cp_r Dir["*"], buildpath/"vendor/lshpack"
     end
+    resource("nodejs-headers").stage do
+      rm_r buildpath/"vendor/nodejs" if (buildpath/"vendor/nodejs").exist?
+      mkdir_p buildpath/"vendor/nodejs"
+      cp_r Dir["*"], buildpath/"vendor/nodejs"
+      # PrepareNodeHeaders.cmake removes conflicting OpenSSL/libuv headers
+      rm_r buildpath/"vendor/nodejs/include/node/openssl" if (buildpath/"vendor/nodejs/include/node/openssl").exist?
+      rm_r buildpath/"vendor/nodejs/include/node/uv" if (buildpath/"vendor/nodejs/include/node/uv").exist?
+      rm buildpath/"vendor/nodejs/include/node/uv.h" if (buildpath/"vendor/nodejs/include/node/uv.h").exist?
+      (buildpath/"vendor/nodejs/include/.node-headers-prepared").write("1")
+    end
+    # Use vendored Node.js headers instead of downloading
+    inreplace "cmake/targets/BuildBun.cmake",
+              "set(NODEJS_HEADERS_PATH ${VENDOR_PATH}/nodejs)\n\nregister_command(",
+              <<~CMAKE
+                set(NODEJS_HEADERS_PATH ${VENDOR_PATH}/nodejs)
+
+                if(EXISTS ${NODEJS_HEADERS_PATH}/include/node/node_version.h)
+                  message(STATUS "Using vendored Node.js headers")
+                  add_custom_target(bun-node-headers)
+                else()
+
+                register_command(
+              CMAKE
+    # Close the else() block for node headers
+    inreplace "cmake/targets/BuildBun.cmake",
+              <<~CMAKE,
+                  OUTPUTS
+                    ${NODEJS_HEADERS_PATH}/include/node/node_version.h
+                    ${NODEJS_HEADERS_PATH}/include/.node-headers-prepared
+                )
+              CMAKE
+              <<~CMAKE
+                  OUTPUTS
+                    ${NODEJS_HEADERS_PATH}/include/node/node_version.h
+                    ${NODEJS_HEADERS_PATH}/include/.node-headers-prepared
+                )
+                endif()
+              CMAKE
     inreplace "cmake/targets/BuildBun.cmake",
               /(\s+OUTPUTS\n\s+\$\{BUN_BINDGENV2_CPP_OUTPUTS\}\n\s+\$\{BUN_BINDGENV2_ZIG_OUTPUTS\}\n)/,
               "\\1  ALWAYS_RUN\n"
@@ -398,6 +440,14 @@ class Bun < Formula
                 -DLSHPACK_XXH=ON
                     -DCMAKE_POLICY_VERSION_MINIMUM=3.5
               CMAKE
+    # Zig 0.15.x removed no_link_obj field; guard with @hasField for compatibility
+    inreplace "build.zig",
+              "obj.no_link_obj = opts.os != .windows and !opts.no_llvm;",
+              <<~ZIG.chomp
+                if (@hasField(@TypeOf(obj.*), "no_link_obj")) {
+                    obj.no_link_obj = opts.os != .windows and !opts.no_llvm;
+                }
+              ZIG
     inreplace "cmake/targets/BuildMimalloc.cmake",
               "register_repository(",
               <<~CMAKE
