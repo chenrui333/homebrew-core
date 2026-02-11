@@ -167,6 +167,21 @@ class Bun < Formula
                 endif()
                 register_repository(
               CMAKE
+    inreplace "cmake/tools/SetupZig.cmake",
+              "register_command(",
+              <<~CMAKE
+                option(USE_SYSTEM_ZIG "Use system Zig from PATH" OFF)
+                if (USE_SYSTEM_ZIG)
+                  unset(ZIG_EXECUTABLE)
+                  unset(ZIG_EXECUTABLE CACHE)
+                  find_program(ZIG_EXECUTABLE zig REQUIRED)
+                  set(CMAKE_ZIG_FLAGS)
+                  add_custom_target(clone-zig)
+                  message(STATUS "Using system Zig: ${ZIG_EXECUTABLE}")
+                  return()
+                endif()
+                register_command(
+              CMAKE
     inreplace "cmake/targets/BuildZstd.cmake",
               "register_cmake_command(",
               <<~CMAKE
