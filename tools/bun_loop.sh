@@ -9,6 +9,7 @@ TS="$(date +"%Y%m%d-%H%M%S")"
 LOG="$LOGDIR/build-$TS.log"
 SUMMARY="$LOGDIR/summary-$TS.txt"
 
+set +e
 (
   cd "$ROOT"
   # Prefer an explicitly provided WebKit path; otherwise auto-detect a local
@@ -38,6 +39,7 @@ SUMMARY="$LOGDIR/summary-$TS.txt"
   HOMEBREW_NO_INSTALL_FROM_API=1 brew install --build-from-source ./Formula/b/bun.rb -v
 ) 2>&1 | tee "$LOG"
 STATUS=${PIPESTATUS[0]}
+set -e
 
 # Guardrail: detect network/download activity in logs (execution, not variable definitions)
 NETWORK_RE='Downloading zig|DownloadZig\.cmake|GitClone\.cmake|register_repository\(|file\(DOWNLOAD|curl |wget |git clone|git fetch|FetchContent|ExternalProject_Add|bun install( |$)|WEBKIT.*download|Fetching|Cloning repository'
@@ -64,5 +66,12 @@ awk '
   /error: / { if (!p) { p=1; c=0; print; next } }
   { if (p && c < 30) { print; c++ } if (p && c >= 30) { exit } }
 ' "$LOG" > "$SUMMARY" || true
+if [[ ! -s "$SUMMARY" ]]; then
+  {
+    echo "BUILD_FAILED"
+    echo "No fatal block matched; inspect log:"
+    echo "$LOG"
+  } > "$SUMMARY"
+fi
 
 exit 1
