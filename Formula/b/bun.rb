@@ -15,6 +15,7 @@ class Bun < Formula
   depends_on "brotli"
   depends_on "c-ares"
   depends_on "highway"
+  depends_on "libarchive"
   depends_on "libdeflate"
   depends_on "libuv"
   depends_on "lol-html"
@@ -275,6 +276,20 @@ class Bun < Formula
                 endif()
                 register_repository(
               CMAKE
+    inreplace "cmake/targets/BuildLibArchive.cmake",
+              "register_repository(",
+              <<~CMAKE
+                option(USE_SYSTEM_LIBARCHIVE "Use system libarchive" OFF)
+                if(USE_SYSTEM_LIBARCHIVE)
+                  find_package(PkgConfig REQUIRED)
+                  pkg_check_modules(LIBARCHIVE REQUIRED IMPORTED_TARGET libarchive)
+                  add_library(libarchive INTERFACE IMPORTED GLOBAL)
+                  target_link_libraries(libarchive INTERFACE PkgConfig::LIBARCHIVE)
+                  message(STATUS "Using system libarchive")
+                  return()
+                endif()
+                register_repository(
+              CMAKE
     inreplace "cmake/targets/BuildLolHtml.cmake",
               "register_repository(",
               <<~CMAKE
@@ -355,6 +370,7 @@ class Bun < Formula
       -DUSE_SYSTEM_BROTLI=ON
       -DUSE_SYSTEM_CARES=ON
       -DUSE_SYSTEM_HIGHWAY=ON
+      -DUSE_SYSTEM_LIBARCHIVE=ON
       -DUSE_SYSTEM_LIBDEFLATE=ON
       -DUSE_SYSTEM_LOLHTML=ON
       -DUSE_SYSTEM_MIMALLOC=ON
