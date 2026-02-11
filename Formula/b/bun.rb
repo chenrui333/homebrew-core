@@ -79,6 +79,16 @@ class Bun < Formula
                   set(WEBKIT_LIB_PATH ${WEBKIT_PATH}/lib)
                 endif()
               CMAKE
+    inreplace "cmake/Globals.cmake",
+              "  register_command(\n    COMMENT\n      ${NPM_COMMENT}\n",
+              <<~CMAKE
+                if (BUN_BOOTSTRAP STREQUAL "OFF" OR BUN_EXECUTABLE STREQUAL "BUN_BOOTSTRAP_DISABLED")
+                  message(FATAL_ERROR "BUN_BOOTSTRAP=OFF: bun install disabled. Pre-populate node_modules for ${NPM_CWD}.")
+                endif()
+                register_command(
+                  COMMENT
+                    ${NPM_COMMENT}
+              CMAKE
 
     args = %w[
       -GNinja
