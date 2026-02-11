@@ -11,6 +11,22 @@ SUMMARY="$LOGDIR/summary-$TS.txt"
 
 (
   cd "$ROOT"
+  # Prefer an explicitly provided WebKit path; otherwise auto-detect a local
+  # Bun-WebKit source build output to avoid immediate WEBKIT_LOCAL hard-stop.
+  if [[ -z "${HOMEBREW_BUN_WEBKIT_PATH:-}" ]]; then
+    for candidate in \
+      "$HOME/Downloads/brew/bun-WebKit/WebKitBuild/Release" \
+      "$HOME/Downloads/bun-WebKit/WebKitBuild/Release" \
+      "$ROOT/vendor/WebKit/WebKitBuild/Release"
+    do
+      if [[ -f "$candidate/libWTF.a" ]]; then
+        export HOMEBREW_BUN_WEBKIT_PATH="$candidate"
+        echo "Using auto-detected HOMEBREW_BUN_WEBKIT_PATH=$HOMEBREW_BUN_WEBKIT_PATH"
+        break
+      fi
+    done
+  fi
+
   # Clear stale bun lock if no brew process is running (avoid clobbering active brew)
   if ! pgrep -f "[b]rew" >/dev/null 2>&1; then
     rm -f /opt/homebrew/var/homebrew/locks/bun.formula.lock || true

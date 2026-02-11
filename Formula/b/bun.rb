@@ -68,6 +68,17 @@ class Bun < Formula
       )
     CMAKE
     inreplace "cmake/tools/SetupWebKit.cmake", webkit_download_block, webkit_guarded_download_block
+    inreplace "cmake/tools/SetupWebKit.cmake",
+              "set(WEBKIT_LIB_PATH ${WEBKIT_PATH}/lib)",
+              <<~CMAKE
+                if(EXISTS ${WEBKIT_PATH}/lib/libWTF.a)
+                  set(WEBKIT_LIB_PATH ${WEBKIT_PATH}/lib)
+                elseif(EXISTS ${WEBKIT_PATH}/libWTF.a)
+                  set(WEBKIT_LIB_PATH ${WEBKIT_PATH})
+                else()
+                  set(WEBKIT_LIB_PATH ${WEBKIT_PATH}/lib)
+                endif()
+              CMAKE
 
     args = %w[
       -GNinja
@@ -85,13 +96,18 @@ class Bun < Formula
 
     webkit_path = ENV["HOMEBREW_BUN_WEBKIT_PATH"].to_s
     webkit_candidates = if webkit_path.empty?
-      [Pathname("vendor/WebKit/WebKitBuild/Release/lib/libWTF.a")]
+      [
+        Pathname("vendor/WebKit/WebKitBuild/Release/lib/libWTF.a"),
+        Pathname("vendor/WebKit/WebKitBuild/Release/libWTF.a"),
+      ]
     else
       args << "-DWEBKIT_PATH=#{webkit_path}"
       [
         Pathname(webkit_path)/"lib/libWTF.a",
+        Pathname(webkit_path)/"libWTF.a",
         Pathname(webkit_path)/"usr/local/lib/libWTF.a",
         Pathname(webkit_path)/"WebKitBuild/Release/lib/libWTF.a",
+        Pathname(webkit_path)/"WebKitBuild/Release/libWTF.a",
       ]
     end
     if webkit_candidates.none?(&:exist?)
