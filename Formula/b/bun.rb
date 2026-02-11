@@ -14,6 +14,7 @@ class Bun < Formula
 
   depends_on "libuv"
   depends_on "sqlite"
+  depends_on "zstd"
 
   patch :DATA
 
@@ -98,6 +99,33 @@ class Bun < Formula
                     message(FATAL_ERROR "BUN_BOOTSTRAP=OFF: external repository downloads are disabled.")
                   endif()
               CMAKE
+    inreplace "cmake/targets/CloneZstd.cmake",
+              "register_repository(",
+              <<~CMAKE
+                option(USE_SYSTEM_ZSTD "Use system zstd" OFF)
+                if(USE_SYSTEM_ZSTD)
+                  message(STATUS "Using system zstd")
+                  add_custom_target(clone-zstd)
+                  return()
+                endif()
+                register_repository(
+              CMAKE
+    inreplace "cmake/targets/BuildZstd.cmake",
+              "register_cmake_command(",
+              <<~CMAKE
+                option(USE_SYSTEM_ZSTD "Use system zstd" OFF)
+                if(USE_SYSTEM_ZSTD)
+                  find_library(ZSTD_LIBRARY NAMES zstd REQUIRED)
+                  find_path(ZSTD_INCLUDE_DIR NAMES zstd.h REQUIRED)
+                  add_library(zstd STATIC IMPORTED GLOBAL)
+                  set_target_properties(zstd PROPERTIES
+                    IMPORTED_LOCATION ${ZSTD_LIBRARY}
+                    INTERFACE_INCLUDE_DIRECTORIES ${ZSTD_INCLUDE_DIR}
+                  )
+                  return()
+                endif()
+                register_cmake_command(
+              CMAKE
 
     args = %w[
       -GNinja
@@ -109,6 +137,7 @@ class Bun < Formula
       -DBUN_EXECUTABLE=BUN_BOOTSTRAP_DISABLED
       -DUSE_SYSTEM_LIBUV=ON
       -DUSE_SYSTEM_SQLITE=ON
+      -DUSE_SYSTEM_ZSTD=ON
       -DWEBKIT_LOCAL=ON
       -DENABLE_BASELINE=ON
     ]
