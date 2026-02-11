@@ -392,6 +392,12 @@ class Bun < Formula
                   )
                 endif()
               CMAKE
+    inreplace "cmake/targets/BuildLshpack.cmake",
+              "-DLSHPACK_XXH=ON",
+              <<~CMAKE.chomp
+                -DLSHPACK_XXH=ON
+                    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+              CMAKE
     inreplace "cmake/targets/BuildMimalloc.cmake",
               "register_repository(",
               <<~CMAKE
