@@ -83,6 +83,9 @@ class Bun < Formula
               /(\s+OUTPUTS\n\s+\$\{BUN_BINDGENV2_CPP_OUTPUTS\}\n\s+\$\{BUN_BINDGENV2_ZIG_OUTPUTS\}\n)/,
               "\\1  ALWAYS_RUN\n"
     inreplace "cmake/targets/BuildBun.cmake",
+              "--platform=browser\n      --minify",
+              "--platform=browser\n      --minify\n      --external:peechy"
+    inreplace "cmake/targets/BuildBun.cmake",
               <<~CMAKE,
                 register_repository(
                   NAME
