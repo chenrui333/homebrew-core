@@ -16,6 +16,11 @@ class Bun < Formula
   depends_on "sqlite"
   depends_on "zstd"
 
+  resource "picohttpparser" do
+    url "https://github.com/h2o/picohttpparser/archive/066d2b1e9ab820703db0837a7255d92d30f0c9f5.tar.gz"
+    sha256 "637ff2ab6f5c7f7e05a5b5dc393d5cf2fea8d4754fcaceaaf935ffff5c1323ee"
+  end
+
   patch :DATA
 
   def install
@@ -50,9 +55,43 @@ class Bun < Formula
     bindgen_v2_sources.write("") unless bindgen_v2_sources.exist?
     bindgen_v2_internal_sources = Pathname("cmake/sources/BindgenV2InternalSources.txt")
     bindgen_v2_internal_sources.write("") unless bindgen_v2_internal_sources.exist?
+    resource("picohttpparser").stage do
+      mkdir_p buildpath/"vendor/picohttpparser"
+      cp "picohttpparser.c", buildpath/"vendor/picohttpparser/picohttpparser.c"
+      cp "picohttpparser.h", buildpath/"vendor/picohttpparser/picohttpparser.h"
+    end
     inreplace "cmake/targets/BuildBun.cmake",
               /(\s+OUTPUTS\n\s+\$\{BUN_BINDGENV2_CPP_OUTPUTS\}\n\s+\$\{BUN_BINDGENV2_ZIG_OUTPUTS\}\n)/,
               "\\1  ALWAYS_RUN\n"
+    inreplace "cmake/targets/BuildBun.cmake",
+              <<~CMAKE,
+                register_repository(
+                  NAME
+                    picohttpparser
+                  REPOSITORY
+                    h2o/picohttpparser
+                  COMMIT
+                    066d2b1e9ab820703db0837a7255d92d30f0c9f5
+                  OUTPUTS
+                    picohttpparser.c
+                )
+              CMAKE
+              <<~CMAKE
+                if(EXISTS ${VENDOR_PATH}/picohttpparser/picohttpparser.c)
+                  message(STATUS "Using vendored picohttpparser")
+                else()
+                  register_repository(
+                    NAME
+                      picohttpparser
+                    REPOSITORY
+                      h2o/picohttpparser
+                    COMMIT
+                      066d2b1e9ab820703db0837a7255d92d30f0c9f5
+                    OUTPUTS
+                      picohttpparser.c
+                  )
+                endif()
+              CMAKE
     webkit_download_block = <<~CMAKE
       file(
         DOWNLOAD ${WEBKIT_DOWNLOAD_URL} ${CACHE_PATH}/${WEBKIT_FILENAME} SHOW_PROGRESS
