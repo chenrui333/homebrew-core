@@ -14,6 +14,7 @@ class Bun < Formula
 
   depends_on "brotli"
   depends_on "c-ares"
+  depends_on "highway"
   depends_on "libuv"
   depends_on "openssl@3"
   depends_on "sqlite"
@@ -228,6 +229,23 @@ class Bun < Formula
                 endif()
                 register_repository(
               CMAKE
+    inreplace "cmake/targets/BuildHighway.cmake",
+              "register_repository(",
+              <<~CMAKE
+                option(USE_SYSTEM_HIGHWAY "Use system highway" OFF)
+                if(USE_SYSTEM_HIGHWAY)
+                  find_library(HWY_LIBRARY NAMES hwy REQUIRED)
+                  find_path(HWY_INCLUDE_DIR NAMES hwy/highway.h REQUIRED)
+                  add_library(highway UNKNOWN IMPORTED GLOBAL)
+                  set_target_properties(highway PROPERTIES
+                    IMPORTED_LOCATION ${HWY_LIBRARY}
+                    INTERFACE_INCLUDE_DIRECTORIES ${HWY_INCLUDE_DIR}
+                  )
+                  message(STATUS "Using system highway")
+                  return()
+                endif()
+                register_repository(
+              CMAKE
 
     args = %w[
       -GNinja
@@ -242,6 +260,7 @@ class Bun < Formula
       -DUSE_SYSTEM_BORINGSSL=ON
       -DUSE_SYSTEM_BROTLI=ON
       -DUSE_SYSTEM_CARES=ON
+      -DUSE_SYSTEM_HIGHWAY=ON
       -DUSE_SYSTEM_ZSTD=ON
       -DWEBKIT_LOCAL=ON
       -DENABLE_BASELINE=ON
