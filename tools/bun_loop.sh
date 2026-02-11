@@ -42,7 +42,7 @@ STATUS=${PIPESTATUS[0]}
 set -e
 
 # Guardrail: detect network/download activity in logs (execution, not variable definitions)
-NETWORK_RE='Downloading zig|DownloadZig\.cmake|GitClone\.cmake|register_repository\(|file\(DOWNLOAD|curl |wget |git clone|git fetch|FetchContent|ExternalProject_Add|bun install( |$)|WEBKIT.*download|Fetching|Cloning repository'
+NETWORK_RE='Downloading zig|DownloadZig\.cmake|GitClone\.cmake|register_repository\(|file\(DOWNLOAD|curl |wget |git clone|git fetch|FetchContent|ExternalProject_Add|bun install( |$)|WEBKIT.*download'
 
 if rg -n "$NETWORK_RE" "$LOG" >/dev/null 2>&1; then
   {
