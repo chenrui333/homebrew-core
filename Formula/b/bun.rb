@@ -15,6 +15,7 @@ class Bun < Formula
   depends_on "brotli"
   depends_on "c-ares"
   depends_on "highway"
+  depends_on "libdeflate"
   depends_on "libuv"
   depends_on "openssl@3"
   depends_on "sqlite"
@@ -246,6 +247,23 @@ class Bun < Formula
                 endif()
                 register_repository(
               CMAKE
+    inreplace "cmake/targets/BuildLibDeflate.cmake",
+              "register_repository(",
+              <<~CMAKE
+                option(USE_SYSTEM_LIBDEFLATE "Use system libdeflate" OFF)
+                if(USE_SYSTEM_LIBDEFLATE)
+                  find_library(LIBDEFLATE_LIBRARY NAMES deflate libdeflate REQUIRED)
+                  find_path(LIBDEFLATE_INCLUDE_DIR NAMES libdeflate.h REQUIRED)
+                  add_library(libdeflate UNKNOWN IMPORTED GLOBAL)
+                  set_target_properties(libdeflate PROPERTIES
+                    IMPORTED_LOCATION ${LIBDEFLATE_LIBRARY}
+                    INTERFACE_INCLUDE_DIRECTORIES ${LIBDEFLATE_INCLUDE_DIR}
+                  )
+                  message(STATUS "Using system libdeflate")
+                  return()
+                endif()
+                register_repository(
+              CMAKE
 
     args = %w[
       -GNinja
@@ -261,6 +279,7 @@ class Bun < Formula
       -DUSE_SYSTEM_BROTLI=ON
       -DUSE_SYSTEM_CARES=ON
       -DUSE_SYSTEM_HIGHWAY=ON
+      -DUSE_SYSTEM_LIBDEFLATE=ON
       -DUSE_SYSTEM_ZSTD=ON
       -DWEBKIT_LOCAL=ON
       -DENABLE_BASELINE=ON
