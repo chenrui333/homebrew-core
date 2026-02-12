@@ -342,6 +342,14 @@ class Bun < Formula
     inreplace "cmake/targets/BuildBun.cmake",
               bun_error_esbuild_cmd,
               bun_error_esbuild_replacement
+    # Disable WEBGL - bun doesn't use it and WebKit cmakeconfig.h enables it,
+    # which causes missing WebGLAny.h during compile.
+    # Patch root.h to override after cmakeconfig.h is included (avoids -Wmacro-redefined with -Werror).
+    inreplace "src/bun.js/bindings/root.h",
+              '#include "cmakeconfig.h"',
+              "#include \"cmakeconfig.h\"\n" \
+              "#undef ENABLE_WEBGL\n#define ENABLE_WEBGL 0\n" \
+              "#undef ENABLE_MEDIA_SOURCE\n#define ENABLE_MEDIA_SOURCE 0"
     inreplace "cmake/targets/BuildBun.cmake",
               <<~CMAKE,
                 if (NOT WIN32)
@@ -483,6 +491,11 @@ class Bun < Formula
                   set(WEBKIT_LIB_PATH ${WEBKIT_PATH}/lib)
                 endif()
               CMAKE
+    # Create a shim directory so #include <JavaScriptCore/X.h> resolves to PrivateHeaders/X.h.
+    # The bun source has ~1400 includes using this pattern and the system framework doesn't
+    # have these private headers; the shim avoids rewriting every include individually.
+    jsc_shim = buildpath/"jsc-include-shim"
+    mkdir_p jsc_shim
     inreplace "cmake/tools/SetupWebKit.cmake",
               "      ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders\n",
               <<~CMAKE
@@ -490,6 +503,52 @@ class Bun < Formula
                 ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders
                 ${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders
                 ${WEBKIT_PATH}/../../Source/JavaScriptCore/dfg
+                ${WEBKIT_PATH}/../../Source/JavaScriptCore/runtime
+                #{jsc_shim}
+              CMAKE
+    # Populate the shim at configure time: create a JavaScriptCore directory containing
+    # symlinks to headers from PrivateHeaders, public Headers, and Source tree.
+    # This resolves all ~1400 #include <JavaScriptCore/X.h> in bun source at once.
+    inreplace "cmake/tools/SetupWebKit.cmake",
+              "set(WEBKIT_INCLUDE_PATH ${WEBKIT_PATH}/include)",
+              <<~CMAKE.chomp
+                set(WEBKIT_INCLUDE_PATH ${WEBKIT_PATH}/include)
+                # Create JavaScriptCore include shim for angle-bracket private header includes
+                set(JSC_SHIM_DIR "#{jsc_shim}/JavaScriptCore")
+                if(NOT EXISTS "${JSC_SHIM_DIR}")
+                  file(MAKE_DIRECTORY "${JSC_SHIM_DIR}")
+                  # Link PrivateHeaders (bulk of needed headers)
+                  foreach(HDIR "${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders"
+                               "${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders"
+                               "${WEBKIT_PATH}/JavaScriptCore.framework/Headers"
+                               "${WEBKIT_PATH}/JavaScriptCore/Headers")
+                    if(EXISTS "${HDIR}")
+                      file(GLOB _hdrs "${HDIR}/*.h")
+                      foreach(_h ${_hdrs})
+                        get_filename_component(_name "${_h}" NAME)
+                        if(NOT EXISTS "${JSC_SHIM_DIR}/${_name}")
+                          file(CREATE_LINK "${_h}" "${JSC_SHIM_DIR}/${_name}" SYMBOLIC)
+                        endif()
+                      endforeach()
+                    endif()
+                  endforeach()
+                  # Link Source tree headers not in PrivateHeaders (e.g. runtime inlines)
+                  set(JSC_SRC "${WEBKIT_PATH}/../../Source/JavaScriptCore")
+                  if(EXISTS "${JSC_SRC}")
+                    foreach(SUBDIR runtime API heap inspector dfg)
+                      if(EXISTS "${JSC_SRC}/${SUBDIR}")
+                        file(GLOB _hdrs "${JSC_SRC}/${SUBDIR}/*.h")
+                        foreach(_h ${_hdrs})
+                          get_filename_component(_name "${_h}" NAME)
+                          if(NOT EXISTS "${JSC_SHIM_DIR}/${_name}")
+                            file(CREATE_LINK "${_h}" "${JSC_SHIM_DIR}/${_name}" SYMBOLIC)
+                          endif()
+                        endforeach()
+                      endif()
+                    endforeach()
+                  endif()
+                  message(STATUS "Created JSC include shim directory: ${JSC_SHIM_DIR}")
+                endif()
               CMAKE
     inreplace "cmake/Globals.cmake",
               "  register_command(\n    COMMENT\n      ${NPM_COMMENT}\n",
