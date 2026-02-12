@@ -432,6 +432,7 @@ class Bun < Formula
     inreplace "cmake/tools/SetupWebKit.cmake",
               "      ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders\n",
               <<~CMAKE
+                ${WEBKIT_PATH}/JavaScriptCore.framework/Headers
                 ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders
                 ${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders
               CMAKE
