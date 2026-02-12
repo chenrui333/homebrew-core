@@ -1106,6 +1106,7 @@ class Bun < Formula
 
       class JS_EXPORT_PRIVATE LifecycleReporterFrontendDispatcher {
           WTF_MAKE_NONCOPYABLE(LifecycleReporterFrontendDispatcher);
+          WTF_DEPRECATED_MAKE_FAST_ALLOCATED(LifecycleReporterFrontendDispatcher);
       public:
           LifecycleReporterFrontendDispatcher(FrontendRouter& router) : m_router(router) {}
           ~LifecycleReporterFrontendDispatcher() = default;
@@ -1139,6 +1140,7 @@ class Bun < Formula
 
       class JS_EXPORT_PRIVATE TestReporterFrontendDispatcher {
           WTF_MAKE_NONCOPYABLE(TestReporterFrontendDispatcher);
+          WTF_DEPRECATED_MAKE_FAST_ALLOCATED(TestReporterFrontendDispatcher);
       public:
           TestReporterFrontendDispatcher(FrontendRouter& router) : m_router(router) {}
           ~TestReporterFrontendDispatcher() = default;
