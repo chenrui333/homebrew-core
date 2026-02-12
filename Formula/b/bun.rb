@@ -342,14 +342,16 @@ class Bun < Formula
     inreplace "cmake/targets/BuildBun.cmake",
               bun_error_esbuild_cmd,
               bun_error_esbuild_replacement
-    # Disable WEBGL - bun doesn't use it and WebKit cmakeconfig.h enables it,
-    # which causes missing WebGLAny.h during compile.
-    # Patch root.h to override after cmakeconfig.h is included (avoids -Wmacro-redefined with -Werror).
+    # Disable WebKit features bun doesn't use — cmakeconfig.h enables them but
+    # required headers (WebGLAny.h, BufferMediaSource.h, DetachedRTCDataChannel.h)
+    # are absent.  Patch root.h to override after cmakeconfig.h is included
+    # (avoids -Wmacro-redefined with -Werror).
     inreplace "src/bun.js/bindings/root.h",
               '#include "cmakeconfig.h"',
               "#include \"cmakeconfig.h\"\n" \
               "#undef ENABLE_WEBGL\n#define ENABLE_WEBGL 0\n" \
-              "#undef ENABLE_MEDIA_SOURCE\n#define ENABLE_MEDIA_SOURCE 0"
+              "#undef ENABLE_MEDIA_SOURCE\n#define ENABLE_MEDIA_SOURCE 0\n" \
+              "#undef ENABLE_WEB_RTC\n#define ENABLE_WEB_RTC 0"
     inreplace "cmake/targets/BuildBun.cmake",
               <<~CMAKE,
                 if (NOT WIN32)
