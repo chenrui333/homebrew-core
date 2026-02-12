@@ -11,7 +11,6 @@ class Bun < Formula
   depends_on "pkgconf" => :build
   depends_on "python@3.12" => :build
   depends_on "rust" => :build
-  depends_on "zig" => :build
 
   depends_on "brotli"
   depends_on "c-ares"
@@ -816,14 +815,7 @@ class Bun < Formula
                 -DLSHPACK_XXH=ON
                     -DCMAKE_POLICY_VERSION_MINIMUM=3.5
               CMAKE
-    # Zig 0.15.x removed no_link_obj field; guard with @hasField for compatibility
-    inreplace "build.zig",
-              "obj.no_link_obj = opts.os != .windows and !opts.no_llvm;",
-              <<~ZIG.chomp
-                if (@hasField(@TypeOf(obj.*), "no_link_obj")) {
-                    obj.no_link_obj = opts.os != .windows and !opts.no_llvm;
-                }
-              ZIG
+    # Bun uses a custom Zig fork (oven-sh/zig); no need for system zig compat patches.
     inreplace "cmake/targets/BuildMimalloc.cmake",
               "register_repository(",
               <<~CMAKE
@@ -857,7 +849,6 @@ class Bun < Formula
       -DCMAKE_BUILD_TYPE=Release
       -DCMAKE_AR=/usr/bin/ar
       -DCMAKE_RANLIB=/usr/bin/ranlib
-      -DUSE_SYSTEM_ZIG=ON
       -DUSE_SYSTEM_LIBUV=ON
       -DUSE_SYSTEM_SQLITE=ON
       -DUSE_SYSTEM_BORINGSSL=ON
