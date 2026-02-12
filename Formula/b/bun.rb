@@ -606,6 +606,11 @@ class Bun < Formula
                   message(STATUS "Created JSC bare-include shim: ${JSC_BARE_SHIM}")
                 endif()
               CMAKE
+    # JSCOnly mode strips PLATFORM(COCOA) but bun uses REMOTE_INSPECTOR with
+    # the socket transport. Tell the WTF headers to pick the socket variant.
+    inreplace "cmake/targets/BuildBun.cmake",
+              "BUILDING_JSCONLY__",
+              "BUILDING_JSCONLY__\n  USE_INSPECTOR_SOCKET_SERVER=1"
     inreplace "cmake/Globals.cmake",
               "  register_command(\n    COMMENT\n      ${NPM_COMMENT}\n",
               <<~CMAKE
