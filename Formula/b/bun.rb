@@ -1030,6 +1030,14 @@ class Bun < Formula
                 #include "ncrypto.h"
                 #include <openssl/x509v3.h>
               CPP
+    # NodeTLS.cpp includes BoringSSL-specific openssl/base.h; guard it.
+    inreplace "src/bun.js/bindings/NodeTLS.cpp",
+              '#include "openssl/base.h"',
+              <<~CPP.chomp
+                #ifdef OPENSSL_IS_BORINGSSL
+                #include "openssl/base.h"
+                #endif
+              CPP
     # Several bun classes use WTF_DEPRECATED_MAKE_FAST_ALLOCATED but their
     # base classes use WTF_MAKE_TZONE_ALLOCATED.  WebKit requires derived
     # classes to match the base allocation scheme.
