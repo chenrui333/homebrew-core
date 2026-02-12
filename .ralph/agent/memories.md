@@ -6,6 +6,58 @@
 
 ## Fixes
 
+### mem-1770897998-4bec
+> failure: cmd=HOMEBREW_BUN_LOCK_WAIT_SECS=0 tools/bun_loop.sh, exit=1, error='brew install already locked /opt/homebrew/Cellar/bun during verification run', next=wait for/clear active brew install process and rerun bun_loop for clean first-blocker confirmation
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770897975-a912
+> failure: cmd=brew uninstall --force bun && brew audit --strict bun, exit=1, error='lock on /opt/homebrew/Cellar/zig while uninstall/autoremove active', next=wait for active brew uninstall/autoremove to finish and rerun brew audit --strict bun'
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770897961-25b7
+> failure: cmd=brew audit --strict bun, exit=1, error='installation seems to be empty from local bun keg state', next=remove stale local bun installation and rerun audit
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770897929-facd
+> failure: cmd=rg -n "NETWORK_ACTIVITY_DETECTED|SUCCESS|WeakGCMapInlines|fatal error|FAILED:" logs/bun/summary-20260212-065542.txt, exit=1, error='no matches in generated summary', next=inspect full build log referenced by bun_loop output to confirm first blocker movement
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770897828-e0ea
+> bun bootstrap-on: rewrote JSCInlines include for ThrowScope in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/ThrowScope.h to missing JavaScriptCore/WeakGCMapInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770897828-c022
+> failure: cmd=tools/bun_loop.sh, exit=1, error='brew install lock on /opt/homebrew/Cellar/bun during verification run', next=terminate stale bun_loop/cmake/ninja processes and rerun bun_loop for clean blocker confirmation
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770897180-90b1
+> bun bootstrap-on: rewrote JSCInlines include for StructureInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/StructureInlines.h to missing JavaScriptCore/ThrowScope.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770897060-5955
+> failure: cmd=tools/bun_loop.sh, exit=1, error='brew install already locked /opt/homebrew/Cellar/bun during verification run', next=wait for/clear active brew install process and rerun bun_loop for clean first-blocker confirmation
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770897029-13f1
+> failure: cmd=brew audit --strict bun, exit=1, error='installation seems to be empty from local bun keg state', next=remove stale local bun installation and rerun audit
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770896905-4188
+> bun bootstrap-on: rewrote JSCInlines include for StrongInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/StrongInlines.h to missing JavaScriptCore/StructureInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770896813-ed43
+> failure: cmd=brew uninstall --force bun, exit=1, error='lock on /opt/homebrew/Cellar/zig while uninstall/autoremove active', next=wait for active brew uninstall to finish then rerun uninstall/audit
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770896655-9ced
+> failure: cmd=tools/bun_loop.sh, exit=1, error='brew install already locked /opt/homebrew/Cellar/bun during verification rerun', next=terminate stale bun_loop/cmake/ninja processes and rerun bun_loop for clean first-blocker confirmation
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770896649-6203
+> bun bootstrap-on: rewrote JSCInlines include for SlotVisitorInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/SlotVisitorInlines.h to missing JavaScriptCore/StrongInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
 ### mem-1770883880-c90a
 > bun bootstrap-on: rewrote JSCInlines include for JSString in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/JSString.h to missing JavaScriptCore/Operations.h
 <!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
