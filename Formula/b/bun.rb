@@ -553,7 +553,7 @@ class Bun < Formula
                   # Link Source tree headers not in PrivateHeaders (e.g. runtime inlines)
                   set(JSC_SRC "${WEBKIT_PATH}/../../Source/JavaScriptCore")
                   if(EXISTS "${JSC_SRC}")
-                    foreach(SUBDIR runtime API heap inspector dfg parser bytecompiler bytecode)
+                    foreach(SUBDIR runtime API heap inspector dfg parser bytecompiler bytecode jit)
                       if(EXISTS "${JSC_SRC}/${SUBDIR}")
                         file(GLOB _hdrs "${JSC_SRC}/${SUBDIR}/*.h")
                         foreach(_h ${_hdrs})
@@ -588,7 +588,7 @@ class Bun < Formula
                     endif()
                   endforeach()
                   # Symlink Source tree headers that are NOT in PrivateHeaders
-                  foreach(SUBDIR2 runtime API heap inspector dfg parser bytecompiler bytecode)
+                  foreach(SUBDIR2 runtime API heap inspector dfg parser bytecompiler bytecode jit)
                     if(EXISTS "${JSC_SRC2}/${SUBDIR2}")
                       file(GLOB _src_hdrs2 "${JSC_SRC2}/${SUBDIR2}/*.h")
                       foreach(_sh2 ${_src_hdrs2})
@@ -1166,6 +1166,16 @@ class Bun < Formula
               "#include <JavaScriptCore/InspectorBackendDispatchers.h>\n" \
               "#include <JavaScriptCore/InspectorFrontendDispatchers.h>\n" \
               "#include \"BunInspectorProtocolStubs.h\""
+
+    # JSBuffer.cpp references JSUint8Array::s_info which is an explicit
+    # template specialization defined in the JSC library.  Tell the compiler
+    # the definition exists in another translation unit.
+    inreplace "src/bun.js/bindings/JSBuffer.cpp",
+              '#include "root.h"',
+              <<~CPP.chomp
+                #include "root.h"
+                #pragma clang diagnostic ignored "-Wundefined-var-template"
+              CPP
 
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
