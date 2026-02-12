@@ -1038,6 +1038,44 @@ class Bun < Formula
                 #include "openssl/base.h"
                 #endif
               CPP
+    # ncrpyto_engine.cpp: method signatures use std::string_view but the
+    # header declares WTF::StringView.  Fix the .cpp to match.
+    inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
+              "EnginePointer EnginePointer::getEngineByName(const std::string_view name,",
+              "EnginePointer EnginePointer::getEngineByName(const WTF::StringView name,"
+    inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
+              "EVPKeyPointer EnginePointer::loadPrivateKey(const std::string_view key_name)",
+              "EVPKeyPointer EnginePointer::loadPrivateKey(const WTF::StringView key_name)"
+    # ncrpyto_engine.cpp uses name.data() and key_name.data() which work with
+    # both std::string_view and WTF::StringView (via utf8().data()), but
+    # WTF::StringView::data() returns a different type.  Fix call sites.
+    inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
+              "EnginePointer engine(ENGINE_by_id(name.data()));",
+              "EnginePointer engine(ENGINE_by_id(name.utf8().data()));"
+    inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
+              'if (!ENGINE_ctrl_cmd_string(engine.get(), "SO_PATH", name.data(), 0)',
+              'if (!ENGINE_ctrl_cmd_string(engine.get(), "SO_PATH", name.utf8().data(), 0)'
+    inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
+              "ENGINE_load_private_key(engine, key_name.data(), nullptr, nullptr)",
+              "ENGINE_load_private_key(engine, key_name.utf8().data(), nullptr, nullptr)"
+    # ncrypto.cpp: getClientHelloAlpn/getClientHelloServerName return
+    # const char* but the return type is const WTF::StringView. Wrap returns.
+    inreplace "src/bun.js/bindings/ncrypto.cpp",
+              "return reinterpret_cast<const char*>(buf + 3);",
+              "return WTF::StringView::fromLatin1(reinterpret_cast<const char*>(buf + 3));"
+    inreplace "src/bun.js/bindings/ncrypto.cpp",
+              "return reinterpret_cast<const char*>(buf + 5);",
+              "return WTF::StringView::fromLatin1(reinterpret_cast<const char*>(buf + 5));"
+    # ncrypto.cpp: setCipherSuites passes ciphers.length() instead of
+    # ciphersUtf8.data() to SSL_CTX_set_ciphersuites.
+    inreplace "src/bun.js/bindings/ncrypto.cpp",
+              "return SSL_CTX_set_ciphersuites(ctx_.get(), ciphers.length());",
+              "return SSL_CTX_set_ciphersuites(ctx_.get(), ciphersUtf8.data());"
+    # ncrypto.cpp: OpenSSL 3 array_push_back passes const char* to
+    # CipherCallbackContext which expects WTF::StringView.
+    inreplace "src/bun.js/bindings/ncrypto.cpp",
+              "free_type(fetched);\n    auto& cb = *(static_cast<CipherCallbackContext*>(arg));\n    cb(from);",
+              "free_type(fetched);\n    auto& cb = *(static_cast<CipherCallbackContext*>(arg));\n    cb(WTF::StringView::fromLatin1(from));"
     # Several bun classes use WTF_DEPRECATED_MAKE_FAST_ALLOCATED but their
     # base classes use WTF_MAKE_TZONE_ALLOCATED.  WebKit requires derived
     # classes to match the base allocation scheme.
