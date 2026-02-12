@@ -555,7 +555,7 @@ class Bun < Formula
                   if(EXISTS "${JSC_SRC}")
                     foreach(SUBDIR runtime API heap inspector dfg parser bytecompiler bytecode jit llint assembler interpreter b3 yarr wasm debugger domjit disassembler profiler generator builtins ftl)
                       if(EXISTS "${JSC_SRC}/${SUBDIR}")
-                        file(GLOB _hdrs "${JSC_SRC}/${SUBDIR}/*.h")
+                        file(GLOB_RECURSE _hdrs "${JSC_SRC}/${SUBDIR}/*.h")
                         foreach(_h ${_hdrs})
                           get_filename_component(_name "${_h}" NAME)
                           if(NOT EXISTS "${JSC_SHIM_DIR}/${_name}")
@@ -590,7 +590,7 @@ class Bun < Formula
                   # Symlink Source tree headers that are NOT in PrivateHeaders
                   foreach(SUBDIR2 runtime API heap inspector dfg parser bytecompiler bytecode jit llint assembler interpreter b3 yarr wasm debugger domjit disassembler profiler generator builtins ftl)
                     if(EXISTS "${JSC_SRC2}/${SUBDIR2}")
-                      file(GLOB _src_hdrs2 "${JSC_SRC2}/${SUBDIR2}/*.h")
+                      file(GLOB_RECURSE _src_hdrs2 "${JSC_SRC2}/${SUBDIR2}/*.h")
                       foreach(_sh2 ${_src_hdrs2})
                         get_filename_component(_sn2 "${_sh2}" NAME)
                         if(NOT "${_sn2}" IN_LIST _ph_names)
