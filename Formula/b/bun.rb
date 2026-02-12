@@ -1005,12 +1005,25 @@ class Bun < Formula
                 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
                 #endif
               CPP
-    # BunGCOutputConstraint uses WTF_DEPRECATED_MAKE_FAST_ALLOCATED but its
-    # base class MarkingConstraint uses WTF_MAKE_TZONE_ALLOCATED.  WebKit
-    # requires derived classes to match the base allocation scheme.
+    # ncrypto.h also uses deprecated OpenSSL functions (RSA_free, DH_free, etc.)
+    inreplace "src/bun.js/bindings/ncrypto.h",
+              "#pragma once",
+              <<~CPP.chomp
+                #pragma once
+                #ifndef OPENSSL_IS_BORINGSSL
+                #pragma GCC diagnostic push
+                #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+                #endif
+              CPP
+    # Several bun classes use WTF_DEPRECATED_MAKE_FAST_ALLOCATED but their
+    # base classes use WTF_MAKE_TZONE_ALLOCATED.  WebKit requires derived
+    # classes to match the base allocation scheme.
     inreplace "src/bun.js/bindings/BunGCOutputConstraint.h",
               "WTF_DEPRECATED_MAKE_FAST_ALLOCATED(DOMGCOutputConstraint);",
               "WTF_MAKE_TZONE_ALLOCATED(DOMGCOutputConstraint);"
+    inreplace "src/bun.js/bindings/ConsoleObject.h",
+              "WTF_DEPRECATED_MAKE_FAST_ALLOCATED(ConsoleObject);",
+              "WTF_MAKE_TZONE_ALLOCATED(ConsoleObject);"
     inreplace "src/bun.js/bindings/BunGCOutputConstraint.cpp",
               '#include "BunGCOutputConstraint.h"',
               <<~CPP.chomp
@@ -1023,6 +1036,19 @@ class Bun < Formula
                 namespace WebCore {
 
                 WTF_MAKE_TZONE_ALLOCATED_IMPL(DOMGCOutputConstraint);
+              CPP
+    inreplace "src/bun.js/bindings/ConsoleObject.cpp",
+              '#include "ConsoleObject.h"',
+              <<~CPP.chomp
+                #include "ConsoleObject.h"
+                #include <wtf/TZoneMallocInlines.h>
+              CPP
+    inreplace "src/bun.js/bindings/ConsoleObject.cpp",
+              "namespace Bun {",
+              <<~CPP.chomp
+                namespace Bun {
+
+                WTF_MAKE_TZONE_ALLOCATED_IMPL(ConsoleObject);
               CPP
 
     # The bun-WebKit build is missing generated C++ dispatchers for two custom
