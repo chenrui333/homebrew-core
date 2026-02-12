@@ -162,6 +162,7 @@ class Bun < Formula
                 set(BUN_ERROR_NODE_MODULES)
                 message(STATUS "Skipping bun install for bun-error")
               CMAKE
+    react_refresh_define = %q(--define:process.env.NODE_ENV=\"'development'\")
     inreplace "cmake/targets/BuildBun.cmake",
               <<~CMAKE,
                 register_bun_install(
@@ -174,6 +175,133 @@ class Bun < Formula
               <<~CMAKE
                 set(BUN_NODE_FALLBACKS_NODE_MODULES)
                 message(STATUS "Skipping bun install for node-fallbacks")
+              CMAKE
+    inreplace "cmake/targets/BuildBun.cmake",
+              <<~CMAKE,
+                # This command relies on an older version of `esbuild`, which is why
+                # it uses ${BUN_EXECUTABLE} x instead of ${ESBUILD_EXECUTABLE}.
+                register_command(
+                  TARGET
+                    bun-node-fallbacks
+                  COMMENT
+                    "Building node-fallbacks/*.js"
+                  CWD
+                    ${BUN_NODE_FALLBACKS_SOURCE}
+                  COMMAND
+                    ${BUN_EXECUTABLE} ${BUN_FLAGS} run build-fallbacks
+                      ${BUN_NODE_FALLBACKS_OUTPUT}
+                      ${BUN_NODE_FALLBACKS_SOURCES}
+                  SOURCES
+                    ${BUN_NODE_FALLBACKS_SOURCES}
+                    ${BUN_NODE_FALLBACKS_NODE_MODULES}
+                  OUTPUTS
+                    ${BUN_NODE_FALLBACKS_OUTPUTS}
+                )
+              CMAKE
+              <<~CMAKE
+                # This command relies on an older version of `esbuild`, which is why
+                # it uses ${BUN_EXECUTABLE} x instead of ${ESBUILD_EXECUTABLE}.
+                if(EXISTS ${BUN_NODE_FALLBACKS_SOURCE}/node_modules/assert)
+                  register_command(
+                    TARGET
+                      bun-node-fallbacks
+                    COMMENT
+                      "Building node-fallbacks/*.js"
+                    CWD
+                      ${BUN_NODE_FALLBACKS_SOURCE}
+                    COMMAND
+                      ${BUN_EXECUTABLE} ${BUN_FLAGS} run build-fallbacks
+                        ${BUN_NODE_FALLBACKS_OUTPUT}
+                        ${BUN_NODE_FALLBACKS_SOURCES}
+                    SOURCES
+                      ${BUN_NODE_FALLBACKS_SOURCES}
+                      ${BUN_NODE_FALLBACKS_NODE_MODULES}
+                    OUTPUTS
+                      ${BUN_NODE_FALLBACKS_OUTPUTS}
+                  )
+                else()
+                  message(STATUS "Skipping node-fallbacks/*.js (node_modules not installed)")
+                  string(REPLACE ";" " " BUN_NODE_FALLBACKS_OUTPUTS_SHELL "${BUN_NODE_FALLBACKS_OUTPUTS}")
+                  register_command(
+                    TARGET
+                      bun-node-fallbacks
+                    COMMENT
+                      "Generating placeholder node-fallbacks/*.js"
+                    COMMAND
+                      /bin/sh -c "mkdir -p ${BUN_NODE_FALLBACKS_OUTPUT} && : > /dev/null && touch ${BUN_NODE_FALLBACKS_OUTPUTS_SHELL}"
+                    OUTPUTS
+                      ${BUN_NODE_FALLBACKS_OUTPUTS}
+                  )
+                endif()
+              CMAKE
+    inreplace "cmake/targets/BuildBun.cmake",
+              <<~CMAKE,
+                # An embedded copy of react-refresh is used when the user forgets to install it.
+                # The library is not versioned alongside React.
+                set(BUN_REACT_REFRESH_OUTPUT ${BUN_NODE_FALLBACKS_OUTPUT}/react-refresh.js)
+                register_command(
+                  TARGET
+                    bun-node-fallbacks-react-refresh
+                  COMMENT
+                    "Building node-fallbacks/react-refresh.js"
+                  CWD
+                    ${BUN_NODE_FALLBACKS_SOURCE}
+                  COMMAND
+                    ${BUN_EXECUTABLE} ${BUN_FLAGS} build
+                      ${BUN_NODE_FALLBACKS_SOURCE}/node_modules/react-refresh/cjs/react-refresh-runtime.development.js
+                      --outfile=${BUN_REACT_REFRESH_OUTPUT}
+                      --target=browser
+                      --format=cjs
+                      --minify
+                      #{react_refresh_define}
+                  SOURCES
+                    ${BUN_NODE_FALLBACKS_SOURCE}/package.json
+                    ${BUN_NODE_FALLBACKS_SOURCE}/bun.lock
+                    ${BUN_NODE_FALLBACKS_NODE_MODULES}
+                  OUTPUTS
+                    ${BUN_REACT_REFRESH_OUTPUT}
+                )
+              CMAKE
+              <<~CMAKE
+                # An embedded copy of react-refresh is used when the user forgets to install it.
+                # The library is not versioned alongside React.
+                set(BUN_REACT_REFRESH_OUTPUT ${BUN_NODE_FALLBACKS_OUTPUT}/react-refresh.js)
+                if(EXISTS ${BUN_NODE_FALLBACKS_SOURCE}/node_modules/react-refresh/cjs/react-refresh-runtime.development.js)
+                  register_command(
+                    TARGET
+                      bun-node-fallbacks-react-refresh
+                    COMMENT
+                      "Building node-fallbacks/react-refresh.js"
+                    CWD
+                      ${BUN_NODE_FALLBACKS_SOURCE}
+                    COMMAND
+                      ${BUN_EXECUTABLE} ${BUN_FLAGS} build
+                        ${BUN_NODE_FALLBACKS_SOURCE}/node_modules/react-refresh/cjs/react-refresh-runtime.development.js
+                        --outfile=${BUN_REACT_REFRESH_OUTPUT}
+                        --target=browser
+                        --format=cjs
+                        --minify
+                        #{react_refresh_define}
+                    SOURCES
+                      ${BUN_NODE_FALLBACKS_SOURCE}/package.json
+                      ${BUN_NODE_FALLBACKS_SOURCE}/bun.lock
+                      ${BUN_NODE_FALLBACKS_NODE_MODULES}
+                    OUTPUTS
+                      ${BUN_REACT_REFRESH_OUTPUT}
+                  )
+                else()
+                  message(STATUS "Skipping node-fallbacks/react-refresh.js (react-refresh not installed)")
+                  register_command(
+                    TARGET
+                      bun-node-fallbacks-react-refresh
+                    COMMENT
+                      "Generating placeholder node-fallbacks/react-refresh.js"
+                    COMMAND
+                      /bin/sh -c "mkdir -p ${BUN_NODE_FALLBACKS_OUTPUT} && : > ${BUN_REACT_REFRESH_OUTPUT}"
+                    OUTPUTS
+                      ${BUN_REACT_REFRESH_OUTPUT}
+                  )
+                endif()
               CMAKE
     # Close the else() block for node headers
     inreplace "cmake/targets/BuildBun.cmake",
