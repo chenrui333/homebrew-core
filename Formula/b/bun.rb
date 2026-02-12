@@ -519,8 +519,6 @@ class Bun < Formula
                 ${WEBKIT_PATH}/JavaScriptCore.framework/Headers
                 ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders
                 ${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders
-                ${WEBKIT_PATH}/../../Source/JavaScriptCore/dfg
-                ${WEBKIT_PATH}/../../Source/JavaScriptCore/runtime
                 #{jsc_shim}
               CMAKE
     # Populate the shim at configure time: create a JavaScriptCore directory containing
