@@ -6,6 +6,210 @@
 
 ## Fixes
 
+### mem-1770883880-c90a
+> bun bootstrap-on: rewrote JSCInlines include for JSString in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/JSString.h to missing JavaScriptCore/Operations.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770883572-d686
+> bun bootstrap-on: rewrote JSCInlines include for JSGlobalProxy in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/JSGlobalProxy.h to missing JavaScriptCore/JSString.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770883062-5f0b
+> bun bootstrap-on: rewrote JSCInlines include for JSObjectInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/JSObjectInlines.h to missing JavaScriptCore/JSGlobalProxy.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770883026-5a71
+> failure: cmd=brew audit --strict bun, exit=1, error='installation seems to be empty from interrupted local bun keg', next=remove stale local bun installation state and rerun audit
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770882566-440e
+> bun bootstrap-on: rewrote JSCInlines include for JSGlobalObjectInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/JSGlobalObjectInlines.h to missing JavaScriptCore/JSObjectInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770882303-b2d4
+> failure: cmd=tools/bun_loop.sh, exit=1, error='brew install already locked /opt/homebrew/Cellar/bun during JSGlobalObjectInlines verification run', next=identify and terminate/wait for active bun brew process then rerun bun_loop for clean first-blocker confirmation
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770881915-f155
+> bun bootstrap-on: rewrote JSCInlines include for JSFunctionInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/JSFunctionInlines.h to missing JavaScriptCore/JSGlobalObjectInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770881687-5c9e
+> failure: cmd=tools/bun_loop.sh, exit=1, error='brew install already locked /opt/homebrew/Cellar/bun during JSFunctionInlines verification run', next=identify and terminate/wait for active bun brew process then rerun bun_loop for clean first-blocker confirmation
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770881283-23ff
+> bun bootstrap-on: rewrote JSCInlines include for JSCellInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/JSCellInlines.h to missing JavaScriptCore/JSFunctionInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770881236-7339
+> failure: cmd=brew audit --strict bun, exit=1, error='installation seems to be empty from interrupted local bun keg', next=remove stale local bun installation state and rerun audit
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770880973-6066
+> failure: cmd=tools/bun_loop.sh, exit=1, error='bun cellar locked by concurrent brew install during JSCellInlines verification run', next=identify and terminate/wait for active brew install process then rerun bun_loop for clean first-blocker confirmation
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770880542-9ca8
+> bun bootstrap-on: added /../../Source/JavaScriptCore/dfg include dir via Formula/b/bun.rb SetupWebKit inreplace; bun_loop advances first blocker from missing DFGAbstractHeap.h (via DOMJITEffect.h) to missing JavaScriptCore/JSCellInlines.h in JSCInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770880542-776f
+> failure: cmd=sed -n '1,220p' /private/tmp/bun-20260212-29683-yg82zn/bun-bun-v1.3.8/cmake/tools/SetupWebKit.cmake, exit=1, error='No such file or directory after tmp cleanup', next=inspect durable paths (brew cache or local WebKit tree) instead of ephemeral /private/tmp build dir
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770879941-bd3d
+> bun bootstrap-on: rewrote JSCInlines include for JSCJSValueInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/JSCJSValueInlines.h to missing DFGAbstractHeap.h via DOMJITEffect.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770879904-b2c4
+> failure: cmd=brew uninstall --force bun && brew audit --strict bun, exit=1, error='uninstall lock on /opt/homebrew/Cellar/zig from active uninstall process', next=wait for uninstall process to complete then rerun brew audit --strict bun
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770879890-af0d
+> failure: cmd=brew audit --strict bun, exit=1, error='installation seems to be empty from interrupted local bun keg', next=remove stale local bun keg and rerun audit
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770878870-f5cb
+> bun bootstrap-on: rewrote JSCInlines include for JSArrayBufferViewInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/JSArrayBufferViewInlines.h to missing JavaScriptCore/JSCJSValueInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770878646-c788
+> failure: cmd=tools/bun_loop.sh, exit=1, error='brew install lock on /opt/homebrew/Cellar/bun from concurrent process after lock-wait timeout', next=identify and terminate/wait for active bun brew process then rerun bun_loop for clean blocker verification
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770878256-a105
+> bun bootstrap-on: rewrote JSCInlines include for IdentifierInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/IdentifierInlines.h to missing JavaScriptCore/JSArrayBufferViewInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770878208-8f1b
+> failure: cmd=brew audit --strict bun, exit=1, error='installation seems to be empty from interrupted local bun keg', next=remove stale local bun keg and rerun audit
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770877999-3adf
+> failure: cmd=tools/bun_loop.sh, exit=1, error='brew install already locked /opt/homebrew/Cellar/bun during verification rerun', next=identify and clear active bun brew process then rerun bun_loop for clean first-blocker confirmation
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770877652-a04a
+> failure: cmd=sed -n '1,220p' /Users/rchen/.codex/skills/ralph-tools/SKILL.md, exit=1, error='No such file or directory', next=load the skill via ralph tools skill load ralph-tools and use built-in guidance
+<!-- tags: tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770877608-8afb
+> bun bootstrap-on: rewrote JSCInlines include for HeapInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/HeapInlines.h to missing JavaScriptCore/IdentifierInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770877400-ee98
+> failure: cmd=kill 66550 66549 63714 && sleep 1 && pgrep -fl 'brew install --build-from-source ./Formula/b/bun.rb -v|tools/bun_loop.sh|cmake --build build|ninja -v', exit=1, error='post-kill pgrep returned no matches', next=treat as successful stale-process cleanup and avoid chained match-required pgrep for status checks
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770877386-8e4e
+> failure: cmd=tools/bun_loop.sh, exit=1, error='brew install already locked /opt/homebrew/Cellar/bun after lock-wait window', next=identify and terminate/wait for active brew install process then rerun bun_loop for clean first-blocker verification
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770876981-b429
+> bun bootstrap-on: rewrote JSCInlines include for GCIncomingRefCountedInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/GCIncomingRefCountedInlines.h to missing JavaScriptCore/HeapInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770876976-e6d0
+> failure: cmd=rg -n 'GCIncomingRefCountedInlines|HeapInlines|NETWORK_ACTIVITY_DETECTED|SUCCESS' logs/bun/summary-20260212-011032.txt, exit=1, error='no matches in generated summary', next=use full bun_loop build output to confirm blocker movement when summary extractor misses compiler diagnostics
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770876771-fd9e
+> failure: cmd=tools/bun_loop.sh, exit=1, error='concurrent brew install locked /opt/homebrew/Cellar/bun after lock-wait window', next=terminate/wait for active brew install process and rerun bun_loop for clean first-blocker verification
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770876381-b077
+> bun bootstrap-on: added JavaScriptCore.framework/Headers to SetupWebKit include dirs via Formula/b/bun.rb inreplace; bun_loop advances first blocker from missing JSBase.h to missing JavaScriptCore/GCIncomingRefCountedInlines.h in JSCInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770876381-74f6
+> failure: cmd=brew uninstall --force bun, exit=1, error='lock on /opt/homebrew/Cellar/zig while bun_loop build still active', next=terminate active bun_loop/cmake/ninja processes and rerun uninstall/audit
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770876381-5295
+> failure: cmd=brew audit --strict bun, exit=1, error='installation seems to be empty from interrupted local bun keg', next=clear stale bun installation (after stopping active bun loop process) and rerun audit
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770875751-74ac
+> bun bootstrap-on: rewrote JSCInlines include for ExceptionHelpers in Formula/b/bun.rb; bun_loop advances first blocker from missing JavaScriptCore/ExceptionHelpers.h to missing JSBase.h via JSHeapFinalizerPrivate.h in WebKit private header chain
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770875244-fb41
+> failure: cmd=tools/bun_loop.sh, exit=1, error='brew install lock on /opt/homebrew/Cellar/bun after 120s wait', next=wait for/clear active brew install process then rerun bun_loop for blocker confirmation
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770874830-72ab
+> failure: cmd=git commit -m 'bun: prototype webkit private header path', exit=128, error='existing .git/index.lock (likely concurrent git invocation)', next=remove stale index.lock and rerun commit serially
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770874817-9d95
+> bun bootstrap-on: patched Formula/b/bun.rb to map root.h JSC private includes to flat headers and include JavaScriptCore.framework/PrivateHeaders in SetupWebKit local include dirs; bun_loop advances first blocker from missing JavaScriptCore/JSCJSValue.h to missing JavaScriptCore/ExceptionHelpers.h in JSCInlines.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770874772-4c7d
+> failure: cmd=brew uninstall --force bun, exit=1, error='lock on /opt/homebrew/Cellar/zig during uninstall while stale brew process active', next=clear active brew process/locks and rerun uninstall or verify bun keg removed
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770874243-80b5
+> failure: cmd=tools/bun_loop.sh, exit=1, error='EPERM creating /Users/rchen/Downloads/brew/bun-WebKit/WebKitBuild/Release/JavaScriptCore/PrivateHeaders from formula shim step', next=avoid mutating external WebKit tree and patch Bun include directives in source instead
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770873780-436d
+> failure: cmd=tools/bun_loop.sh, exit=1, error='bun cellar lock held by concurrent brew install during JSC header verification run', next=wait for active brew install process to finish and rerun bun_loop for clean blocker confirmation
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770873234-ee3b
+> bun bootstrap-on: disabled BuildBun.cmake target_precompile_headers block via formula inreplace; bun_loop no longer fails at cmake_pch.hxx.pch and first blocker advances to missing JavaScriptCore/JSCJSValue.h in root.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770873230-d8d1
+> failure: cmd=tools/bun_loop.sh, exit=2, error='compile fails at GeneratedBindings.cpp with JavaScriptCore/JSCJSValue.h missing after disabling PCH', next=patch WebKit include path/header staging in Formula/b/bun.rb to expose JSCJSValue.h during compile
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770873023-2c5b
+> failure: cmd=kill ... | rg ..., exit=1, error='post-cleanup rg returned no matches', next=treat as successful stale-process cleanup and avoid piping through match-required rg for status checks
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770872751-2a6a
+> failure: cmd=tools/bun_loop.sh, exit=1, error='bun cellar lock held by concurrent brew install', next=wait for active brew install process to exit before rerunning bun_loop
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770872057-def4
+> failure: cmd=tools/bun_loop.sh after initial node-fallback placeholder, exit=1, error='register_command merged multiple cmake -E commands causing placeholder generation failure', next=replace with single shell COMMAND and flatten list with string(REPLACE ';' ' ').
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770872057-8edc
+> bun bootstrap-on: node-fallbacks placeholder branch now skips build-fallbacks when node_modules/assert is missing and creates codegen placeholder files via single shell command; bun_loop advances first blocker from node-fallbacks missing node_modules to cmake_pch.hxx.pch compile.
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770868405-82f9
+> bun bootstrap-on: replaced BuildBun register_bun_install blocks for bun-error and node-fallbacks with no-op markers via formula inreplace; build log shows skipped bun installs and blocker advances to missing node-fallbacks/react-refresh inputs.
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770868079-4416
+> failure: cmd=tools/bun_loop.sh, exit=1, error='brew install already locked /opt/homebrew/Cellar/bun by another process', next=identify active bun brew process and rerun loop after lock clears for clean blocker evidence.
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770867940-e612
+> failure: cmd=brew audit --strict bun after skipping register_bun_install in BuildBun.cmake, exit=1, error='The installation seems to be empty', next=use bun_loop/build log to confirm first compile blocker and revisit no-op install approach if it prevents artifacts needed for audit.
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770867511-36df
+> failure: cmd=tools/bun_loop.sh session terminated after manual kill during long build, exit=2, error='SIGTERM in Homebrew install subprocess', next=avoid mid-build termination unless needed; use log tail to capture first blocker if loop output channel stalls
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
+### mem-1770867511-1179
+> bun bootstrap-on: patched SetupBun.cmake via formula inreplace to download and extract platform bun-v zip when BUN_EXECUTABLE is missing; configure now uses downloaded bootstrap Bun and advances first blocker from bindgen execute_process no-such-file to compile-time missing JavaScriptCore/JSCJSValue.h
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770867511-c31c
+> failure: cmd=brew style Formula/b/bun.rb + brew audit --strict bun with bootstrap *.zip resources, exit=1, error='FormulaAudit/Urls flags binary package URLs; homebrew/core is source-only', next=remove binary resources and implement bootstrap bun download fallback inside SetupBun.cmake patch
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
+### mem-1770866946-1a2d
+> failure: cmd=sed/nl/rg on guessed /private/tmp/bun-* path for BuildBun.cmake, exit=1/2, error='No such file or directory', next=locate active build tree with filesystem search before inspecting line context
+<!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
+
 ### mem-1770844889-09cc
 > bun bootstrap-off: inject -DCMAKE_POLICY_VERSION_MINIMUM=3.5 into BuildLshpack register_cmake_command args via formula inreplace; lshpack config/build now succeeds under CMake 4 and first blocker moves to zig build no_link_obj API mismatch
 <!-- tags: bun, formula, error-handling | created: 2026-02-11 -->

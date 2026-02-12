@@ -1,8 +1,8 @@
 # Loop Summary
 
-**Status:** Completed successfully
-**Iterations:** 2
-**Duration:** 12m 37s
+**Status:** Stopped: max iterations reached
+**Iterations:** 20
+**Duration:** 3h 35m 46s
 
 ## Tasks
 
@@ -14,4 +14,4 @@ _No events recorded._
 
 ## Final Commit
 
-7c4ec215425: bun: prototype lshpack cmake policy
+00328e5b35c: bun: prototype JSString shim
