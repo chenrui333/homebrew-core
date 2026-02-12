@@ -512,13 +512,16 @@ class Bun < Formula
     # The bun source has ~1400 includes using this pattern and the system framework doesn't
     # have these private headers; the shim avoids rewriting every include individually.
     jsc_shim = buildpath/"jsc-include-shim"
+    jsc_bare_shim = buildpath/"jsc-bare-shim"
     mkdir_p jsc_shim
+    mkdir_p jsc_bare_shim
     inreplace "cmake/tools/SetupWebKit.cmake",
               "      ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders\n",
               <<~CMAKE
                 ${WEBKIT_PATH}/JavaScriptCore.framework/Headers
                 ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders
                 ${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders
+                #{jsc_bare_shim}
                 #{jsc_shim}
               CMAKE
     # Populate the shim at configure time: create a JavaScriptCore directory containing
@@ -564,29 +567,42 @@ class Bun < Formula
                   endif()
                   message(STATUS "Created JSC include shim directory: ${JSC_SHIM_DIR}")
                 endif()
-                # Also symlink Source tree headers that are missing from PrivateHeaders
-                # directly into PrivateHeaders so bare #include "X.h" from within
-                # PrivateHeaders headers resolves without adding Source dirs to -I
-                # (which would cause redefinition conflicts for overlapping headers).
-                foreach(PH_DIR "${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders"
-                               "${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders")
-                  if(EXISTS "${PH_DIR}")
-                    set(JSC_SRC2 "${WEBKIT_PATH}/../../Source/JavaScriptCore")
-                    if(EXISTS "${JSC_SRC2}")
-                      foreach(SUBDIR2 runtime API heap inspector dfg)
-                        if(EXISTS "${JSC_SRC2}/${SUBDIR2}")
-                          file(GLOB _src_hdrs "${JSC_SRC2}/${SUBDIR2}/*.h")
-                          foreach(_sh ${_src_hdrs})
-                            get_filename_component(_sname "${_sh}" NAME)
-                            if(NOT EXISTS "${PH_DIR}/${_sname}")
-                              file(CREATE_LINK "${_sh}" "${PH_DIR}/${_sname}" SYMBOLIC)
-                            endif()
-                          endforeach()
+                # Create a bare-include shim for Source tree headers not in PrivateHeaders.
+                # PrivateHeaders headers use bare #include "X.h" to include internal
+                # headers; we can't add Source/runtime as -I (causes redefinitions for
+                # overlapping headers), so we symlink only the MISSING headers into a
+                # separate shim directory that's in the -I path.
+                set(JSC_BARE_SHIM "#{jsc_bare_shim}")
+                set(JSC_SRC2 "${WEBKIT_PATH}/../../Source/JavaScriptCore")
+                if(EXISTS "${JSC_SRC2}")
+                  # Collect all PrivateHeaders names to skip
+                  set(_ph_names)
+                  foreach(PH_DIR2 "${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders"
+                                  "${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders")
+                    if(EXISTS "${PH_DIR2}")
+                      file(GLOB _ph_hdrs "${PH_DIR2}/*.h")
+                      foreach(_ph ${_ph_hdrs})
+                        get_filename_component(_pname "${_ph}" NAME)
+                        list(APPEND _ph_names "${_pname}")
+                      endforeach()
+                    endif()
+                  endforeach()
+                  # Symlink Source tree headers that are NOT in PrivateHeaders
+                  foreach(SUBDIR2 runtime API heap inspector dfg)
+                    if(EXISTS "${JSC_SRC2}/${SUBDIR2}")
+                      file(GLOB _src_hdrs2 "${JSC_SRC2}/${SUBDIR2}/*.h")
+                      foreach(_sh2 ${_src_hdrs2})
+                        get_filename_component(_sn2 "${_sh2}" NAME)
+                        if(NOT "${_sn2}" IN_LIST _ph_names)
+                          if(NOT EXISTS "${JSC_BARE_SHIM}/${_sn2}")
+                            file(CREATE_LINK "${_sh2}" "${JSC_BARE_SHIM}/${_sn2}" SYMBOLIC)
+                          endif()
                         endif()
                       endforeach()
                     endif()
-                  endif()
-                endforeach()
+                  endforeach()
+                  message(STATUS "Created JSC bare-include shim: ${JSC_BARE_SHIM}")
+                endif()
               CMAKE
     inreplace "cmake/Globals.cmake",
               "  register_command(\n    COMMENT\n      ${NPM_COMMENT}\n",
