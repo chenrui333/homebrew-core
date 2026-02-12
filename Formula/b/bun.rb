@@ -148,6 +148,33 @@ class Bun < Formula
 
                 register_command(
               CMAKE
+    # Avoid network package installs for bun-error and node-fallbacks
+    inreplace "cmake/targets/BuildBun.cmake",
+              <<~CMAKE,
+                register_bun_install(
+                  CWD
+                    ${BUN_ERROR_SOURCE}
+                  NODE_MODULES_VARIABLE
+                    BUN_ERROR_NODE_MODULES
+                )
+              CMAKE
+              <<~CMAKE
+                set(BUN_ERROR_NODE_MODULES)
+                message(STATUS "Skipping bun install for bun-error")
+              CMAKE
+    inreplace "cmake/targets/BuildBun.cmake",
+              <<~CMAKE,
+                register_bun_install(
+                  CWD
+                    ${BUN_NODE_FALLBACKS_SOURCE}
+                  NODE_MODULES_VARIABLE
+                    BUN_NODE_FALLBACKS_NODE_MODULES
+                )
+              CMAKE
+              <<~CMAKE
+                set(BUN_NODE_FALLBACKS_NODE_MODULES)
+                message(STATUS "Skipping bun install for node-fallbacks")
+              CMAKE
     # Close the else() block for node headers
     inreplace "cmake/targets/BuildBun.cmake",
               <<~CMAKE,
