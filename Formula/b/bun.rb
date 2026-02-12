@@ -1108,7 +1108,7 @@ class Bun < Formula
     # ExceptionOr<Vector<uint8_t>> needs explicit move from Vector.
     inreplace "src/bun.js/bindings/webcrypto/CryptoAlgorithmECDSAOpenSSL.cpp",
               "        return signature;\n    } else {",
-              "        return WTFMove(signature);\n    } else {"
+              "        return WTF::move(signature);\n    } else {"
     # ED25519_sign / ED25519_verify are BoringSSL-only.  Use the EVP API
     # for OpenSSL 3: construct an EVP_PKEY from the raw key material and
     # then call EVP_DigestSign / EVP_DigestVerify.
