@@ -1079,12 +1079,25 @@ class Bun < Formula
                 #include <openssl/kdf.h>
                 #endif
               CPP
-    # macOS 26 SDK libc++ lazy_split_view.h has a mismatched access
-    # specifier in forward declaration vs definition (-Wmismatched-tags).
-    # With -Werror this becomes a build failure.  Suppress it.
-    inreplace "cmake/targets/BuildBun.cmake",
-              "-Wno-nullability-completeness",
-              "-Wno-nullability-completeness\n      -Wno-mismatched-tags"
+    # macOS 26 SDK libc++ lazy_split_view.h has a hard access-specifier
+    # error (__outer_iterator/__inner_iterator forward-declared private but
+    # defined as public struct).  The include chain is v8-memory-span.h →
+    # <ranges> → lazy_split_view.h.  Avoid <ranges> on Apple altogether;
+    # the features it enables (range concepts, contiguous_iterator_tag) are
+    # not essential for Bun's V8 shim layer.
+    inreplace "vendor/nodejs/include/node/v8-memory-span.h",
+              "#if __has_include(<ranges>)",
+              "#if __has_include(<ranges>) && !defined(__APPLE__)"
+    # BIO_mem_contents is BoringSSL-only.  Use BIO_get_mem_ptr for OpenSSL 3.
+    inreplace "src/bun.js/bindings/webcore/SerializedScriptValue.cpp",
+              '#include "ncrypto.h"',
+              "#include \"ncrypto.h\"\n#include <openssl/buffer.h>"
+    inreplace "src/bun.js/bindings/webcore/SerializedScriptValue.cpp",
+              "BIO_mem_contents(bio, &pemData, reinterpret_cast<size_t*>(&pemSize));",
+              "{ BUF_MEM* bptr = nullptr; BIO_get_mem_ptr(bio, &bptr); " \
+              "pemData = reinterpret_cast<const uint8_t*>(bptr->data); " \
+              "pemSize = bptr->length; }",
+              global: true
     # ncrpyto_engine.cpp: method signatures use std::string_view but the
     # header declares WTF::StringView.  Fix the .cpp to match.
     inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
