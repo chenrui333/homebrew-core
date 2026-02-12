@@ -1432,6 +1432,125 @@ class Bun < Formula
                 #pragma clang diagnostic ignored "-Wundefined-var-template"
               CPP
 
+    # CryptoKeyRSAOpenSSL.cpp: OpenSSL 3 EVP_PKEY_get0_RSA returns const RSA*.
+    inreplace "src/bun.js/bindings/webcrypto/CryptoKeyRSAOpenSSL.cpp",
+              "static size_t getRSAModulusLength(RSA* rsa)",
+              "static size_t getRSAModulusLength(const RSA* rsa)"
+    inreplace "src/bun.js/bindings/webcrypto/CryptoKeyRSAOpenSSL.cpp",
+              "    RSA* rsa = EVP_PKEY_get0_RSA(",
+              "    const RSA* rsa = EVP_PKEY_get0_RSA(",
+              global: true
+    # CryptoDigest.cpp takes addresses of deprecated SHA functions (SHA1_Init,
+    # SHA256_Init, etc.) as constexpr function pointers.  These are deprecated
+    # in OpenSSL 3 and -Werror makes it fatal.  Suppress for this file.
+    inreplace "src/bun.js/bindings/webcrypto/CryptoDigest.cpp",
+              '#include "CryptoDigest.h"',
+              <<~CPP.chomp
+                #include "CryptoDigest.h"
+                #pragma clang diagnostic push
+                #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+              CPP
+    # CryptoKeyECOpenSSL.cpp: EC_KEY_set_asn1_flag is deprecated/removed in
+    # OpenSSL 3.  When EC_KEY_new_by_curve_name is used, OPENSSL_EC_NAMED_CURVE
+    # is already the default.  Guard the three call sites.
+    inreplace "src/bun.js/bindings/webcrypto/CryptoKeyECOpenSSL.cpp",
+              "        EC_KEY_set_asn1_flag(key.get(), OPENSSL_EC_NAMED_CURVE);",
+              <<~CPP.chomp,
+                #ifdef OPENSSL_IS_BORINGSSL
+                        EC_KEY_set_asn1_flag(key.get(), OPENSSL_EC_NAMED_CURVE);
+                #endif
+              CPP
+              global: true
+    inreplace "src/bun.js/bindings/webcrypto/CryptoKeyECOpenSSL.cpp",
+              "    EC_KEY_set_asn1_flag(ecKey, OPENSSL_EC_NAMED_CURVE);",
+              <<~CPP.chomp
+                #ifdef OPENSSL_IS_BORINGSSL
+                    EC_KEY_set_asn1_flag(ecKey, OPENSSL_EC_NAMED_CURVE);
+                #endif
+              CPP
+    # CryptoKeyECOpenSSL.cpp: OpenSSL 3 EVP_PKEY_get0_EC_KEY returns const EC_KEY*.
+    # Lines 364, 381, 402 need const or const_cast.
+    inreplace "src/bun.js/bindings/webcrypto/CryptoKeyECOpenSSL.cpp",
+              "    auto ecKey = EVP_PKEY_get0_EC_KEY(pkey.get());",
+              "    auto ecKey = const_cast<EC_KEY*>(EVP_PKEY_get0_EC_KEY(pkey.get()));"
+    inreplace "src/bun.js/bindings/webcrypto/CryptoKeyECOpenSSL.cpp",
+              "    EC_KEY* key = EVP_PKEY_get0_EC_KEY(platformKey());",
+              "    const EC_KEY* key = EVP_PKEY_get0_EC_KEY(platformKey());",
+              global: true
+    # CryptoKeyOKPOpenSSL.cpp: BoringSSL defines ED25519_PUBLIC_KEY_LEN etc.
+    # in curve25519.h; provide fallback definitions for OpenSSL 3.
+    inreplace "src/bun.js/bindings/webcrypto/CryptoKeyOKPOpenSSL.cpp",
+              "#include \"CommonCryptoDERUtilities.h\"",
+              <<~CPP.chomp
+                #include "CommonCryptoDERUtilities.h"
+                #ifndef OPENSSL_IS_BORINGSSL
+                #define ED25519_PUBLIC_KEY_LEN 32
+                #define ED25519_PRIVATE_KEY_LEN 64
+                #define X25519_PUBLIC_VALUE_LEN 32
+                #define X25519_PRIVATE_KEY_LEN 32
+                #endif
+              CPP
+    # CryptoKeyOKPOpenSSL.cpp: ED25519_keypair, ED25519_keypair_from_seed,
+    # X25519_keypair, X25519_public_from_private are BoringSSL-only.
+    # Provide OpenSSL 3 EVP equivalents.
+    inreplace "src/bun.js/bindings/webcrypto/CryptoKeyOKPOpenSSL.cpp",
+              "namespace WebCore {",
+              <<~CPP.chomp
+                namespace WebCore {
+
+                #ifndef OPENSSL_IS_BORINGSSL
+                #include <openssl/evp.h>
+                #include <openssl/rand.h>
+                static void ED25519_keypair(uint8_t out_public_key[32], uint8_t out_private_key[64])
+                {
+                    EVP_PKEY* pkey = nullptr;
+                    EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_ED25519, nullptr);
+                    EVP_PKEY_keygen_init(ctx);
+                    EVP_PKEY_keygen(ctx, &pkey);
+                    EVP_PKEY_CTX_free(ctx);
+                    size_t len = 32;
+                    EVP_PKEY_get_raw_public_key(pkey, out_public_key, &len);
+                    len = 64;
+                    EVP_PKEY_get_raw_private_key(pkey, out_private_key, &len);
+                    // OpenSSL returns 32-byte seed, but BoringSSL returns 64-byte (seed+pubkey)
+                    // Bun code expects 64-byte private key (seed || public_key)
+                    if (len == 32) {
+                        memcpy(out_private_key + 32, out_public_key, 32);
+                    }
+                    EVP_PKEY_free(pkey);
+                }
+                static void X25519_keypair(uint8_t out_public_key[32], uint8_t out_private_key[32])
+                {
+                    EVP_PKEY* pkey = nullptr;
+                    EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_X25519, nullptr);
+                    EVP_PKEY_keygen_init(ctx);
+                    EVP_PKEY_keygen(ctx, &pkey);
+                    EVP_PKEY_CTX_free(ctx);
+                    size_t len = 32;
+                    EVP_PKEY_get_raw_public_key(pkey, out_public_key, &len);
+                    len = 32;
+                    EVP_PKEY_get_raw_private_key(pkey, out_private_key, &len);
+                    EVP_PKEY_free(pkey);
+                }
+                static void ED25519_keypair_from_seed(uint8_t out_public_key[32], uint8_t out_private_key[64], const uint8_t seed[32])
+                {
+                    EVP_PKEY* pkey = EVP_PKEY_new_raw_private_key(EVP_PKEY_ED25519, nullptr, seed, 32);
+                    size_t len = 32;
+                    EVP_PKEY_get_raw_public_key(pkey, out_public_key, &len);
+                    memcpy(out_private_key, seed, 32);
+                    memcpy(out_private_key + 32, out_public_key, 32);
+                    EVP_PKEY_free(pkey);
+                }
+                static void X25519_public_from_private(uint8_t out_public_key[32], const uint8_t private_key[32])
+                {
+                    EVP_PKEY* pkey = EVP_PKEY_new_raw_private_key(EVP_PKEY_X25519, nullptr, private_key, 32);
+                    size_t len = 32;
+                    EVP_PKEY_get_raw_public_key(pkey, out_public_key, &len);
+                    EVP_PKEY_free(pkey);
+                }
+                #endif
+              CPP
+
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end
