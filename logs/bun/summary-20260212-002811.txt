@@ -1,0 +1,19 @@
+Error: Failed to load cask: ./Formula/b/bun.rb
+Cask 'bun' is unreadable: wrong constant name #<Class:0x00000001270bfa18>
+Warning: Treating ./Formula/b/bun.rb as a formula.
+==> Fetching downloads for: bun
+✔︎ Resource bun--nodejs-headers
+✔︎ Resource bun--picohttpparser
+✔︎ Resource bun--ls-hpack
+✔︎ Formula bun (1.3.8)
+==> Verifying checksum for 'd79d5920ee9b0fc1a5884f2886724b6915d8276ec3a0b2936110617333b4d253--node-v24.3.0-headers.tar.gz'
+==> Verifying checksum for '73e0c55d12ea4fc2665ba0e3b1461100832375845d5b691d1ec74dc56cd48c11--ls-hpack-8905c024b6d052f083a3d11d0a169b3c2735c8a1.tar.gz'
+==> Verifying checksum for 'fad59b16ad4752cc63c8a23339da36f57d1851485a7a1c08260daccefaec3961--picohttpparser-066d2b1e9ab820703db0837a7255d92d30f0c9f5.tar.gz'
+==> Verifying checksum for '5893d56c4d1ab1cbd456077a3a5863c0618e4649e194100eec5a1cd3946ae391--bun-bun-v1.3.8.tar.gz'
+mv /private/tmp/homebrew-unpack-20260212-6174-qj9gb5/bun-bun-v1.3.8 /private/tmp/bun-20260212-6174-yjeugq/bun-bun-v1.3.8
+==> Patching
+mv /private/tmp/homebrew-unpack-20260212-6174-5y8jw7/picohttpparser-066d2b1e9ab820703db0837a7255d92d30f0c9f5 /private/tmp/bun--picohttpparser-20260212-6174-eeerm9/picohttpparser-066d2b1e9ab820703db0837a7255d92d30f0c9f5
+mv /private/tmp/homebrew-unpack-20260212-6174-z3bl7i/ls-hpack-8905c024b6d052f083a3d11d0a169b3c2735c8a1 /private/tmp/bun--ls-hpack-20260212-6174-menj4/ls-hpack-8905c024b6d052f083a3d11d0a169b3c2735c8a1
+mv /private/tmp/homebrew-unpack-20260212-6174-jgqrqv/node-v24.3.0 /private/tmp/bun--nodejs-headers-20260212-6174-euycxj/node-v24.3.0
+Error: An exception occurred within a child process:
+  Errno::EPERM: Operation not permitted @ dir_s_mkdir - /Users/rchen/Downloads/brew/bun-WebKit/WebKitBuild/Release/JavaScriptCore/PrivateHeaders
