@@ -638,6 +638,27 @@ class Bun < Formula
                 endif()
                 register_cmake_command(
               CMAKE
+    # When using system OpenSSL (USE_SYSTEM_BORINGSSL=ON), the usockets
+    # crypto code uses BoringSSL-specific APIs that don't exist in OpenSSL 3.
+    # Add compatibility shims so the code compiles against either library.
+    inreplace "packages/bun-usockets/src/crypto/openssl.c",
+              "#include <openssl/ssl.h>",
+              <<~C
+                #include <openssl/ssl.h>
+                #ifndef OPENSSL_IS_BORINGSSL
+                /* OpenSSL 3 compat: suppress deprecated DH API warnings */
+                #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+                /* OpenSSL 3 compat: OPENSSL_PUT_ERROR is BoringSSL-only */
+                #include <openssl/err.h>
+                #define OPENSSL_PUT_ERROR(lib, code) ERR_raise(ERR_LIB_##lib, code)
+                /* OpenSSL 3 compat: renegotiation mode is BoringSSL-only */
+                enum ssl_renegotiate_mode_t { ssl_renegotiate_never = 0, ssl_renegotiate_explicit = 1 };
+                static inline void SSL_set_renegotiate_mode(SSL *ssl, enum ssl_renegotiate_mode_t mode) { (void)ssl; (void)mode; }
+                #ifndef SSL_ERROR_WANT_RENEGOTIATE
+                #define SSL_ERROR_WANT_RENEGOTIATE (-1)
+                #endif
+                #endif /* OPENSSL_IS_BORINGSSL */
+              C
     inreplace "cmake/targets/BuildBoringSSL.cmake",
               "register_repository(",
               <<~CMAKE
