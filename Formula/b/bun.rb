@@ -93,6 +93,48 @@ class Bun < Formula
       rm buildpath/"vendor/nodejs/include/node/uv.h" if (buildpath/"vendor/nodejs/include/node/uv.h").exist?
       (buildpath/"vendor/nodejs/include/.node-headers-prepared").write("1")
     end
+    inreplace "cmake/tools/SetupBun.cmake",
+              "if (NOT CI)",
+              <<~CMAKE
+                if (NOT EXISTS ${BUN_EXECUTABLE})
+                  if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Darwin")
+                    if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "^(arm64|aarch64)$")
+                      set(BUN_BOOTSTRAP_FILENAME "bun-darwin-aarch64.zip")
+                      set(BUN_BOOTSTRAP_SHA256 "672a0a9a7b744d085a1d2219ca907e3e26f5579fca9e783a9510a4f98a36212f")
+                    else()
+                      set(BUN_BOOTSTRAP_FILENAME "bun-darwin-x64.zip")
+                      set(BUN_BOOTSTRAP_SHA256 "4a0ecd703b37d66abaf51e5bc24fd1249e8dc392c17ee6235710cf51a0988b85")
+                    endif()
+                  elseif(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "^(arm64|aarch64)$")
+                    set(BUN_BOOTSTRAP_FILENAME "bun-linux-aarch64.zip")
+                    set(BUN_BOOTSTRAP_SHA256 "4e9deb6814a7ec7f68725ddd97d0d7b4065bcda9a850f69d497567e995a7fa33")
+                  else()
+                    set(BUN_BOOTSTRAP_FILENAME "bun-linux-x64.zip")
+                    set(BUN_BOOTSTRAP_SHA256 "0322b17f0722da76a64298aad498225aedcbf6df1008a1dee45e16ecb226a3f1")
+                  endif()
+                  set(BUN_BOOTSTRAP_URL "https://github.com/oven-sh/bun/releases/download/bun-v${VERSION}/${BUN_BOOTSTRAP_FILENAME}")
+                  set(BUN_BOOTSTRAP_ARCHIVE "${CACHE_PATH}/${BUN_BOOTSTRAP_FILENAME}")
+                  set(BUN_BOOTSTRAP_ROOT "${CACHE_PATH}/bootstrap-bun-${VERSION}")
+                  string(REPLACE ".zip" "" BUN_BOOTSTRAP_DIRNAME "${BUN_BOOTSTRAP_FILENAME}")
+                  set(BUN_BOOTSTRAP_EXTRACTED "${BUN_BOOTSTRAP_ROOT}/${BUN_BOOTSTRAP_DIRNAME}/bun")
+                  if(NOT EXISTS "${BUN_BOOTSTRAP_ARCHIVE}")
+                    file(
+                      DOWNLOAD "${BUN_BOOTSTRAP_URL}" "${BUN_BOOTSTRAP_ARCHIVE}" SHOW_PROGRESS
+                      EXPECTED_HASH "SHA256=${BUN_BOOTSTRAP_SHA256}"
+                    )
+                  endif()
+                  if(NOT EXISTS "${BUN_BOOTSTRAP_EXTRACTED}")
+                    file(ARCHIVE_EXTRACT INPUT "${BUN_BOOTSTRAP_ARCHIVE}" DESTINATION "${BUN_BOOTSTRAP_ROOT}")
+                  endif()
+                  if(NOT EXISTS "${BUN_BOOTSTRAP_EXTRACTED}")
+                    message(FATAL_ERROR "Failed to extract bootstrap bun: ${BUN_BOOTSTRAP_EXTRACTED}")
+                  endif()
+                  set(BUN_EXECUTABLE "${BUN_BOOTSTRAP_EXTRACTED}" CACHE FILEPATH "Bun executable" FORCE)
+                  message(STATUS "Using downloaded bootstrap Bun: ${BUN_EXECUTABLE}")
+                endif()
+
+                if (NOT CI)
+              CMAKE
     # Use vendored Node.js headers instead of downloading
     inreplace "cmake/targets/BuildBun.cmake",
               "set(NODEJS_HEADERS_PATH ${VENDOR_PATH}/nodejs)\n\nregister_command(",
