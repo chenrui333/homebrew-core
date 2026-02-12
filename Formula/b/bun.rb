@@ -564,6 +564,29 @@ class Bun < Formula
                   endif()
                   message(STATUS "Created JSC include shim directory: ${JSC_SHIM_DIR}")
                 endif()
+                # Also symlink Source tree headers that are missing from PrivateHeaders
+                # directly into PrivateHeaders so bare #include "X.h" from within
+                # PrivateHeaders headers resolves without adding Source dirs to -I
+                # (which would cause redefinition conflicts for overlapping headers).
+                foreach(PH_DIR "${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders"
+                               "${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders")
+                  if(EXISTS "${PH_DIR}")
+                    set(JSC_SRC2 "${WEBKIT_PATH}/../../Source/JavaScriptCore")
+                    if(EXISTS "${JSC_SRC2}")
+                      foreach(SUBDIR2 runtime API heap inspector dfg)
+                        if(EXISTS "${JSC_SRC2}/${SUBDIR2}")
+                          file(GLOB _src_hdrs "${JSC_SRC2}/${SUBDIR2}/*.h")
+                          foreach(_sh ${_src_hdrs})
+                            get_filename_component(_sname "${_sh}" NAME)
+                            if(NOT EXISTS "${PH_DIR}/${_sname}")
+                              file(CREATE_LINK "${_sh}" "${PH_DIR}/${_sname}" SYMBOLIC)
+                            endif()
+                          endforeach()
+                        endif()
+                      endforeach()
+                    endif()
+                  endif()
+                endforeach()
               CMAKE
     inreplace "cmake/Globals.cmake",
               "  register_command(\n    COMMENT\n      ${NPM_COMMENT}\n",
