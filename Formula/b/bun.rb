@@ -874,6 +874,50 @@ class Bun < Formula
     end
 
     system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
+
+    # Add minimal JSBlob stub class — normally Zig-generated but absent in
+    # BUN_CPP_ONLY builds.  Required by ZigGeneratedClasses.cpp (jsDynamicCast),
+    # blob.cpp, JSS3File.h, BunIDLConvertBlob.h, and bindings.cpp.
+    # Patched after configure (the codegen files are generated during configure).
+    inreplace "build/codegen/ZigGeneratedClasses.h",
+              "class StructuredCloneableDeserialize {",
+              <<~CPP
+                class JSBlob : public JSDOMObject {
+                public:
+                    using Base = JSDOMObject;
+                    DECLARE_INFO;
+                    void* wrapped() const { return m_wrapped; }
+                    static size_t memoryCost(void*) { return 0; }
+                    template<typename, JSC::SubspaceAccess mode> static JSC::GCClient::IsoSubspace* subspaceFor(JSC::VM& vm)
+                    {
+                        if constexpr (mode == JSC::SubspaceAccess::Concurrently)
+                            return nullptr;
+                        return subspaceForImpl(vm);
+                    }
+                    static JSC::GCClient::IsoSubspace* subspaceForImpl(JSC::VM& vm);
+                    static JSC::Structure* createStructure(JSC::VM& vm, JSC::JSGlobalObject* globalObject, JSC::JSValue prototype)
+                    {
+                        return JSC::Structure::create(vm, globalObject, prototype, JSC::TypeInfo(JSC::ObjectType, StructureFlags), info(), JSC::NonArray);
+                    }
+                    static void destroy(JSC::JSCell*);
+                protected:
+                    void* m_wrapped { nullptr };
+                    JSBlob(JSC::Structure* structure, JSDOMGlobalObject& globalObject)
+                        : Base(structure, globalObject) {}
+                };
+
+                class StructuredCloneableDeserialize {
+              CPP
+    inreplace "build/codegen/ZigGeneratedClasses.cpp",
+              "} // namespace WebCore",
+              <<~CPP
+                const JSC::ClassInfo JSBlob::s_info = { "Blob"_s, &Base::s_info, nullptr, nullptr, CREATE_METHOD_TABLE(JSBlob) };
+                JSC::GCClient::IsoSubspace* JSBlob::subspaceForImpl(JSC::VM&) { return nullptr; }
+                void JSBlob::destroy(JSC::JSCell*) {}
+
+                } // namespace WebCore
+              CPP
+
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end
