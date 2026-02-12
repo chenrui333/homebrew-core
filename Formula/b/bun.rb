@@ -724,6 +724,8 @@ class Bun < Formula
                   )
                   add_library(decrepit INTERFACE IMPORTED GLOBAL)
                   target_link_libraries(decrepit INTERFACE crypto)
+                  target_include_directories(${bun} PRIVATE ${OPENSSL_INCLUDE_DIR})
+                  target_link_libraries(${bun} PRIVATE ${CRYPTO_LIBRARY} ${SSL_LIBRARY})
                   message(STATUS "Using system OpenSSL for BoringSSL targets")
                   return()
                 endif()
@@ -1550,6 +1552,203 @@ class Bun < Formula
                 }
                 #endif
               CPP
+
+    # When using system libraries, the Build*.cmake files create IMPORTED targets
+    # but return() before register_cmake_command which normally links artifacts to
+    # the bun target. We must explicitly link them. Also add macOS frameworks
+    # required by static libWTF.a and Security framework for SecTask*.
+    inreplace "cmake/targets/BuildBun.cmake",
+              "target_link_libraries(${bun} PRIVATE icucore resolv)",
+              <<~CMAKE.chomp
+                target_link_libraries(${bun} PRIVATE icucore resolv)
+                target_link_libraries(${bun} PRIVATE "-framework CoreFoundation" "-framework Foundation" "-framework Security" objc)
+                if(TARGET cares)
+                  target_link_libraries(${bun} PRIVATE cares)
+                endif()
+                if(TARGET hdrhistogram)
+                  target_link_libraries(${bun} PRIVATE hdrhistogram)
+                endif()
+                if(TARGET libarchive)
+                  target_link_libraries(${bun} PRIVATE libarchive)
+                endif()
+                if(TARGET zlib)
+                  target_link_libraries(${bun} PRIVATE zlib)
+                endif()
+                if(TARGET zstd)
+                  target_link_libraries(${bun} PRIVATE zstd)
+                endif()
+                if(TARGET libdeflate)
+                  target_link_libraries(${bun} PRIVATE libdeflate)
+                endif()
+                if(TARGET highway)
+                  target_link_libraries(${bun} PRIVATE highway)
+                endif()
+                if(EXISTS ${WEBKIT_LIB_PATH}/libpas.a)
+                  target_link_libraries(${bun} PRIVATE ${WEBKIT_LIB_PATH}/libpas.a)
+                endif()
+              CMAKE
+
+    # Homebrew mimalloc installs flat headers (no mimalloc/ subdirectory) and
+    # does not expose internal types.h. Only MI_MAX_ALIGN_SIZE is needed.
+    inreplace "src/bun.js/bindings/MimallocWTFMalloc.h",
+              '#include "mimalloc/types.h"',
+              <<~CPP.chomp
+                #ifndef MI_MAX_ALIGN_SIZE
+                #define MI_MAX_ALIGN_SIZE 16
+                #endif
+              CPP
+
+    # Create BoringSSL → OpenSSL 3 compatibility shim for pre-compiled bun-zig.o
+    # which references BoringSSL-specific symbols not present in OpenSSL 3.
+    # Also provides WTFTimer__fire which bridges Zig → C++ WTF::RunLoop::TimerBase.
+    (buildpath/"src/bun.js/bindings/openssl3_compat_shim.cpp").write <<~CPP
+      #include <openssl/ssl.h>
+      #include <openssl/evp.h>
+      #include <openssl/hmac.h>
+      #include <openssl/bio.h>
+      #include <openssl/crypto.h>
+      #include <openssl/stack.h>
+      #include <cstdint>
+      #include <cstddef>
+      #include <cstring>
+
+      // WTF::RunLoop::TimerBase::fired() bridge for Zig
+      namespace WTF { class RunLoop { public: class TimerBase {
+      public: virtual void fired() = 0; virtual ~TimerBase() = default; }; }; }
+
+      extern "C" {
+
+      // --- WTFTimer bridge ---
+      void WTFTimer__fire(void* timer) {
+          reinterpret_cast<WTF::RunLoop::TimerBase*>(timer)->fired();
+      }
+
+      // --- Deprecated OpenSSL functions that are macros in OpenSSL 3 ---
+      // bun-zig.o calls these as functions, but OpenSSL 3 defines them as macros
+
+      int EVP_MD_CTX_cleanup(EVP_MD_CTX* ctx) { return EVP_MD_CTX_reset(ctx); }
+
+      // EVP_MD_CTX_init is already a macro in this OpenSSL but bun-zig.o needs the symbol
+      #undef EVP_MD_CTX_init
+      void EVP_MD_CTX_init(EVP_MD_CTX* ctx) { EVP_MD_CTX_reset(ctx); }
+
+      #undef EVP_MD_CTX_size
+      int EVP_MD_CTX_size(const EVP_MD_CTX* ctx) { return EVP_MD_CTX_get_size(ctx); }
+
+      #undef EVP_PKEY_bits
+      int EVP_PKEY_bits(const EVP_PKEY* pkey) { return EVP_PKEY_get_bits(pkey); }
+
+      #undef EVP_PKEY_id
+      int EVP_PKEY_id(const EVP_PKEY* pkey) { return EVP_PKEY_get_id(pkey); }
+
+      void HMAC_CTX_init(HMAC_CTX* ctx) { (void)ctx; /* no-op, OpenSSL 3 uses HMAC_CTX_new */ }
+      void HMAC_CTX_cleanup(HMAC_CTX* ctx) { (void)ctx; /* no-op, OpenSSL 3 uses HMAC_CTX_free */ }
+
+      #undef SSL_get_peer_certificate
+      X509* SSL_get_peer_certificate(const SSL* s) { return SSL_get1_peer_certificate(s); }
+
+      #undef SSL_library_init
+      int SSL_library_init(void) { return 1; /* no-op in OpenSSL 3 */ }
+      #undef SSL_load_error_strings
+      void SSL_load_error_strings(void) { /* no-op in OpenSSL 3 */ }
+      #undef OpenSSL_add_all_algorithms
+      void OpenSSL_add_all_algorithms(void) { /* no-op in OpenSSL 3 */ }
+      void CRYPTO_library_init(void) { /* no-op - BoringSSL specific */ }
+
+      // --- sk_* functions (BoringSSL uses short names, OpenSSL 3 uses OPENSSL_sk_*) ---
+      #undef sk_num
+      size_t sk_num(const OPENSSL_STACK* sk) { return (size_t)OPENSSL_sk_num(sk); }
+      #undef sk_value
+      void* sk_value(const OPENSSL_STACK* sk, size_t i) {
+          return OPENSSL_sk_value(sk, (int)i);
+      }
+      #undef sk_free
+      void sk_free(OPENSSL_STACK* sk) { OPENSSL_sk_free(sk); }
+
+      // BoringSSL sk_pop_free_ex takes a thunk; call thunk(free_func, elem) per element
+      typedef void (*boringssl_sk_free_func)(void*);
+      typedef void (*boringssl_sk_call_free_func)(boringssl_sk_free_func, void*);
+      void sk_pop_free_ex(OPENSSL_STACK* sk,
+                          boringssl_sk_call_free_func call_free_func,
+                          boringssl_sk_free_func free_func) {
+          if (!sk) return;
+          int n = OPENSSL_sk_num(sk);
+          for (int i = 0; i < n; i++) {
+              void* elem = OPENSSL_sk_value(sk, i);
+              if (elem && call_free_func && free_func)
+                  call_free_func(free_func, elem);
+          }
+          OPENSSL_sk_free(sk);
+      }
+
+      // --- SSL macros that bun-zig.o calls as functions ---
+      #undef SSL_set_tlsext_host_name
+      long SSL_set_tlsext_host_name(SSL* s, const char* name) {
+          return SSL_ctrl(s, SSL_CTRL_SET_TLSEXT_HOSTNAME,
+                          TLSEXT_NAMETYPE_host_name, (void*)name);
+      }
+
+      #undef SSL_set_max_send_fragment
+      long SSL_set_max_send_fragment(SSL* ssl, long m) {
+          return SSL_ctrl(ssl, SSL_CTRL_SET_MAX_SEND_FRAGMENT, m, NULL);
+      }
+
+      #undef BIO_set_mem_eof_return
+      long BIO_set_mem_eof_return(BIO* b, int v) {
+          return BIO_ctrl(b, BIO_C_SET_BUF_MEM_EOF_RETURN, v, NULL);
+      }
+
+      // --- BoringSSL-only stubs ---
+      void* CRYPTO_BUFFER_POOL_new(void) { return NULL; }
+      void SSL_CTX_set0_buffer_pool(SSL_CTX* ctx, void* pool) {
+          (void)ctx; (void)pool;
+      }
+      int SSL_enable_ocsp_stapling(SSL* ssl) { (void)ssl; return 1; }
+      int SSL_enable_signed_cert_timestamps(SSL* ssl) { (void)ssl; return 1; }
+      int SSL_set_enable_ech_grease(SSL* ssl, int en) { (void)ssl; (void)en; return 1; }
+      void SSL_set_renegotiate_mode(SSL* ssl, int m) { (void)ssl; (void)m; }
+
+      int EVP_PBE_validate_scrypt_params(uint64_t N, uint64_t r, uint64_t p,
+                                          uint64_t maxmem) {
+          if (N < 2 || (N & (N - 1)) != 0) return 0;
+          if (r == 0 || p == 0) return 0;
+          (void)maxmem;
+          return 1;
+      }
+
+      const EVP_MD* EVP_blake2b256(void) {
+          return EVP_MD_fetch(NULL, "BLAKE2B-256", NULL);
+      }
+
+      unsigned char* SHA512_256(const unsigned char* data, size_t len,
+                                unsigned char* out) {
+          EVP_MD_CTX* ctx = EVP_MD_CTX_new();
+          if (!ctx) return NULL;
+          const EVP_MD* md = EVP_MD_fetch(NULL, "SHA512-256", NULL);
+          if (!md) { EVP_MD_CTX_free(ctx); return NULL; }
+          unsigned int md_len = 0;
+          if (EVP_DigestInit_ex(ctx, md, NULL) &&
+              EVP_DigestUpdate(ctx, data, len) &&
+              EVP_DigestFinal_ex(ctx, out, &md_len)) {
+              EVP_MD_free((EVP_MD*)md);
+              EVP_MD_CTX_free(ctx);
+              return out;
+          }
+          EVP_MD_free((EVP_MD*)md);
+          EVP_MD_CTX_free(ctx);
+          return NULL;
+      }
+
+      } // extern "C"
+    CPP
+
+    # Add shim to the build source list
+    inreplace "cmake/targets/BuildBun.cmake",
+              "list(APPEND BUN_CPP_SOURCES",
+              <<~CMAKE.chomp
+                list(APPEND BUN_CXX_SOURCES ${CWD}/src/bun.js/bindings/openssl3_compat_shim.cpp)
+                list(APPEND BUN_CPP_SOURCES
+              CMAKE
 
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
