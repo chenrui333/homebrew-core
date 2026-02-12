@@ -390,6 +390,15 @@ class Bun < Formula
                   )
                 endif()
               CMAKE
+    inreplace "src/bun.js/bindings/root.h",
+              "#include <JavaScriptCore/JSCJSValue.h>",
+              "#include <JSCJSValue.h>"
+    inreplace "src/bun.js/bindings/root.h",
+              "#include <JavaScriptCore/JSCInlines.h>",
+              "#include <JSCInlines.h>"
+    inreplace "src/bun.js/bindings/root.h",
+              "#include <JavaScriptCore/HandleSet.h>",
+              "#include <HandleSet.h>"
     webkit_download_block = <<~CMAKE
       file(
         DOWNLOAD ${WEBKIT_DOWNLOAD_URL} ${CACHE_PATH}/${WEBKIT_FILENAME} SHOW_PROGRESS
@@ -416,6 +425,12 @@ class Bun < Formula
                 else()
                   set(WEBKIT_LIB_PATH ${WEBKIT_PATH}/lib)
                 endif()
+              CMAKE
+    inreplace "cmake/tools/SetupWebKit.cmake",
+              "      ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders\n",
+              <<~CMAKE
+                ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders
+                ${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders
               CMAKE
     inreplace "cmake/Globals.cmake",
               "  register_command(\n    COMMENT\n      ${NPM_COMMENT}\n",
@@ -738,7 +753,7 @@ class Bun < Formula
            "Set HOMEBREW_BUN_WEBKIT_PATH to a prebuilt WebKit tree."
     end
 
-    system "cmake", "-S", ".", "-B", "build", *args
+    system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end
