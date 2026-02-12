@@ -453,6 +453,9 @@ class Bun < Formula
     inreplace "src/bun.js/bindings/JSCInlines.h",
               "#include <JavaScriptCore/WeakGCMapInlines.h>",
               "#include <WeakGCMapInlines.h>"
+    inreplace "src/bun.js/bindings/JSCInlines.h",
+              "#include <JavaScriptCore/WeakGCSetInlines.h>",
+              "#include <WeakGCSetInlines.h>"
     webkit_download_block = <<~CMAKE
       file(
         DOWNLOAD ${WEBKIT_DOWNLOAD_URL} ${CACHE_PATH}/${WEBKIT_FILENAME} SHOW_PROGRESS
