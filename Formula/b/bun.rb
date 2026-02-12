@@ -450,6 +450,7 @@ class Bun < Formula
                 ${WEBKIT_PATH}/JavaScriptCore.framework/Headers
                 ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders
                 ${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders
+                ${WEBKIT_PATH}/../../Source/JavaScriptCore/dfg
               CMAKE
     inreplace "cmake/Globals.cmake",
               "  register_command(\n    COMMENT\n      ${NPM_COMMENT}\n",
