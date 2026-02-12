@@ -57,37 +57,27 @@ class Bun < Formula
   patch :DATA
 
   def install
-    # Tarball builds may omit generated source-list manifests expected by CMake.
+    # Populate cmake/sources/*.txt from cmake/Sources.json.  The release
+    # tarball ships empty placeholder files; the upstream build expects
+    # `scripts/glob-sources.mjs` (a bun script) to have been run beforehand.
+    # We replicate that logic in Ruby so the source lists are ready before
+    # cmake configure.
     mkdir_p "cmake/sources"
-    bun_error_sources = Pathname("cmake/sources/BunErrorSources.txt")
-    unless bun_error_sources.exist?
-      bun_error_sources.write("packages/bun-error/index.tsx\npackages/bun-error/bun-error.css\n")
+    excludes = %w[
+      src/bun.js/bindings/GeneratedBindings.zig
+      src/bun.js/bindings/GeneratedJS2Native.zig
+    ]
+    require "json"
+    JSON.parse((buildpath/"cmake/Sources.json").read).each do |entry|
+      outfile = buildpath/"cmake/sources"/entry["output"]
+      item_excludes = (entry["exclude"] || []) + excludes
+      paths = entry["paths"].flat_map { |pat| Dir.glob(pat) }
+                            .reject { |p| item_excludes.include?(p) }
+                            .map { |p| Pathname(p).relative_path_from(buildpath).to_s }
+                            .sort
+                            .uniq
+      outfile.write("#{paths.join("\n")}\n")
     end
-    node_fallbacks_sources = Pathname("cmake/sources/NodeFallbacksSources.txt")
-    if !node_fallbacks_sources.exist? || node_fallbacks_sources.read.strip.empty?
-      fallback_inputs = Dir["src/node-fallbacks/*.js", "src/node-fallbacks/vendor/*.js"].sort
-      node_fallbacks_sources.write("#{fallback_inputs.join("\n")}\n")
-    end
-    zig_generated_classes_sources = Pathname("cmake/sources/ZigGeneratedClassesSources.txt")
-    zig_generated_classes_sources.write("") unless zig_generated_classes_sources.exist?
-    cxx_sources = Pathname("cmake/sources/CxxSources.txt")
-    cxx_sources.write("") unless cxx_sources.exist?
-    c_sources = Pathname("cmake/sources/CSources.txt")
-    c_sources.write("") unless c_sources.exist?
-    javascript_sources = Pathname("cmake/sources/JavaScriptSources.txt")
-    javascript_sources.write("") unless javascript_sources.exist?
-    javascript_codegen_sources = Pathname("cmake/sources/JavaScriptCodegenSources.txt")
-    javascript_codegen_sources.write("") unless javascript_codegen_sources.exist?
-    bake_runtime_sources = Pathname("cmake/sources/BakeRuntimeSources.txt")
-    bake_runtime_sources.write("") unless bake_runtime_sources.exist?
-    bindgen_sources = Pathname("cmake/sources/BindgenSources.txt")
-    bindgen_sources.write("") unless bindgen_sources.exist?
-    zig_sources = Pathname("cmake/sources/ZigSources.txt")
-    zig_sources.write("") unless zig_sources.exist?
-    bindgen_v2_sources = Pathname("cmake/sources/BindgenV2Sources.txt")
-    bindgen_v2_sources.write("") unless bindgen_v2_sources.exist?
-    bindgen_v2_internal_sources = Pathname("cmake/sources/BindgenV2InternalSources.txt")
-    bindgen_v2_internal_sources.write("") unless bindgen_v2_internal_sources.exist?
     resource("picohttpparser").stage do
       mkdir_p buildpath/"vendor/picohttpparser"
       cp "picohttpparser.c", buildpath/"vendor/picohttpparser/picohttpparser.c"
