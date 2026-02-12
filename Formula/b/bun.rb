@@ -553,7 +553,7 @@ class Bun < Formula
                   # Link Source tree headers not in PrivateHeaders (e.g. runtime inlines)
                   set(JSC_SRC "${WEBKIT_PATH}/../../Source/JavaScriptCore")
                   if(EXISTS "${JSC_SRC}")
-                    foreach(SUBDIR runtime API heap inspector dfg parser bytecompiler bytecode jit)
+                    foreach(SUBDIR runtime API heap inspector dfg parser bytecompiler bytecode jit llint assembler interpreter b3 yarr wasm debugger domjit disassembler profiler generator builtins ftl)
                       if(EXISTS "${JSC_SRC}/${SUBDIR}")
                         file(GLOB _hdrs "${JSC_SRC}/${SUBDIR}/*.h")
                         foreach(_h ${_hdrs})
@@ -588,7 +588,7 @@ class Bun < Formula
                     endif()
                   endforeach()
                   # Symlink Source tree headers that are NOT in PrivateHeaders
-                  foreach(SUBDIR2 runtime API heap inspector dfg parser bytecompiler bytecode jit)
+                  foreach(SUBDIR2 runtime API heap inspector dfg parser bytecompiler bytecode jit llint assembler interpreter b3 yarr wasm debugger domjit disassembler profiler generator builtins ftl)
                     if(EXISTS "${JSC_SRC2}/${SUBDIR2}")
                       file(GLOB _src_hdrs2 "${JSC_SRC2}/${SUBDIR2}/*.h")
                       foreach(_sh2 ${_src_hdrs2})
