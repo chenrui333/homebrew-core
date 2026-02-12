@@ -6,6 +6,10 @@
 
 ## Fixes
 
+### mem-1770902775-a7d8
+> bun bootstrap-on: rewrote JSCInlines include for WeakGCSetInlines in Formula/b/bun.rb to flat private header include; bun_loop advances first blocker from missing JavaScriptCore/WeakGCSetInlines.h to next header in JSCInlines.h chain
+<!-- tags: bun, formula, error-handling | created: 2026-02-12 -->
+
 ### mem-1770897998-4bec
 > failure: cmd=HOMEBREW_BUN_LOCK_WAIT_SECS=0 tools/bun_loop.sh, exit=1, error='brew install already locked /opt/homebrew/Cellar/bun during verification run', next=wait for/clear active brew install process and rerun bun_loop for clean first-blocker confirmation
 <!-- tags: bun, tooling, error-handling | created: 2026-02-12 -->
