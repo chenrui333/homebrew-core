@@ -553,7 +553,7 @@ class Bun < Formula
                   # Link Source tree headers not in PrivateHeaders (e.g. runtime inlines)
                   set(JSC_SRC "${WEBKIT_PATH}/../../Source/JavaScriptCore")
                   if(EXISTS "${JSC_SRC}")
-                    foreach(SUBDIR runtime API heap inspector dfg)
+                    foreach(SUBDIR runtime API heap inspector dfg parser)
                       if(EXISTS "${JSC_SRC}/${SUBDIR}")
                         file(GLOB _hdrs "${JSC_SRC}/${SUBDIR}/*.h")
                         foreach(_h ${_hdrs})
@@ -588,7 +588,7 @@ class Bun < Formula
                     endif()
                   endforeach()
                   # Symlink Source tree headers that are NOT in PrivateHeaders
-                  foreach(SUBDIR2 runtime API heap inspector dfg)
+                  foreach(SUBDIR2 runtime API heap inspector dfg parser)
                     if(EXISTS "${JSC_SRC2}/${SUBDIR2}")
                       file(GLOB _src_hdrs2 "${JSC_SRC2}/${SUBDIR2}/*.h")
                       foreach(_sh2 ${_src_hdrs2})
@@ -1005,6 +1005,134 @@ class Bun < Formula
                 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
                 #endif
               CPP
+    # BunGCOutputConstraint uses WTF_DEPRECATED_MAKE_FAST_ALLOCATED but its
+    # base class MarkingConstraint uses WTF_MAKE_TZONE_ALLOCATED.  WebKit
+    # requires derived classes to match the base allocation scheme.
+    inreplace "src/bun.js/bindings/BunGCOutputConstraint.h",
+              "WTF_DEPRECATED_MAKE_FAST_ALLOCATED(DOMGCOutputConstraint);",
+              "WTF_MAKE_TZONE_ALLOCATED(DOMGCOutputConstraint);"
+    inreplace "src/bun.js/bindings/BunGCOutputConstraint.cpp",
+              '#include "BunGCOutputConstraint.h"',
+              <<~CPP.chomp
+                #include "BunGCOutputConstraint.h"
+                #include <wtf/TZoneMallocInlines.h>
+
+                WTF_MAKE_TZONE_ALLOCATED_IMPL(DOMGCOutputConstraint);
+              CPP
+
+    # The bun-WebKit build is missing generated C++ dispatchers for two custom
+    # inspector protocol domains (LifecycleReporter and TestReporter).  Create
+    # a stub header that provides the minimal interfaces needed by the bun
+    # agent code.
+    (buildpath/"src/bun.js/bindings/BunInspectorProtocolStubs.h").write(<<~HEADER)
+      #pragma once
+      // Auto-generated stubs for bun's custom inspector protocol domains that
+      // are missing from the WebKit DerivedSources.
+
+      #include <JavaScriptCore/InspectorBackendDispatcher.h>
+      #include <JavaScriptCore/InspectorFrontendRouter.h>
+      #include <JavaScriptCore/InspectorProtocolTypes.h>
+      #include <wtf/JSONValues.h>
+      #include <wtf/FastMalloc.h>
+      #include <wtf/Forward.h>
+      #include <wtf/Ref.h>
+      #include <optional>
+
+      namespace Inspector {
+
+      // ------ Protocol types ------
+      namespace Protocol {
+      namespace TestReporter {
+      enum class TestStatus { Pass, Fail, Timeout, Skip, Todo, Skipped_because_label };
+      enum class TestType { Test, Describe };
+      } // namespace TestReporter
+      } // namespace Protocol
+
+      // ------ LifecycleReporter ------
+      class JS_EXPORT_PRIVATE LifecycleReporterBackendDispatcherHandler {
+      public:
+          virtual Inspector::CommandResult<void> enable() = 0;
+          virtual Inspector::CommandResult<void> disable() = 0;
+          virtual Inspector::CommandResult<void> preventExit() = 0;
+          virtual Inspector::CommandResult<void> stopPreventingExit() = 0;
+          virtual Inspector::CommandResultOf<Ref<JSON::ArrayOf<String>>,Ref<JSON::ArrayOf<String>>,String,String,Ref<JSON::ArrayOf<String>>> getModuleGraph() = 0;
+      protected:
+          virtual ~LifecycleReporterBackendDispatcherHandler() = default;
+      };
+
+      class JS_EXPORT_PRIVATE LifecycleReporterBackendDispatcher final : public SupplementalBackendDispatcher {
+      public:
+          static Ref<LifecycleReporterBackendDispatcher> create(BackendDispatcher& bd, LifecycleReporterBackendDispatcherHandler* agent)
+          {
+              return adoptRef(*new LifecycleReporterBackendDispatcher(bd, agent));
+          }
+          void dispatch(long, const String&, Ref<JSON::Object>&&) final {}
+      private:
+          LifecycleReporterBackendDispatcher(BackendDispatcher& bd, LifecycleReporterBackendDispatcherHandler* agent)
+              : SupplementalBackendDispatcher(bd), m_agent(agent) {}
+          LifecycleReporterBackendDispatcherHandler* m_agent { nullptr };
+      };
+
+      class JS_EXPORT_PRIVATE LifecycleReporterFrontendDispatcher {
+          WTF_MAKE_NONCOPYABLE(LifecycleReporterFrontendDispatcher);
+      public:
+          LifecycleReporterFrontendDispatcher(FrontendRouter& router) : m_router(router) {}
+          ~LifecycleReporterFrontendDispatcher() = default;
+          void reload() {}
+          void error(const String&, const String&, Ref<JSON::ArrayOf<String>>&&, Ref<JSON::ArrayOf<int>>&&, Ref<JSON::ArrayOf<String>>&&) {}
+      private:
+          const CheckedRef<FrontendRouter> m_router;
+      };
+
+      // ------ TestReporter ------
+      class JS_EXPORT_PRIVATE TestReporterBackendDispatcherHandler {
+      public:
+          virtual Inspector::CommandResult<void> enable() = 0;
+          virtual Inspector::CommandResult<void> disable() = 0;
+      protected:
+          virtual ~TestReporterBackendDispatcherHandler() = default;
+      };
+
+      class JS_EXPORT_PRIVATE TestReporterBackendDispatcher final : public SupplementalBackendDispatcher {
+      public:
+          static Ref<TestReporterBackendDispatcher> create(BackendDispatcher& bd, TestReporterBackendDispatcherHandler* agent)
+          {
+              return adoptRef(*new TestReporterBackendDispatcher(bd, agent));
+          }
+          void dispatch(long, const String&, Ref<JSON::Object>&&) final {}
+      private:
+          TestReporterBackendDispatcher(BackendDispatcher& bd, TestReporterBackendDispatcherHandler* agent)
+              : SupplementalBackendDispatcher(bd), m_agent(agent) {}
+          TestReporterBackendDispatcherHandler* m_agent { nullptr };
+      };
+
+      class JS_EXPORT_PRIVATE TestReporterFrontendDispatcher {
+          WTF_MAKE_NONCOPYABLE(TestReporterFrontendDispatcher);
+      public:
+          TestReporterFrontendDispatcher(FrontendRouter& router) : m_router(router) {}
+          ~TestReporterFrontendDispatcher() = default;
+          void found(int, const String&, const String&, int, const String&,
+                     Protocol::TestReporter::TestType, std::optional<int>) {}
+          void start(int) {}
+          void end(int, Protocol::TestReporter::TestStatus, double) {}
+      private:
+          const CheckedRef<FrontendRouter> m_router;
+      };
+
+      } // namespace Inspector
+    HEADER
+    inreplace "src/bun.js/bindings/InspectorLifecycleAgent.h",
+              "#include <JavaScriptCore/InspectorBackendDispatchers.h>\n" \
+              "#include <JavaScriptCore/InspectorFrontendDispatchers.h>",
+              "#include <JavaScriptCore/InspectorBackendDispatchers.h>\n" \
+              "#include <JavaScriptCore/InspectorFrontendDispatchers.h>\n" \
+              "#include \"BunInspectorProtocolStubs.h\""
+    inreplace "src/bun.js/bindings/InspectorTestReporterAgent.h",
+              "#include <JavaScriptCore/InspectorBackendDispatchers.h>\n" \
+              "#include <JavaScriptCore/InspectorFrontendDispatchers.h>",
+              "#include <JavaScriptCore/InspectorBackendDispatchers.h>\n" \
+              "#include <JavaScriptCore/InspectorFrontendDispatchers.h>\n" \
+              "#include \"BunInspectorProtocolStubs.h\""
 
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
