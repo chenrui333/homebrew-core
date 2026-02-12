@@ -1079,6 +1079,12 @@ class Bun < Formula
                 #include <openssl/kdf.h>
                 #endif
               CPP
+    # macOS 26 SDK libc++ lazy_split_view.h has a mismatched access
+    # specifier in forward declaration vs definition (-Wmismatched-tags).
+    # With -Werror this becomes a build failure.  Suppress it.
+    inreplace "cmake/targets/BuildBun.cmake",
+              "-Wno-nullability-completeness",
+              "-Wno-nullability-completeness\n      -Wno-mismatched-tags"
     # ncrpyto_engine.cpp: method signatures use std::string_view but the
     # header declares WTF::StringView.  Fix the .cpp to match.
     inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
