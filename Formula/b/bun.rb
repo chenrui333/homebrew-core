@@ -344,6 +344,25 @@ class Bun < Formula
               bun_error_esbuild_replacement
     inreplace "cmake/targets/BuildBun.cmake",
               <<~CMAKE,
+                if (NOT WIN32)
+                  # Enable precompiled headers
+                  # Only enable in these scenarios:
+                  # 1. NOT in CI, OR
+                  # 2. In CI AND BUN_CPP_ONLY is enabled
+                  if(NOT CI OR (CI AND BUN_CPP_ONLY))
+                    target_precompile_headers(${bun} PRIVATE
+                      "$<$<COMPILE_LANGUAGE:CXX>:${CWD}/src/bun.js/bindings/root.h>"
+                    )
+                  endif()
+                endif()
+              CMAKE
+              <<~CMAKE
+                if (NOT WIN32)
+                  message(STATUS "Skipping precompiled headers for Homebrew build")
+                endif()
+              CMAKE
+    inreplace "cmake/targets/BuildBun.cmake",
+              <<~CMAKE,
                 register_repository(
                   NAME
                     picohttpparser
