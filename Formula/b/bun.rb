@@ -1022,6 +1022,14 @@ class Bun < Formula
                 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
                 #endif
               CPP
+    # JSX509CertificatePrototype.cpp uses X509_CHECK_FLAG_* constants which
+    # are defined in <openssl/x509v3.h>, not <openssl/x509.h>.
+    inreplace "src/bun.js/bindings/JSX509CertificatePrototype.cpp",
+              '#include "ncrypto.h"',
+              <<~CPP.chomp
+                #include "ncrypto.h"
+                #include <openssl/x509v3.h>
+              CPP
     # Several bun classes use WTF_DEPRECATED_MAKE_FAST_ALLOCATED but their
     # base classes use WTF_MAKE_TZONE_ALLOCATED.  WebKit requires derived
     # classes to match the base allocation scheme.
