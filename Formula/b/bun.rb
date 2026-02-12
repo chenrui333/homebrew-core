@@ -1016,6 +1016,11 @@ class Bun < Formula
               <<~CPP.chomp
                 #include "BunGCOutputConstraint.h"
                 #include <wtf/TZoneMallocInlines.h>
+              CPP
+    inreplace "src/bun.js/bindings/BunGCOutputConstraint.cpp",
+              "namespace WebCore {",
+              <<~CPP.chomp
+                namespace WebCore {
 
                 WTF_MAKE_TZONE_ALLOCATED_IMPL(DOMGCOutputConstraint);
               CPP
