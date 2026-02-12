@@ -38,6 +38,22 @@ class Bun < Formula
     url "https://nodejs.org/dist/v24.3.0/node-v24.3.0-headers.tar.gz"
     sha256 "045e9bf477cd5db0ec67f8c1a63ba7f784dedfe2c581e3d0ed09b88e9115dd07"
   end
+  resource "lezer-cpp" do
+    url "https://registry.npmjs.org/@lezer/cpp/-/cpp-1.1.3.tgz"
+    sha256 "c03573bc59c1e8458ea365b1bef6c69025ccad499b1c181f1608a8a090894c0b"
+  end
+  resource "lezer-common" do
+    url "https://registry.npmjs.org/@lezer/common/-/common-1.3.0.tgz"
+    sha256 "f39d47d2a032de876151f5d1867d2efe8d1b597edb877f19ea8d92ac4925ce5a"
+  end
+  resource "lezer-highlight" do
+    url "https://registry.npmjs.org/@lezer/highlight/-/highlight-1.2.3.tgz"
+    sha256 "5257a530b96473efa7dcfd02adf790d71bc4d6f216e77d3b5842fb26f0b674ef"
+  end
+  resource "lezer-lr" do
+    url "https://registry.npmjs.org/@lezer/lr/-/lr-1.4.3.tgz"
+    sha256 "22b56fa117f749e07499ad039158c6efac603f3b419966e630fa48e81b61a01f"
+  end
 
   patch :DATA
 
@@ -92,6 +108,15 @@ class Bun < Formula
       rm_r buildpath/"vendor/nodejs/include/node/uv" if (buildpath/"vendor/nodejs/include/node/uv").exist?
       rm buildpath/"vendor/nodejs/include/node/uv.h" if (buildpath/"vendor/nodejs/include/node/uv.h").exist?
       (buildpath/"vendor/nodejs/include/.node-headers-prepared").write("1")
+    end
+    # Pre-install @lezer npm packages needed by cppbind.ts (C++ → Zig binding
+    # generator). The script auto-runs `bun install` when node_modules is
+    # missing, but that hangs inside the Homebrew sandbox (no network).
+    %w[lezer-cpp lezer-common lezer-highlight lezer-lr].each do |res|
+      scope = res.delete_prefix("lezer-")
+      dest = buildpath/"node_modules/@lezer"/scope
+      mkdir_p dest
+      resource(res).stage { cp_r Dir["*"], dest }
     end
     inreplace "cmake/tools/SetupBun.cmake",
               "if (NOT CI)",
