@@ -852,6 +852,10 @@ class Bun < Formula
       -DENABLE_BASELINE=ON
     ]
 
+    # Use system bun for codegen if available (avoids flaky bootstrap download)
+    system_bun = Pathname("#{Dir.home}/.bun/bin/bun")
+    args << "-DBUN_EXECUTABLE=#{system_bun}" if system_bun.executable?
+
     webkit_path = ENV["HOMEBREW_BUN_WEBKIT_PATH"].to_s
     webkit_candidates = if webkit_path.empty?
       [
