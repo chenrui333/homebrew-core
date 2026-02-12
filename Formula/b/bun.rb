@@ -1054,6 +1054,31 @@ class Bun < Formula
                   #endif
                 CPP
     end
+    # Additional files include BoringSSL-only openssl/curve25519.h; guard them.
+    %w[
+      src/bun.js/bindings/node/crypto/node_crypto_binding.cpp
+      src/bun.js/bindings/webcrypto/CryptoAlgorithmEd25519.cpp
+      src/bun.js/bindings/webcrypto/CryptoKeyOKPOpenSSL.cpp
+    ].each do |f|
+      inreplace f,
+                "#include <openssl/curve25519.h>",
+                <<~CPP.chomp
+                  #ifdef OPENSSL_IS_BORINGSSL
+                  #include <openssl/curve25519.h>
+                  #endif
+                CPP
+    end
+    # CryptoAlgorithmHKDFOpenSSL.cpp includes BoringSSL-only openssl/hkdf.h.
+    # On OpenSSL 3, HKDF is available through EVP_KDF in openssl/kdf.h.
+    inreplace "src/bun.js/bindings/webcrypto/CryptoAlgorithmHKDFOpenSSL.cpp",
+              "#include <openssl/hkdf.h>",
+              <<~CPP.chomp
+                #ifdef OPENSSL_IS_BORINGSSL
+                #include <openssl/hkdf.h>
+                #else
+                #include <openssl/kdf.h>
+                #endif
+              CPP
     # ncrpyto_engine.cpp: method signatures use std::string_view but the
     # header declares WTF::StringView.  Fix the .cpp to match.
     inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
