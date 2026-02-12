@@ -1077,6 +1077,7 @@ class Bun < Formula
                 #include <openssl/hkdf.h>
                 #else
                 #include <openssl/kdf.h>
+                #include <openssl/params.h>
                 #endif
               CPP
     # macOS 26 SDK libc++ lazy_split_view.h has a hard access-specifier
@@ -1098,6 +1099,139 @@ class Bun < Formula
               "pemData = reinterpret_cast<const uint8_t*>(bptr->data); " \
               "pemSize = bptr->length; }",
               global: true
+    # OpenSSL 3 EVP_PKEY_get0_EC_KEY returns const EC_KEY*, BoringSSL
+    # returns non-const.  Add const_cast for the three call sites.
+    inreplace "src/bun.js/bindings/webcrypto/CryptoAlgorithmECDSAOpenSSL.cpp",
+              "EC_KEY* ecKey = EVP_PKEY_get0_EC_KEY(key.platformKey());",
+              "EC_KEY* ecKey = const_cast<EC_KEY*>(EVP_PKEY_get0_EC_KEY(key.platformKey()));",
+              global: true
+    # ExceptionOr<Vector<uint8_t>> needs explicit move from Vector.
+    inreplace "src/bun.js/bindings/webcrypto/CryptoAlgorithmECDSAOpenSSL.cpp",
+              "        return signature;\n    } else {",
+              "        return WTF::WTFMove(signature);\n    } else {"
+    # ED25519_sign / ED25519_verify are BoringSSL-only.  Use the EVP API
+    # for OpenSSL 3: construct an EVP_PKEY from the raw key material and
+    # then call EVP_DigestSign / EVP_DigestVerify.
+    inreplace "src/bun.js/bindings/webcrypto/CryptoAlgorithmEd25519.cpp",
+              "// -- BUN --\n" \
+              "#ifdef OPENSSL_IS_BORINGSSL\n" \
+              "#include <openssl/curve25519.h>\n" \
+              "#endif",
+              <<~CPP.chomp
+                // -- BUN --
+                #ifdef OPENSSL_IS_BORINGSSL
+                #include <openssl/curve25519.h>
+                #endif
+                #include <openssl/evp.h>
+              CPP
+    inreplace "src/bun.js/bindings/webcrypto/CryptoAlgorithmEd25519.cpp",
+              <<~ORIG.chomp,
+                static ExceptionOr<Vector<uint8_t>> signEd25519(const Vector<uint8_t>& sk, size_t len, const Vector<uint8_t>& data)
+                {
+                    uint8_t newSignature[64];
+
+                    ED25519_sign(newSignature, data.begin(), data.size(), sk.begin());
+                    return Vector<uint8_t>(std::span { newSignature, 64 });
+                }
+              ORIG
+              <<~REPL.chomp
+                static ExceptionOr<Vector<uint8_t>> signEd25519(const Vector<uint8_t>& sk, size_t len, const Vector<uint8_t>& data)
+                {
+                #ifdef OPENSSL_IS_BORINGSSL
+                    uint8_t newSignature[64];
+                    ED25519_sign(newSignature, data.begin(), data.size(), sk.begin());
+                    return Vector<uint8_t>(std::span { newSignature, 64 });
+                #else
+                    auto pkey = EVP_PKEY_new_raw_private_key(EVP_PKEY_ED25519, nullptr, sk.begin(), len);
+                    if (!pkey)
+                        return Exception { OperationError };
+                    auto ctx = EVP_MD_CTX_new();
+                    if (!ctx || EVP_DigestSignInit(ctx, nullptr, nullptr, nullptr, pkey) <= 0) {
+                        EVP_MD_CTX_free(ctx);
+                        EVP_PKEY_free(pkey);
+                        return Exception { OperationError };
+                    }
+                    size_t sigLen = 64;
+                    Vector<uint8_t> sig(sigLen);
+                    if (EVP_DigestSign(ctx, sig.begin(), &sigLen, data.begin(), data.size()) <= 0) {
+                        EVP_MD_CTX_free(ctx);
+                        EVP_PKEY_free(pkey);
+                        return Exception { OperationError };
+                    }
+                    EVP_MD_CTX_free(ctx);
+                    EVP_PKEY_free(pkey);
+                    sig.shrink(sigLen);
+                    return sig;
+                #endif
+                }
+              REPL
+    inreplace "src/bun.js/bindings/webcrypto/CryptoAlgorithmEd25519.cpp",
+              <<~ORIG.chomp,
+                static ExceptionOr<bool> verifyEd25519(const Vector<uint8_t>& key, size_t keyLengthInBytes, const Vector<uint8_t>& signature, const Vector<uint8_t> data)
+                {
+                    if (signature.size() != keyLengthInBytes * 2)
+                        return false;
+
+                    return ED25519_verify(data.begin(), data.size(), signature.begin(), key.begin()) == 1;
+                }
+              ORIG
+              <<~REPL.chomp
+                static ExceptionOr<bool> verifyEd25519(const Vector<uint8_t>& key, size_t keyLengthInBytes, const Vector<uint8_t>& signature, const Vector<uint8_t> data)
+                {
+                    if (signature.size() != keyLengthInBytes * 2)
+                        return false;
+
+                #ifdef OPENSSL_IS_BORINGSSL
+                    return ED25519_verify(data.begin(), data.size(), signature.begin(), key.begin()) == 1;
+                #else
+                    auto pkey = EVP_PKEY_new_raw_public_key(EVP_PKEY_ED25519, nullptr, key.begin(), keyLengthInBytes);
+                    if (!pkey)
+                        return Exception { OperationError };
+                    auto ctx = EVP_MD_CTX_new();
+                    if (!ctx || EVP_DigestVerifyInit(ctx, nullptr, nullptr, nullptr, pkey) <= 0) {
+                        EVP_MD_CTX_free(ctx);
+                        EVP_PKEY_free(pkey);
+                        return Exception { OperationError };
+                    }
+                    int ret = EVP_DigestVerify(ctx, signature.begin(), signature.size(), data.begin(), data.size());
+                    EVP_MD_CTX_free(ctx);
+                    EVP_PKEY_free(pkey);
+                    return ret == 1;
+                #endif
+                }
+              REPL
+    # HKDF() is BoringSSL-only.  Use EVP_KDF for OpenSSL 3.
+    inreplace "src/bun.js/bindings/webcrypto/CryptoAlgorithmHKDFOpenSSL.cpp",
+              "if (HKDF(output.begin(), output.size(), algorithm, " \
+              "key.key().begin(), key.key().size(), " \
+              "parameters.saltVector().begin(), parameters.saltVector().size(), " \
+              "parameters.infoVector().begin(), parameters.infoVector().size()) <= 0)\n        " \
+              "return Exception { OperationError };",
+              <<~CPP.chomp
+                #ifdef OPENSSL_IS_BORINGSSL
+                    if (HKDF(output.begin(), output.size(), algorithm, key.key().begin(), key.key().size(), parameters.saltVector().begin(), parameters.saltVector().size(), parameters.infoVector().begin(), parameters.infoVector().size()) <= 0)
+                        return Exception { OperationError };
+                #else
+                    {
+                        EVP_KDF* kdf = EVP_KDF_fetch(nullptr, "HKDF", nullptr);
+                        if (!kdf) return Exception { OperationError };
+                        EVP_KDF_CTX* kctx = EVP_KDF_CTX_new(kdf);
+                        EVP_KDF_free(kdf);
+                        if (!kctx) return Exception { OperationError };
+                        const char* mdName = EVP_MD_get0_name(algorithm);
+                        OSSL_PARAM params[] = {
+                            OSSL_PARAM_construct_utf8_string("digest", const_cast<char*>(mdName), 0),
+                            OSSL_PARAM_construct_octet_string("key", const_cast<uint8_t*>(key.key().begin()), key.key().size()),
+                            OSSL_PARAM_construct_octet_string("salt", const_cast<uint8_t*>(parameters.saltVector().begin()), parameters.saltVector().size()),
+                            OSSL_PARAM_construct_octet_string("info", const_cast<uint8_t*>(parameters.infoVector().begin()), parameters.infoVector().size()),
+                            OSSL_PARAM_END
+                        };
+                        int rc = EVP_KDF_derive(kctx, output.begin(), output.size(), params);
+                        EVP_KDF_CTX_free(kctx);
+                        if (rc <= 0) return Exception { OperationError };
+                    }
+                #endif
+              CPP
     # ncrpyto_engine.cpp: method signatures use std::string_view but the
     # header declares WTF::StringView.  Fix the .cpp to match.
     inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
