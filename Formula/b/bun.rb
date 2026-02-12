@@ -902,6 +902,11 @@ class Bun < Formula
            "Set HOMEBREW_BUN_WEBKIT_PATH to a prebuilt WebKit tree."
     end
 
+    # build.zig hardcodes vendor/zstd/lib for zstd.h include path used by
+    # translate-c.  Point it at the system zstd when using USE_SYSTEM_ZSTD.
+    mkdir_p "vendor/zstd"
+    ln_s Formula["zstd"].opt_include, "vendor/zstd/lib"
+
     system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
 
     # Generate codegen files first — they are Ninja build targets, not
