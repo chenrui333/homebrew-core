@@ -1038,6 +1038,22 @@ class Bun < Formula
                 #include "openssl/base.h"
                 #endif
               CPP
+    # Additional files include BoringSSL-only openssl/mem.h; guard them.
+    %w[
+      src/bun.js/bindings/node/crypto/node_crypto_binding.cpp
+      src/bun.js/bindings/dh-primes.h
+      src/bun.js/bindings/webcrypto/CryptoAlgorithmRSA_OAEPOpenSSL.cpp
+    ].each do |f|
+      inreplace f,
+                "#include <openssl/mem.h>",
+                <<~CPP.chomp
+                  #ifdef OPENSSL_IS_BORINGSSL
+                  #include <openssl/mem.h>
+                  #else
+                  #include <stdlib.h>
+                  #endif
+                CPP
+    end
     # ncrpyto_engine.cpp: method signatures use std::string_view but the
     # header declares WTF::StringView.  Fix the .cpp to match.
     inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
