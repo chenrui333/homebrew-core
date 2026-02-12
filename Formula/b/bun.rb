@@ -71,9 +71,9 @@ class Bun < Formula
     JSON.parse((buildpath/"cmake/Sources.json").read).each do |entry|
       outfile = buildpath/"cmake/sources"/entry["output"]
       item_excludes = (entry["exclude"] || []) + excludes
-      paths = entry["paths"].flat_map { |pat| Dir.glob(pat) }
-                            .reject { |p| item_excludes.include?(p) }
+      paths = entry["paths"].flat_map { |pat| Dir.glob(buildpath/pat) }
                             .map { |p| Pathname(p).relative_path_from(buildpath).to_s }
+                            .reject { |p| item_excludes.include?(p) }
                             .sort
                             .uniq
       outfile.write("#{paths.join("\n")}\n")
