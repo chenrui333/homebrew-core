@@ -1,3 +1,12 @@
 {
-  "loops": []
+  "loops": [
+    {
+      "id": "quick-lark",
+      "pid": 69573,
+      "started": "2026-02-11T23:05:39.973307Z",
+      "prompt": "# Bun v1.3.8 Source-Build Orchestration\n\n## Objective\nIterate on a Homebrew/core **source build** of...",
+      "worktree_path": "/opt/homebrew/Homebrew/Library/Taps/homebrew/homebrew-core/.worktrees/quick-lark",
+      "workspace": "/opt/homebrew/Homebrew/Library/Taps/homebrew/homebrew-core/.worktrees/quick-lark"
+    }
+  ]
 }
