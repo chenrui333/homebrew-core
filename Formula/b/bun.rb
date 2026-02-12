@@ -363,6 +363,7 @@ class Bun < Formula
     inreplace "src/bun.js/bindings/root.h",
               '#include "cmakeconfig.h"',
               "#include \"cmakeconfig.h\"\n" \
+              "#ifndef USE_BUN_JSC_ADDITIONS\n#define USE_BUN_JSC_ADDITIONS 1\n#endif\n" \
               "#undef ENABLE_WEBGL\n#define ENABLE_WEBGL 0\n" \
               "#undef ENABLE_MEDIA_SOURCE\n#define ENABLE_MEDIA_SOURCE 0\n" \
               "#undef ENABLE_WEB_RTC\n#define ENABLE_WEB_RTC 0"
@@ -915,47 +916,57 @@ class Bun < Formula
     # produced during cmake configure.
     system "cmake", "--build", "build", "--target", "bun-zig-generated-classes"
 
-    # The codegen script (generate-classes.ts) produces ZigGeneratedClasses.cpp
-    # with jsDynamicCast<WebCore::JSBlob*> but the JSBlob class definition
-    # comes from Zig compilation (which hasn't happened yet and won't link in
-    # a Homebrew build).  Add a minimal stub so the C++ compiles.
-    inreplace "build/codegen/ZigGeneratedClasses.h",
-              "class StructuredCloneableDeserialize {",
-              <<~CPP
-                class JSBlob : public JSDOMObject {
-                public:
-                    using Base = JSDOMObject;
-                    DECLARE_INFO;
-                    void* wrapped() const { return m_wrapped; }
-                    static size_t memoryCost(void*) { return 0; }
-                    template<typename, JSC::SubspaceAccess mode> static JSC::GCClient::IsoSubspace* subspaceFor(JSC::VM& vm)
-                    {
-                        if constexpr (mode == JSC::SubspaceAccess::Concurrently)
-                            return nullptr;
-                        return subspaceForImpl(vm);
-                    }
-                    static JSC::GCClient::IsoSubspace* subspaceForImpl(JSC::VM& vm);
-                    static JSC::Structure* createStructure(JSC::VM& vm, JSC::JSGlobalObject* globalObject, JSC::JSValue prototype)
-                    {
-                        return JSC::Structure::create(vm, globalObject, prototype, JSC::TypeInfo(JSC::ObjectType, StructureFlags), info(), JSC::NonArray);
-                    }
-                    static void destroy(JSC::JSCell*);
-                protected:
-                    void* m_wrapped { nullptr };
-                    JSBlob(JSC::Structure* structure, JSDOMGlobalObject& globalObject)
-                        : Base(structure, globalObject) {}
-                };
-
-                class StructuredCloneableDeserialize {
+    # root_certs.cpp and root_certs_darwin.cpp also use BoringSSL-specific APIs.
+    # Add OpenSSL 3 compat shims to root_certs.cpp (includes + OPENSSL_PUT_ERROR + ERR_R_MALLOC_FAILURE).
+    inreplace "packages/bun-usockets/src/crypto/root_certs.cpp",
+              '#include "./root_certs.h"',
+              <<~CPP.chomp
+                #include "./root_certs.h"
+                #include <openssl/err.h>
+                #include <openssl/pem.h>
+                #ifndef OPENSSL_IS_BORINGSSL
+                #define OPENSSL_PUT_ERROR(lib, code) ERR_raise(ERR_LIB_##lib, code)
+                #endif
+                #ifndef ERR_R_MALLOC_FAILURE
+                #define ERR_R_MALLOC_FAILURE 3
+                #endif
               CPP
-    inreplace "build/codegen/ZigGeneratedClasses.cpp",
-              "} // namespace WebCore",
-              <<~CPP
-                const JSC::ClassInfo JSBlob::s_info = { "Blob"_s, &Base::s_info, nullptr, nullptr, CREATE_METHOD_TABLE(JSBlob) };
-                JSC::GCClient::IsoSubspace* JSBlob::subspaceForImpl(JSC::VM&) { return nullptr; }
-                void JSBlob::destroy(JSC::JSCell*) {}
-
-                } // namespace WebCore
+    # root_certs_darwin.cpp needs <initializer_list> and <openssl/x509v3.h> for X509_check_ca.
+    inreplace "packages/bun-usockets/src/crypto/root_certs_darwin.cpp",
+              "#include <openssl/x509.h>",
+              <<~CPP.chomp
+                #include <initializer_list>
+                #include <openssl/x509.h>
+                #include <openssl/x509v3.h>
+              CPP
+    # AsymmetricKeyValue.cpp uses BoringSSL-only headers and deprecated OpenSSL 3 APIs.
+    # openssl/mem.h → stdlib.h; openssl/curve25519.h → omit (functions are in evp.h for OpenSSL).
+    inreplace "src/bun.js/bindings/AsymmetricKeyValue.cpp",
+              "#include <openssl/mem.h>",
+              <<~CPP.chomp
+                #ifdef OPENSSL_IS_BORINGSSL
+                #include <openssl/mem.h>
+                #else
+                #include <stdlib.h>
+                #endif
+              CPP
+    inreplace "src/bun.js/bindings/AsymmetricKeyValue.cpp",
+              "#include <openssl/curve25519.h>",
+              <<~CPP.chomp
+                #ifdef OPENSSL_IS_BORINGSSL
+                #include <openssl/curve25519.h>
+                #endif
+              CPP
+    # Suppress deprecated warnings in webcrypto headers (RSA_free, EC_KEY_free, HMAC_CTX_free
+    # are deprecated in OpenSSL 3 but still functional).
+    inreplace "src/bun.js/bindings/webcrypto/OpenSSLCryptoUniquePtr.h",
+              "#pragma once",
+              <<~CPP.chomp
+                #pragma once
+                #ifndef OPENSSL_IS_BORINGSSL
+                #pragma GCC diagnostic push
+                #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+                #endif
               CPP
 
     system "cmake", "--build", "build"
