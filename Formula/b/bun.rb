@@ -441,6 +441,9 @@ class Bun < Formula
     inreplace "src/bun.js/bindings/JSCInlines.h",
               "#include <JavaScriptCore/SlotVisitorInlines.h>",
               "#include <SlotVisitorInlines.h>"
+    inreplace "src/bun.js/bindings/JSCInlines.h",
+              "#include <JavaScriptCore/StrongInlines.h>",
+              "#include <StrongInlines.h>"
     webkit_download_block = <<~CMAKE
       file(
         DOWNLOAD ${WEBKIT_DOWNLOAD_URL} ${CACHE_PATH}/${WEBKIT_FILENAME} SHOW_PROGRESS
