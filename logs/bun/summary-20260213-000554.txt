@@ -1,3 +1,0 @@
-BUILD_FAILED
-No fatal block matched; inspect log:
-/opt/homebrew/Homebrew/Library/Taps/homebrew/homebrew-core/logs/bun/build-20260213-000554.log

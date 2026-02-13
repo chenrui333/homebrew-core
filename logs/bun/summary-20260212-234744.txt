@@ -1,8 +1,0 @@
-NETWORK_ACTIVITY_DETECTED
-PATTERN: Downloading zig|DownloadZig\.cmake|GitClone\.cmake|register_repository\(|file\(DOWNLOAD|curl |wget |git clone|git fetch|FetchContent|ExternalProject_Add|bun install( |$)|WEBKIT.*download
-243:-- Skipping bun install for bun-error
-244:-- Skipping bun install for node-fallbacks
-442:-- Skipping bun install for bun-error
-443:-- Skipping bun install for node-fallbacks
-592:[59/595] cd /private/tmp/bun-20260212-95702-m3fhex/bun-bun-v1.3.8 && /opt/homebrew/opt/cmake/bin/cmake -DZIG_PATH=/private/tmp/bun-20260212-95702-m3fhex/bun-bun-v1.3.8/vendor/zig -DZIG_COMMIT=c1423ff3fc7064635773a4a4616c5bf986eb00fe -DENABLE_ASAN=OFF -DENABLE_VALGRIND= -DZIG_COMPILER_SAFE=OFF -P /private/tmp/bun-20260212-95702-m3fhex/bun-bun-v1.3.8/cmake/scripts/DownloadZig.cmake
-593:-- Running script: DownloadZig.cmake

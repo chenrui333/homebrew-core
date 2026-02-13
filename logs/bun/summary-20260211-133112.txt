@@ -1,8 +1,0 @@
-Error: Failed to load cask: ./Formula/b/bun.rb
-Cask 'bun' is unreadable: wrong constant name #<Class:0x0000000132430b60>
-Warning: Treating ./Formula/b/bun.rb as a formula.
-==> Fetching downloads for: bun
-✔︎ Formula bun (1.3.8)
-Error: A `brew install --build-from-source ./Formula/b/bun.rb -v` process has already locked /opt/homebrew/Cellar/cmake.
-Please wait for it to finish or terminate it to continue.
-==> Verifying checksum for '5893d56c4d1ab1cbd456077a3a5863c0618e4649e194100eec5a1cd3946ae391--bun-bun-v1.3.8.tar.gz'
