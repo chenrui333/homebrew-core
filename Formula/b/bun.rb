@@ -1890,6 +1890,12 @@ class Bun < Formula
                 list(APPEND BUN_CXX_SOURCES ${CWD}/src/bun.js/bindings/missing_webkit_stubs.cpp)
               CMAKE
 
+    # macOS strip doesn't support GNU-style --remove-section; clear the flags
+    inreplace "cmake/targets/BuildBun.cmake",
+              "set(CMAKE_STRIP_FLAGS --remove-section=__TEXT,__eh_frame " \
+              "--remove-section=__TEXT,__unwind_info --remove-section=__TEXT,__gcc_except_tab)",
+              'set(CMAKE_STRIP_FLAGS "")'
+
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end
