@@ -360,19 +360,13 @@ class Bun < Formula
     # required headers (WebGLAny.h, BufferMediaSource.h, DetachedRTCDataChannel.h)
     # are absent.  Patch root.h to override after cmakeconfig.h is included
     # (avoids -Wmacro-redefined with -Werror).
-    # Force USE_FOUNDATION=1 so sizeof(JSC::Heap) matches the prebuilt WebKit
-    # library (built with PORT=Mac / USE(FOUNDATION)=1).  Without this,
-    # Heap is 16 bytes too small (missing m_delayedReleaseObjects) and every
-    # VM field after `heap` is at the wrong offset → segfault in
-    # BunBuiltinNames at startup.
     inreplace "src/bun.js/bindings/root.h",
               '#include "cmakeconfig.h"',
               "#include \"cmakeconfig.h\"\n" \
               "#ifndef USE_BUN_JSC_ADDITIONS\n#define USE_BUN_JSC_ADDITIONS 1\n#endif\n" \
               "#undef ENABLE_WEBGL\n#define ENABLE_WEBGL 0\n" \
               "#undef ENABLE_MEDIA_SOURCE\n#define ENABLE_MEDIA_SOURCE 0\n" \
-              "#undef ENABLE_WEB_RTC\n#define ENABLE_WEB_RTC 0\n" \
-              "#define USE_FOUNDATION 1"
+              "#undef ENABLE_WEB_RTC\n#define ENABLE_WEB_RTC 0\n"
     inreplace "cmake/targets/BuildBun.cmake",
               <<~CMAKE,
                 if (NOT WIN32)
@@ -519,11 +513,15 @@ class Bun < Formula
     # have these private headers; the shim avoids rewriting every include individually.
     jsc_shim = buildpath/"jsc-include-shim"
     jsc_bare_shim = buildpath/"jsc-bare-shim"
+    abi_shim = buildpath/"abi-shim"
     mkdir_p jsc_shim
     mkdir_p jsc_bare_shim
+    mkdir_p abi_shim
+    # abi-shim goes FIRST so the patched Heap.h is found before PrivateHeaders.
     inreplace "cmake/tools/SetupWebKit.cmake",
               "      ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders\n",
               <<~CMAKE
+                #{abi_shim}
                 ${WEBKIT_PATH}/JavaScriptCore.framework/Headers
                 ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders
                 ${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders
@@ -957,6 +955,49 @@ class Bun < Formula
     if webkit_candidates.none?(&:exist?)
       odie "WEBKIT_LOCAL=ON requires local WebKit static libs (missing libWTF.a). " \
            "Set HOMEBREW_BUN_WEBKIT_PATH to a prebuilt WebKit tree."
+    end
+
+    # ABI shim: the prebuilt WebKit library was compiled with PORT=Mac which
+    # sets USE(FOUNDATION)=1, adding two data members to JSC::Heap:
+    #   Vector<RetainPtr<CFTypeRef>> m_delayedReleaseObjects  (16 bytes)
+    #   unsigned m_delayedReleaseRecursionCount               ( 4 bytes)
+    # Bun compiles with BUILDING_JSCONLY__ → USE(FOUNDATION)=0 → those 20
+    # bytes of members are absent.  Combined with alignment this shifts every
+    # VM field after `heap` by 16 bytes → segfault in BunBuiltinNames.
+    # Fix: copy Heap.h to abi-shim (first in -I path) with ABI-compatible
+    # padding that matches the prebuilt library layout.
+    unless webkit_path.empty?
+      heap_src = [
+        Pathname(webkit_path)/"JavaScriptCore.framework/PrivateHeaders/Heap.h",
+        Pathname(webkit_path)/"JavaScriptCore/PrivateHeaders/Heap.h",
+        Pathname(webkit_path)/".."/".."/
+          "Source/JavaScriptCore/heap/Heap.h",
+      ].find(&:exist?)
+      if heap_src
+        abi_heap = abi_shim/"Heap.h"
+        cp heap_src, abi_heap
+        # Replace the USE(FOUNDATION) #if…#endif with an #if/#elif/#endif
+        # that adds padding members matching the exact original sizes when
+        # USE(FOUNDATION) is false (and JSC_GLIB_API_ENABLED is not set).
+        inreplace abi_heap, <<~ORIG.chomp, <<~PATCHED.chomp
+          #if USE(FOUNDATION)
+              Vector<RetainPtr<CFTypeRef>> m_delayedReleaseObjects;
+              unsigned m_delayedReleaseRecursionCount { 0 };
+          #endif
+        ORIG
+          #if USE(FOUNDATION)
+              Vector<RetainPtr<CFTypeRef>> m_delayedReleaseObjects;
+              unsigned m_delayedReleaseRecursionCount { 0 };
+          #elif !defined(JSC_GLIB_API_ENABLED)
+              // ABI padding: prebuilt WebKit (PORT=Mac) has USE(FOUNDATION)=1.
+              // Match layout: Vector<> is {T*,uint,uint} = 16 bytes + unsigned = 4.
+              void* m_abiPadBuf_ { nullptr };
+              unsigned m_abiPadCap_ { 0 };
+              unsigned m_abiPadSize_ { 0 };
+              unsigned m_abiPadRecursion_ { 0 };
+          #endif
+        PATCHED
+      end
     end
 
     # build.zig hardcodes vendor/zstd/lib for zstd.h include path used by
