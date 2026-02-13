@@ -1756,29 +1756,34 @@ class Bun < Formula
     # s_heapRef and operatorNewSlow declarations that need definitions.
     tzone_impl = "\n#include <wtf/TZoneMallocInlines.h>\n"
 
-    # Bun:: namespace crypto job classes
+    # Bun:: namespace crypto job classes — must wrap in namespace Bun { }
+    # since the IMPL is appended outside the file's namespace block
     {
-      "src/bun.js/bindings/node/crypto/CryptoHkdf.cpp"          => "Bun::HkdfJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoSignJob.cpp"       => "Bun::SignJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoGenDhKeyPair.cpp"  => "Bun::DhKeyPairJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoGenEcKeyPair.cpp"  => "Bun::EcKeyPairJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoKeygen.cpp"        => "Bun::SecretKeyJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoGenDsaKeyPair.cpp" => "Bun::DsaKeyPairJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoGenNidKeyPair.cpp" => "Bun::NidKeyPairJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoGenRsaKeyPair.cpp" => "Bun::RsaKeyPairJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoDhJob.cpp"         => "Bun::DhJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoHkdf.cpp"          => "HkdfJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoSignJob.cpp"       => "SignJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoGenDhKeyPair.cpp"  => "DhKeyPairJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoGenEcKeyPair.cpp"  => "EcKeyPairJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoKeygen.cpp"        => "SecretKeyJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoGenDsaKeyPair.cpp" => "DsaKeyPairJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoGenNidKeyPair.cpp" => "NidKeyPairJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoGenRsaKeyPair.cpp" => "RsaKeyPairJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoDhJob.cpp"         => "DhJobCtx",
     }.each do |file, cls|
       File.open(buildpath/file, "a") do |f|
         f.puts tzone_impl
-        f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(#{cls.split("::").last});"
+        f.puts "namespace Bun {"
+        f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(#{cls});"
+        f.puts "}"
       end
     end
 
-    # CryptoPrimes.cpp has two classes
+    # CryptoPrimes.cpp has two classes in Bun:: namespace
     File.open(buildpath/"src/bun.js/bindings/node/crypto/CryptoPrimes.cpp", "a") do |f|
       f.puts tzone_impl
+      f.puts "namespace Bun {"
       f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(CheckPrimeJobCtx);"
       f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(GeneratePrimeJobCtx);"
+      f.puts "}"
     end
 
     # KeyObjectData (global namespace)
