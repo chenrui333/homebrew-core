@@ -415,72 +415,14 @@ class Bun < Formula
                   )
                 endif()
               CMAKE
-    inreplace "src/bun.js/bindings/root.h",
-              "#include <JavaScriptCore/JSCJSValue.h>",
-              "#include <JSCJSValue.h>"
-    inreplace "src/bun.js/bindings/root.h",
-              "#include <JavaScriptCore/JSCInlines.h>",
-              "#include <JSCInlines.h>"
-    inreplace "src/bun.js/bindings/root.h",
-              "#include <JavaScriptCore/HandleSet.h>",
-              "#include <HandleSet.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/ExceptionHelpers.h>",
-              "#include <ExceptionHelpers.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/GCIncomingRefCountedInlines.h>",
-              "#include <GCIncomingRefCountedInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/HeapInlines.h>",
-              "#include <HeapInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/IdentifierInlines.h>",
-              "#include <IdentifierInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/JSArrayBufferViewInlines.h>",
-              "#include <JSArrayBufferViewInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/JSCJSValueInlines.h>",
-              "#include <JSCJSValueInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/JSCellInlines.h>",
-              "#include <JSCellInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/JSFunctionInlines.h>",
-              "#include <JSFunctionInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/JSGlobalObjectInlines.h>",
-              "#include <JSGlobalObjectInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/JSObjectInlines.h>",
-              "#include <JSObjectInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/JSGlobalProxy.h>",
-              "#include <JSGlobalProxy.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/JSString.h>",
-              "#include <JSString.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/Operations.h>",
-              "#include <Operations.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/SlotVisitorInlines.h>",
-              "#include <SlotVisitorInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/StrongInlines.h>",
-              "#include <StrongInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/StructureInlines.h>",
-              "#include <StructureInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/ThrowScope.h>",
-              "#include <ThrowScope.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/WeakGCMapInlines.h>",
-              "#include <WeakGCMapInlines.h>"
-    inreplace "src/bun.js/bindings/JSCInlines.h",
-              "#include <JavaScriptCore/WeakGCSetInlines.h>",
-              "#include <WeakGCSetInlines.h>"
+    # Strip JavaScriptCore/ prefix from angle-bracket includes in root.h
+    # and JSCInlines.h so the JSC shim directory resolves them correctly.
+    %w[
+      src/bun.js/bindings/root.h
+      src/bun.js/bindings/JSCInlines.h
+    ].each do |f|
+      inreplace f, %r{#include <JavaScriptCore/([^>]+)>}, '#include <\1>'
+    end
     webkit_download_block = <<~CMAKE
       file(
         DOWNLOAD ${WEBKIT_DOWNLOAD_URL} ${CACHE_PATH}/${WEBKIT_FILENAME} SHOW_PROGRESS
@@ -1030,45 +972,20 @@ class Bun < Formula
                 #include <openssl/x509.h>
                 #include <openssl/x509v3.h>
               CPP
-    # AsymmetricKeyValue.cpp uses BoringSSL-only headers and deprecated OpenSSL 3 APIs.
-    # openssl/mem.h → stdlib.h; openssl/curve25519.h → omit (functions are in evp.h for OpenSSL).
-    inreplace "src/bun.js/bindings/AsymmetricKeyValue.cpp",
-              "#include <openssl/mem.h>",
-              <<~CPP.chomp
-                #ifdef OPENSSL_IS_BORINGSSL
-                #include <openssl/mem.h>
-                #else
-                #include <stdlib.h>
-                #endif
-              CPP
-    inreplace "src/bun.js/bindings/AsymmetricKeyValue.cpp",
-              "#include <openssl/curve25519.h>",
-              <<~CPP.chomp
-                #ifdef OPENSSL_IS_BORINGSSL
-                #include <openssl/curve25519.h>
-                #endif
-              CPP
-    # Suppress deprecated warnings in webcrypto headers (RSA_free, EC_KEY_free, HMAC_CTX_free
-    # are deprecated in OpenSSL 3 but still functional).
-    inreplace "src/bun.js/bindings/webcrypto/OpenSSLCryptoUniquePtr.h",
-              "#pragma once",
-              <<~CPP.chomp
-                #pragma once
-                #ifndef OPENSSL_IS_BORINGSSL
-                #pragma GCC diagnostic push
-                #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-                #endif
-              CPP
-    # ncrypto.h also uses deprecated OpenSSL functions (RSA_free, DH_free, etc.)
-    inreplace "src/bun.js/bindings/ncrypto.h",
-              "#pragma once",
-              <<~CPP.chomp
-                #pragma once
-                #ifndef OPENSSL_IS_BORINGSSL
-                #pragma GCC diagnostic push
-                #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-                #endif
-              CPP
+    # Suppress deprecated warnings in headers using deprecated OpenSSL 3
+    # functions (RSA_free, EC_KEY_free, DH_free, etc.) that are still functional.
+    %w[
+      src/bun.js/bindings/webcrypto/OpenSSLCryptoUniquePtr.h
+      src/bun.js/bindings/ncrypto.h
+    ].each do |f|
+      inreplace f, "#pragma once", <<~CPP.chomp
+        #pragma once
+        #ifndef OPENSSL_IS_BORINGSSL
+        #pragma GCC diagnostic push
+        #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        #endif
+      CPP
+    end
     # JSX509CertificatePrototype.cpp uses X509_CHECK_FLAG_* constants which
     # are defined in <openssl/x509v3.h>, not <openssl/x509.h>.
     inreplace "src/bun.js/bindings/JSX509CertificatePrototype.cpp",
@@ -1085,8 +1002,9 @@ class Bun < Formula
                 #include "openssl/base.h"
                 #endif
               CPP
-    # Additional files include BoringSSL-only openssl/mem.h; guard them.
+    # Guard BoringSSL-only openssl/mem.h with stdlib.h fallback for OpenSSL 3.
     %w[
+      src/bun.js/bindings/AsymmetricKeyValue.cpp
       src/bun.js/bindings/node/crypto/node_crypto_binding.cpp
       src/bun.js/bindings/dh-primes.h
       src/bun.js/bindings/webcrypto/CryptoAlgorithmRSA_OAEPOpenSSL.cpp
@@ -1101,8 +1019,9 @@ class Bun < Formula
                   #endif
                 CPP
     end
-    # Additional files include BoringSSL-only openssl/curve25519.h; guard them.
+    # Guard BoringSSL-only openssl/curve25519.h (omit on OpenSSL 3).
     %w[
+      src/bun.js/bindings/AsymmetricKeyValue.cpp
       src/bun.js/bindings/node/crypto/node_crypto_binding.cpp
       src/bun.js/bindings/webcrypto/CryptoAlgorithmEd25519.cpp
       src/bun.js/bindings/webcrypto/CryptoKeyOKPOpenSSL.cpp
@@ -1320,38 +1239,20 @@ class Bun < Formula
     # Several bun classes use WTF_DEPRECATED_MAKE_FAST_ALLOCATED but their
     # base classes use WTF_MAKE_TZONE_ALLOCATED.  WebKit requires derived
     # classes to match the base allocation scheme.
-    inreplace "src/bun.js/bindings/BunGCOutputConstraint.h",
-              "WTF_DEPRECATED_MAKE_FAST_ALLOCATED(DOMGCOutputConstraint);",
-              "WTF_MAKE_TZONE_ALLOCATED(DOMGCOutputConstraint);"
-    inreplace "src/bun.js/bindings/ConsoleObject.h",
-              "WTF_DEPRECATED_MAKE_FAST_ALLOCATED(ConsoleObject);",
-              "WTF_MAKE_TZONE_ALLOCATED(ConsoleObject);"
-    inreplace "src/bun.js/bindings/BunGCOutputConstraint.cpp",
-              '#include "BunGCOutputConstraint.h"',
-              <<~CPP.chomp
-                #include "BunGCOutputConstraint.h"
-                #include <wtf/TZoneMallocInlines.h>
-              CPP
-    inreplace "src/bun.js/bindings/BunGCOutputConstraint.cpp",
-              "namespace WebCore {",
-              <<~CPP.chomp
-                namespace WebCore {
-
-                WTF_MAKE_TZONE_ALLOCATED_IMPL(DOMGCOutputConstraint);
-              CPP
-    inreplace "src/bun.js/bindings/ConsoleObject.cpp",
-              '#include "ConsoleObject.h"',
-              <<~CPP.chomp
-                #include "ConsoleObject.h"
-                #include <wtf/TZoneMallocInlines.h>
-              CPP
-    inreplace "src/bun.js/bindings/ConsoleObject.cpp",
-              "namespace Bun {",
-              <<~CPP.chomp
-                namespace Bun {
-
-                WTF_MAKE_TZONE_ALLOCATED_IMPL(ConsoleObject);
-              CPP
+    {
+      "BunGCOutputConstraint" => ["DOMGCOutputConstraint", "namespace WebCore {"],
+      "ConsoleObject"         => ["ConsoleObject", "namespace Bun {"],
+    }.each do |file_stem, (klass, ns_line)|
+      inreplace "src/bun.js/bindings/#{file_stem}.h",
+                "WTF_DEPRECATED_MAKE_FAST_ALLOCATED(#{klass});",
+                "WTF_MAKE_TZONE_ALLOCATED(#{klass});"
+      inreplace "src/bun.js/bindings/#{file_stem}.cpp",
+                "#include \"#{file_stem}.h\"",
+                "#include \"#{file_stem}.h\"\n#include <wtf/TZoneMallocInlines.h>"
+      inreplace "src/bun.js/bindings/#{file_stem}.cpp",
+                ns_line,
+                "#{ns_line}\n\nWTF_MAKE_TZONE_ALLOCATED_IMPL(#{klass});"
+    end
 
     # The bun-WebKit build is missing generated C++ dispatchers for two custom
     # inspector protocol domains (LifecycleReporter and TestReporter).  Create
