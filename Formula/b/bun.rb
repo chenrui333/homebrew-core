@@ -924,6 +924,7 @@ class Bun < Formula
       -DWEBKIT_LOCAL=ON
       -DENABLE_TINYCC=OFF
       -DENABLE_BASELINE=ON
+      -DCMAKE_DSYMUTIL=dsymutil
     ]
 
     # Use system bun for codegen if available (avoids flaky bootstrap download)
