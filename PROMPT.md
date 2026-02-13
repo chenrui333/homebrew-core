@@ -34,6 +34,9 @@ Preserve artifacts and history on this branch:
 - keep investigation breadcrumbs useful for later PR authoring.
 
 Do not perform artifact cleanup in this branch unless explicitly requested.
+Do not remove/untrack non-shipping artifacts from this branch (including
+`.ralph/**`, `.ralph.bak*/**`, `logs/**`, `tools/**`, `docs/**`,
+`PROMPT.md`, `.gitignore`, `ralph.yml`, `mise.toml`) unless explicitly requested.
 
 ## Scope Guardrails
 1. Prioritize edits in `Formula/b/bun.rb`.
