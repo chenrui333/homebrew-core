@@ -1,17 +1,17 @@
 class VercelCli < Formula
   desc "Command-line interface for Vercel"
   homepage "https://vercel.com/home"
-  url "https://registry.npmjs.org/vercel/-/vercel-50.15.1.tgz"
-  sha256 "09f44a5eade0e3e3382f3e20d1ac32539f397f0c2207931821cece201fcf3b71"
+  url "https://registry.npmjs.org/vercel/-/vercel-50.17.0.tgz"
+  sha256 "3f26fb6686fc8fc6d1a24f987830b82a4d74774cf0a1e2fcdb87eb19ec2fdb58"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "a5b1dd86b59c934f501f0054d9fc2f6ea89fe978a8d5f9a4783cdff1c057ffa0"
-    sha256 cellar: :any,                 arm64_sequoia: "6c014a488f1fcf26b88a6c854b43c70b378332226097eee7bb28a81040af6211"
-    sha256 cellar: :any,                 arm64_sonoma:  "6c014a488f1fcf26b88a6c854b43c70b378332226097eee7bb28a81040af6211"
-    sha256 cellar: :any,                 sonoma:        "87b2711cda20de1a3c59dd968b7aafffb1745f67513011d0fddcc2fe471dfea8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d9a188268a67f2847459af7a44fc196f75de9e3f47b97fb0ae5276060b07019e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9c7f0effbb9125d522ba50a46a9360e56aa85f117c50e74730075cb1926bf632"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "125f07c9e1698c35ff77c2b6bec4126ecb3dfdfb2c0ab903f698c0d3cd8ea7db"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "125f07c9e1698c35ff77c2b6bec4126ecb3dfdfb2c0ab903f698c0d3cd8ea7db"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "125f07c9e1698c35ff77c2b6bec4126ecb3dfdfb2c0ab903f698c0d3cd8ea7db"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e65fb85ec99b85a407a668fe39d3ea12ddb372f6bbcfafde454a3249801b38f3"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "79ed55d7a77fa83fcbc17fdc7449844f3d5cab9a09758b3928a393c04accc30d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b39a0d68c84a0d94029de7f820875f4bb15436278a3ab93c13a31f4a772eecd8"
   end
 
   depends_on "node"
@@ -22,15 +22,6 @@ class VercelCli < Formula
 
     system "npm", "install", *std_npm_args
     bin.install_symlink libexec.glob("bin/*")
-
-    # Remove incompatible deasync modules
-    os = OS.kernel_name.downcase
-    arch = Hardware::CPU.intel? ? "x64" : Hardware::CPU.arch.to_s
-    node_modules = libexec/"lib/node_modules/vercel/node_modules"
-    node_modules.glob("deasync/bin/*")
-                .each { |dir| rm_r(dir) if dir.basename.to_s != "#{os}-#{arch}" }
-
-    deuniversalize_machos node_modules/"fsevents/fsevents.node" if OS.mac?
   end
 
   test do

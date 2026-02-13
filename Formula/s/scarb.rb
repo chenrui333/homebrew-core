@@ -12,16 +12,20 @@ class Scarb < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "648857e92e0f9207971eb9b40e9c6e8a254cc1b941b34a3ced66edb3a8905a8e"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7f91b2218d75c6b25181687d023d00ddfdaa1aa871815b841c44ceaa024e66d3"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "de89e6ff31438b93e109f411ba8143e7d058ecebeb270de879496125a91e2e32"
-    sha256 cellar: :any_skip_relocation, sonoma:        "065f62a57574b6f15bbd0ca570d6b44866eb16db6b35f1e991ac06d689d72351"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b3c1351b0bf336612a39ee0efdcdd087c81a4ab1075304226b2f97f356579353"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a040cd0f1042e07de3a83a946eece7b2f5d6c55128e00295817f8dafbacf036f"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "68dabecb501f79fa80e40354902c0fb86662c9bfcc35bb64576d566b5b13d253"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "25ec7cacb19d7c42f68436acbd58a39bf1987994ef0e56b4c932d78c3e777c96"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "4f3df0b9dc1ef19a436db3272dc126aa84af5a6386d6aa7364b9e73b01df3bbe"
+    sha256 cellar: :any_skip_relocation, sonoma:        "a74de971be362170ad6d527bd48cedf113388e7e7abb90f6f1209f139feb46ab"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "8a87af999b32d029378ea56005bcd8e3ddce613121bab2c73b4b4a485efcf08f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "66e9da25510c689f19d576f1d9a98708e484ba67db0baae49774cd1649058efe"
   end
 
   depends_on "rust" => :build
-  uses_from_macos "zlib"
+
+  on_linux do
+    depends_on "zlib-ng-compat"
+  end
 
   def install
     %w[

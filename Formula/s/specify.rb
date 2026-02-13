@@ -3,17 +3,17 @@ class Specify < Formula
 
   desc "Toolkit to help you get started with Spec-Driven Development"
   homepage "https://github.com/github/spec-kit"
-  url "https://github.com/github/spec-kit/archive/refs/tags/v0.0.94.tar.gz"
-  sha256 "f1d0ca1ccdffb49ad97637107eb0dec0685e94b8fbdc82b666bdaed442daec49"
+  url "https://github.com/github/spec-kit/archive/refs/tags/v0.0.95.tar.gz"
+  sha256 "ff0366679e0ffe776fdfc845f30fc919269d70b3aab80457618bcda9e1e03851"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "ae6818db657141cd91ad23eb6542b86dc20997a51efce061921e54a177b92dbb"
-    sha256 cellar: :any,                 arm64_sequoia: "bcba29f12441ba39f72202c9cb3130623fd30a4bb9c8d04e771b25f12aacfd0f"
-    sha256 cellar: :any,                 arm64_sonoma:  "259255c7d37deb56c757aae1d25d820b5710530e4b384c96abce02748cfefc08"
-    sha256 cellar: :any,                 sonoma:        "3315c3b6623cdf033e88b484a00cf251ffd74115e3a0916f9317d72a5e273fb4"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "16662d63cc02bf9e98ed0c8c7835aa6aa4af907e506a2220dd0f2ceaf04171b6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4f8e577c02503dec7ff2a160040746f0bdc3f298fd3bcd1c4f0fb9b828b173fd"
+    sha256 cellar: :any,                 arm64_tahoe:   "99fb146166a11457b67a6fd91341e08a734004a8f23e42202d775664643249ce"
+    sha256 cellar: :any,                 arm64_sequoia: "df9aa390aa63d300b82377c49237b29e1a059390519fb547bed16a112c5fbb21"
+    sha256 cellar: :any,                 arm64_sonoma:  "33f6f4fd69213686edc6d75ea29ecb08a4ce5581d85b6cfc232287176b12a646"
+    sha256 cellar: :any,                 sonoma:        "d3831af7e5b2acf172c10484c62d9a6b239402ea0fc71bce86092574bc1f7de2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c37ed1d9efc0788363482164689d72d33d1e1d08fb87b37bc3fc8fa14dab8f29"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a935dab3f8fe2e3bb57056ef1e94fb4fe569d21dbd2a401fca59ca8b56edc753"
   end
 
   depends_on "certifi" => :no_linkage
@@ -73,8 +73,8 @@ class Specify < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/cf/86/0248f086a84f01b37aaec0fa567b397df1a119f73c16f6c7a9aac73ea309/platformdirs-4.5.1.tar.gz"
-    sha256 "61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"
+    url "https://files.pythonhosted.org/packages/71/25/ccd8e88fcd16a4eb6343a8b4b9635e6f3928a7ebcd82822a14d20e3ca29f/platformdirs-4.7.0.tar.gz"
+    sha256 "fd1a5f8599c85d49b9ac7d6e450bc2f1aaf4a23f1fe86d09952fe20ad365cf36"
   end
 
   resource "pygments" do

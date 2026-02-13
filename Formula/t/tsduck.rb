@@ -27,8 +27,6 @@ class Tsduck < Formula
 
   depends_on "asciidoctor" => :build
   depends_on "dos2unix" => :build
-  depends_on "gnu-sed" => :build
-  depends_on "grep" => :build
   depends_on "openjdk" => :build
   depends_on "qpdf" => :build
   depends_on "librist"
@@ -42,9 +40,9 @@ class Tsduck < Formula
   uses_from_macos "pcsc-lite"
 
   on_macos do
-    depends_on "bash" => :build
+    depends_on "gnu-sed" => :build
     depends_on "llvm" => :build if DevelopmentTools.clang_build_version <= 1599
-    depends_on "make" => :build
+    depends_on "make" => :build # needs make 4+
   end
 
   on_linux do

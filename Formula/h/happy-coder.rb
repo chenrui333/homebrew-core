@@ -6,6 +6,11 @@ class HappyCoder < Formula
   license "MIT"
   head "https://github.com/slopus/happy-cli.git", branch: "main"
 
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
   bottle do
     sha256 cellar: :any_skip_relocation, arm64_tahoe:   "03313b663fe8310e65192bf523cec55c71aac6c6921a19812e713789647cc11c"
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "03313b663fe8310e65192bf523cec55c71aac6c6921a19812e713789647cc11c"
