@@ -1750,6 +1750,135 @@ class Bun < Formula
                 list(APPEND BUN_CPP_SOURCES
               CMAKE
 
+    # Add WTF_MAKE_TZONE_ALLOCATED_IMPL for classes that declare WTF_MAKE_TZONE_ALLOCATED
+    # in their headers but lack the corresponding IMPL in any .cpp file.
+    # Needed because our WebKit is built with USE(TZONE_MALLOC) which generates
+    # s_heapRef and operatorNewSlow declarations that need definitions.
+    tzone_impl = "\n#include <wtf/TZoneMallocInlines.h>\n"
+
+    # Bun:: namespace crypto job classes
+    {
+      "src/bun.js/bindings/node/crypto/CryptoHkdf.cpp"          => "Bun::HkdfJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoSignJob.cpp"       => "Bun::SignJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoGenDhKeyPair.cpp"  => "Bun::DhKeyPairJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoGenEcKeyPair.cpp"  => "Bun::EcKeyPairJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoKeygen.cpp"        => "Bun::SecretKeyJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoGenDsaKeyPair.cpp" => "Bun::DsaKeyPairJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoGenNidKeyPair.cpp" => "Bun::NidKeyPairJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoGenRsaKeyPair.cpp" => "Bun::RsaKeyPairJobCtx",
+      "src/bun.js/bindings/node/crypto/CryptoDhJob.cpp"         => "Bun::DhJobCtx",
+    }.each do |file, cls|
+      File.open(buildpath/file, "a") do |f|
+        f.puts tzone_impl
+        f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(#{cls.split("::").last});"
+      end
+    end
+
+    # CryptoPrimes.cpp has two classes
+    File.open(buildpath/"src/bun.js/bindings/node/crypto/CryptoPrimes.cpp", "a") do |f|
+      f.puts tzone_impl
+      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(CheckPrimeJobCtx);"
+      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(GeneratePrimeJobCtx);"
+    end
+
+    # KeyObjectData (global namespace)
+    File.open(buildpath/"src/bun.js/bindings/node/crypto/KeyObject.cpp", "a") do |f|
+      f.puts tzone_impl
+      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(KeyObjectData);"
+    end
+
+    # WebCore:: namespace classes
+    File.open(buildpath/"src/bun.js/bindings/ScriptExecutionContext.cpp", "a") do |f|
+      f.puts tzone_impl
+      f.puts "namespace WebCore {"
+      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(ScriptExecutionContext);"
+      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(EventLoopTask);"
+      f.puts "}"
+    end
+
+    File.open(buildpath/"src/bun.js/bindings/webcrypto/CryptoAlgorithmX25519.cpp", "a") do |f|
+      f.puts tzone_impl
+      f.puts "namespace WebCore {"
+      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(CryptoAlgorithmX25519Params);"
+      f.puts "}"
+    end
+
+    File.open(buildpath/"src/bun.js/bindings/webcore/URLPattern.cpp", "a") do |f|
+      f.puts tzone_impl
+      f.puts "namespace WebCore {"
+      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(URLPattern);"
+      f.puts "}"
+    end
+
+    # Bun:: namespace misc classes
+    File.open(buildpath/"src/bun.js/bindings/EventLoopTaskNoContext.cpp", "a") do |f|
+      f.puts tzone_impl
+      f.puts "namespace Bun {"
+      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(EventLoopTaskNoContext);"
+      f.puts "}"
+    end
+
+    # Classes defined in .cpp files (WeakRef, JSCDeferredWorkTask, SecretsJobOptions)
+    File.open(buildpath/"src/bun.js/bindings/Weak.cpp", "a") do |f|
+      f.puts tzone_impl
+      f.puts "namespace Bun {"
+      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(WeakRef);"
+      f.puts "}"
+    end
+
+    File.open(buildpath/"src/bun.js/bindings/JSCTaskScheduler.cpp", "a") do |f|
+      f.puts tzone_impl
+      f.puts "namespace Bun {"
+      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(JSCDeferredWorkTask);"
+      f.puts "}"
+    end
+
+    File.open(buildpath/"src/bun.js/bindings/JSSecrets.cpp", "a") do |f|
+      f.puts tzone_impl
+      f.puts "namespace Bun {"
+      f.puts "WTF_MAKE_STRUCT_TZONE_ALLOCATED_IMPL(SecretsJobOptions);"
+      f.puts "}"
+    end
+
+    # NapiEnv (global namespace struct, defined in src/bun.js/bindings/napi.h)
+    File.open(buildpath/"src/bun.js/bindings/napi.cpp", "a") do |f|
+      f.puts tzone_impl
+      f.puts "WTF_MAKE_STRUCT_TZONE_ALLOCATED_IMPL(NapiEnv);"
+    end
+
+    # Stub bmalloc::memoryStatus() and Inspector::RemoteInspectorServer
+    # which are not present in our WebKit build
+    (buildpath/"src/bun.js/bindings/missing_webkit_stubs.cpp").write <<~CPP
+      #include <cstddef>
+
+      namespace bmalloc {
+      struct MemoryStatus {
+          MemoryStatus(size_t mf, double pam) : memoryFootprint(mf), percentAvailableMemoryInUse(pam) {}
+          size_t memoryFootprint;
+          double percentAvailableMemoryInUse;
+      };
+      MemoryStatus memoryStatus() { return MemoryStatus(0, 0.5); }
+      } // namespace bmalloc
+
+      namespace Inspector {
+      class RemoteInspectorServer {
+      public:
+          static RemoteInspectorServer& singleton() {
+              static RemoteInspectorServer instance;
+              return instance;
+          }
+          bool start(const char*, unsigned short) { return false; }
+      };
+      } // namespace Inspector
+    CPP
+
+    inreplace "cmake/targets/BuildBun.cmake",
+              "list(APPEND BUN_CXX_SOURCES ${CWD}/src/bun.js/bindings/openssl3_compat_shim.cpp)",
+              <<~CMAKE.chomp
+                list(APPEND BUN_CXX_SOURCES ${CWD}/src/bun.js/bindings/openssl3_compat_shim.cpp)
+                list(APPEND BUN_CXX_SOURCES ${CWD}/src/bun.js/bindings/missing_webkit_stubs.cpp)
+              CMAKE
+
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end
