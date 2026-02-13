@@ -1706,99 +1706,61 @@ class Bun < Formula
     # s_heapRef and operatorNewSlow declarations that need definitions.
     tzone_impl = "\n#include <wtf/TZoneMallocInlines.h>\n"
 
-    # Bun:: namespace crypto job classes — must wrap in namespace Bun { }
-    # since the IMPL is appended outside the file's namespace block
+    # Bun:: namespace classes
     {
-      "src/bun.js/bindings/node/crypto/CryptoHkdf.cpp"          => "HkdfJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoSignJob.cpp"       => "SignJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoGenDhKeyPair.cpp"  => "DhKeyPairJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoGenEcKeyPair.cpp"  => "EcKeyPairJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoKeygen.cpp"        => "SecretKeyJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoGenDsaKeyPair.cpp" => "DsaKeyPairJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoGenNidKeyPair.cpp" => "NidKeyPairJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoGenRsaKeyPair.cpp" => "RsaKeyPairJobCtx",
-      "src/bun.js/bindings/node/crypto/CryptoDhJob.cpp"         => "DhJobCtx",
-    }.each do |file, cls|
+      "src/bun.js/bindings/node/crypto/CryptoHkdf.cpp"          => %w[HkdfJobCtx],
+      "src/bun.js/bindings/node/crypto/CryptoSignJob.cpp"       => %w[SignJobCtx],
+      "src/bun.js/bindings/node/crypto/CryptoGenDhKeyPair.cpp"  => %w[DhKeyPairJobCtx],
+      "src/bun.js/bindings/node/crypto/CryptoGenEcKeyPair.cpp"  => %w[EcKeyPairJobCtx],
+      "src/bun.js/bindings/node/crypto/CryptoKeygen.cpp"        => %w[SecretKeyJobCtx],
+      "src/bun.js/bindings/node/crypto/CryptoGenDsaKeyPair.cpp" => %w[DsaKeyPairJobCtx],
+      "src/bun.js/bindings/node/crypto/CryptoGenNidKeyPair.cpp" => %w[NidKeyPairJobCtx],
+      "src/bun.js/bindings/node/crypto/CryptoGenRsaKeyPair.cpp" => %w[RsaKeyPairJobCtx],
+      "src/bun.js/bindings/node/crypto/CryptoDhJob.cpp"         => %w[DhJobCtx],
+      "src/bun.js/bindings/node/crypto/CryptoPrimes.cpp"        => %w[CheckPrimeJobCtx GeneratePrimeJobCtx],
+      "src/bun.js/bindings/EventLoopTaskNoContext.cpp"          => %w[EventLoopTaskNoContext],
+      "src/bun.js/bindings/Weak.cpp"                            => %w[WeakRef],
+      "src/bun.js/bindings/JSCTaskScheduler.cpp"                => %w[JSCDeferredWorkTask],
+    }.each do |file, classes|
       File.open(buildpath/file, "a") do |f|
         f.puts tzone_impl
         f.puts "namespace Bun {"
-        f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(#{cls});"
+        classes.each { |cls| f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(#{cls});" }
         f.puts "}"
       end
     end
 
-    # CryptoPrimes.cpp has two classes in Bun:: namespace
-    File.open(buildpath/"src/bun.js/bindings/node/crypto/CryptoPrimes.cpp", "a") do |f|
-      f.puts tzone_impl
-      f.puts "namespace Bun {"
-      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(CheckPrimeJobCtx);"
-      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(GeneratePrimeJobCtx);"
-      f.puts "}"
+    # WebCore:: namespace classes
+    {
+      "src/bun.js/bindings/ScriptExecutionContext.cpp"          => %w[ScriptExecutionContext EventLoopTask],
+      "src/bun.js/bindings/webcrypto/CryptoAlgorithmX25519.cpp" => %w[CryptoAlgorithmX25519Params],
+      "src/bun.js/bindings/webcore/URLPattern.cpp"              => %w[URLPattern],
+    }.each do |file, classes|
+      File.open(buildpath/file, "a") do |f|
+        f.puts tzone_impl
+        f.puts "namespace WebCore {"
+        classes.each { |cls| f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(#{cls});" }
+        f.puts "}"
+      end
     end
 
-    # KeyObjectData (global namespace)
+    # Global namespace classes
     File.open(buildpath/"src/bun.js/bindings/node/crypto/KeyObject.cpp", "a") do |f|
       f.puts tzone_impl
       f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(KeyObjectData);"
     end
 
-    # WebCore:: namespace classes
-    File.open(buildpath/"src/bun.js/bindings/ScriptExecutionContext.cpp", "a") do |f|
-      f.puts tzone_impl
-      f.puts "namespace WebCore {"
-      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(ScriptExecutionContext);"
-      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(EventLoopTask);"
-      f.puts "}"
-    end
-
-    File.open(buildpath/"src/bun.js/bindings/webcrypto/CryptoAlgorithmX25519.cpp", "a") do |f|
-      f.puts tzone_impl
-      f.puts "namespace WebCore {"
-      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(CryptoAlgorithmX25519Params);"
-      f.puts "}"
-    end
-
-    File.open(buildpath/"src/bun.js/bindings/webcore/URLPattern.cpp", "a") do |f|
-      f.puts tzone_impl
-      f.puts "namespace WebCore {"
-      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(URLPattern);"
-      f.puts "}"
-    end
-
-    # Bun:: namespace misc classes
-    File.open(buildpath/"src/bun.js/bindings/EventLoopTaskNoContext.cpp", "a") do |f|
-      f.puts tzone_impl
-      f.puts "namespace Bun {"
-      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(EventLoopTaskNoContext);"
-      f.puts "}"
-    end
-
-    # Classes defined in .cpp files (WeakRef, JSCDeferredWorkTask, SecretsJobOptions)
-    File.open(buildpath/"src/bun.js/bindings/Weak.cpp", "a") do |f|
-      f.puts tzone_impl
-      f.puts "namespace Bun {"
-      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(WeakRef);"
-      f.puts "}"
-    end
-
-    File.open(buildpath/"src/bun.js/bindings/JSCTaskScheduler.cpp", "a") do |f|
-      f.puts tzone_impl
-      f.puts "namespace Bun {"
-      f.puts "WTF_MAKE_TZONE_ALLOCATED_IMPL(JSCDeferredWorkTask);"
-      f.puts "}"
-    end
-
-    File.open(buildpath/"src/bun.js/bindings/JSSecrets.cpp", "a") do |f|
-      f.puts tzone_impl
-      f.puts "namespace Bun {"
-      f.puts "WTF_MAKE_STRUCT_TZONE_ALLOCATED_IMPL(SecretsJobOptions);"
-      f.puts "}"
-    end
-
-    # NapiEnv (global namespace struct, defined in src/bun.js/bindings/napi.h)
-    File.open(buildpath/"src/bun.js/bindings/napi.cpp", "a") do |f|
-      f.puts tzone_impl
-      f.puts "WTF_MAKE_STRUCT_TZONE_ALLOCATED_IMPL(NapiEnv);"
+    # Struct variants (WTF_MAKE_STRUCT_TZONE_ALLOCATED_IMPL)
+    {
+      "src/bun.js/bindings/JSSecrets.cpp" => ["Bun", "SecretsJobOptions"],
+      "src/bun.js/bindings/napi.cpp"      => [nil, "NapiEnv"],
+    }.each do |file, (ns, cls)|
+      File.open(buildpath/file, "a") do |f|
+        f.puts tzone_impl
+        f.puts "namespace #{ns} {" if ns
+        f.puts "WTF_MAKE_STRUCT_TZONE_ALLOCATED_IMPL(#{cls});"
+        f.puts "}" if ns
+      end
     end
 
     # Stub bmalloc::memoryStatus() and Inspector::RemoteInspectorServer
