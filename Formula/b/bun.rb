@@ -360,13 +360,19 @@ class Bun < Formula
     # required headers (WebGLAny.h, BufferMediaSource.h, DetachedRTCDataChannel.h)
     # are absent.  Patch root.h to override after cmakeconfig.h is included
     # (avoids -Wmacro-redefined with -Werror).
+    # Force USE_FOUNDATION=1 so sizeof(JSC::Heap) matches the prebuilt WebKit
+    # library (built with PORT=Mac / USE(FOUNDATION)=1).  Without this,
+    # Heap is 16 bytes too small (missing m_delayedReleaseObjects) and every
+    # VM field after `heap` is at the wrong offset → segfault in
+    # BunBuiltinNames at startup.
     inreplace "src/bun.js/bindings/root.h",
               '#include "cmakeconfig.h"',
               "#include \"cmakeconfig.h\"\n" \
               "#ifndef USE_BUN_JSC_ADDITIONS\n#define USE_BUN_JSC_ADDITIONS 1\n#endif\n" \
               "#undef ENABLE_WEBGL\n#define ENABLE_WEBGL 0\n" \
               "#undef ENABLE_MEDIA_SOURCE\n#define ENABLE_MEDIA_SOURCE 0\n" \
-              "#undef ENABLE_WEB_RTC\n#define ENABLE_WEB_RTC 0"
+              "#undef ENABLE_WEB_RTC\n#define ENABLE_WEB_RTC 0\n" \
+              "#define USE_FOUNDATION 1"
     inreplace "cmake/targets/BuildBun.cmake",
               <<~CMAKE,
                 if (NOT WIN32)
@@ -924,6 +930,7 @@ class Bun < Formula
       -DWEBKIT_LOCAL=ON
       -DENABLE_TINYCC=OFF
       -DENABLE_BASELINE=ON
+      -DENABLE_CANARY=OFF
       -DCMAKE_DSYMUTIL=dsymutil
     ]
 
