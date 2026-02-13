@@ -1379,26 +1379,12 @@ class Bun < Formula
                 #pragma clang diagnostic push
                 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
               CPP
-    # CryptoKeyECOpenSSL.cpp: EC_KEY_set_asn1_flag is deprecated/removed in
-    # OpenSSL 3.  When EC_KEY_new_by_curve_name is used, OPENSSL_EC_NAMED_CURVE
-    # is already the default.  Guard the three call sites.
+    # CryptoKeyECOpenSSL.cpp: OpenSSL 3 compat — guard deprecated
+    # EC_KEY_set_asn1_flag (already the default with EC_KEY_new_by_curve_name)
+    # and fix const return types from EVP_PKEY_get0_EC_KEY.
     inreplace "src/bun.js/bindings/webcrypto/CryptoKeyECOpenSSL.cpp",
-              "        EC_KEY_set_asn1_flag(key.get(), OPENSSL_EC_NAMED_CURVE);",
-              <<~CPP.chomp,
-                #ifdef OPENSSL_IS_BORINGSSL
-                        EC_KEY_set_asn1_flag(key.get(), OPENSSL_EC_NAMED_CURVE);
-                #endif
-              CPP
-              global: true
-    inreplace "src/bun.js/bindings/webcrypto/CryptoKeyECOpenSSL.cpp",
-              "    EC_KEY_set_asn1_flag(ecKey, OPENSSL_EC_NAMED_CURVE);",
-              <<~CPP.chomp
-                #ifdef OPENSSL_IS_BORINGSSL
-                    EC_KEY_set_asn1_flag(ecKey, OPENSSL_EC_NAMED_CURVE);
-                #endif
-              CPP
-    # CryptoKeyECOpenSSL.cpp: OpenSSL 3 EVP_PKEY_get0_EC_KEY returns const EC_KEY*.
-    # Lines 364, 381, 402 need const or const_cast.
+              /^(\s+)EC_KEY_set_asn1_flag\((.+?), OPENSSL_EC_NAMED_CURVE\);/,
+              "#ifdef OPENSSL_IS_BORINGSSL\n\\1EC_KEY_set_asn1_flag(\\2, OPENSSL_EC_NAMED_CURVE);\n#endif"
     inreplace "src/bun.js/bindings/webcrypto/CryptoKeyECOpenSSL.cpp",
               "    auto ecKey = EVP_PKEY_get0_EC_KEY(pkey.get());",
               "    auto ecKey = const_cast<EC_KEY*>(EVP_PKEY_get0_EC_KEY(pkey.get()));"
