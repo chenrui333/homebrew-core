@@ -1860,6 +1860,9 @@ class Bun < Formula
     assert_match version.to_s, shell_output("#{bin}/bun --version")
     (testpath/"hello.js").write("console.log('ok')")
     assert_match "ok", shell_output("#{bin}/bun run #{testpath}/hello.js")
+    # Verify the transpiler works (a core bun feature beyond simple script execution)
+    (testpath/"ts_test.ts").write("const x: number = 42; console.log(x);")
+    assert_match "42", shell_output("#{bin}/bun run #{testpath}/ts_test.ts")
   end
 end
 
