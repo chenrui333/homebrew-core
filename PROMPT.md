@@ -1,73 +1,77 @@
-# Bun v1.3.8 Source-Build Orchestration
+# Bun v1.3.8 Formula Execution Contract
 
 ## Objective
-Iterate on a Homebrew/core **source build** of Bun v1.3.8 with constraints:
-- **Bootstrap binary allowed** (like Rust/Go - bun needs bun for codegen)
-- No build-time git clones or `bun install` for external deps.
-- Prefer system/Homebrew deps where available.
-- Vendor small deps as resources when system versions unavailable.
+Deliver a submission-ready Bun 1.3.8 Homebrew formula branch that is:
+- reproducibly source-buildable,
+- materially simpler than the current patch-heavy state,
+- maintainable for future upgrades,
+- backed by explicit validation gates.
 
-## Bootstrap Philosophy
-Like `rustc` (needs rustc to build) and `go` (needs go to build), Bun requires
-a working bun binary to generate codegen files (`ZigGeneratedClasses.zig`, etc.).
-This is an accepted pattern for self-hosting compilers/runtimes.
+Primary planning docs:
+- `docs/bun-1.3.8-plan/master-roadmap.md`
+- `docs/bun-1.3.8-plan/phase-checklists.md`
+- `docs/bun-1.3.8-plan/upstream-issues-draft.md`
 
-## Loop
-On each iteration:
-1. Run the loop script:
+## Execution Mode
+Work in **phase-gated mode** only.
+
+Rules:
+1. Execute exactly one phase at a time from `docs/bun-1.3.8-plan/phase-checklists.md`.
+2. Do not begin the next phase until the current phase check-in gate is satisfied.
+3. If a gate fails, stay in the same phase and iterate only on that phase scope.
+
+## Commit Policy
+1. One logical commit per coherent step.
+2. Do not mix unrelated changes in the same commit.
+3. Use commit messages that include phase context when applicable.
+4. Avoid noisy intermediate commits once behavior is understood; prefer small, clean logical commits.
+
+## Validation Policy
+At each phase gate, run and report:
+1. `HOMEBREW_NO_INSTALL_FROM_API=1 brew install --build-from-source Formula/b/bun.rb`
+2. `brew test bun`
+3. `brew audit --strict bun`
+4. `brew style Formula/b/bun.rb`
+
+If any command fails, document first failure and continue within current phase scope only.
+
+## Patch Reduction Policy
+During reduction phases:
+1. For each removed/consolidated patch, record rationale:
+   - keep / remove / consolidate
+   - reason
+   - risk level
+2. Prefer deleting no-op and duplicate edits before touching ABI-sensitive edits.
+3. Preserve behavior while reducing patch count and duplicated inreplace operations.
+
+## Scope Guardrails
+1. Keep edits focused on:
+   - `Formula/b/bun.rb`
    - `tools/bun_loop.sh`
-2. Read the latest summary:
-   - `logs/bun/summary-*.txt` (most recent timestamp)
-3. If summary contains `SUCCESS`:
-   - Mark `- [x] TASK_COMPLETE` below and stop.
-4. If summary contains `NETWORK_ACTIVITY_DETECTED` for non-bootstrap downloads:
-   - Identify the exact trigger (file path + command).
-   - Add a minimal fail-fast guard or a `USE_SYSTEM_*` switch to prevent downloads.
-   - Prefer CMake options over large refactors.
-5. If summary contains a compile or configure error:
-   - Patch the minimal CMake or source file to resolve the **first** failure only.
-   - Do not preemptively fix unrelated issues.
-6. Commit after each iteration:
-   - `git add` changed files
-   - `git commit -m "bun: prototype <short change>"`
+   - planning docs under `docs/bun-1.3.8-plan/`
+2. Do not modify unrelated formulae.
+3. Avoid broad refactors outside active phase goals.
 
-## Allowed Network Activity (Bootstrap)
-The following are acceptable during build:
-- Bootstrap bun binary download (for codegen)
-- Bootstrap zig download (if USE_SYSTEM_ZIG doesn't work)
+## Artifact Policy
+1. Do not commit `.ralph/*` runtime artifacts by default.
+2. Commit `.ralph` artifacts only if explicitly requested.
 
-## Blocked Network Activity
-The following should be prevented:
-- npm/bun install for JS dependencies
-- git clone for C/C++ dependencies
-- Arbitrary URL fetches for headers/sources
+## Network Policy
+Allowed bootstrap activity:
+- bootstrap bun download for codegen,
+- bootstrap zig download when required.
 
-## Guardrails
-- Keep diffs minimal and surgical.
-- Do not add Homebrew allowlists or large resource closures.
-- Do not modify unrelated formulae.
-- Keep patches in `Formula/b/bun.rb` unless absolutely necessary elsewhere.
+Blocked activity:
+- build-time `bun install` for external deps,
+- build-time git clone/fetch for deps,
+- arbitrary source/header fetches outside declared strategy.
 
-## Files of Interest
-- Formula: `Formula/b/bun.rb`
-- Status doc: `docs/bun-1.3.8-status.md`
-- Loop script: `tools/bun_loop.sh`
-
-## Progress So Far
-Successfully patched/vendored:
-- ✅ System zig support (USE_SYSTEM_ZIG=ON)
-- ✅ System deps: brotli, c-ares, highway, libdeflate, lol-html, mimalloc, zlib, zstd, libarchive, hdrhistogram_c, libuv, sqlite, boringssl
-- ✅ Vendored: picohttpparser, ls-hpack, nodejs-headers
-- ✅ Zig 0.15.x compatibility (@hasField guard for no_link_obj)
-- ✅ CMake 4 policy for lshpack
-- ✅ esbuild external peechy/preact patches
-- ✅ Bootstrap re-enabled for codegen
-
-## Stop Conditions
-Stop and report if any of the following remain unavoidable without upstream changes:
-- Zig download is hard-coded AND USE_SYSTEM_ZIG is broken.
-- Dependencies are only available via git-clone at build time (not vendorable).
-- WebKit cannot be built locally with the expected headers/derived sources.
+## Reporting Format (per check-in)
+- Active phase
+- Changes made
+- Validation results (install/test/audit/style)
+- Patch count delta (if in reduction phase)
+- Remaining risks / blockers
 
 ## Completion Marker
 LOOP_COMPLETE
