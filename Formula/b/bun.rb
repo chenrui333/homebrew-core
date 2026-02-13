@@ -107,6 +107,7 @@ class Bun < Formula
       mkdir_p dest
       resource(res).stage { cp_r Dir["*"], dest }
     end
+    # ── CMake patches: bootstrap, network, and build tool overrides ──
     inreplace "cmake/tools/SetupBun.cmake",
               "if (NOT CI)",
               <<~CMAKE
@@ -356,6 +357,7 @@ class Bun < Formula
     inreplace "cmake/targets/BuildBun.cmake",
               bun_error_esbuild_cmd,
               bun_error_esbuild_replacement
+    # ── WebKit/JSC ABI compatibility patches ──
     # Disable WebKit features bun doesn't use — cmakeconfig.h enables them but
     # required headers (WebGLAny.h, BufferMediaSource.h, DetachedRTCDataChannel.h)
     # are absent.  Patch root.h to override after cmakeconfig.h is included
@@ -576,6 +578,7 @@ class Bun < Formula
                     message(FATAL_ERROR "BUN_BOOTSTRAP=OFF: external repository downloads are disabled.")
                   endif()
               CMAKE
+    # ── System dependency patches: USE_SYSTEM_* for Homebrew deps ──
     inreplace "cmake/targets/CloneZstd.cmake",
               "register_repository(",
               <<~CMAKE
@@ -629,6 +632,7 @@ class Bun < Formula
                 endif()
                 register_cmake_command(
               CMAKE
+    # ── OpenSSL 3 / BoringSSL compatibility patches ──
     # When using system OpenSSL (USE_SYSTEM_BORINGSSL=ON), the usockets
     # crypto code uses BoringSSL-specific APIs that don't exist in OpenSSL 3.
     # Add compatibility shims so the code compiles against either library.
@@ -819,7 +823,6 @@ class Bun < Formula
                 -DLSHPACK_XXH=ON
                     -DCMAKE_POLICY_VERSION_MINIMUM=3.5
               CMAKE
-    # Bun uses a custom Zig fork (oven-sh/zig); no need for system zig compat patches.
     inreplace "cmake/targets/BuildMimalloc.cmake",
               "register_repository(",
               <<~CMAKE
@@ -1254,6 +1257,7 @@ class Bun < Formula
                 "#{ns_line}\n\nWTF_MAKE_TZONE_ALLOCATED_IMPL(#{klass});"
     end
 
+    # ── Runtime stubs and linker shims ──
     # The bun-WebKit build is missing generated C++ dispatchers for two custom
     # inspector protocol domains (LifecycleReporter and TestReporter).  Create
     # a stub header that provides the minimal interfaces needed by the bun
