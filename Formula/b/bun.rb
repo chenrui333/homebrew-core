@@ -164,33 +164,25 @@ class Bun < Formula
                 register_command(
               CMAKE
     # Avoid network package installs for bun-error and node-fallbacks
-    inreplace "cmake/targets/BuildBun.cmake",
-              <<~CMAKE,
-                register_bun_install(
-                  CWD
-                    ${BUN_ERROR_SOURCE}
-                  NODE_MODULES_VARIABLE
-                    BUN_ERROR_NODE_MODULES
-                )
-              CMAKE
-              <<~CMAKE
-                set(BUN_ERROR_NODE_MODULES)
-                message(STATUS "Skipping bun install for bun-error")
-              CMAKE
     react_refresh_define = %q(--define:process.env.NODE_ENV=\"'development'\")
-    inreplace "cmake/targets/BuildBun.cmake",
-              <<~CMAKE,
-                register_bun_install(
-                  CWD
-                    ${BUN_NODE_FALLBACKS_SOURCE}
-                  NODE_MODULES_VARIABLE
-                    BUN_NODE_FALLBACKS_NODE_MODULES
-                )
-              CMAKE
-              <<~CMAKE
-                set(BUN_NODE_FALLBACKS_NODE_MODULES)
-                message(STATUS "Skipping bun install for node-fallbacks")
-              CMAKE
+    {
+      "BUN_ERROR"          => "bun-error",
+      "BUN_NODE_FALLBACKS" => "node-fallbacks",
+    }.each do |prefix, name|
+      inreplace "cmake/targets/BuildBun.cmake",
+                <<~CMAKE,
+                  register_bun_install(
+                    CWD
+                      ${#{prefix}_SOURCE}
+                    NODE_MODULES_VARIABLE
+                      #{prefix}_NODE_MODULES
+                  )
+                CMAKE
+                <<~CMAKE
+                  set(#{prefix}_NODE_MODULES)
+                  message(STATUS "Skipping bun install for #{name}")
+                CMAKE
+    end
     inreplace "cmake/targets/BuildBun.cmake",
               <<~CMAKE,
                 # This command relies on an older version of `esbuild`, which is why
