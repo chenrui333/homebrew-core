@@ -1,0 +1,31 @@
+Error: Failed to load cask: ./Formula/b/bun.rb
+Cask 'bun' is unreadable: wrong constant name #<Class:0x000000012b9330d8>
+Warning: Treating ./Formula/b/bun.rb as a formula.
+==> Fetching downloads for: bun
+✔︎ Resource bun--picohttpparser
+✔︎ Resource bun--ls-hpack
+✔︎ Formula bun (1.3.8)
+==> Verifying checksum for '5893d56c4d1ab1cbd456077a3a5863c0618e4649e194100eec5a1cd3946ae391--bun-bun-v1.3.8.tar.gz'
+==> Verifying checksum for '73e0c55d12ea4fc2665ba0e3b1461100832375845d5b691d1ec74dc56cd48c11--ls-hpack-8905c024b6d052f083a3d11d0a169b3c2735c8a1.tar.gz'
+==> Verifying checksum for 'fad59b16ad4752cc63c8a23339da36f57d1851485a7a1c08260daccefaec3961--picohttpparser-066d2b1e9ab820703db0837a7255d92d30f0c9f5.tar.gz'
+mv /private/tmp/homebrew-unpack-20260211-51751-wk59mv/bun-bun-v1.3.8 /private/tmp/bun-20260211-51751-xnsshy/bun-bun-v1.3.8
+==> Patching
+mv /private/tmp/homebrew-unpack-20260211-51751-6a4i6i/picohttpparser-066d2b1e9ab820703db0837a7255d92d30f0c9f5 /private/tmp/bun--picohttpparser-20260211-51751-veqclp/picohttpparser-066d2b1e9ab820703db0837a7255d92d30f0c9f5
+mv /private/tmp/homebrew-unpack-20260211-51751-11eh2j/ls-hpack-8905c024b6d052f083a3d11d0a169b3c2735c8a1 /private/tmp/bun--ls-hpack-20260211-51751-olrygd/ls-hpack-8905c024b6d052f083a3d11d0a169b3c2735c8a1
+Error: inreplace failed
+cmake/targets/BuildBun.cmake:
+  expected replacement of "index.tsx\nbun-error.css\n--outdir=${BUN_ERROR_OUTPUT}\n--define:process.env.NODE_ENV=\"'production'\"\n--minify\n--bundle\n--platform=browser\n--format=esm\n" with "index.tsx\nbun-error.css\n--outdir=${BUN_ERROR_OUTPUT}\n--define:process.env.NODE_ENV=\"'production'\"\n--minify\n--bundle\n--platform=browser\n--format=esm\n--external:preact\n--external:preact/hooks\n--external:preact/jsx-runtime\n"
+
+==> Formula
+Path: /opt/homebrew/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/b/bun.rb
+==> Configuration
+HOMEBREW_VERSION: 5.0.13-67-g473e8c7
+ORIGIN: https://github.com/Homebrew/brew
+HEAD: 473e8c762d15264c591d917fb2d39b3120a3481c
+Last commit: 6 days ago
+Branch: fix/test-bot-homebrew-repository-to-s
+Core tap HEAD: c3f395ee0fa32dc9f58b699fa6b50bd9008a8fb2
+Core tap last commit: 3 minutes ago
+Core tap branch: bun-1.3.8
+Core tap JSON: 06 Feb 09:38 UTC
+Core cask tap HEAD: 20f523ee5fad935ead3e2256c4f3cdb238be66e8
