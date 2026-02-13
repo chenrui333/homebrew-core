@@ -1005,37 +1005,31 @@ class Bun < Formula
                 #include "openssl/base.h"
                 #endif
               CPP
-    # Guard BoringSSL-only openssl/mem.h with stdlib.h fallback for OpenSSL 3.
-    %w[
-      src/bun.js/bindings/AsymmetricKeyValue.cpp
-      src/bun.js/bindings/node/crypto/node_crypto_binding.cpp
-      src/bun.js/bindings/dh-primes.h
-      src/bun.js/bindings/webcrypto/CryptoAlgorithmRSA_OAEPOpenSSL.cpp
-    ].each do |f|
-      inreplace f,
-                "#include <openssl/mem.h>",
-                <<~CPP.chomp
-                  #ifdef OPENSSL_IS_BORINGSSL
-                  #include <openssl/mem.h>
-                  #else
-                  #include <stdlib.h>
-                  #endif
-                CPP
-    end
-    # Guard BoringSSL-only openssl/curve25519.h (omit on OpenSSL 3).
-    %w[
-      src/bun.js/bindings/AsymmetricKeyValue.cpp
-      src/bun.js/bindings/node/crypto/node_crypto_binding.cpp
-      src/bun.js/bindings/webcrypto/CryptoAlgorithmEd25519.cpp
-      src/bun.js/bindings/webcrypto/CryptoKeyOKPOpenSSL.cpp
-    ].each do |f|
-      inreplace f,
-                "#include <openssl/curve25519.h>",
-                <<~CPP.chomp
-                  #ifdef OPENSSL_IS_BORINGSSL
-                  #include <openssl/curve25519.h>
-                  #endif
-                CPP
+    # Guard BoringSSL-only headers: replace with guarded includes for OpenSSL 3.
+    {
+      "openssl/mem.h"        => ["#include <stdlib.h>"],
+      "openssl/curve25519.h" => [],
+    }.each do |header, fallbacks|
+      guard = "#ifdef OPENSSL_IS_BORINGSSL\n#include <#{header}>"
+      guard += "\n#else\n#{fallbacks.join("\n")}" unless fallbacks.empty?
+      guard += "\n#endif"
+      files = case header
+      when "openssl/mem.h"
+        %w[
+          src/bun.js/bindings/AsymmetricKeyValue.cpp
+          src/bun.js/bindings/node/crypto/node_crypto_binding.cpp
+          src/bun.js/bindings/dh-primes.h
+          src/bun.js/bindings/webcrypto/CryptoAlgorithmRSA_OAEPOpenSSL.cpp
+        ]
+      when "openssl/curve25519.h"
+        %w[
+          src/bun.js/bindings/AsymmetricKeyValue.cpp
+          src/bun.js/bindings/node/crypto/node_crypto_binding.cpp
+          src/bun.js/bindings/webcrypto/CryptoAlgorithmEd25519.cpp
+          src/bun.js/bindings/webcrypto/CryptoKeyOKPOpenSSL.cpp
+        ]
+      end
+      files.each { |f| inreplace f, "#include <#{header}>", guard }
     end
     # CryptoAlgorithmHKDFOpenSSL.cpp includes BoringSSL-only openssl/hkdf.h.
     # On OpenSSL 3, HKDF is available through EVP_KDF in openssl/kdf.h.
@@ -1201,26 +1195,17 @@ class Bun < Formula
                     }
                 #endif
               CPP
-    # ncrpyto_engine.cpp: method signatures use std::string_view but the
-    # header declares WTF::StringView.  Fix the .cpp to match.
-    inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
-              "EnginePointer EnginePointer::getEngineByName(const std::string_view name,",
-              "EnginePointer EnginePointer::getEngineByName(const WTF::StringView name,"
-    inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
-              "EVPKeyPointer EnginePointer::loadPrivateKey(const std::string_view key_name)",
-              "EVPKeyPointer EnginePointer::loadPrivateKey(const WTF::StringView key_name)"
-    # ncrpyto_engine.cpp uses name.data() and key_name.data() which work with
-    # both std::string_view and WTF::StringView (via utf8().data()), but
-    # WTF::StringView::data() returns a different type.  Fix call sites.
-    inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
-              "EnginePointer engine(ENGINE_by_id(name.data()));",
-              "EnginePointer engine(ENGINE_by_id(name.utf8().data()));"
-    inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
-              'if (!ENGINE_ctrl_cmd_string(engine.get(), "SO_PATH", name.data(), 0)',
-              'if (!ENGINE_ctrl_cmd_string(engine.get(), "SO_PATH", name.utf8().data(), 0)'
-    inreplace "src/bun.js/bindings/ncrpyto_engine.cpp",
-              "ENGINE_load_private_key(engine, key_name.data(), nullptr, nullptr)",
-              "ENGINE_load_private_key(engine, key_name.utf8().data(), nullptr, nullptr)"
+    # ncrpyto_engine.cpp: fix std::string_view → WTF::StringView signatures
+    # and .data() → .utf8().data() call sites for OpenSSL engine API.
+    [
+      ["const std::string_view name,", "const WTF::StringView name,"],
+      ["const std::string_view key_name)", "const WTF::StringView key_name)"],
+      ["ENGINE_by_id(name.data())", "ENGINE_by_id(name.utf8().data())"],
+      ['"SO_PATH", name.data(), 0)', '"SO_PATH", name.utf8().data(), 0)'],
+      ["key_name.data(), nullptr", "key_name.utf8().data(), nullptr"],
+    ].each do |from, to|
+      inreplace "src/bun.js/bindings/ncrpyto_engine.cpp", from, to
+    end
     # ncrypto.cpp: getClientHelloAlpn/getClientHelloServerName return
     # const char* but the return type is const WTF::StringView. Wrap returns.
     inreplace "src/bun.js/bindings/ncrypto.cpp",
@@ -1361,18 +1346,14 @@ class Bun < Formula
 
       } // namespace Inspector
     HEADER
-    inreplace "src/bun.js/bindings/InspectorLifecycleAgent.h",
-              "#include <JavaScriptCore/InspectorBackendDispatchers.h>\n" \
-              "#include <JavaScriptCore/InspectorFrontendDispatchers.h>",
-              "#include <JavaScriptCore/InspectorBackendDispatchers.h>\n" \
-              "#include <JavaScriptCore/InspectorFrontendDispatchers.h>\n" \
-              "#include \"BunInspectorProtocolStubs.h\""
-    inreplace "src/bun.js/bindings/InspectorTestReporterAgent.h",
-              "#include <JavaScriptCore/InspectorBackendDispatchers.h>\n" \
-              "#include <JavaScriptCore/InspectorFrontendDispatchers.h>",
-              "#include <JavaScriptCore/InspectorBackendDispatchers.h>\n" \
-              "#include <JavaScriptCore/InspectorFrontendDispatchers.h>\n" \
-              "#include \"BunInspectorProtocolStubs.h\""
+    %w[InspectorLifecycleAgent InspectorTestReporterAgent].each do |agent|
+      inreplace "src/bun.js/bindings/#{agent}.h",
+                "#include <JavaScriptCore/InspectorBackendDispatchers.h>\n" \
+                "#include <JavaScriptCore/InspectorFrontendDispatchers.h>",
+                "#include <JavaScriptCore/InspectorBackendDispatchers.h>\n" \
+                "#include <JavaScriptCore/InspectorFrontendDispatchers.h>\n" \
+                "#include \"BunInspectorProtocolStubs.h\""
+    end
 
     # JSBuffer.cpp references JSUint8Array::s_info which is an explicit
     # template specialization defined in the JSC library.  Tell the compiler
@@ -1507,32 +1488,16 @@ class Bun < Formula
     # but return() before register_cmake_command which normally links artifacts to
     # the bun target. We must explicitly link them. Also add macOS frameworks
     # required by static libWTF.a and Security framework for SecTask*.
+    sys_link_targets = %w[cares hdrhistogram libarchive zlib zstd libdeflate highway]
+    conditional_links = sys_link_targets.map do |t|
+      "if(TARGET #{t})\n  target_link_libraries(${bun} PRIVATE #{t})\nendif()"
+    end.join("\n")
     inreplace "cmake/targets/BuildBun.cmake",
               "target_link_libraries(${bun} PRIVATE icucore resolv)",
               <<~CMAKE.chomp
                 target_link_libraries(${bun} PRIVATE icucore resolv)
                 target_link_libraries(${bun} PRIVATE "-framework CoreFoundation" "-framework Foundation" "-framework Security" objc)
-                if(TARGET cares)
-                  target_link_libraries(${bun} PRIVATE cares)
-                endif()
-                if(TARGET hdrhistogram)
-                  target_link_libraries(${bun} PRIVATE hdrhistogram)
-                endif()
-                if(TARGET libarchive)
-                  target_link_libraries(${bun} PRIVATE libarchive)
-                endif()
-                if(TARGET zlib)
-                  target_link_libraries(${bun} PRIVATE zlib)
-                endif()
-                if(TARGET zstd)
-                  target_link_libraries(${bun} PRIVATE zstd)
-                endif()
-                if(TARGET libdeflate)
-                  target_link_libraries(${bun} PRIVATE libdeflate)
-                endif()
-                if(TARGET highway)
-                  target_link_libraries(${bun} PRIVATE highway)
-                endif()
+                #{conditional_links}
                 if(EXISTS ${WEBKIT_LIB_PATH}/libpas.a)
                   target_link_libraries(${bun} PRIVATE ${WEBKIT_LIB_PATH}/libpas.a)
                 endif()
