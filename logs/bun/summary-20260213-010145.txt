@@ -1,6 +1,0 @@
-NETWORK_ACTIVITY_DETECTED
-PATTERN: GitClone\.cmake|register_repository\(|file\(DOWNLOAD|curl |wget |git clone|git fetch|FetchContent|ExternalProject_Add|bun install( |$)|WEBKIT.*download
-221:-- Skipping bun install for bun-error
-222:-- Skipping bun install for node-fallbacks
-420:-- Skipping bun install for bun-error
-421:-- Skipping bun install for node-fallbacks

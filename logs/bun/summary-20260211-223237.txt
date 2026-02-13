@@ -1,6 +1,0 @@
-NETWORK_ACTIVITY_DETECTED
-PATTERN: Downloading zig|DownloadZig\.cmake|GitClone\.cmake|register_repository\(|file\(DOWNLOAD|curl |wget |git clone|git fetch|FetchContent|ExternalProject_Add|bun install( |$)|WEBKIT.*download
-305:[21/37] bun install --cwd /private/tmp/bun-20260211-88249-qjg2fv/bun-bun-v1.3.8/packages/bun-error
-306:bun install v1.3.8 (b64edcb4)
-317:[23/37] bun install --cwd /private/tmp/bun-20260211-88249-qjg2fv/bun-bun-v1.3.8/src/node-fallbacks
-318:bun install v1.3.8 (b64edcb4)
