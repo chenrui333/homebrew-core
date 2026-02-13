@@ -1852,7 +1852,9 @@ class Bun < Formula
     end
 
     # Stub bmalloc::memoryStatus() and Inspector::RemoteInspectorServer
-    # which are not present in our WebKit build
+    # which are not present in our WebKit build.
+    # Functions must be out-of-line with default visibility to be exported,
+    # since the build uses -fvisibility=hidden.
     (buildpath/"src/bun.js/bindings/missing_webkit_stubs.cpp").write <<~CPP
       #include <cstddef>
 
@@ -1862,18 +1864,22 @@ class Bun < Formula
           size_t memoryFootprint;
           double percentAvailableMemoryInUse;
       };
-      MemoryStatus memoryStatus() { return MemoryStatus(0, 0.5); }
+      __attribute__((visibility("default"))) MemoryStatus memoryStatus() { return MemoryStatus(0, 0.5); }
       } // namespace bmalloc
 
       namespace Inspector {
       class RemoteInspectorServer {
       public:
-          static RemoteInspectorServer& singleton() {
-              static RemoteInspectorServer instance;
-              return instance;
-          }
-          bool start(const char*, unsigned short) { return false; }
+          static RemoteInspectorServer& singleton();
+          bool start(const char*, unsigned short);
       };
+      __attribute__((visibility("default"))) RemoteInspectorServer& RemoteInspectorServer::singleton() {
+          static RemoteInspectorServer instance;
+          return instance;
+      }
+      __attribute__((visibility("default"))) bool RemoteInspectorServer::start(const char*, unsigned short) {
+          return false;
+      }
       } // namespace Inspector
     CPP
 
