@@ -513,18 +513,16 @@ class Bun < Formula
     # have these private headers; the shim avoids rewriting every include individually.
     jsc_shim = buildpath/"jsc-include-shim"
     jsc_bare_shim = buildpath/"jsc-bare-shim"
-    abi_shim = buildpath/"abi-shim"
+    patched_ph_dir = buildpath/"patched-privateheaders"
     mkdir_p jsc_shim
     mkdir_p jsc_bare_shim
-    mkdir_p abi_shim
-    # abi-shim goes FIRST so the patched Heap.h is found before PrivateHeaders.
+    # Replace framework PrivateHeaders path with our patched copy so that
+    # transitive #include "Heap.h" from JSC headers picks up the ABI fix.
     inreplace "cmake/tools/SetupWebKit.cmake",
               "      ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders\n",
               <<~CMAKE
-                #{abi_shim}
                 ${WEBKIT_PATH}/JavaScriptCore.framework/Headers
-                ${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders
-                ${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders
+                #{patched_ph_dir}
                 #{jsc_bare_shim}
                 #{jsc_shim}
               CMAKE
@@ -540,7 +538,9 @@ class Bun < Formula
                 if(NOT EXISTS "${JSC_SHIM_DIR}")
                   file(MAKE_DIRECTORY "${JSC_SHIM_DIR}")
                   # Link PrivateHeaders (bulk of needed headers)
-                  foreach(HDIR "${WEBKIT_PATH}/JavaScriptCore.framework/PrivateHeaders"
+                  # Use patched-privateheaders instead of framework PrivateHeaders
+                  # so that transitive #include "Heap.h" resolves to the ABI-patched copy.
+                  foreach(HDIR "#{patched_ph_dir}"
                                "${WEBKIT_PATH}/JavaScriptCore/PrivateHeaders"
                                "${WEBKIT_PATH}/JavaScriptCore.framework/Headers"
                                "${WEBKIT_PATH}/JavaScriptCore/Headers")
@@ -957,29 +957,25 @@ class Bun < Formula
            "Set HOMEBREW_BUN_WEBKIT_PATH to a prebuilt WebKit tree."
     end
 
-    # ABI shim: the prebuilt WebKit library was compiled with PORT=Mac which
+    # ABI fix: the prebuilt WebKit library was compiled with PORT=Mac which
     # sets USE(FOUNDATION)=1, adding two data members to JSC::Heap:
     #   Vector<RetainPtr<CFTypeRef>> m_delayedReleaseObjects  (16 bytes)
     #   unsigned m_delayedReleaseRecursionCount               ( 4 bytes)
     # Bun compiles with BUILDING_JSCONLY__ → USE(FOUNDATION)=0 → those 20
     # bytes of members are absent.  Combined with alignment this shifts every
     # VM field after `heap` by 16 bytes → segfault in BunBuiltinNames.
-    # Fix: copy Heap.h to abi-shim (first in -I path) with ABI-compatible
-    # padding that matches the prebuilt library layout.
+    #
+    # A simple abi-shim directory doesn't work because JSC headers do
+    # #include "Heap.h" and resolve it relative to their own directory
+    # (PrivateHeaders/) before checking the -I include path.  Instead, copy
+    # the entire PrivateHeaders directory locally, patch Heap.h in that copy,
+    # and replace the framework PrivateHeaders include path with our copy.
     unless webkit_path.empty?
-      heap_src = [
-        Pathname(webkit_path)/"JavaScriptCore.framework/PrivateHeaders/Heap.h",
-        Pathname(webkit_path)/"JavaScriptCore/PrivateHeaders/Heap.h",
-        Pathname(webkit_path)/".."/".."/
-          "Source/JavaScriptCore/heap/Heap.h",
-      ].find(&:exist?)
-      if heap_src
-        abi_heap = abi_shim/"Heap.h"
-        cp heap_src, abi_heap
-        # Replace the USE(FOUNDATION) #if…#endif with an #if/#elif/#endif
-        # that adds padding members matching the exact original sizes when
-        # USE(FOUNDATION) is false (and JSC_GLIB_API_ENABLED is not set).
-        inreplace abi_heap, <<~ORIG.chomp, <<~PATCHED.chomp
+      fw_private = Pathname(webkit_path)/"JavaScriptCore.framework/PrivateHeaders"
+      if fw_private.directory?
+        patched_ph = buildpath/"patched-privateheaders"
+        cp_r fw_private, patched_ph
+        inreplace patched_ph/"Heap.h", <<~ORIG.chomp, <<~PATCHED.chomp
           #if USE(FOUNDATION)
               Vector<RetainPtr<CFTypeRef>> m_delayedReleaseObjects;
               unsigned m_delayedReleaseRecursionCount { 0 };
