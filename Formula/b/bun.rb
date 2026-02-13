@@ -1790,39 +1790,10 @@ class Bun < Formula
 end
 
 __END__
-From dc78fd800172cb7592612149e90ffdbd4d62f68b Mon Sep 17 00:00:00 2001
-From: Rui Chen <rui@chenrui.dev>
-Date: Fri, 6 Feb 2026 13:09:40 -0500
-Subject: [PATCH 1/4] cmake: add system zig option
-
----
- cmake/tools/SetupZig.cmake | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/cmake/tools/SetupZig.cmake b/cmake/tools/SetupZig.cmake
-index fcdd8721f3..4035faced4 100644
---- a/cmake/tools/SetupZig.cmake
-+++ b/cmake/tools/SetupZig.cmake
-@@ -92,3 +92,11 @@ register_command(
-   OUTPUTS
-     ${ZIG_EXECUTABLE}
- )
-+option(USE_SYSTEM_ZIG "Use system Zig from PATH" OFF)
-+
-+if (USE_SYSTEM_ZIG)
-+  unset(ZIG_EXECUTABLE CACHE)
-+  find_program(ZIG_EXECUTABLE zig REQUIRED)
-+  message(STATUS "Using system Zig: ${ZIG_EXECUTABLE}")
-+  return()
-+endif()
--- 
-2.50.1 (Apple Git-155)
-
-
 From d3cb93d12d119e2f18d15529821c02c6507efd5f Mon Sep 17 00:00:00 2001
 From: Rui Chen <rui@chenrui.dev>
 Date: Fri, 6 Feb 2026 13:09:40 -0500
-Subject: [PATCH 2/4] cmake: add bun bootstrap toggle
+Subject: [PATCH 1/4] cmake: add bun bootstrap toggle
 
 ---
  cmake/targets/BuildBun.cmake |  9 +++++++++
@@ -1878,7 +1849,7 @@ index b57d29b9a1..c598b96798 100644
 From 160702c711148884bfca484e24fad868c800d57a Mon Sep 17 00:00:00 2001
 From: Rui Chen <rui@chenrui.dev>
 Date: Fri, 6 Feb 2026 13:09:40 -0500
-Subject: [PATCH 3/4] cmake: add system dep toggles
+Subject: [PATCH 2/4] cmake: add system dep toggles
 
 ---
  cmake/targets/BuildLibuv.cmake  | 9 +++++++++
@@ -1926,7 +1897,7 @@ index ce4cd8da24..a848320388 100644
 From 850663497e8884c4972a570efae2b73f3b4e27a9 Mon Sep 17 00:00:00 2001
 From: Rui Chen <rui@chenrui.dev>
 Date: Fri, 6 Feb 2026 13:12:33 -0500
-Subject: [PATCH 4/4] cmake: allow register_command target dependency
+Subject: [PATCH 3/4] cmake: allow register_command target dependency
 
 ---
  cmake/Globals.cmake | 4 ++++
@@ -1953,7 +1924,7 @@ index ab78654512..ae6cfdf827 100644
 From 0e8c2f0b7f3c7b9a0b5e2f2a1f1b26e0b0a9f5c7 Mon Sep 17 00:00:00 2001
 From: Rui Chen <rui@chenrui.dev>
 Date: Fri, 6 Feb 2026 13:55:00 -0500
-Subject: [PATCH 5/5] cmake: fallback UWS/USOCKETS version in tarballs
+Subject: [PATCH 4/4] cmake: fallback UWS/USOCKETS version in tarballs
 
 ---
  cmake/tools/GenerateDependencyVersions.cmake | 2 +-
