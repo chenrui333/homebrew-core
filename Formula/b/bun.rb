@@ -1631,11 +1631,12 @@ class Bun < Formula
       } // extern "C"
     CPP
 
-    # Add shim to the build source list
+    # Add shim and stub sources to the build source list
     inreplace "cmake/targets/BuildBun.cmake",
               "list(APPEND BUN_CPP_SOURCES",
               <<~CMAKE.chomp
                 list(APPEND BUN_CXX_SOURCES ${CWD}/src/bun.js/bindings/openssl3_compat_shim.cpp)
+                list(APPEND BUN_CXX_SOURCES ${CWD}/src/bun.js/bindings/missing_webkit_stubs.cpp)
                 list(APPEND BUN_CPP_SOURCES
               CMAKE
 
@@ -1733,13 +1734,6 @@ class Bun < Formula
       }
       } // namespace Inspector
     CPP
-
-    inreplace "cmake/targets/BuildBun.cmake",
-              "list(APPEND BUN_CXX_SOURCES ${CWD}/src/bun.js/bindings/openssl3_compat_shim.cpp)",
-              <<~CMAKE.chomp
-                list(APPEND BUN_CXX_SOURCES ${CWD}/src/bun.js/bindings/openssl3_compat_shim.cpp)
-                list(APPEND BUN_CXX_SOURCES ${CWD}/src/bun.js/bindings/missing_webkit_stubs.cpp)
-              CMAKE
 
     # macOS strip doesn't support GNU-style flags; replace with macOS equivalents
     inreplace "cmake/targets/BuildBun.cmake",
