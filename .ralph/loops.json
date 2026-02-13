@@ -1,12 +1,3 @@
 {
-  "loops": [
-    {
-      "id": "nimble-teak",
-      "pid": 17651,
-      "started": "2026-02-13T16:56:56.341010Z",
-      "prompt": "# Bun v1.3.8 Experimental Simplification Contract\n\n## Context\nThis branch is an **experiment branch*...",
-      "worktree_path": "/opt/homebrew/Homebrew/Library/Taps/homebrew/homebrew-core/.worktrees/nimble-teak",
-      "workspace": "/opt/homebrew/Homebrew/Library/Taps/homebrew/homebrew-core/.worktrees/nimble-teak"
-    }
-  ]
+  "loops": []
 }
