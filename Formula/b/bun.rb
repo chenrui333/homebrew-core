@@ -1206,24 +1206,20 @@ class Bun < Formula
     ].each do |from, to|
       inreplace "src/bun.js/bindings/ncrpyto_engine.cpp", from, to
     end
-    # ncrypto.cpp: getClientHelloAlpn/getClientHelloServerName return
-    # const char* but the return type is const WTF::StringView. Wrap returns.
-    inreplace "src/bun.js/bindings/ncrypto.cpp",
-              "return reinterpret_cast<const char*>(buf + 3);",
-              "return WTF::StringView::fromLatin1(reinterpret_cast<const char*>(buf + 3));"
-    inreplace "src/bun.js/bindings/ncrypto.cpp",
-              "return reinterpret_cast<const char*>(buf + 5);",
-              "return WTF::StringView::fromLatin1(reinterpret_cast<const char*>(buf + 5));"
-    # ncrypto.cpp: setCipherSuites passes ciphers.length() instead of
-    # ciphersUtf8.data() to SSL_CTX_set_ciphersuites.
-    inreplace "src/bun.js/bindings/ncrypto.cpp",
-              "return SSL_CTX_set_ciphersuites(ctx_.get(), ciphers.length());",
-              "return SSL_CTX_set_ciphersuites(ctx_.get(), ciphersUtf8.data());"
-    # ncrypto.cpp: OpenSSL 3 array_push_back passes const char* to
-    # CipherCallbackContext which expects WTF::StringView.
-    inreplace "src/bun.js/bindings/ncrypto.cpp",
-              "free_type(fetched);\n    auto& cb = *(static_cast<CipherCallbackContext*>(arg));\n    cb(from);",
-              "free_type(fetched);\n    auto& cb = *(static_cast<CipherCallbackContext*>(arg));\n    cb(WTF::StringView::fromLatin1(from));"
+    # ncrypto.cpp: fix WTF::StringView / OpenSSL 3 API mismatches
+    # (return type wraps, cipher suites arg, callback type conversion)
+    [
+      ["return reinterpret_cast<const char*>(buf + 3);",
+       "return WTF::StringView::fromLatin1(reinterpret_cast<const char*>(buf + 3));"],
+      ["return reinterpret_cast<const char*>(buf + 5);",
+       "return WTF::StringView::fromLatin1(reinterpret_cast<const char*>(buf + 5));"],
+      ["return SSL_CTX_set_ciphersuites(ctx_.get(), ciphers.length());",
+       "return SSL_CTX_set_ciphersuites(ctx_.get(), ciphersUtf8.data());"],
+      ["free_type(fetched);\n    auto& cb = *(static_cast<CipherCallbackContext*>(arg));\n    cb(from);",
+       "free_type(fetched);\n    auto& cb = *(static_cast<CipherCallbackContext*>(arg));\n    cb(WTF::StringView::fromLatin1(from));"],
+    ].each do |from, to|
+      inreplace "src/bun.js/bindings/ncrypto.cpp", from, to
+    end
     # Several bun classes use WTF_DEPRECATED_MAKE_FAST_ALLOCATED but their
     # base classes use WTF_MAKE_TZONE_ALLOCATED.  WebKit requires derived
     # classes to match the base allocation scheme.
