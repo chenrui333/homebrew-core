@@ -1902,7 +1902,9 @@ class Bun < Formula
               "          -x\n"
 
     system "cmake", "--build", "build"
-    system "cmake", "--install", "build"
+
+    # Bun has no cmake install() rules; install the stripped binary manually
+    bin.install "build/bun"
   end
 
   test do
