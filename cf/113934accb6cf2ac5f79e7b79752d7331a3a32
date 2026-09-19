@@ -1,0 +1,20 @@
+Formula/k/kiota.rb
+  s_73ebbc70891fbd::t_b242688d111a4f 25,32
+  s_73ebbc70891fbd::t_423a75d4c1a3f7 43-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "cf113934accb6cf2ac5f79e7b79752d7331a3a32",
+  "prompts": {},
+  "sessions": {
+    "s_73ebbc70891fbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0b7fc-fce0-7a63-9ead-b1d826672235",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
