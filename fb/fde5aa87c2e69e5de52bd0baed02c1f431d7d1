@@ -1,0 +1,22 @@
+Formula/u/undercutf1.rb
+  s_73ebbc70891fbd::t_8a948f4b8bea60 52
+  s_73ebbc70891fbd::t_1cabb556892bb2 61
+  s_73ebbc70891fbd::t_a6fe177ae5e798 53-54
+  s_73ebbc70891fbd::t_0765711e93fefb 57-60,62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "fbfde5aa87c2e69e5de52bd0baed02c1f431d7d1",
+  "prompts": {},
+  "sessions": {
+    "s_73ebbc70891fbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0b7fc-fce0-7a63-9ead-b1d826672235",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
