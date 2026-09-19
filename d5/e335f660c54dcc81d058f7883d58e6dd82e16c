@@ -1,0 +1,14 @@
+Formula/t/tunnelite.rb
+  h_9df9c32c3f321d 42-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d5e335f660c54dcc81d058f7883d58e6dd82e16c",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
