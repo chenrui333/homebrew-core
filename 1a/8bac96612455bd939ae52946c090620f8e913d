@@ -1,0 +1,14 @@
+Formula/p/postgraphile.rb
+  h_9df9c32c3f321d 44-45,48-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "1a8bac96612455bd939ae52946c090620f8e913d",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
