@@ -1,0 +1,21 @@
+Formula/p/postgraphile.rb
+  s_61f8aff34e6669::t_7f49f9390bb859 40-41
+  s_61f8aff34e6669::t_ed535096a3d0a6 38
+  s_61f8aff34e6669::t_894987546fece8 23,28,35-37,39,42,44-47,50-53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c4daf215212932ae9b522c4a383db4e64ad463fc",
+  "prompts": {},
+  "sessions": {
+    "s_61f8aff34e6669": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0b82b-df94-7d50-83af-42948fa7da1e",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
