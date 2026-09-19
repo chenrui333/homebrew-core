@@ -1,0 +1,17 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f316e4bde055d78e2050fc7956098a3a8b24444d",
+  "prompts": {},
+  "sessions": {
+    "s_73ebbc70891fbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0b7fc-fce0-7a63-9ead-b1d826672235",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
