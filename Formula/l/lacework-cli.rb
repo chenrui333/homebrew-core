@@ -25,6 +25,8 @@ class LaceworkCli < Formula
 
   depends_on "go" => :build
 
+  deny_network_access!
+
   def install
     ldflags = %W[
       -X github.com/lacework/go-sdk/v2/cli/cmd.Version=#{version}
