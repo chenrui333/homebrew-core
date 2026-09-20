@@ -1,0 +1,19 @@
+Formula/c/chart-testing.rb
+  s_982c42b205fc4b::t_c0a28477c8fecd 27-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "232462dbdf2fe3b9376e88f3bcb12253fd5a6d7c",
+  "prompts": {},
+  "sessions": {
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
