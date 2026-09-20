@@ -19,6 +19,8 @@ class Mage < Formula
 
   depends_on "go"
 
+  deny_network_access!
+
   def install
     ldflags = %W[
       -X github.com/magefile/mage/mage.timestamp=#{time.iso8601}
