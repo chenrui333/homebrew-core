@@ -22,6 +22,8 @@ class Arkade < Formula
 
   depends_on "go" => :build
 
+  deny_network_access!
+
   def install
     ldflags = %W[
       -X github.com/alexellis/arkade/pkg.Version=#{version}
