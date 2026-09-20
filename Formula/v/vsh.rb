@@ -17,6 +17,8 @@ class Vsh < Formula
 
   depends_on "go" => :build
 
+  deny_network_access!
+
   def install
     system "go", "build", *std_go_args(ldflags: "-X main.vshVersion=v#{version}")
   end
