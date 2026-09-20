@@ -1,0 +1,16 @@
+Formula/l/lowdown.rb
+  h_9df9c32c3f321d 7
+Formula/g/gcli.rb
+  h_9df9c32c3f321d 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c299267b857ae3fb87a4251ca86fae7680ead5a3",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
