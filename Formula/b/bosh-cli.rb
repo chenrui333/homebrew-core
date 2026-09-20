@@ -17,6 +17,8 @@ class BoshCli < Formula
 
   depends_on "go" => :build
 
+  deny_network_access!
+
   def install
     # https://github.com/cloudfoundry/bosh-cli/blob/master/ci/tasks/build.sh#L23-L24
     inreplace "cmd/version.go", "[DEV BUILD]", "#{version}-#{tap.user}-#{time.iso8601}"
