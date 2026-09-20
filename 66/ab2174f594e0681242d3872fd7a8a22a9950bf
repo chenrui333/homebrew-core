@@ -1,0 +1,19 @@
+Formula/d/diagram.rb
+  s_982c42b205fc4b::t_3f599d245739ba 34-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "66ab2174f594e0681242d3872fd7a8a22a9950bf",
+  "prompts": {},
+  "sessions": {
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
