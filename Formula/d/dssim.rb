@@ -23,6 +23,12 @@ class Dssim < Formula
     depends_on "nasm" => :build
   end
 
+  deny_network_access!
+
+  def fetch
+    system "cargo", "fetch", "--locked", "--target", "host-tuple"
+  end
+
   def install
     system "cargo", "install", *std_cargo_args
   end
