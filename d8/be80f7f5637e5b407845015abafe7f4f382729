@@ -1,0 +1,14 @@
+Formula/i/igrep.rb
+  h_9df9c32c3f321d 22-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d8be80f7f5637e5b407845015abafe7f4f382729",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
