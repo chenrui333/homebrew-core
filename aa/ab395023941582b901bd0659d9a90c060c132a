@@ -1,0 +1,14 @@
+Formula/h/httm.rb
+  h_9df9c32c3f321d 25-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "aaab395023941582b901bd0659d9a90c060c132a",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
