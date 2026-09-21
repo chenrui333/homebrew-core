@@ -20,6 +20,12 @@ class Rasusa < Formula
 
   uses_from_macos "llvm" => :build # for libclang
 
+  deny_network_access!
+
+  def fetch
+    system "cargo", "fetch", "--locked", "--target", "host-tuple"
+  end
+
   def install
     system "cargo", "install", *std_cargo_args
     pkgshare.install "tests/cases"
