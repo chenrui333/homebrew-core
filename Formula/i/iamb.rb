@@ -22,6 +22,12 @@ class Iamb < Formula
     depends_on "openssl@3"
   end
 
+  deny_network_access!
+
+  def fetch
+    system "cargo", "fetch", "--locked", "--target", "host-tuple"
+  end
+
   def install
     ENV["LIBSQLITE3_SYS_USE_PKG_CONFIG"] = "1"
     ENV["VERGEN_GIT_SHA"] = tap.user
