@@ -1,0 +1,14 @@
+Formula/n/nanoq.rb
+  h_9df9c32c3f321d 21-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "7b8d55a695183a56fa16652cca242d839cc48d7d",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
