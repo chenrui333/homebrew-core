@@ -1,0 +1,19 @@
+Formula/m/macchina.rb
+  s_982c42b205fc4b::t_473ab09dac345d 22-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "19ac4f8e81174bb4b8f7c012fa4866b0f5f0d98a",
+  "prompts": {},
+  "sessions": {
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "unknown"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
