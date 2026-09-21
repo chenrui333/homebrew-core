@@ -1,0 +1,19 @@
+Formula/d/dust.rb
+  s_982c42b205fc4b::t_97a086b5bbfc3c 27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "9ca7dac39d3a3059689c1d485241a7a836dc970d",
+  "prompts": {},
+  "sessions": {
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "unknown"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
