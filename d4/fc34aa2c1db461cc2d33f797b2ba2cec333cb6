@@ -1,0 +1,19 @@
+Formula/c/cocogitto.rb
+  s_982c42b205fc4b::t_e197976aaea102 24-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d4fc34aa2c1db461cc2d33f797b2ba2cec333cb6",
+  "prompts": {},
+  "sessions": {
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
