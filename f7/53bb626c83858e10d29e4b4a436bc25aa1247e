@@ -1,0 +1,14 @@
+Formula/r/rio-terminal.rb
+  h_9df9c32c3f321d 28-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f753bb626c83858e10d29e4b4a436bc25aa1247e",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
