@@ -17,6 +17,12 @@ class Genact < Formula
 
   depends_on "rust" => :build
 
+  deny_network_access!
+
+  def fetch
+    system "cargo", "fetch", "--locked", "--target", "host-tuple"
+  end
+
   def install
     system "cargo", "install", *std_cargo_args
     generate_completions_from_executable(bin/"genact", "--print-completions")
