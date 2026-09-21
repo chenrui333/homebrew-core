@@ -1,0 +1,14 @@
+Formula/f/fileql.rb
+  h_9df9c32c3f321d 23-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "bc3ba6c1aafa13ba11cc92ab29b400af7074c55a",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
