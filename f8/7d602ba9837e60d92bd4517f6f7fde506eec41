@@ -1,0 +1,19 @@
+Formula/r/rapidyaml.rb
+  s_6464c0fe3ad4be::t_e449e9db3a0a88 22-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f87d602ba9837e60d92bd4517f6f7fde506eec41",
+  "prompts": {},
+  "sessions": {
+    "s_6464c0fe3ad4be": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c46e-63b5-7f73-a9b0-28a1ffa73ceb",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
