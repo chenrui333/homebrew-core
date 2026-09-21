@@ -1,0 +1,19 @@
+Formula/d/dnscrypt-proxy.rb
+  s_982c42b205fc4b::t_8bd5f0fa8ed462 26-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "fe690dca31dba5521f84b2f0ee25d2e95d6b1b91",
+  "prompts": {},
+  "sessions": {
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
