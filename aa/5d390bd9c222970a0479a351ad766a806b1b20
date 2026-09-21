@@ -1,0 +1,14 @@
+Formula/m/meli.rb
+  h_9df9c32c3f321d 27-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "aa5d390bd9c222970a0479a351ad766a806b1b20",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
