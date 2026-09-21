@@ -1,0 +1,14 @@
+Formula/i/install-nothing.rb
+  h_9df9c32c3f321d 29-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5bf0bd5d564d3424fb54e6653e495e7b8a6399c5",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
