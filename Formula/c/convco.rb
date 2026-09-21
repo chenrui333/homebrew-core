@@ -17,6 +17,12 @@ class Convco < Formula
 
   depends_on "rust" => :build
 
+  deny_network_access!
+
+  def fetch
+    system "cargo", "fetch", "--locked", "--target", "host-tuple"
+  end
+
   def install
     system "cargo", "install", "--no-default-features", *std_cargo_args(features: "gix")
 
