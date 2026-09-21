@@ -25,6 +25,12 @@ class Jaq < Formula
 
   conflicts_with "json2tsv", because: "both install `jaq` binaries"
 
+  deny_network_access!
+
+  def fetch
+    system "cargo", "fetch", "--locked", "--target", "host-tuple"
+  end
+
   def install
     system "cargo", "install", *std_cargo_args(path: "jaq")
   end
