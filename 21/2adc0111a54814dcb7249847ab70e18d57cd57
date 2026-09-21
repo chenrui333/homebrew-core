@@ -1,0 +1,14 @@
+Formula/g/gpg-tui.rb
+  h_9df9c32c3f321d 25-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "212adc0111a54814dcb7249847ab70e18d57cd57",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
