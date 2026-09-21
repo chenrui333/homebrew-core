@@ -19,6 +19,12 @@ class RustScript < Formula
 
   depends_on "rust" => :no_linkage
 
+  deny_network_access!
+
+  def fetch
+    system "cargo", "fetch", "--locked", "--target", "host-tuple"
+  end
+
   def install
     system "cargo", "install", *std_cargo_args
   end
