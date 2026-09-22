@@ -1,0 +1,19 @@
+Formula/g/glbinding.rb
+  s_982c42b205fc4b::t_de71214410008c 29-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "57f8c8c316fcf5b9ecb0928f27236a36dd0e4bc2",
+  "prompts": {},
+  "sessions": {
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
