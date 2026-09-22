@@ -1,0 +1,28 @@
+Formula/g/git-bug.rb
+  s_01eed826ebbfc8::t_ff476952b23636 32
+  s_2316195b58a8fc::t_4af63ab9be5d8a 4-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "bccc50c456fbb7acd13e4c2a2f6538c5f9777af3",
+  "prompts": {},
+  "sessions": {
+    "s_01eed826ebbfc8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cb12-8afe-73c0-8e9c-882df68b4eda",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    },
+    "s_2316195b58a8fc": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0caf4-1086-7c40-8b94-e15dbdb071e1",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
