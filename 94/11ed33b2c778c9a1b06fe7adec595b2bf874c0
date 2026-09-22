@@ -1,0 +1,19 @@
+Formula/g/glbinding.rb
+  s_564329db5a3670::t_897e94fd7c2b6b 29-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "9411ed33b2c778c9a1b06fe7adec595b2bf874c0",
+  "prompts": {},
+  "sessions": {
+    "s_564329db5a3670": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c788-661a-7fe3-aeee-40dbe080c603",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
