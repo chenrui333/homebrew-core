@@ -18,6 +18,8 @@ class Doh < Formula
 
   uses_from_macos "curl"
 
+  allow_network_access! :test
+
   def install
     system "make"
     bin.install "doh"
