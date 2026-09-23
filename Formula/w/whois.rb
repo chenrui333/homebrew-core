@@ -22,6 +22,8 @@ class Whois < Formula
   depends_on "pkgconf" => :build
   depends_on "libidn2"
 
+  allow_network_access! :test
+
   def install
     ENV.append "LDFLAGS", "-L/usr/lib -liconv" if OS.mac?
 
