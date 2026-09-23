@@ -22,6 +22,8 @@ class PostgresqlHll < Formula
     deps.map(&:to_formula).sort_by(&:version).filter { |f| f.name.start_with?("postgresql@") }
   end
 
+  allow_network_access! :test
+
   def install
     odie "Too many postgresql dependencies!" if postgresqls.count > 2
 
