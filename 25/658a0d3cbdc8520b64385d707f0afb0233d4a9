@@ -1,0 +1,19 @@
+Formula/lib/libcoap.rb
+  s_8c4ad52df1d4fb::t_22b0a9310137dd 24-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "25658a0d3cbdc8520b64385d707f0afb0233d4a9",
+  "prompts": {},
+  "sessions": {
+    "s_8c4ad52df1d4fb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cad8-90ad-7a52-8564-f6d2f7bd104b",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
