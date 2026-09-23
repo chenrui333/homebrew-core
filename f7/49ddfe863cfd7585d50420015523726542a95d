@@ -1,0 +1,172 @@
+Formula/a/asccli.rb
+  s_8c4ad52df1d4fb::t_f37e92c40caffb 4-5,9-11
+Formula/b/bubblewrap.rb
+  s_8c4ad52df1d4fb::t_714e3a738b8840 4-5,10-11
+Formula/c/cloudflare-wrangler.rb
+  s_8c4ad52df1d4fb::t_dd693e6b30bc90 4-5,9-13
+Formula/c/code-cli.rb
+  s_8c4ad52df1d4fb::t_13d0b480ada33b 4-5,15-19
+Formula/c/commitizen.rb
+  s_8c4ad52df1d4fb::t_22199a6b537ef8 6-7,12-16,90-91
+Formula/c/cpp-httplib.rb
+  s_8c4ad52df1d4fb::t_12ae924fe3b01d 28-29
+Formula/c/cppcms.rb
+  s_8c4ad52df1d4fb::t_b26449d9747e9a 38-39
+Formula/c/cpprestsdk.rb
+  s_8c4ad52df1d4fb::t_27c738312b7f56 74-75
+Formula/c/cycode.rb
+  s_8c4ad52df1d4fb::t_c92d4572ed6911 6-7,12-16,89-90,234-235
+Formula/d/davix.rb
+  s_8c4ad52df1d4fb::t_8d85d5744a1b01 39-40
+Formula/d/drogon.rb
+  s_8c4ad52df1d4fb::t_baa951eddb126b 34-35
+Formula/e/et.rb
+  s_8c4ad52df1d4fb::t_36c0135564f3e1 29-30
+Formula/e/ethereum.rb
+  s_8c4ad52df1d4fb::t_ba3642b9136e9d 4-5,15-19,22
+Formula/f/fetch-crl.rb
+  s_8c4ad52df1d4fb::t_6c5b137aee8135 4-5,14-18
+Formula/f/freerdp.rb
+  s_8c4ad52df1d4fb::t_b213488fdc46a1 4-5,10-14,47
+Formula/g/gammaray.rb
+  s_8c4ad52df1d4fb::t_21fec2cd9b763f 4-5,10-14
+Formula/g/ggml.rb
+  s_8c4ad52df1d4fb::t_59b7be3f583f6b 4-5,11-15,44-45
+Formula/g/groonga.rb
+  s_8c4ad52df1d4fb::t_d2276c54103b69 4-5,16-20
+Formula/h/h2o.rb
+  s_8c4ad52df1d4fb::t_bf389cdd2d9c57 32-33
+Formula/h/hermit.rb
+  s_8c4ad52df1d4fb::t_81d9c3c4020876 4-5,10-14
+Formula/h/hk.rb
+  s_8c4ad52df1d4fb::t_30e08fb57769ad 6-7,17-21
+Formula/h/httping.rb
+  s_8c4ad52df1d4fb::t_4e05ad435604e9 48-49
+Formula/j/jackett.rb
+  s_8c4ad52df1d4fb::t_f5277ddcb3b750 4-5,10-14
+Formula/j/jcode.rb
+  s_8c4ad52df1d4fb::t_7e829c85882c34 4-5,14-18
+Formula/k/kaskade.rb
+  s_8c4ad52df1d4fb::t_8a3be658e7263e 6-7,12-16,26-28,56-57,61-62,66-67,81-82,86-87,101-102,106-107,126-127,171-172,176-177,236-237
+Formula/k/keeper-commander.rb
+  s_8c4ad52df1d4fb::t_37f8001264c231 6-7,14-18
+Formula/k/ketch.rb
+  s_8c4ad52df1d4fb::t_9d9b21f6b339d7 4-5,10-14
+Formula/l/leetgo.rb
+  s_8c4ad52df1d4fb::t_e095bbbd415490 4-5,10-14
+Formula/l/lit.rb
+  s_8c4ad52df1d4fb::t_0f9a93a3bbf46c 4-5,9
+Formula/l/llvm.rb
+  s_8c4ad52df1d4fb::t_1d2bd648e42c18 220-222,242,264-265,269-270,304-310,312-322,326-328,332-338,341-343,347,349,352-353,356,359-366,368-371,374-376
+Formula/m/magic-wormhole.rb
+  s_8c4ad52df1d4fb::t_27005a26722ff2 9,13-17,35-36,45-46,50-51,60-61,70-71,85-86,90-91,100-101,120-121,140-141,145-146,150-151,155-156
+Formula/m/marked.rb
+  s_8c4ad52df1d4fb::t_6bd7146a4eede9 4-5,9
+Formula/m/massdns.rb
+  s_8c4ad52df1d4fb::t_c08c1499616ff0 39-40
+Formula/m/maxwell.rb
+  s_8c4ad52df1d4fb::t_84d18fb2f71a35 4-5,14
+Formula/m/mvfst.rb
+  s_8c4ad52df1d4fb::t_0f7afdf114a13e 28-29
+Formula/n/nanomsg.rb
+  s_8c4ad52df1d4fb::t_3b080f682b1420 25-26
+Formula/n/neonctl.rb
+  s_8c4ad52df1d4fb::t_e45a1627fe22f8 4-5,9-13
+Formula/n/nng.rb
+  s_8c4ad52df1d4fb::t_4e7e2f844777dd 26-27
+Formula/o/oci-cli.rb
+  s_8c4ad52df1d4fb::t_5e5064918d53a3 6-7,12-16,72-73,82-83,87-88,97-98,147-148,152-153,157-158
+Formula/o/oh-my-agent.rb
+  s_8c4ad52df1d4fb::t_5337bcb085e637 4-5,9-13
+Formula/o/opendht.rb
+  s_8c4ad52df1d4fb::t_f639f024da9a75 35-36
+Formula/o/openrtsp.rb
+  s_8c4ad52df1d4fb::t_6b213022e6b72f 4-6,8,17-21
+Formula/p/payload-dumper-go.rb
+  s_8c4ad52df1d4fb::t_3ff4059810c776 4-5,9-13
+Formula/p/pgbouncer.rb
+  s_8c4ad52df1d4fb::t_2ae7d9f5e93188 4-5,14-18
+Formula/p/pgrouting.rb
+  s_8c4ad52df1d4fb::t_2eade7a4f96240 29-30
+Formula/p/proxygen.rb
+  s_8c4ad52df1d4fb::t_8d97070a70a8e8 44-45
+Formula/p/pulumi.rb
+  s_8c4ad52df1d4fb::t_a9b9b630c5aa60 5-6,13-17
+Formula/p/pup.rb
+  s_8c4ad52df1d4fb::t_4e99ccf61f4f30 4-5,10-14
+Formula/p/puzzles.rb
+  s_8c4ad52df1d4fb::t_6010d9a802b70e 5-7,21-25
+Formula/q/qtgrpc.rb
+  s_8c4ad52df1d4fb::t_8d5da3bb038691 39-40
+Formula/q/qtwebsockets.rb
+  s_8c4ad52df1d4fb::t_cd0398140e672b 37-38
+Formula/r/railway.rb
+  s_8c4ad52df1d4fb::t_184a76c2cbb264 4-5,10-14
+Formula/r/redocly-cli.rb
+  s_8c4ad52df1d4fb::t_09f5283f8af8a3 4-5,9
+Formula/r/rtp2httpd.rb
+  s_8c4ad52df1d4fb::t_b2bcb5716c1919 19-20
+Formula/r/ruby@3.4.rb
+  s_8c4ad52df1d4fb::t_7354265dc4e3c9 4-5,14-18,41-42
+Formula/s/secretspec.rb
+  s_8c4ad52df1d4fb::t_019d2e34bbabba 4-5,10-14
+Formula/s/sequoia-sqv.rb
+  s_8c4ad52df1d4fb::t_9bfbb084f3cf0a 10-15,21,25-30,32
+Formula/s/stubby.rb
+  s_8c4ad52df1d4fb::t_22541c23cb762f 41-42
+Formula/s/summarize.rb
+  s_8c4ad52df1d4fb::t_8fa40be290188f 4-5,10
+Formula/t/tele.rb
+  s_8c4ad52df1d4fb::t_f026496c00e162 4-5,9-13
+Formula/u/upterm.rb
+  s_8c4ad52df1d4fb::t_67f60b08dd3ad9 4-5,10-14
+Formula/v/vtcode.rb
+  s_8c4ad52df1d4fb::t_6a8b518b66e618 4-5,14-18
+Formula/y/yuque-dl.rb
+  s_8c4ad52df1d4fb::t_d13e7aaa77d65d 4-5,9-13
+Formula/z/zabbix-cli.rb
+  s_8c4ad52df1d4fb::t_5f4ffd18b70261 138-139
+Formula/z/zabbix.rb
+  s_8c4ad52df1d4fb::t_70fea69e56273c 4-5,15-19
+Formula/z/zapp.rb
+  s_8c4ad52df1d4fb::t_7e5f3e7731dd4f 26-31
+Formula/z/zenith.rb
+  s_8c4ad52df1d4fb::t_d5ac8982fcfaf7 28-33
+Formula/z/zeptoclaw.rb
+  s_8c4ad52df1d4fb::t_6a40318d783103 21-26,28
+Formula/z/zeroclaw.rb
+  s_8c4ad52df1d4fb::t_9319a65009d26e 20-25
+Formula/z/zet.rb
+  s_8c4ad52df1d4fb::t_0c6366b8ad9468 34-39
+Formula/z/zim.rb
+  s_8c4ad52df1d4fb::t_7c596d532ba019 33-34,39
+Formula/z/zipkin.rb
+  s_8c4ad52df1d4fb::t_fc0294755fda06 19-20
+Formula/z/zopfli.rb
+  s_8c4ad52df1d4fb::t_1b99c02d12b528 34-35
+Formula/z/zot.rb
+  s_8c4ad52df1d4fb::t_150e5463145294 4-5,10-14
+audit_exceptions/versioned_dependencies_conflicts_allowlist.json
+  s_8c4ad52df1d4fb::t_3fe9f2697b84a7 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f749ddfe863cfd7585d50420015523726542a95d",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  },
+  "sessions": {
+    "s_8c4ad52df1d4fb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cad8-90ad-7a52-8564-f6d2f7bd104b",
+        "model": "unknown"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
