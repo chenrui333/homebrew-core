@@ -4,7 +4,6 @@ class Privoxy < Formula
   url "https://downloads.sourceforge.net/project/ijbswa/Sources/4.2.0%20%28stable%29/privoxy-4.2.0-stable-src.tar.gz"
   sha256 "6f91267f81f626c416994db89ab62f4d09246eebf4754b81186e13a18ee9028f"
   license "GPL-2.0-or-later"
-
   livecheck do
     url :stable
     regex(%r{url=.*?/privoxy[._-]v?(\d+(?:\.\d+)+)[._-]stable[._-]src\.t}i)
@@ -28,6 +27,8 @@ class Privoxy < Formula
   on_linux do
     depends_on "zlib-ng-compat"
   end
+
+  allow_network_access! :test
 
   def install
     system "autoreconf", "--force", "--install", "--verbose"
