@@ -18,6 +18,8 @@ class Microsocks < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:      "da9b7567d172d896cbf1b8040de3801a26c25608259428a3d7b1a12b0bae6a4e"
   end
 
+  allow_network_access! :test
+
   def install
     system "make", "install", "prefix=#{prefix}"
   end
