@@ -25,6 +25,8 @@ class NatsStreamingServer < Formula
 
   depends_on "go" => :build
 
+  allow_network_access! :test
+
   def install
     system "go", "build", *std_go_args
   end
