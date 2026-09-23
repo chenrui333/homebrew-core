@@ -17,6 +17,8 @@ class Miniserve < Formula
 
   depends_on "rust" => :build
 
+  allow_network_access! :test
+
   def install
     system "cargo", "install", *std_cargo_args
 
