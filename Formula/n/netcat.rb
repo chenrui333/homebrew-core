@@ -4,7 +4,6 @@ class Netcat < Formula
   url "https://downloads.sourceforge.net/project/netcat/netcat/0.7.1/netcat-0.7.1.tar.bz2"
   sha256 "b55af0bbdf5acc02d1eb6ab18da2acd77a400bafd074489003f3df09676332bb"
   license "GPL-2.0-or-later"
-
   bottle do
     rebuild 1
     sha256 cellar: :any_skip_relocation, arm64_golden_gate: "e670cc0145759e2fd488c25122bee85dc10a23b059bb5c36e2d39eac27a61ff4"
@@ -34,6 +33,8 @@ class Netcat < Formula
       resolves "https://sourceforge.net/p/netcat/bugs/51/"
     end
   end
+
+  allow_network_access! :test
 
   def install
     # Regenerate configure script for arm64/Apple Silicon support.
