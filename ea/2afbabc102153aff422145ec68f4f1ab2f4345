@@ -1,0 +1,19 @@
+Formula/g/git-vendor.rb
+  s_8c4ad52df1d4fb::t_06be5f2b2bebaf 14-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "ea2afbabc102153aff422145ec68f4f1ab2f4345",
+  "prompts": {},
+  "sessions": {
+    "s_8c4ad52df1d4fb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cad8-90ad-7a52-8564-f6d2f7bd104b",
+        "model": "unknown"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
