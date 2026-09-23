@@ -1,0 +1,19 @@
+Formula/e/etcd-cpp-apiv3.rb
+  s_2316195b58a8fc::t_c5d8659a73dcd8 68-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f708fe670d47e7b3cebc9b9d7e562bee304e1491",
+  "prompts": {},
+  "sessions": {
+    "s_2316195b58a8fc": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0caf4-1086-7c40-8b94-e15dbdb071e1",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
