@@ -1,0 +1,19 @@
+Formula/t/tinyproxy.rb
+  s_ad8b81d03c7426::t_00e6037752ce77 21-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "317328da8b5d0c6e597df67a8ac8caadec906d77",
+  "prompts": {},
+  "sessions": {
+    "s_ad8b81d03c7426": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ce53-0500-7a12-84d8-afea73941cb3",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
