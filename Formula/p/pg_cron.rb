@@ -27,6 +27,8 @@ class PgCron < Formula
         .sort_by(&:version)
   end
 
+  allow_network_access! :test
+
   def install
     odie "Too many postgresql dependencies!" if postgresqls.count > 2
 
