@@ -1,8 +1,8 @@
 class PythonFreethreading < Formula
   desc "Interpreted, interactive, object-oriented programming language"
   homepage "https://www.python.org/"
-  url "https://www.python.org/ftp/python/3.14.8/Python-3.14.8.tgz"
-  sha256 "a65b20a728f169f4e66ae143f40b1bd3d33c38d770251663f627c9767b79b210"
+  url "https://www.python.org/ftp/python/3.15.0/Python-3.15.0.tgz"
+  sha256 "438596cac081036d3c1d532ab7e7335eeb35567bc961749a0d5797176db0db68"
   license "Python-2.0"
 
   livecheck do
@@ -433,15 +433,15 @@ class PythonFreethreading < Formula
     system python3, "-c", "import _zstd"
 
     # tkinter is provided in a separate formula
-    assert_match "ModuleNotFoundError: No module named '_tkinter'",
-                 shell_output("#{python3} -Sc 'import tkinter' 2>&1", 1)
+    assert_match(/ModuleNotFoundError.*_tkinter/,
+                 shell_output("#{python3} -Sc 'import tkinter' 2>&1", 1))
 
     # gdbm is not provided on macOS
     if OS.mac?
-      assert_match "ModuleNotFoundError: No module named '_gdbm'",
-                   shell_output("#{python3} -Sc 'import _gdbm' 2>&1", 1)
-      assert_match "ModuleNotFoundError: No module named '_gdbm'",
-                   shell_output("#{python3} -Sc 'import dbm.gnu' 2>&1", 1)
+      assert_match(/ModuleNotFoundError.*_gdbm/,
+                   shell_output("#{python3} -Sc 'import _gdbm' 2>&1", 1))
+      assert_match(/ModuleNotFoundError.*_gdbm/,
+                   shell_output("#{python3} -Sc 'import dbm.gnu' 2>&1", 1))
     end
 
     # Verify that the selected DBM interface works
