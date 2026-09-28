@@ -28,9 +28,21 @@ class Malbolge < Formula
 
   patch :DATA
 
+  deny_network_access!
+
   def install
     system ENV.cxx, "malbolge.c", "-o", "malbolge"
     bin.install "malbolge"
+  end
+
+  test do
+    (testpath/"hello.mb").write <<~EOS
+      (=<`#9]~6ZY32Vx/4Rs+0No-&Jk)"Fh}|Bcy?`=*z]Kw%oG4UUS0/@-ejc(:'8dc
+    EOS
+    assert_equal "Hello World!", shell_output("#{bin}/malbolge hello.mb")
+
+    (testpath/"bad.mb").write "aaaa\n"
+    assert_match "invalid character in source file", shell_output("#{bin}/malbolge bad.mb 2>&1", 1)
   end
 end
 
