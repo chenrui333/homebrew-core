@@ -21,10 +21,28 @@ class Mailcheck < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:      "84fa4f1d288f0f8824334bb68621b8589b65e0d9e21a4ca0961a33aae5d0ef63"
   end
 
+  deny_network_access!
+
   def install
     system "make", "mailcheck"
     bin.install "mailcheck"
     man1.install "mailcheck.1"
     etc.install "mailcheckrc"
+  end
+
+  test do
+    ENV["HOME"] = testpath
+    %w[cur new tmp].each { |d| (testpath/"Maildir"/d).mkpath }
+    touch testpath/"Maildir/new/1"
+    touch testpath/"Maildir/new/2"
+    touch testpath/"Maildir/cur/3"
+    (testpath/".mailcheckrc").write "$(HOME)/Maildir\n"
+
+    assert_equal "You have 2 new and 1 saved messages in #{testpath}/Maildir",
+                 shell_output("#{bin}/mailcheck").strip
+
+    # Login mode exits silently when ~/.hushlogin exists
+    touch testpath/".hushlogin"
+    assert_empty shell_output("#{bin}/mailcheck -l")
   end
 end
