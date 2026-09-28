@@ -38,8 +38,29 @@ class Mjpegtools < Formula
     resolves "https://sourceforge.net/p/mjpeg/patches/63/"
   end
 
+  deny_network_access!
+
   def install
     system "./configure", "--enable-simd-accel", *std_configure_args
     system "make", "install"
+  end
+
+  test do
+    system "#{bin}/y4mcolorbars -v 0 -n 5 -W 64 -H 48 -S 420jpeg > bars.y4m"
+    assert_match "YUV4MPEG2 W64 H48 F30000:1001 Ip A10:11 C420jpeg", (testpath/"bars.y4m").read(50)
+
+    # Encode to MJPEG AVI and inspect / decode it again
+    system "#{bin}/yuv2lav -v 0 -f a -o bars.avi < bars.y4m"
+    info = shell_output("#{bin}/lavinfo bars.avi")
+    assert_match "video_frames=5", info
+    assert_match "video_width=64", info
+    assert_match "video_height=48", info
+    system "#{bin}/lav2yuv bars.avi > decoded.y4m"
+    assert_equal "YUV4MPEG2 W64 H48 ", (testpath/"decoded.y4m").binread(18)
+    assert_equal 5, (testpath/"decoded.y4m").binread.scan("FRAME\n").size
+
+    # Encode to MPEG-1 video and check for the sequence header start code
+    system "#{bin}/mpeg2enc -v 0 -f 0 -a 2 -o bars.m1v < bars.y4m"
+    assert_equal "\x00\x00\x01\xB3".b, (testpath/"bars.m1v").binread(4)
   end
 end
