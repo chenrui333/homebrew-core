@@ -21,8 +21,24 @@ class MacRobber < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:      "ac53384d4cfcdf2b78d8abc6e8882ce7e6efd95304a9f09895a9e8a6108a4a9a"
   end
 
+  deny_network_access!
+
   def install
     system "make", "CC=#{ENV.cc}", "GCC_OPT=#{ENV.cflags}"
     bin.install "mac-robber"
+  end
+
+  test do
+    (testpath/"data").mkpath
+    (testpath/"data/hello.txt").write "hello"
+    chmod 0644, testpath/"data/hello.txt"
+    (testpath/"data/link").make_symlink "hello.txt"
+
+    output = shell_output("#{bin}/mac-robber data")
+    assert_match "MD5|name|inode|mode_as_string|UID|GID|size|atime|mtime|ctime|crtime", output
+    assert_match %r{^0\|data/hello\.txt\|0\|-rw-r--r--\|\d+\|\d+\|5\|}, output
+    assert_match %r{^0\|data/link\|0\|l\S+ -> hello\.txt\|}, output
+
+    assert_match "invalid directory: missing/", shell_output("#{bin}/mac-robber missing", 1)
   end
 end
