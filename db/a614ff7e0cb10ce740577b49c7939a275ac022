@@ -1,0 +1,26 @@
+Formula/a/aws-c-s3.rb
+  h_9df9c32c3f321d 7
+Formula/a/aws-crt-cpp.rb
+  s_6e5d1e6427e031::t_b1c534279ab348 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "dba614ff7e0cb10ce740577b49c7939a275ac022",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  },
+  "sessions": {
+    "s_6e5d1e6427e031": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e80f-96ed-7660-9e4e-a1e651928560",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
