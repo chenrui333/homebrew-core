@@ -1,0 +1,19 @@
+Formula/m/mcp-google-sheets.rb
+  s_20ee2ac03ef1eb::t_88e0b9b463b57d 9,27-29,32-33,42-43,47-48,52-53,57-58,62-63,67-68,72-73,77-78,107-108,122-123,127-133,137-138,142-143,157-158,162-163,167-168,172-173,197-198,202-203,212-213,217-218
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "65d012fc0cf18591514e64481135cbb095dd3abf",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
