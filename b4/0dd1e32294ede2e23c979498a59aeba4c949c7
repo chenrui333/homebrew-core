@@ -1,0 +1,19 @@
+Formula/r/rockcraft.rb
+  s_20ee2ac03ef1eb::t_afb36b87fe3689 11,42-43,45,53-54,58-59,63-64,98-99,108-109,128-129,133-134,143-144,153-154,163-164,168-169,173-174,178-179,188-189,223-224,243-244,263-264
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b40dd1e32294ede2e23c979498a59aeba4c949c7",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
