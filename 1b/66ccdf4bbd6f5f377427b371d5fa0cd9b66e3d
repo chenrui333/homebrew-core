@@ -1,0 +1,19 @@
+Formula/o/openjpeg.rb
+  s_20ee2ac03ef1eb::t_1f24f2c0593fd9 5,9-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "1b66ccdf4bbd6f5f377427b371d5fa0cd9b66e3d",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
