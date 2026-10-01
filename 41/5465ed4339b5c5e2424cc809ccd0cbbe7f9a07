@@ -1,0 +1,19 @@
+Formula/o/openimageio.rb
+  s_20ee2ac03ef1eb::t_aeff91113eef07 4-5,7,25,27,53-54
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "415465ed4339b5c5e2424cc809ccd0cbbe7f9a07",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
