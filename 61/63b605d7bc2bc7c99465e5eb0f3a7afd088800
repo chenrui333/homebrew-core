@@ -1,0 +1,19 @@
+Formula/a/apache-polaris.rb
+  s_20ee2ac03ef1eb::t_e5cd0035fe7142 4-5,29-36,58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "6163b605d7bc2bc7c99465e5eb0f3a7afd088800",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
