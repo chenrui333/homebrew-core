@@ -1,0 +1,21 @@
+Formula/j/julia.rb
+  s_20ee2ac03ef1eb::t_a6d62e4c0b4584 5-6,53-54,69-89,91,148,159
+  s_20ee2ac03ef1eb::t_4866e4f2fd1f06 212-217,269
+  s_20ee2ac03ef1eb::t_6b19a8206d4f2d 265-268
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a32f4006076a8bec2f028378bc1ce5d018a7d0a4",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
