@@ -1,0 +1,19 @@
+Formula/s/semgrep.rb
+  s_20ee2ac03ef1eb::t_830b044567174a 8-9,55-56,110-111,135-136,290-291,295-296,305-306,310-311,398-401,408
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b25fa03b33d2479cae585be6671abf82db9eeb62",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
