@@ -1,0 +1,19 @@
+Formula/v/vulkan-profiles.rb
+  s_20ee2ac03ef1eb::t_b455d16a38ebc6 2-3,28-30,46-135,139-154
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "82055538cac2d46da1cbfcb80061917a64a41ed9",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
