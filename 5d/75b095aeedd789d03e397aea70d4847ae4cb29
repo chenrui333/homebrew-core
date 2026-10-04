@@ -1,0 +1,20 @@
+Formula/a/arcane-cli.rb
+  s_2e88dfb5d81479::t_d695f5431ec3f6 51-52
+  s_2e88dfb5d81479::t_9a34a5c0b715f3 4-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5d75b095aeedd789d03e397aea70d4847ae4cb29",
+  "prompts": {},
+  "sessions": {
+    "s_2e88dfb5d81479": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a108fe-a0e3-7cc0-9500-63b50aedce5e",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
