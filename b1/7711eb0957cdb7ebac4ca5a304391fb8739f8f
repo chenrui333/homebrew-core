@@ -1,0 +1,19 @@
+Formula/s/sequoia-chameleon-gnupg.rb
+  s_20ee2ac03ef1eb::t_94a7d3d1219284 28-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b17711eb0957cdb7ebac4ca5a304391fb8739f8f",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
