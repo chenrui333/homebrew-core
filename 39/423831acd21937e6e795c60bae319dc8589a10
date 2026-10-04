@@ -1,0 +1,19 @@
+Formula/y/yek.rb
+  s_20ee2ac03ef1eb::t_b3881b75a1ac97 33-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "39423831acd21937e6e795c60bae319dc8589a10",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
