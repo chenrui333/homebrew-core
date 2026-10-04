@@ -1,0 +1,19 @@
+Formula/l/lrzsz.rb
+  s_ac9679fd1e6445::t_81ed6f4cee141a 4-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e298b76b1c03542fc07c0eacf62b5bfc96cf6b27",
+  "prompts": {},
+  "sessions": {
+    "s_ac9679fd1e6445": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a107b4-7757-76a3-81d3-d37d6ead48e1",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
