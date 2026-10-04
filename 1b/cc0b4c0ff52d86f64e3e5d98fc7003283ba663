@@ -1,0 +1,28 @@
+Formula/g/geeqie.rb
+  s_2e88dfb5d81479::t_b466c284ea4086 30
+  s_20ee2ac03ef1eb::t_2fb13e7431981a 4-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1bcc0b4c0ff52d86f64e3e5d98fc7003283ba663",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    },
+    "s_2e88dfb5d81479": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a108fe-a0e3-7cc0-9500-63b50aedce5e",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
