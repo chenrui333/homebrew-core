@@ -1,8 +1,8 @@
 class Wangle < Formula
   desc "Modular, composable client/server abstractions framework"
   homepage "https://github.com/facebook/wangle"
-  url "https://github.com/facebook/wangle/archive/refs/tags/v2026.09.28.00.tar.gz"
-  sha256 "f21d0db5690b6e946d1e30efd62e2842c5764f6a28ac6f75eff320fec0a4c65d"
+  url "https://github.com/facebook/wangle/archive/refs/tags/v2026.10.05.00.tar.gz"
+  sha256 "4ba21ca487d25c66c9b56ce786dd4e7ba0724ac8f52b511f5529142d43a9940f"
   license "Apache-2.0"
   compatibility_version 1
   head "https://github.com/facebook/wangle.git", branch: "main"
@@ -63,6 +63,7 @@ class Wangle < Formula
 
     ENV.delete "CPATH"
     system "cmake", "-S", ".", "-B", "build", "-DCMAKE_MODULE_PATH=#{testpath}/cmake",
+                    "-DCMAKE_BUILD_RPATH=#{HOMEBREW_PREFIX}/lib",
                     "-DOPENSSL_ROOT_DIR=#{formula_opt_prefix("openssl@3")}", "-Wno-author"
     system "cmake", "--build", "build"
 
@@ -71,15 +72,18 @@ class Wangle < Formula
     sleep 30
 
     require "pty"
+    require "io/console"
     output = ""
-    PTY.spawn(testpath/"build/EchoClient", "-port", port.to_s) do |r, w, pid|
-      w.write "Hello from Homebrew!\nAnother test line.\n"
-      sleep 60
-      Process.kill "TERM", pid
-      begin
-        r.each_line { |line| output += line }
-      rescue Errno::EIO
-        # GNU/Linux raises EIO when read is done on closed pty
+    PTY.spawn(testpath/"build/EchoClient", "-host", "127.0.0.1", "-port", port.to_s) do |r, w, pid|
+      r.noecho do
+        w.write "Hello from Homebrew!\nAnother test line.\n"
+        sleep 60
+        Process.kill "TERM", pid
+        begin
+          r.each_line { |line| output += line }
+        rescue Errno::EIO
+          # GNU/Linux raises EIO when read is done on closed pty
+        end
       end
     end
     assert_match("Hello from Homebrew!", output)
