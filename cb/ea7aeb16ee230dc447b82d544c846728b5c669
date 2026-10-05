@@ -1,0 +1,19 @@
+Formula/f/flintrock.rb
+  s_20ee2ac03ef1eb::t_6b15e7318e0855 32-51,68-77,83-97,103-107,113-132,153-172,178-192,198-213,215-254
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cbea7aeb16ee230dc447b82d544c846728b5c669",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
