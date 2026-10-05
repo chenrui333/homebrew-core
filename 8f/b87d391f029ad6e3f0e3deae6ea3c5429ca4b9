@@ -1,0 +1,19 @@
+Formula/m/meta-package-manager.rb
+  s_20ee2ac03ef1eb::t_0cb1c916dd337e 30-48,60-64,90-109,115-154,165-184,200-213,216-255
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8fb87d391f029ad6e3f0e3deae6ea3c5429ca4b9",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
