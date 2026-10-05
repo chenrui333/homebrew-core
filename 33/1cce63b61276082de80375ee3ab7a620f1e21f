@@ -1,0 +1,19 @@
+Formula/m/mail-deduplicate.rb
+  s_20ee2ac03ef1eb::t_392d01182fcdd0 24-41,53-57,83-112,118-147,158-172,183-196,198-235
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "331cce63b61276082de80375ee3ab7a620f1e21f",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
