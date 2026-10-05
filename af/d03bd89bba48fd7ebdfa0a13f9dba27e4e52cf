@@ -1,0 +1,19 @@
+Formula/g/gersemi.rb
+  s_20ee2ac03ef1eb::t_48c48edd2464b3 22-36,42-75,78-95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "afd03bd89bba48fd7ebdfa0a13f9dba27e4e52cf",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
