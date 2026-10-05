@@ -1,8 +1,8 @@
 class Folly < Formula
   desc "Collection of reusable C++ library artifacts developed at Facebook"
   homepage "https://github.com/facebook/folly"
-  url "https://github.com/facebook/folly/archive/refs/tags/v2026.09.28.00.tar.gz"
-  sha256 "f1be5c9030d99081e4459205d0db0967b1ae58116fdfd601c431a4015f3171a8"
+  url "https://github.com/facebook/folly/archive/refs/tags/v2026.10.05.00.tar.gz"
+  sha256 "403a1180bb6ade75182c8609929463cbb14bfe63696e39ab86bd691446fe76ec"
   license "Apache-2.0"
   compatibility_version 1
   head "https://github.com/facebook/folly.git", branch: "main"
@@ -36,10 +36,6 @@ class Folly < Formula
   on_linux do
     depends_on "zlib-ng-compat"
   end
-
-  # Workaround for arm64 Linux error "Missing variable is: CMAKE_ASM_CREATE_SHARED_LIBRARY"
-  # Ref: https://github.com/facebook/folly/pull/2562#issuecomment-3988207056
-  patch :DATA
 
   def install
     args = %w[
@@ -77,20 +73,3 @@ class Folly < Formula
     system "./test"
   end
 end
-
-__END__
-diff --git a/folly/external/aor/CMakeLists.txt b/folly/external/aor/CMakeLists.txt
-index defff33a5..382457be6 100644
---- a/folly/external/aor/CMakeLists.txt
-+++ b/folly/external/aor/CMakeLists.txt
-@@ -20,6 +20,10 @@
- # Linux ELF directives (.size, etc.) that Darwin's assembler doesn't support
- if (IS_AARCH64_ARCH)
- 
-+  if(BUILD_SHARED_LIBS)
-+    set(CMAKE_ASM_CREATE_SHARED_LIBRARY ${CMAKE_C_CREATE_SHARED_LIBRARY})
-+  endif()
-+
-   folly_add_library(
-     NAME
-     memcpy_aarch64
