@@ -1,0 +1,19 @@
+Formula/c/cargo-c.rb
+  s_20ee2ac03ef1eb::t_e1806ef17931d7 4-6,10,39-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d25d4a939c1050a8a4baa6ae646abdf7eaddb5ac",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
