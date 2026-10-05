@@ -1,0 +1,19 @@
+Formula/e/esptool.rb
+  s_20ee2ac03ef1eb::t_f2ca15d0730001 24-42,54-58,64-68,74-83,94-98,104-123,154-173,179-193,199-217,219-260
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "088da69ae19516868efb4d5cda828af9bf527d16",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
