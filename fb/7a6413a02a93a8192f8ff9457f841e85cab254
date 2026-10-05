@@ -1,0 +1,19 @@
+Formula/d/dolphie.rb
+  s_20ee2ac03ef1eb::t_506948e7d17ad5 24-53,60-74,95-99,125-129,140-149,155-159,180-199,215-224,235-244,250-268,270-320
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fb7a6413a02a93a8192f8ff9457f841e85cab254",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
