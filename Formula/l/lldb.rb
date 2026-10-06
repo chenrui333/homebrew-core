@@ -1,22 +1,11 @@
 class Lldb < Formula
   desc "Next generation, high-performance debugger"
   homepage "https://lldb.llvm.org/"
+  url "https://github.com/llvm/llvm-project/releases/download/llvmorg-23.1.3/llvm-project-23.1.3.src.tar.xz"
+  sha256 "c44186a7762ed28954be72e5ff6df9808e0779d4f1bf014ecc4e7e211d31ee34"
   license "Apache-2.0" => { with: "LLVM-exception" }
   compatibility_version 1
   head "https://github.com/llvm/llvm-project.git", branch: "main"
-
-  stable do
-    url "https://github.com/llvm/llvm-project/releases/download/llvmorg-23.1.2/llvm-project-23.1.2.src.tar.xz"
-    sha256 "c98bbef08a2b4c2613cd50e9aa9ae7b69b1fe6c16b2c40373bc0ab6116fdf78a"
-
-    # Fix build with macOS 27 SDK, which defines `CPU_SUBTYPE_ARM64E_X1`
-    patch do
-      url "https://github.com/llvm/llvm-project/commit/923902483c7a6937a65b9679795a247ae2a2ad56.patch?full_index=1"
-      sha256 "779ad57084a91143c84907ea83f41925a1d08b396a08551c08ce39e7d35a0f07"
-      type :backport
-      resolves "https://github.com/llvm/llvm-project/pull/223090"
-    end
-  end
 
   livecheck do
     formula "llvm"
