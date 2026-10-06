@@ -4,7 +4,7 @@ class Nanomsgxx < Formula
   url "https://github.com/achille-roussel/nanomsgxx/archive/refs/tags/0.2.tar.gz"
   sha256 "116ad531b512d60ea75ef21f55fd9d31c00b172775548958e5e7d4edaeeedbaa"
   license "MIT"
-  revision 3
+  revision 4
 
   bottle do
     sha256 cellar: :any,                 arm64_golden_gate: "78673eebb3989c953b3d8423dc5bea9f1a9422bf000552cf3bcf1d3b08d1f807"
@@ -61,6 +61,7 @@ class Nanomsgxx < Formula
       --static
       --shared
       --prefix=#{prefix}
+      --libdir=#{lib}
     ]
 
     system "python3", "./waf", "configure", *args
