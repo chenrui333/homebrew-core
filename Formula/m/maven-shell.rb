@@ -11,8 +11,8 @@ class MavenShell < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, all: "8cf238b82fe150f113e5df470ec8f73d9d8cb58d940c716726a3442492a8fa16"
+    rebuild 2
+    sha256 cellar: :any_skip_relocation, all: "5a843fccb7f0f9c53ab493d82fe2d2579cdce60d16f3274437bb7a01c9475b72"
   end
 
   depends_on "openjdk" => :test
