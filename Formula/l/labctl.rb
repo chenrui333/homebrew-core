@@ -1,8 +1,8 @@
 class Labctl < Formula
   desc "CLI tool for interacting with iximiuz labs and playgrounds"
   homepage "https://labs.iximiuz.com/playgrounds"
-  url "https://github.com/iximiuz/labctl/archive/refs/tags/v0.1.113.tar.gz"
-  sha256 "8bde038c28b69c5dfae461bac91d931e8999f47b2148696d2fc833db27f4e728"
+  url "https://github.com/iximiuz/labctl/archive/refs/tags/v0.1.114.tar.gz"
+  sha256 "956fa49203c75fc255909473a2a7f9fdd4cd272e64a15628a692264e544bea04"
   license "Apache-2.0"
 
   bottle do
