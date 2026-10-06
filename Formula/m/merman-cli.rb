@@ -23,6 +23,9 @@ class MermanCli < Formula
 
   def install
     system "cargo", "install", *std_cargo_args(path: "crates/merman-cli")
+
+    generate_completions_from_executable(bin/"merman-cli", "completion", shells: [:bash, :zsh, :fish, :pwsh])
+    man1.install Dir["crates/merman-cli/assets/man/*.1"]
   end
 
   test do
