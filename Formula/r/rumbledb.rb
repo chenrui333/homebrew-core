@@ -11,7 +11,7 @@ class Rumbledb < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "c3461f8f7ecc1a25a2d3c4036be2f21613dce95f08c8111a15618395e7ee4e42"
+    sha256 cellar: :any_skip_relocation, all: "ba9b5340ef5a80b94509e24898a9068ee51a28e9fc432b4c05fdf9a6da2910be"
   end
 
   depends_on "apache-spark"
