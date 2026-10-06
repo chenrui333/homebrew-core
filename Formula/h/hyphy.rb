@@ -1,9 +1,10 @@
 class Hyphy < Formula
   desc "Hypothesis testing using Phylogenies"
   homepage "https://www.hyphy.org"
-  url "https://github.com/veg/hyphy/archive/refs/tags/2.5.101.tar.gz"
-  sha256 "7eb3ff9c660e9a88b3e5f3ed8c553dc9ed6ab254259a9d00612d8347795c961f"
+  url "https://github.com/veg/hyphy/archive/refs/tags/2.5.102.tar.gz"
+  sha256 "6aeea1d13bd6baf6440c044dd36a99866dc6d68e737b4e3114524cafa815c48c"
   license "MIT"
+  head "https://github.com/veg/hyphy.git", branch: "master"
 
   bottle do
     sha256 arm64_golden_gate: "9961353a45113a5705ea4fb534ed3a6fc05686bfb3c97f37303c4d07d9a2ce81"
@@ -26,6 +27,15 @@ class Hyphy < Formula
   on_linux do
     depends_on "zlib-ng-compat"
   end
+
+  patch do
+    url "https://github.com/veg/hyphy/commit/f3fbdf2db77c9f5d32d868d60780c893c857348e.patch?full_index=1"
+    sha256 "c8662c672ff3b44e276ae908115389ea647b019480d6d2a0a91397fe246ce47c"
+    type :unofficial
+    resolves "https://github.com/veg/hyphy/pull/2030"
+  end
+
+  deny_network_access!
 
   def install
     system "cmake", "-S", ".", "-B", "build", *std_cmake_args
