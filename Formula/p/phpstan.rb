@@ -18,6 +18,8 @@ class Phpstan < Formula
     end
   end
 
+  allow_network_access! :test
+
   def install
     bin.install "phpstan.phar" => "phpstan"
   end
