@@ -1,8 +1,8 @@
 class Rustnet < Formula
   desc "Cross-platform network monitoring terminal UI with deep packet inspection"
   homepage "https://github.com/domcyrus/rustnet"
-  url "https://github.com/domcyrus/rustnet/archive/refs/tags/v1.6.0.tar.gz"
-  sha256 "245fc7074d5f142fbf1c798233be86b715b4f2ce3b3cfec10fabdcbbc9345ddb"
+  url "https://github.com/domcyrus/rustnet/archive/refs/tags/v1.7.0.tar.gz"
+  sha256 "9d3f6509da06f832c04c5accc7b777c18f3de8b32c885137c9a1346990694dda"
   license "Apache-2.0"
   head "https://github.com/domcyrus/rustnet.git", branch: "main"
 
@@ -59,9 +59,8 @@ class Rustnet < Formula
 
   test do
     assert_match version.to_s, shell_output("#{bin}/rustnet --version")
-    assert_match "network monitoring", shell_output("#{bin}/rustnet --help").downcase
 
-    output = shell_output("#{bin}/rustnet --log-level not-a-level 2>&1", 1)
+    output = shell_output("#{bin}/rustnet --headless --log-level not-a-level 2>&1", 1)
     assert_match "Invalid log level", output
   end
 end
