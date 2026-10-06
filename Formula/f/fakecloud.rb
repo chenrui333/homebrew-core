@@ -7,11 +7,11 @@ class Fakecloud < Formula
   head "https://github.com/faiscadev/fakecloud.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "c4d6b67f9c7ecfaba10eb2850658d360092591271949376b1551f2f59795f4e0"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "f344fb0efedf9defabc58b17a72cf47db767525af79cde646e63b9201b1904db"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "fcfc581582b90afd8ac90a0c3a97f23c17830ba34d76f9fe84a39879afb46a57"
-    sha256 cellar: :any,                 arm64_linux:       "297a5c3f8886104db87523cdea057a9017a038f529f85af285c9594103620103"
-    sha256 cellar: :any,                 x86_64_linux:      "bd528601fb5a4ec855222a894eeb80dde4998e79f8bfbb6bbc278304002985ff"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "9a85acf082bccfd112c91479ee52ea14583109bec307013ea79920216b125a29"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "49aae679dcca78368ecf7540fd01c28ac825ce9f9a6a37fb350ffaa8f7ad91ea"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "3da3bbb7b52ae2fd00d6ae6e93b9b683a4ca8a0a8644c805830452729d68e37e"
+    sha256 cellar: :any,                 arm64_linux:       "65e8f5d13ad381f425a4452ee792108607cd48cca952d3dd79a6874e343b068c"
+    sha256 cellar: :any,                 x86_64_linux:      "75904426288fba454aaadf61190e8ba7b988b7ddb7148271969a52990d51a11c"
   end
 
   depends_on "pkgconf" => :build
