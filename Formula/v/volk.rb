@@ -22,14 +22,11 @@ class Volk < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any, arm64_golden_gate: "99b5c4b33bbdcf58d28ee2a6b7cd100fe51e8bafab2cb6b3624b2a275cca6e4a"
-    sha256 cellar: :any, arm64_tahoe:       "191cd1de815b6a227597a8d734e323a9d8f41587da9e2ef0f6f8be98c716bf6c"
-    sha256 cellar: :any, arm64_sequoia:     "f62aa1a95e3f8ed22968fe8e92b036754db1c02f9d80f6ed0cccbbfd7dfc5f2f"
-    sha256 cellar: :any, arm64_sonoma:      "3454fbda5eae8449ce41463f6f88c929cdb054aa2feb024d8a2be58770aeacbc"
-    sha256 cellar: :any, sonoma:            "2d359de9c959e7ef49d200f8f702158845d2730213a4f5b73de126b4a93f7897"
-    sha256 cellar: :any, arm64_linux:       "6fb7686968e2c94fee1d4a4829a8a89430ebb96eb7f522c935cafae913cf13a0"
-    sha256 cellar: :any, x86_64_linux:      "303e1b62238f08c8929062431295a62c915fd5191e4f3c543390d73e14ff4ce8"
+    sha256 cellar: :any, arm64_golden_gate: "064a12142b6a5db630acdc6ad43739178ec1e5e92ae45d02546c1a691edf743e"
+    sha256 cellar: :any, arm64_tahoe:       "537a5468aeee011491cee324d7515d0e70309e8184b41af722ef049f0bcb50e9"
+    sha256 cellar: :any, arm64_sequoia:     "171af672ac4f4c50f1aca6c9e675e33774d2c2908f53720ec057dd0fbe3c7e0c"
+    sha256 cellar: :any, arm64_linux:       "6b8c1758e38fc748a047f67bfe5a2078cf3dd4893737c8fd591d2b5905b32866"
+    sha256 cellar: :any, x86_64_linux:      "8db67d0983446bd027566318c8debcc4058bc45eaef61dc5e8f06fb769d99eba"
   end
 
   depends_on "cmake" => :build
