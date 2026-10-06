@@ -15,17 +15,17 @@ class CalmCli < Formula
 
   depends_on "node"
 
+  resource "testdata", :test do
+    url "https://raw.githubusercontent.com/finos/architecture-as-code/717350bec736a7f931c7c09df6b0b0b56e51612f/calm/getting-started/conference-signup.pattern.json"
+    sha256 "26bb2979bb3e8a3a8eea2dfe0bd19aaa374770be61ee42c509c773c2fcc6c063"
+  end
+
   def install
     system "npm", "install", *std_npm_args
     bin.install_symlink libexec.glob("bin/*")
   end
 
   test do
-    resource "testdata" do
-      url "https://raw.githubusercontent.com/finos/architecture-as-code/717350bec736a7f931c7c09df6b0b0b56e51612f/calm/getting-started/conference-signup.pattern.json"
-      sha256 "26bb2979bb3e8a3a8eea2dfe0bd19aaa374770be61ee42c509c773c2fcc6c063"
-    end
-
     testpath.install resource("testdata")
     system bin/"calm", "generate",
                        "--pattern", "./conference-signup.pattern.json",
