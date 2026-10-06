@@ -1,8 +1,8 @@
 class Hyphy < Formula
   desc "Hypothesis testing using Phylogenies"
   homepage "https://www.hyphy.org"
-  url "https://github.com/veg/hyphy/archive/refs/tags/2.5.102.tar.gz"
-  sha256 "6aeea1d13bd6baf6440c044dd36a99866dc6d68e737b4e3114524cafa815c48c"
+  url "https://github.com/veg/hyphy/archive/refs/tags/2.5.103.tar.gz"
+  sha256 "e3602aa3add7f4d88c18038828bc49080a749dd377f9d41c92933fbf07d846c2"
   license "MIT"
   head "https://github.com/veg/hyphy.git", branch: "master"
 
@@ -24,13 +24,6 @@ class Hyphy < Formula
 
   on_linux do
     depends_on "zlib-ng-compat"
-  end
-
-  patch do
-    url "https://github.com/veg/hyphy/commit/f3fbdf2db77c9f5d32d868d60780c893c857348e.patch?full_index=1"
-    sha256 "c8662c672ff3b44e276ae908115389ea647b019480d6d2a0a91397fe246ce47c"
-    type :unofficial
-    resolves "https://github.com/veg/hyphy/pull/2030"
   end
 
   deny_network_access!
