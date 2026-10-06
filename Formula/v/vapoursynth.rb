@@ -3,8 +3,8 @@ class Vapoursynth < Formula
 
   desc "Video processing framework with simplicity in mind"
   homepage "https://www.vapoursynth.com"
-  url "https://files.pythonhosted.org/packages/66/22/4e7bb7682495b03470b2f594cbe30b13fb81d7b3378edf359042c9f1f6bf/vapoursynth-80.tar.gz"
-  sha256 "4d03e3ef64df65a855490e6fd77ccc74d5debf89799aea93a6bd08f6a90afeb0"
+  url "https://files.pythonhosted.org/packages/69/6a/f9441173c91a3355a32b870522726ed2252cd3c7b04b45e499f30b1a2c98/vapoursynth-81.tar.gz"
+  sha256 "3bf6c90ad737e8ffc5605b05a1ff29cd884f8632fbe0eb49a2705942073a96be"
   license "LGPL-2.1-or-later"
   compatibility_version 2
   head "https://github.com/vapoursynth/vapoursynth.git", branch: "master"
@@ -37,8 +37,13 @@ class Vapoursynth < Formula
 
   # Upstream pins the shader compiler to keep the accepted GLSL dialect stable.
   resource "glslang" do
-    url "https://github.com/KhronosGroup/glslang/archive/refs/tags/vulkan-sdk-1.4.357.0.tar.gz"
-    sha256 "81038794e20494556edbcc0fc70fa984d71d1b440f9c49adf2cbaaa60a519757"
+    url "https://github.com/KhronosGroup/glslang/archive/refs/tags/vulkan-sdk-1.4.363.0.tar.gz"
+    sha256 "cda24ec765e6d2845d106b7caa593f34127195a88524cf87821ff0088fb6edec"
+
+    livecheck do
+      url :url
+      regex(/^vulkan-sdk-(\d+(?:\.\d+)+)$/i)
+    end
   end
 
   def install
