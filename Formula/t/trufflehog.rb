@@ -1,8 +1,8 @@
 class Trufflehog < Formula
   desc "Find and verify credentials"
   homepage "https://trufflesecurity.com/"
-  url "https://github.com/trufflesecurity/trufflehog/archive/refs/tags/v3.98.0.tar.gz"
-  sha256 "7411534ce8a6c69cbc7cdd69be7fe0fe4ff26aa6c460152cea67144bf236aae3"
+  url "https://github.com/trufflesecurity/trufflehog/archive/refs/tags/v3.98.1.tar.gz"
+  sha256 "7f40fe8f20174054b6ef3e45ee1c33997976eaa764f3804743fe95617b1e0893"
   # upstream license ask, https://github.com/trufflesecurity/trufflehog/issues/1446
   license "AGPL-3.0-only"
   head "https://github.com/trufflesecurity/trufflehog.git", branch: "main"
