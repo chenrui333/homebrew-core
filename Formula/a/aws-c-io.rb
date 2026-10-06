@@ -4,6 +4,7 @@ class AwsCIo < Formula
   url "https://github.com/awslabs/aws-c-io/archive/refs/tags/v1.0.0.tar.gz"
   sha256 "5fecb19c2c0a165687cdd94723943a02ab23a0270deade5661fd935a3cd55e78"
   license "Apache-2.0"
+  revision 1
   compatibility_version 2
 
   bottle do
@@ -18,13 +19,16 @@ class AwsCIo < Formula
   depends_on "cmake" => :build
   depends_on "aws-c-cal"
   depends_on "aws-c-common"
-  depends_on "openssl@3"
   depends_on "s2n"
 
   deny_network_access!
 
   def install
-    system "cmake", "-S", ".", "-B", "build", "-DBUILD_SHARED_LIBS=ON", *std_cmake_args
+    args = ["-DBUILD_SHARED_LIBS=ON"]
+    # Avoid linkage to OpenSSL
+    args << "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-dead_strip_dylibs" if OS.mac?
+
+    system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end
