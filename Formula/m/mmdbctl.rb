@@ -18,6 +18,11 @@ class Mmdbctl < Formula
 
   depends_on "go" => :build
 
+  resource "test.mmdb", :test do
+    url "https://raw.githubusercontent.com/maxmind/MaxMind-DB/02de12f89048db626d04f8865c6fc76eac9a7a6b/test-data/GeoIP2-City-Test.mmdb"
+    sha256 "df1eb8e048d3b2561f477cd27f7d642fc25a24767395071d782ae927036818a0"
+  end
+
   allow_network_access! :test
 
   def fetch
@@ -31,11 +36,6 @@ class Mmdbctl < Formula
   end
 
   test do
-    resource "test.mmdb" do
-      url "https://raw.githubusercontent.com/maxmind/MaxMind-DB/02de12f89048db626d04f8865c6fc76eac9a7a6b/test-data/GeoIP2-City-Test.mmdb"
-      sha256 "df1eb8e048d3b2561f477cd27f7d642fc25a24767395071d782ae927036818a0"
-    end
-
     testpath.install resource("test.mmdb")
 
     system bin/"mmdbctl", "verify", testpath/"GeoIP2-City-Test.mmdb"
