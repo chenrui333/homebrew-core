@@ -1,8 +1,8 @@
 class Deadfinder < Formula
   desc "Finds broken links"
   homepage "https://deadfinder.hahwul.com"
-  url "https://github.com/hahwul/deadfinder/archive/refs/tags/2.0.2.tar.gz"
-  sha256 "13d3d4b0392d6b1548071d44dc03a14e790ea161781d5a57a196577316a97543"
+  url "https://github.com/hahwul/deadfinder/archive/refs/tags/2.1.0.tar.gz"
+  sha256 "ae2364f33c1b94f9d2183162b6dd42ae33a68dbda970a1e67c9080ee1681c7d9"
   license "MIT"
   head "https://github.com/hahwul/deadfinder.git", branch: "main"
 
@@ -38,6 +38,9 @@ class Deadfinder < Formula
   end
 
   def install
+    ENV["CRYSTAL_LIBRARY_PATH"] = formula_opt_lib("openssl@3")
+    ENV.prepend_path "PKG_CONFIG_PATH", formula_opt_lib("openssl@3")/"pkgconfig"
+
     # Use our lexbor as long as compatible with https://github.com/kostya/lexbor
     (buildpath/"lib/lexbor/src/ext/lexbor-c/build").install_symlink formula_opt_lib("lexbor")/"liblexbor_static.a"
 
