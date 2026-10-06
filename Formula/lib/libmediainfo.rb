@@ -1,8 +1,8 @@
 class Libmediainfo < Formula
   desc "Shared library for mediainfo"
   homepage "https://mediaarea.net/en/MediaInfo"
-  url "https://mediaarea.net/download/source/libmediainfo/26.05/libmediainfo_26.05.tar.xz"
-  sha256 "c08b2d87b2fb5edb4526c2a8a317eb1f2cff44807e4631a037ca9f9a1d455054"
+  url "https://mediaarea.net/download/source/libmediainfo/26.10/libmediainfo_26.10.tar.xz"
+  sha256 "a806fd36592549a03e810486f415a6858d4d8f14066bfbe97b32a447cd5eb590"
   license "BSD-2-Clause"
   compatibility_version 1
   head "https://github.com/MediaArea/MediaInfoLib.git", branch: "master"
@@ -40,13 +40,7 @@ class Libmediainfo < Formula
   link_overwrite "lib/pkgconfig/libmediainfo.pc"
   link_overwrite "lib/libmediainfo.*"
 
-  # Fix build with c++23 capable compilers with older stdlib. Remove with the next release.
-  patch do
-    url "https://github.com/MediaArea/MediaInfoLib/commit/f90c003eef186c41f8929e4ff5da86861835c1a8.patch?full_index=1"
-    sha256 "4a1ad20304c638e8cbd91b9246df8a1bd979104df516b3d5bda749164270230e"
-    type :backport
-    resolves "https://github.com/MediaArea/MediaInfoLib/pull/2624"
-  end
+  deny_network_access!
 
   def install
     system "cmake", "-S", "Project/CMake", "-B", "build", "-DBUILD_SHARED_LIBS=ON", *std_cmake_args
