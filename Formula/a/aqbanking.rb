@@ -4,7 +4,7 @@ class Aqbanking < Formula
   url "https://www.aquamaniac.de/rdm/attachments/download/654/aqbanking-6.9.2.tar.gz"
   sha256 "244b5f7a139f829928f5cdc3f5f7488517b3e8aa63625a92741c3efc1892bb3f"
   license "GPL-2.0-or-later"
-  revision 1
+  revision 2
 
   livecheck do
     url "https://www.aquamaniac.de/rdm/projects/aqbanking/files"
@@ -25,11 +25,8 @@ class Aqbanking < Formula
 
   depends_on "gmp"
   depends_on "gwenhywfar"
-  depends_on "ktoblzcheck"
   depends_on "libxml2"
   depends_on "libxmlsec1"
-  depends_on "libxslt" # Our libxslt links with libgcrypt
-  depends_on "openssl@3"
   depends_on "pkgconf" # aqbanking-config needs pkg-config for execution
 
   on_macos do
@@ -42,6 +39,7 @@ class Aqbanking < Formula
 
   def install
     ENV.deparallelize
+    ENV.append "LDFLAGS", "-Wl,-dead_strip_dylibs" if OS.mac? # avoid openssl linkage
 
     inreplace "aqbanking-config.in.in", "@PKG_CONFIG@", "pkg-config"
     system "./configure", "--enable-cli", *std_configure_args
