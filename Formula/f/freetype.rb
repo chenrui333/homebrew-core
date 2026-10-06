@@ -23,6 +23,7 @@ class Freetype < Formula
   end
 
   depends_on "pkgconf" => :build
+  depends_on "brotli"
   depends_on "libpng"
 
   uses_from_macos "bzip2"
@@ -38,6 +39,7 @@ class Freetype < Formula
 
     system "./configure", "--prefix=#{prefix}",
                           "--enable-freetype-config",
+                          "--with-brotli",
                           "--without-harfbuzz"
     system "make"
     system "make", "install"
