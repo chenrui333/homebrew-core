@@ -1,0 +1,19 @@
+Formula/m/merman-cli.rb
+  s_87e9a83978736d::t_e3a3f8680e5269 4-5,39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b5c3f4a0f80e3bc318715f2f2ba15f8a29e5dcb1",
+  "prompts": {},
+  "sessions": {
+    "s_87e9a83978736d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10d3b-5cdd-76d0-b05d-4b2d5929cf4c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
