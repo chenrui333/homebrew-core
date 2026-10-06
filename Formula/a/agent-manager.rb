@@ -1,8 +1,8 @@
 class AgentManager < Formula
   desc "Run Claude Code, Codex, OpenCode and other AI coding agents in tmux"
   homepage "https://agent-manager.dev/"
-  url "https://github.com/YoanWai/agent-manager/archive/refs/tags/v0.39.0.tar.gz"
-  sha256 "9589e5c867a2c0d78515778f28ffb0432362093fbc618ce6d701fa5f403735eb"
+  url "https://github.com/YoanWai/agent-manager/archive/refs/tags/v0.40.0.tar.gz"
+  sha256 "783f2e256b91ed70ce5c75886c20b7fc904fd9fa2b392e429a7fb55aad6a3a5d"
   license "Apache-2.0"
   head "https://github.com/YoanWai/agent-manager.git", branch: "main"
 
