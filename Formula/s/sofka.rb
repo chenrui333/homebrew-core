@@ -1,8 +1,8 @@
 class Sofka < Formula
   desc "Kubernetes TUI, reimagined in Rust"
   homepage "https://github.com/nklmilojevic/sofka"
-  url "https://github.com/nklmilojevic/sofka/archive/refs/tags/v0.29.9.tar.gz"
-  sha256 "76ddd5b75244d0f8defb344983617b93740bb286176cb4f2db7103e8e5b34e12"
+  url "https://github.com/nklmilojevic/sofka/archive/refs/tags/v0.29.10.tar.gz"
+  sha256 "8ce45aaeec8a89708deb85f07ef9c7e43091248c6acd166845b1377e51ee4d68"
   license "Apache-2.0"
 
   bottle do
