@@ -7,12 +7,11 @@ class KamalProxy < Formula
   head "https://github.com/basecamp/kamal-proxy.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "b3d66086ffc7dc0f8f28552a770d269e6cd8c7b12ebc48fe5a5f1b39591b5665"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "ef37239b56025333a167704496ee426d55dafbf0d4b988f366ac97fd1e9b436f"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "f96df97d14d4168df4d077afbb5261c2073996788ec62aa5558bd8c8f1a854bd"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:      "891d4f74eb3a1f8c6436fee0d2d77f5ce43d0d05f75f642cddb865cb3991d306"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "b30e9ef8f836b80e26dec8e6429a8ad69364bc32290b9f6757eb311630e36b1d"
-    sha256 cellar: :any,                 x86_64_linux:      "2baca77705c2a2503787bd0b4f1bc82422b1509e56cfa4f451661b7f34a1267e"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "2c5f356f28858e1c05dbf055a10c7076d7fdaa8714a7a038ef12dafc9cd6932c"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "88ae13f4fd258c5acff5c3e14624dfcad79a3d9a4f0de7f2103a0fddfdbb26f7"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "4a6591de2ddb563eafdee2cfc2d0c91a01ba43e5c9188d7795dacca4f6dc5133"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "6ee62d9a6aebec5b1e63ead71ff41e982b9104768a65901a3da89e0a4c90a60b"
+    sha256 cellar: :any,                 x86_64_linux:      "4e8da46b79b1402b9e597db28454a49cac9c4d216ebeb096472f29ecaa35c6e6"
   end
 
   depends_on "go" => :build
