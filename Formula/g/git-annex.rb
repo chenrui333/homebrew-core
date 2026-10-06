@@ -1,8 +1,8 @@
 class GitAnnex < Formula
   desc "Manage files with git without checking in file contents"
   homepage "https://git-annex.branchable.com/"
-  url "https://hackage.haskell.org/package/git-annex-10.20261005/git-annex-10.20261005.tar.gz"
-  sha256 "07b16092c91925a9e21f6011fd39a4e5d944b0e037df4de838dd106f501db8d2"
+  url "https://hackage.haskell.org/package/git-annex-10.20261006/git-annex-10.20261006.tar.gz"
+  sha256 "f2f275f8b1bef3ab482935cde137a59a815886e5edc7545171c2081a9bf64a9c"
   license all_of: ["AGPL-3.0-or-later", "BSD-2-Clause", "BSD-3-Clause",
                    "GPL-2.0-only", "GPL-3.0-or-later", "MIT"]
   head "git://git-annex.branchable.com/", branch: "master"
@@ -13,11 +13,11 @@ class GitAnnex < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "2b13ee19fb6b7bb718c6032a6130831fd258727644a63b2f2d7ec7c84d2235d3"
-    sha256 cellar: :any, arm64_tahoe:       "b9f225da98b25571d99d3b4a744e564c6b2aac306824b47184302193891ea5f8"
-    sha256 cellar: :any, arm64_sequoia:     "be8ae8f7cb3d936a368702c7062977de4483338d2a6e798244c4be13a0285985"
-    sha256 cellar: :any, arm64_linux:       "662f90b06517f68c924ffe15caae3f6772b29de7e31c2aedffd92d867899953a"
-    sha256 cellar: :any, x86_64_linux:      "357184640db9cd9e0293d31d997c776fd419ddf1be98934d414ea421b3bfe7c3"
+    sha256 cellar: :any, arm64_golden_gate: "04006a4c0196c7505624b3531861d2a018e4803703d86bd21e82d077fd49494d"
+    sha256 cellar: :any, arm64_tahoe:       "121f0299b54bc071e42aedc4b2e8a0b8174913893c91f2561e49407b50d96fc2"
+    sha256 cellar: :any, arm64_sequoia:     "134875628893519f548f37aa525470542e407de90a43fb366db4ac7011d5dc89"
+    sha256 cellar: :any, arm64_linux:       "505d160fd064bf4b2023efd233f9de17f1e63e017556f3779a02998c27c81ae0"
+    sha256 cellar: :any, x86_64_linux:      "70ba9888a681ca4426697c435e121c7a4f9a4a9c498415a4ea6c9dfeeb75233a"
   end
 
   depends_on "cabal-install" => :build
