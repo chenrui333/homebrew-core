@@ -1,10 +1,9 @@
 class Qxmpp < Formula
   desc "Cross-platform C++ XMPP client and server library"
   homepage "https://invent.kde.org/libraries/qxmpp"
-  url "https://invent.kde.org/libraries/qxmpp/-/archive/v1.16.3/qxmpp-v1.16.3.tar.bz2"
-  sha256 "8a9833b8e991736584f46b2f70a7c0252366f69846a263fbc2db723628385cad"
+  url "https://invent.kde.org/libraries/qxmpp/-/archive/v1.17.0/qxmpp-v1.17.0.tar.bz2"
+  sha256 "1c480d17489e0f83a976b670bb8a36b81e902152c9d5dcfe08b98e3d75f669e7"
   license "LGPL-2.1-or-later"
-  revision 1
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "de355b907194c1a38ee2e87ac676f1b47d12d883b09f4f416fd155a48ee750d3"
