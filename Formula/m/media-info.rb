@@ -1,8 +1,8 @@
 class MediaInfo < Formula
   desc "Unified display of technical and tag data for audio/video"
   homepage "https://mediaarea.net/"
-  url "https://mediaarea.net/download/source/mediainfo/26.05/mediainfo_26.05.tar.xz"
-  sha256 "f852093f9050022d699606eeabb38b24da5523d0212fab64dc4e4d3e46b56de1"
+  url "https://mediaarea.net/download/source/mediainfo/26.10/mediainfo_26.10.tar.xz"
+  sha256 "82f6bce8e58818509022f0bbcc87fce0c6da21822fb2a2a9573b5e3950d8e5f6"
   license "BSD-2-Clause"
   compatibility_version 1
   head "https://github.com/MediaArea/MediaInfo.git", branch: "master"
@@ -32,6 +32,8 @@ class MediaInfo < Formula
   on_linux do
     depends_on "zlib-ng-compat"
   end
+
+  deny_network_access!
 
   def install
     cd "Project/GNU/CLI" do
