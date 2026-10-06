@@ -6,7 +6,7 @@ class Awscurl < Formula
   url "https://files.pythonhosted.org/packages/c8/77/7da6af880d56aed4a4023bb7c725e15c72a3088afd729ffd373eed0f5a18/awscurl-0.44.tar.gz"
   sha256 "13056e867ac33f556f29d3662102bfc3c40259ea037c6d817c5914dbb2bbd948"
   license "MIT"
-  revision 5
+  revision 6
   head "https://github.com/okigan/awscurl.git", branch: "master"
 
   bottle do
@@ -17,28 +17,18 @@ class Awscurl < Formula
     sha256 cellar: :any, x86_64_linux:      "5ab357402d57f19715ec1ee6201c87e6bc734b1be6ee07841bc49928bf6d4334"
   end
 
-  depends_on "cmake" => :build # for `awscrt`
   depends_on "aws-c-auth"
   depends_on "aws-c-cal"
   depends_on "aws-c-common"
-  depends_on "aws-c-compression"
   depends_on "aws-c-event-stream"
   depends_on "aws-c-http"
   depends_on "aws-c-io"
   depends_on "aws-c-mqtt"
   depends_on "aws-c-s3"
-  depends_on "aws-c-sdkutils"
   depends_on "aws-checksums"
   depends_on "certifi" => :no_linkage
   depends_on "cryptography" => :no_linkage
-  depends_on "openssl@3" # for `awscrt`
   depends_on "python@3.14"
-
-  uses_from_macos "libffi"
-
-  on_macos do
-    depends_on "s2n"
-  end
 
   pypi_packages exclude_packages: ["certifi", "cryptography"]
 
@@ -110,6 +100,8 @@ class Awscurl < Formula
   def install
     ENV["AWS_CRT_BUILD_USE_SYSTEM_LIBCRYPTO"] = "1"
     ENV["AWS_CRT_BUILD_USE_SYSTEM_LIBS"] = "1"
+    # Avoid overlinking to aws-c-* indirect dependencies
+    ENV.append "LDFLAGS", "-Wl,-dead_strip_dylibs" if OS.mac?
 
     virtualenv_install_with_resources
   end
