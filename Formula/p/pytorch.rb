@@ -14,11 +14,11 @@ class Pytorch < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "7cb3a591da1fb739ce75e7033145451f780ea6934c5e9790192efe77733726b8"
-    sha256 cellar: :any, arm64_tahoe:       "2ea0f6a893b54dae2a2a66cbef03d21bd4345ac8be48b0b7c928c43b532e3c67"
-    sha256 cellar: :any, arm64_sequoia:     "391586e4030d14495f7231d764cc2b0f20497d4524e3bd4fc81cde39ad59764e"
-    sha256 cellar: :any, arm64_linux:       "08f20de24d8c2bfb20a59efdb12cd05f3dfc6387d117de531e73ce6fdb2cb8bd"
-    sha256 cellar: :any, x86_64_linux:      "db667d2c30ca3206692841a8da3331383516d1dedca1e610c885bf897e24e3de"
+    sha256 cellar: :any, arm64_golden_gate: "8541a88e7d1c04013772d726b745d2271e2aa15cc9b6dc6345d30ee9f7b9444a"
+    sha256 cellar: :any, arm64_tahoe:       "80cb101e0ba864c0160627c0a470d6aa0331623db1f83c3da5c718288947fb03"
+    sha256 cellar: :any, arm64_sequoia:     "63aee7d35798c3bfc0ae55b0a5ec39a060cdc534fa94f5c997c9fb9ad1b20aad"
+    sha256 cellar: :any, arm64_linux:       "cac0918672ffbccbbd9602ffa7997bd8fe6482de5c424bb1ed405536f14fcb54"
+    sha256 cellar: :any, x86_64_linux:      "be0c8346c6a003bf24015a358220eb8a1f32105fe1a89c7e611ae16a325580b4"
   end
 
   depends_on "cmake" => :build
