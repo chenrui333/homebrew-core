@@ -1,11 +1,22 @@
 class Folly < Formula
   desc "Collection of reusable C++ library artifacts developed at Facebook"
   homepage "https://github.com/facebook/folly"
-  url "https://github.com/facebook/folly/archive/refs/tags/v2026.10.05.00.tar.gz"
-  sha256 "403a1180bb6ade75182c8609929463cbb14bfe63696e39ab86bd691446fe76ec"
   license "Apache-2.0"
   compatibility_version 1
   head "https://github.com/facebook/folly.git", branch: "main"
+
+  stable do
+    url "https://github.com/facebook/folly/archive/refs/tags/v2026.10.05.00.tar.gz"
+    sha256 "403a1180bb6ade75182c8609929463cbb14bfe63696e39ab86bd691446fe76ec"
+
+    # Apply open PR to support OpenSSL 4
+    patch do
+      url "https://github.com/facebook/folly/commit/e3330eaa1edef120fe13911fa259152c8b1f8734.patch?full_index=1"
+      sha256 "d85da885a98a12d73e6c970aa62f18ad8db8a1653bfd0eee722f3aee2de1c4e2"
+      type :unofficial
+      resolves "https://github.com/facebook/folly/pull/2706"
+    end
+  end
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "d723cf8a89b321d8c7ab3b5be4c2cf413f1c5a4f85d25ec7613c010214b0358e"
