@@ -20,10 +20,18 @@ class CargoGeiger < Formula
   depends_on "pkgconf" => :build
   depends_on "rust" => :build
   depends_on "rustup" => :test
-  depends_on "openssl@3"
+  depends_on "openssl@4"
+
+  uses_from_macos "curl"
 
   on_linux do
     depends_on "zlib-ng-compat"
+  end
+
+  # Backport OpenSSL 4 support to the 0.13.0 release source.
+  patch do
+    file "Patches/cargo-geiger/openssl4-0.13.0.patch"
+    type :backport
   end
 
   allow_network_access! :test
@@ -34,7 +42,7 @@ class CargoGeiger < Formula
 
   def install
     # Ensure that the `openssl` crate picks up the intended library.
-    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@3")
+    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@4")
 
     system "cargo", "install", *std_cargo_args(path: "cargo-geiger")
   end
@@ -72,8 +80,8 @@ class CargoGeiger < Formula
     require "utils/linkage"
 
     [
-      formula_opt_lib("openssl@3")/shared_library("libcrypto"),
-      formula_opt_lib("openssl@3")/shared_library("libssl"),
+      formula_opt_lib("openssl@4")/shared_library("libcrypto"),
+      formula_opt_lib("openssl@4")/shared_library("libssl"),
     ].each do |library|
       assert Utils.binary_linked_to_library?(bin/"cargo-geiger", library),
              "No linkage with #{library.basename}! Cargo is likely using a vendored version."
