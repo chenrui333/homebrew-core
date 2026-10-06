@@ -13,13 +13,11 @@ class Libmediainfo < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_golden_gate: "b2e9d90fe810fe52b749db61b7c7f88f62c26254ac05b857e97110fc5dc789fc"
-    sha256 cellar: :any,                 arm64_tahoe:       "40bfb74ab59661516204cad038fb34443c637e91782b55ed8425bdc23770c5e5"
-    sha256 cellar: :any,                 arm64_sequoia:     "a4aea5ab66ae1ed64e7afb9ec347002280f02b63fde5001d09e7c86b3a267a8a"
-    sha256 cellar: :any,                 arm64_sonoma:      "34cf18c0b6ec0fb800573013d3325fba7ed035cee7d253df22e6679f86b48f41"
-    sha256 cellar: :any,                 sonoma:            "d1272778c486c622bd29aef8567147b9eba3d5d3666f8a5f45bf64425724295c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "3c9196fc51986b6d2b13b7f78faaf613c141b0fb2e29ea57180f46ba3ac2fb6a"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "c4420e7bafe9e97662cfb4dcaa97bdc1a2ae57954d74c31c64ec91bd5f5f00dd"
+    sha256 cellar: :any, arm64_golden_gate: "cd110ce0d72727bf2e4433aa5bb5e5a7c29d966f440e0b70401a6064da18be51"
+    sha256 cellar: :any, arm64_tahoe:       "eda9eddad2c74ebf59e91541264a9323680ea0ba26cf77bdaf74b42e7448fd7c"
+    sha256 cellar: :any, arm64_sequoia:     "fbe973993be24f71841704cf04d5b8a79bf54c2a1d2f2a0d74b7102ade54c258"
+    sha256 cellar: :any, arm64_linux:       "e3f44abf0827c0c8dbe015988ca47d5124b050bf2a25d10bcdd68e87f88d125d"
+    sha256 cellar: :any, x86_64_linux:      "54f65c86fc90fa0b5529586fefade935c7f6a5bacd09031eac938f9625e28713"
   end
 
   depends_on "cmake" => :build
