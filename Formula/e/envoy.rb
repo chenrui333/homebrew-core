@@ -4,18 +4,10 @@ class Envoy < Formula
   license "Apache-2.0"
 
   stable do
-    url "https://github.com/envoyproxy/envoy/archive/refs/tags/v1.39.2.tar.gz"
-    sha256 "4c897373699a45e848f4abf1892143f693c1d0bfd4414f73da57957697f35d6e"
+    url "https://github.com/envoyproxy/envoy/archive/refs/tags/v1.39.3.tar.gz"
+    sha256 "e005538cdb416a3008be83b0829d4e98cf40f71c80a14c9db6cbd42e00c3eaa5"
 
     depends_on "llvm@18" => :build
-
-    # TODO: remove once 1.39 includes host-toolchain support, upstream PR ref, https://github.com/envoyproxy/envoy/pull/47963
-    patch do
-      url "https://github.com/envoyproxy/envoy/commit/3806cefa801e337fe0ce182c00019079c03076a7.patch?full_index=1"
-      sha256 "d2e5eea97cc244a3ba8d2dd9e477a02f2e757497213a49ea77c24d3f71aebe3e"
-      type :backport
-      resolves "https://github.com/envoyproxy/envoy/pull/47963"
-    end
 
     # TODO: Remove once 1.39 reuses API CEL protos, upstream PR ref, https://github.com/envoyproxy/envoy/pull/47984
     patch do
