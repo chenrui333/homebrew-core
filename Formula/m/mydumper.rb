@@ -4,6 +4,7 @@ class Mydumper < Formula
   url "https://github.com/mydumper/mydumper/archive/refs/tags/v1.0.5-1.tar.gz"
   sha256 "2c2307f1655728b59a6874cf6ccbe85ffea26977fb698eaf62a56976bcf5991f"
   license "GPL-3.0-or-later"
+  revision 1
   head "https://github.com/mydumper/mydumper.git", branch: "master"
 
   livecheck do
@@ -29,20 +30,17 @@ class Mydumper < Formula
   depends_on "mariadb-connector-c"
   depends_on "pcre2"
 
-  on_macos do
-    depends_on "openssl@3"
-  end
-
   deny_network_access!
 
   def install
+    ENV.append "LDFLAGS", "-Wl,-dead_strip_dylibs" if OS.mac? # avoid openssl linkage
+
     # Avoid installing config into /etc
     inreplace "CMakeLists.txt", "/etc", etc
 
     # Override location of mysql-client
     args = %W[
       -DMYSQL_CONFIG_PREFER_PATH=#{formula_opt_bin("mariadb-connector-c")}
-      -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     ]
 
     system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
