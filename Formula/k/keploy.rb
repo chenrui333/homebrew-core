@@ -7,11 +7,11 @@ class Keploy < Formula
   head "https://github.com/keploy/keploy.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "2e0077f103ac4cab70a4156a0eb58159b361b8ed7d4e32d45a9a9b158eed9c56"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "2e0077f103ac4cab70a4156a0eb58159b361b8ed7d4e32d45a9a9b158eed9c56"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "2e0077f103ac4cab70a4156a0eb58159b361b8ed7d4e32d45a9a9b158eed9c56"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "fe64fca27922623250f627a9ca76785dac3d67afa6f2ffa5b2b919fe21d0f1d2"
-    sha256 cellar: :any,                 x86_64_linux:      "7d9c9fde3f235398d0a36f7f73be557e29b56d65db9cc229ddd5aad3e973a28c"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "647b969144b9412b674cbde7185e5de82b51c6d7614bfbd4fe3226c1c09f8092"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "647b969144b9412b674cbde7185e5de82b51c6d7614bfbd4fe3226c1c09f8092"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "647b969144b9412b674cbde7185e5de82b51c6d7614bfbd4fe3226c1c09f8092"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "2cb7c9001025a011499a0f247e6c59587337450ebc9047555bf30f8519291f2f"
+    sha256 cellar: :any,                 x86_64_linux:      "adbe3febf0fbb848b89bd0229c9cc8daf9e4ca28f2760032f0e0811f10fbb81c"
   end
 
   depends_on "go" => :build
