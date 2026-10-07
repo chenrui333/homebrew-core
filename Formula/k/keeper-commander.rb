@@ -24,23 +24,13 @@ class KeeperCommander < Formula
   depends_on "rust" => :build
   depends_on "certifi" => :no_linkage
   depends_on "cryptography" => :no_linkage
-  depends_on "ffmpeg"
-  depends_on "libvpx"
   depends_on "libyaml"
-  depends_on "opus"
   depends_on "pillow" => :no_linkage
   depends_on "pydantic" => :no_linkage
   depends_on "python@3.14"
-  depends_on "srtp"
 
   on_macos do
     depends_on "llvm" => :build if DevelopmentTools.clang_build_version <= 1699
-    depends_on "openssl@3"
-  end
-
-  on_intel do
-    depends_on "libxcb"
-    depends_on "openjpeg"
   end
 
   fails_with :clang do
