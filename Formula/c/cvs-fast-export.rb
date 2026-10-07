@@ -3,8 +3,8 @@ class CvsFastExport < Formula
 
   desc "Export an RCS or CVS history as a fast-import stream"
   homepage "http://www.catb.org/~esr/cvs-fast-export/"
-  url "https://gitlab.com/esr/cvs-fast-export/-/archive/2.5/cvs-fast-export-2.5.tar.bz2"
-  sha256 "84eefa84a0f71b076147522c59dbecb64a6b691742c065cec354c39f944cfeda"
+  url "https://gitlab.com/esr/cvs-fast-export/-/archive/2.6/cvs-fast-export-2.6.tar.bz2"
+  sha256 "54b93785d4d107d41b368e0d190678a17a03891e19b544481d9980cd113c6eef"
   license "GPL-2.0-or-later"
   head "https://gitlab.com/esr/cvs-fast-export.git", branch: "master"
 
