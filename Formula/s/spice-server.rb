@@ -4,7 +4,7 @@ class SpiceServer < Formula
   url "https://gitlab.freedesktop.org/-/project/62/uploads/54a0f9f5d1840e1ad8060cb560f3dde6/spice-0.16.0.tar.bz2"
   sha256 "0a6ec9528f05371261bbb2d46ff35e7b5c45ff89bb975a99af95a5f20ff4717d"
   license "LGPL-2.1-or-later"
-  revision 1
+  revision 2
   head "https://gitlab.freedesktop.org/spice/spice.git", branch: "master"
 
   bottle do
@@ -23,7 +23,7 @@ class SpiceServer < Formula
   depends_on "gstreamer"
   depends_on "jpeg-turbo"
   depends_on "lz4"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "opus"
   depends_on "orc"
   depends_on "pixman"
@@ -64,7 +64,7 @@ class SpiceServer < Formula
       }
     C
 
-    ENV.prepend_path "PKG_CONFIG_PATH", formula_opt_lib("openssl@3")/"pkgconfig"
+    ENV.prepend_path "PKG_CONFIG_PATH", formula_opt_lib("openssl@4")/"pkgconfig"
     flags = shell_output("pkg-config --cflags --libs spice-server").chomp.split
     system ENV.cc, "test.c", *flags, "-o", "test"
 
