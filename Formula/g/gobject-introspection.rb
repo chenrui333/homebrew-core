@@ -11,13 +11,11 @@ class GobjectIntrospection < Formula
   compatibility_version 1
 
   bottle do
-    sha256 arm64_golden_gate: "bfd6ab36f3f80ffda3a130cbd5890272066447d6468c3dbd4f38b406056be277"
-    sha256 arm64_tahoe:       "7626946518290438bb39682f49b4cbfe48fefa3a2a651314fe7a9e36f9ad7912"
-    sha256 arm64_sequoia:     "722743b16501778a92553b0967b4ac4fc00408fd3742ee5ba9b11ea50a7fc22c"
-    sha256 arm64_sonoma:      "d3bab28068563383c77eba96c97de06c4b9acbce372c6b8ff6d5c6c1feb63887"
-    sha256 sonoma:            "d828266a982a993b4c954aaeda6f948adcdf3875ec33b17d9807aaeb3d0551f7"
-    sha256 arm64_linux:       "18d9306f68f5d7059a8a84cff6cc9af37b95d020f72d3a3fe3e146d331e7a0ab"
-    sha256 x86_64_linux:      "fee8fc3524298ee5eec84ba9af6f6e4dc2e41411bff617ad36651eba79c5df23"
+    sha256 arm64_golden_gate: "fe949284e88c8a8aeb4769a3693f459ba280c6432252719c55ea38c0d720ee10"
+    sha256 arm64_tahoe:       "87ae8192aa4d9caf136a0b1c42125e6c34d3e366013beb0c185316f081844e29"
+    sha256 arm64_sequoia:     "d70659f28e8e125c1497e872b9eada816bb85eb49204e84f6bf66316262b83fd"
+    sha256 arm64_linux:       "c34a74946df6431e09867828ef75a6cd7d237bbf0ba942e3712960903c91adec"
+    sha256 x86_64_linux:      "830673494fdd06a9b331d030cc928328e3f3187dada5bd490c1c685399b66acb"
   end
 
   depends_on "bison" => :build
