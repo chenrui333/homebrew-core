@@ -14,12 +14,11 @@ class Torrra < Formula
   no_autobump! because: "`update-python-resources` cannot determine dependencies"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "20c75cd1b7ed9984518f8015949132ee3e303af9fcbee08cfa760b5a4d42ca96"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "20c75cd1b7ed9984518f8015949132ee3e303af9fcbee08cfa760b5a4d42ca96"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "20c75cd1b7ed9984518f8015949132ee3e303af9fcbee08cfa760b5a4d42ca96"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:      "20c75cd1b7ed9984518f8015949132ee3e303af9fcbee08cfa760b5a4d42ca96"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "c9c07bcf20a00ca244ad4ffb6b5dbcdba5279aa8485e97c0218e2f1c200b0cb9"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "20c75cd1b7ed9984518f8015949132ee3e303af9fcbee08cfa760b5a4d42ca96"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "f74d59e3aca60f3a5e0595b0b5d12f389ea1dbe0f3ca023a136980c09ef4aff1"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "f74d59e3aca60f3a5e0595b0b5d12f389ea1dbe0f3ca023a136980c09ef4aff1"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "f74d59e3aca60f3a5e0595b0b5d12f389ea1dbe0f3ca023a136980c09ef4aff1"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "3f45a9aadf52ccdb6b20d7865464e1be47a544e2f1fd1aa802d88650546780cb"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "3f45a9aadf52ccdb6b20d7865464e1be47a544e2f1fd1aa802d88650546780cb"
   end
 
   depends_on "certifi" => :no_linkage
