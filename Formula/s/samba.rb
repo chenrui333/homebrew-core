@@ -7,6 +7,7 @@ class Samba < Formula
   url "https://download.samba.org/pub/samba/stable/samba-4.25.0.tar.gz"
   sha256 "2e2cb7296833b35b8f7a7fb76045e0c57adc0c2cd03264b37df5d58e40f28437"
   license "GPL-3.0-or-later"
+  revision 1
   compatibility_version 2
 
   livecheck do
@@ -31,7 +32,6 @@ class Samba < Formula
   depends_on "icu4c@78"
   depends_on "krb5"
   depends_on "libtasn1"
-  depends_on "libxcrypt"
   depends_on "lmdb"
   depends_on "popt"
   depends_on "readline"
@@ -46,7 +46,6 @@ class Samba < Formula
 
   on_macos do
     depends_on "gettext"
-    depends_on "openssl@3"
   end
 
   on_linux do
@@ -101,6 +100,7 @@ class Samba < Formula
       end
     end
     ENV.append "LDFLAGS", "-Wl,-rpath,#{lib}/private" if OS.linux?
+    ENV.append "LDFLAGS", "-Wl,-dead_strip_dylibs" if OS.mac? # avoid openssl linkage
 
     bundled_libs_list = []
     # Upstream (https://github.com/lxin/quic) has no tagged releases, so we would have to add an arbitrary
