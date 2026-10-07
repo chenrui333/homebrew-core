@@ -4,7 +4,7 @@ class Stubby < Formula
   url "https://github.com/getdnsapi/stubby/archive/refs/tags/v0.4.3.tar.gz"
   sha256 "99291ab4f09bce3743000ed3ecbf58961648a35ca955889f1c41d36810cc4463"
   license "BSD-3-Clause"
-  revision 1
+  revision 2
   head "https://github.com/getdnsapi/stubby.git", branch: "develop"
 
   bottle do
@@ -28,12 +28,6 @@ class Stubby < Formula
   depends_on "getdns"
   depends_on "libyaml"
 
-  on_macos do
-    depends_on "libidn2"
-    depends_on "openssl@3"
-    depends_on "unbound"
-  end
-
   on_linux do
     depends_on "bind" => :test
   end
@@ -45,6 +39,8 @@ class Stubby < Formula
       -DCMAKE_INSTALL_RUNSTATEDIR=#{var}/run/
       -DCMAKE_INSTALL_SYSCONFDIR=#{etc}
     ]
+    args << "-DCMAKE_EXE_LINKER_FLAGS=-Wl,-dead_strip_dylibs" if OS.mac?
+
     system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
