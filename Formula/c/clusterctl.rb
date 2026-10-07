@@ -17,12 +17,11 @@ class Clusterctl < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "9fed8498eda5ce9c5972e944467a192c466bd97b91a114bf8126536429194581"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "27f6ba0b6037612221d9e578d360b3a7f34af83338129d61a09571650f244661"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "999ecc0f49380498699a0d2916ee43a9eab060d3edb284f619d6d0f05339faec"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:      "b64cefdcc41658bbeca7366d0be4051a1b3ab80a7102724d66baf45e7685eab4"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "9ce259d8bf31178a02626913aeb66497e951ef6b5a29095c66bf6404658338d2"
-    sha256 cellar: :any,                 x86_64_linux:      "3bd5048a5cee0534c8f46471c327f77916cf3f5cfc43c3d8c33fddc46a2e460b"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "f5acf764e08379a0575f9b10e60950704b356382023644215665ea90217df2d0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "a340180f0483a6c6fa0733e39e4b50be6cb05e6d4f283db13b6ba7e72bf3bcaf"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "dd6e04196bab561948d42e860369fa142eb2ef6b8b25739d68cb8c07dcd9c127"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "2904c1b873e20a9642a33a41b9381a8a8d4e6fed7fa46a78506ea8476d3046d8"
+    sha256 cellar: :any,                 x86_64_linux:      "23407ef5f6e995398fb01dcfaebad3f82a0b7643279e06908dc8b8763482c20a"
   end
 
   depends_on "go" => :build
