@@ -1,8 +1,8 @@
 class Certstrap < Formula
   desc "Tools to bootstrap CAs, certificate requests, and signed certificates"
   homepage "https://github.com/square/certstrap"
-  url "https://github.com/square/certstrap/archive/refs/tags/v1.3.0.tar.gz"
-  sha256 "4b32289c20dfad7bf8ab653c200954b3b9981fcbf101b699ceb575c6e7661a90"
+  url "https://github.com/square/certstrap/archive/refs/tags/v1.4.0.tar.gz"
+  sha256 "10f1d123aa0ec066e3256741f1d945b5dfd2c61ca24855556e3a8db93b44d8c5"
   license "Apache-2.0"
   head "https://github.com/square/certstrap.git", branch: "master"
 
