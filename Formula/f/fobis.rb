@@ -3,8 +3,8 @@ class Fobis < Formula
 
   desc "KISS build tool for automatically building modern Fortran projects"
   homepage "https://github.com/szaghi/FoBiS"
-  url "https://files.pythonhosted.org/packages/fb/1d/8d75f8e564f3397dea25fe35aa0ff8bbc28df94eb7948e63d77aacecfb4c/fobis_py-3.9.5.tar.gz"
-  sha256 "16f440c5150e68252b3af0916f57129663d6864c38bdc1f181e3a5babe1cfe52"
+  url "https://files.pythonhosted.org/packages/2c/77/43e582025f673c48d88fb5f791b46682b48c9fabd3fb98af0e50679455cd/fobis_py-3.9.7.tar.gz"
+  sha256 "7893ec89c27e55e45f3412e03fc6df537a5aa0aa89f6c16adb314aab52c5b89e"
   license "GPL-3.0-or-later"
 
   bottle do
@@ -46,8 +46,8 @@ class Fobis < Formula
   end
 
   resource "typer" do
-    url "https://files.pythonhosted.org/packages/16/f7/57713ba479fd405eb76de31404b2c744c289e336b2d999511ebf51e496f7/typer-0.27.2.tar.gz"
-    sha256 "269b7eb9d3c202ca84b4bc9618cb04ebb43d3d4d1e567e4c768607232c05f945"
+    url "https://files.pythonhosted.org/packages/03/51/d33db42cc72ffd8c30777547b42d01f0cbf9d95a770457698d0174b3ed71/typer-0.27.3.tar.gz"
+    sha256 "d0396f770a560ab1b0a8504e13b5f254b728cedb05c61cf0359e944e50ce8901"
   end
 
   def install
