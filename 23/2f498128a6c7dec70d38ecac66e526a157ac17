@@ -1,0 +1,17 @@
+Formula/a/ansible.rb
+  h_9df9c32c3f321d 9
+Formula/a/ansible-lint.rb
+  h_9df9c32c3f321d 9
+  h_9df9c32c3f321d 35-36,45-46,65-66,85-86,105-106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "232f498128a6c7dec70d38ecac66e526a157ac17",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
