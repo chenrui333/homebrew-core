@@ -4,7 +4,7 @@ class Colmap < Formula
   url "https://github.com/colmap/colmap/archive/refs/tags/4.2.1.tar.gz"
   sha256 "15fb9e333541676e4ee9bc5d8ab95a3ed6e549a20eb13fc5aafd04ca06c76c88"
   license "BSD-3-Clause"
-  revision 1
+  revision 2
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "c409e9a23becb7d06c1e95c2b13ff72db84ce57b9add93c51edb507d5b092074"
@@ -31,7 +31,7 @@ class Colmap < Formula
   depends_on "onnx"
   depends_on "onnxruntime"
   depends_on "openimageio"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "qtbase"
   depends_on "qtsvg"
   depends_on "suite-sparse"
@@ -84,9 +84,7 @@ class Colmap < Formula
     # Fix library install directory and rpath
     inreplace "CMakeLists.txt", "LIBRARY DESTINATION thirdparty/", "LIBRARY DESTINATION lib/"
     args << "-DCMAKE_INSTALL_RPATH=#{loader_path};#{loader_path}/../libexec/poselib/lib"
-    # Set openssl@3 to avoid indirect linkage with openssl@4
-    # TODO: switch to openssl@4
-    args << "-DOPENSSL_ROOT_DIR=#{formula_opt_prefix("openssl@3")}"
+    args << "-DOPENSSL_ROOT_DIR=#{formula_opt_prefix("openssl@4")}"
 
     system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
     system "cmake", "--build", "build"
