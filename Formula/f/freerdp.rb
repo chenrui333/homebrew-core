@@ -4,6 +4,7 @@ class Freerdp < Formula
   url "https://github.com/FreeRDP/FreeRDP/archive/refs/tags/3.32.1.tar.gz"
   sha256 "8803dd26ec9660550252f255cf2d672a785ddd8f544bb475834993e96807c87f"
   license "Apache-2.0"
+  revision 1
   head "https://github.com/FreeRDP/FreeRDP.git", branch: "master"
 
   bottle do
@@ -31,7 +32,7 @@ class Freerdp < Formula
   depends_on "libxrandr"
   depends_on "libxrender"
   depends_on "libxv"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "sdl3"
   depends_on "sdl3_ttf"
   depends_on "uriparser"
