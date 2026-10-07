@@ -1,9 +1,9 @@
 class Unrtf < Formula
   desc "RTF to other formats converter"
   homepage "https://www.gnu.org/software/unrtf/"
-  url "https://ftpmirror.gnu.org/unrtf/unrtf-0.21.10.tar.gz"
-  mirror "https://ftp.gnu.org/gnu/unrtf/unrtf-0.21.10.tar.gz"
-  sha256 "b49f20211fa69fff97d42d6e782a62d7e2da670b064951f14bbff968c93734ae"
+  url "https://ftpmirror.gnu.org/unrtf/unrtf-0.21.12.tar.gz"
+  mirror "https://ftp.gnu.org/gnu/unrtf/unrtf-0.21.12.tar.gz"
+  sha256 "59ad6062fb1d7ab4d89dd0316a3cee19f5e719525a5387b6da6b69b3178e2098"
   license "GPL-3.0-or-later"
   head "https://hg.savannah.gnu.org/hgweb/unrtf/", using: :hg
 
@@ -25,6 +25,16 @@ class Unrtf < Formula
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
+
+  # Fix macOS build errors, MacPorts PR ref, https://github.com/macports/macports-ports/pull/34986
+  patch :p0 do
+    on_macos do
+      url "https://raw.githubusercontent.com/macports/macports-ports/658984b1c0c8032c32a27969853d7e958e9ae6e9/textproc/unrtf/files/patch-src_execdir.c.diff"
+      sha256 "66a8f3509bdf69899c8a8a2b7dfae94a1916b3e8778e69443ab89548a4d3ab84"
+      type :unofficial
+      resolves "https://github.com/macports/macports-ports/pull/34986"
+    end
+  end
 
   def install
     # C23 treats the upstream's unprototyped function pointers as zero-argument functions
