@@ -12,11 +12,11 @@ class Gleam < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "43c0e7ac7b4dda3f899b0ce4a89e23cf5f8d829130180684c3481a5f28c85d62"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "359923a3b342892a9a945c3d8e8bc22f43c9f6ea4aebae4366fd73c7cb5b5e08"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "40e7b87d5089603816e6af8487cf00c2715101d89ae4ace35de71ddf32df626c"
-    sha256 cellar: :any,                 arm64_linux:       "e9eae857c708ffe2f3bc6a7226e210f1e874801d67596ed54d0640670c76bec7"
-    sha256 cellar: :any,                 x86_64_linux:      "1997f6297b500e2314fdfbc35b929e90d8e8064395a700675d87a287a08d67e4"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "fab0af400c1bffce6a7384ca56a3fe352c891798a5094910fc0155121822bccc"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "eb204a0aae3973582352fd6890c02e99b106bc1cf766716af5dd8fe70f3711fb"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "089b9d69d4a5270fadf98a968c6fcd66bdd0e38aaea45bcd8e15f03998162bed"
+    sha256 cellar: :any,                 arm64_linux:       "607d1f280d570d441f9dd89d9bfe44809776f5476f5d2a37283c9655e2db3fed"
+    sha256 cellar: :any,                 x86_64_linux:      "b15bd0b5623d75ce8820d6f7041e0b466ab56f9404b76ba4f4dafdaeaa195dfc"
   end
 
   depends_on "pkgconf" => :build
