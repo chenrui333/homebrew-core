@@ -13,7 +13,7 @@ class Musikcube < Formula
     "bcrypt-Solar-Designer", # src/3rdparty/{include,src}/md5.*
     "blessing", # src/3rdparty/{include,src}/sqlite/sqlite3*
   ]
-  revision 1
+  revision 2
   head "https://github.com/clangen/musikcube.git", branch: "master"
 
   livecheck do
@@ -42,7 +42,7 @@ class Musikcube < Formula
   depends_on "libmicrohttpd"
   depends_on "libopenmpt"
   depends_on "ncurses"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "portaudio"
   depends_on "taglib"
 
