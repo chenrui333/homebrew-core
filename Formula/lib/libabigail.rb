@@ -1,8 +1,8 @@
 class Libabigail < Formula
   desc "ABI Generic Analysis and Instrumentation Library"
   homepage "https://sourceware.org/libabigail/"
-  url "https://mirrors.kernel.org/sourceware/libabigail/libabigail-2.10.tar.xz"
-  sha256 "0cc10e6471398330e001b9fe37f1e8c5108a9ab632b08ca9634d6c64bc380b78"
+  url "https://mirrors.kernel.org/sourceware/libabigail/libabigail-3.0.tar.xz"
+  sha256 "d34ea7c4b150f61e22edb1d16157e12c43fd18f8e8f09abce053d82ccaf92e06"
   license "Apache-2.0" => { with: "LLVM-exception" }
 
   livecheck do
