@@ -1,8 +1,8 @@
 class Wuppiefuzz < Formula
   desc "Coverage-guided REST API fuzzer developed on top of LibAFL"
   homepage "https://github.com/TNO-S3/WuppieFuzz"
-  url "https://github.com/TNO-S3/WuppieFuzz/releases/download/v1.7.1/source.tar.gz"
-  sha256 "93e3c143b90d552a2620211b866176cedfea58d263bf75331f2da550a55996f3"
+  url "https://github.com/TNO-S3/WuppieFuzz/releases/download/v1.8.0/source.tar.gz"
+  sha256 "8405309fc4b51fbabda282540c25605a00e741b4f3c0c73fe8e7a594ed23ca9c"
   license "Apache-2.0"
 
   bottle do
@@ -48,6 +48,6 @@ class Wuppiefuzz < Formula
     YAML
 
     output = shell_output("#{bin}/wuppiefuzz fuzz openapi.yaml 2>&1", 1)
-    assert_match "Error: Error parsing OpenAPI-file at openapi.yaml", output
+    assert_match "Error: Could not extract server URL from API spec", output
   end
 end
