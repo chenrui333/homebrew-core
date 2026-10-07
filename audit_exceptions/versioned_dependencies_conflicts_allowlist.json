@@ -3,11 +3,20 @@
   "cdxgen",
   "cyan",
   "dasht",
+  "dvisvgm",
   "hermes-agent",
   "hive",
   "klee",
+  "mysql-client@8.0",
+  "mysql-client@8.4",
+  "node@22",
   "opencoarrays",
+  "opensearch-dashboards",
   "pake",
+  "percona-server@8.4",
+  "pyenv-ccache",
   "rpki-client",
-  "tsung"
+  "texlive",
+  "tsung",
+  "undercutf1"
 ]
