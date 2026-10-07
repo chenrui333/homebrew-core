@@ -1,8 +1,8 @@
 class Kiesel < Formula
   desc "JavaScript engine written in Zig"
   homepage "https://kiesel.dev/"
-  url "https://codeberg.org/kiesel-js/kiesel/archive/0.3.0.tar.gz"
-  sha256 "ead71398e6a6f12266b73492ff2f8e9a8c76b0294ebda71cd0e11e634b4c8273"
+  url "https://codeberg.org/kiesel-js/kiesel/archive/0.4.0.tar.gz"
+  sha256 "8519832ad3214f0d534ca572a8f94d6b5034eb160e9054ba42247908fee0f937"
   license "MIT"
   head "https://codeberg.org/kiesel-js/kiesel.git", branch: "main"
 
