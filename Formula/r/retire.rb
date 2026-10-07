@@ -6,7 +6,7 @@ class Retire < Formula
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "bcb10ae3028a2512973c3f375988b51798be9331c015d33c11638e0d3026f282"
+    sha256 cellar: :any_skip_relocation, all: "16c2f979d60a8188221149ed396a3937b1f4dc40a015ae262aec06313aaf1e84"
   end
 
   depends_on "node"
