@@ -1,9 +1,9 @@
 class Groff < Formula
   desc "GNU troff text-formatting system"
   homepage "https://www.gnu.org/software/groff/"
-  url "https://ftpmirror.gnu.org/groff/groff-1.24.1.tar.gz"
-  mirror "https://ftp.gnu.org/gnu/groff/groff-1.24.1.tar.gz"
-  sha256 "74e2819795b6aff431aeac983d63a9c8968eeaba2a2eba7df8ba4c7b41e7cfd8"
+  url "https://ftpmirror.gnu.org/groff/groff-1.24.2.tar.gz"
+  mirror "https://ftp.gnu.org/gnu/groff/groff-1.24.2.tar.gz"
+  sha256 "f9c1efd5bebbe37fc6e1063db7473ce8df1e3e0be4ff0f43ce04fce57e9c5dd9"
   license "GPL-3.0-or-later"
   compatibility_version 1
 
@@ -34,12 +34,16 @@ class Groff < Formula
     depends_on "glib"
   end
 
+  deny_network_access!
+
   def install
     # Local config needs to survive upgrades
     inreplace "Makefile.in" do |s|
       s.change_make_var! "localfontdir", "@sysconfdir@/groff/site-font"
       s.change_make_var! "localtmacdir", "@sysconfdir@/groff/site-tmac"
     end
+    # Upstream still uses K&R function definitions, which do not compile as C23.
+    ENV["ac_cv_prog_cc_c23"] = "no"
     system "./configure", "--sysconfdir=#{etc}",
                           "--without-x",
                           "--with-uchardet",
