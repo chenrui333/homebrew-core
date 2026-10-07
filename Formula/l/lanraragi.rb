@@ -4,7 +4,7 @@ class Lanraragi < Formula
   url "https://github.com/Difegue/LANraragi/archive/refs/tags/v.0.9.81.tar.gz"
   sha256 "d4ded2cde7d30b5d565da8a0f85014a245cefe9a8f969a45aa0eec57854beadc"
   license "MIT"
-  revision 1
+  revision 2
   head "https://github.com/Difegue/LANraragi.git", branch: "dev"
 
   bottle do
@@ -25,7 +25,7 @@ class Lanraragi < Formula
   depends_on "libarchive"
   depends_on "libffi" # TODO: uses_from_macos when node supports it
   depends_on "node"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "perl" # perl >= 5.36.0
   depends_on "redis" # TODO: migrate to `valkey`
   depends_on "zstd"
@@ -40,6 +40,20 @@ class Lanraragi < Formula
     end
   end
 
+  # Temporary resource to patch
+  resource "Net::SSLeay" do
+    url "https://cpan.metacpan.org/authors/id/C/CH/CHRISN/Net-SSLeay-1.96.tar.gz"
+    sha256 "ab213691685fb2a576c669cbc8d9266f8165a31563ad15b7c4030b94adfc0753"
+
+    # Backport support for OpenSSL 4.0
+    patch do
+      url "https://github.com/radiator-software/p5-net-ssleay/commit/a55abab4a33b040fbd56cc18fde6c257af2928e2.patch?full_index=1"
+      sha256 "dd0fab47cfb05393ba1124f0b3fcbdf43cb346212ca145beed5aa8af9dfbd12d"
+      type :backport
+      resolves "https://github.com/radiator-software/p5-net-ssleay/pull/553"
+    end
+  end
+
   # The last stable release does not build with perl 5.44's stricter `xsubpp`
   # TODO: Remove this when the next release of this resource is out.
   resource "Sys::CpuAffinity" do
@@ -49,9 +63,10 @@ class Lanraragi < Formula
 
   def install
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
-    ENV["OPENSSL_PREFIX"] = formula_opt_prefix("openssl@3")
+    ENV["OPENSSL_PREFIX"] = formula_opt_prefix("openssl@4")
     ENV["ARCHIVE_LIBARCHIVE_LIB_DLL"] = formula_opt_lib("libarchive")/shared_library("libarchive")
     ENV["ALIEN_INSTALL_TYPE"] = "system"
+    ENV["PERL_MM_USE_DEFAULT"] = "1"
 
     imagemagick = Formula["imagemagick"]
     resource("Image::Magick").stage do
@@ -61,6 +76,11 @@ class Lanraragi < Formula
 
       system "perl", "Makefile.PL", "INSTALL_BASE=#{libexec}"
       system "make"
+      system "make", "install"
+    end
+
+    resource("Net::SSLeay").stage do
+      system "perl", "Makefile.PL", "INSTALL_BASE=#{libexec}"
       system "make", "install"
     end
 
