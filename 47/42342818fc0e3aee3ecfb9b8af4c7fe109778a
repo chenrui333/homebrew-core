@@ -1,0 +1,21 @@
+Formula/h/httptap.rb
+  s_87e9a83978736d::t_4e6a973b37837f 6-7,34-41,75-76,89-93,124
+  s_87e9a83978736d::t_7b96862ba00b93 16,123
+  s_87e9a83978736d::t_3df252c259006f 19-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4742342818fc0e3aee3ecfb9b8af4c7fe109778a",
+  "prompts": {},
+  "sessions": {
+    "s_87e9a83978736d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10d3b-5cdd-76d0-b05d-4b2d5929cf4c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": null
+    }
+  }
+}
