@@ -1,8 +1,8 @@
 class Ns3 < Formula
   desc "Discrete-event network simulator"
   homepage "https://www.nsnam.org/"
-  url "https://gitlab.com/nsnam/ns-3-dev/-/archive/ns-3.48/ns-3-dev-ns-3.48.tar.gz"
-  sha256 "23a4c2606281ca534e0d4ab4b90d47ed3d4f82f52c94667b890bbb90ea113e9e"
+  url "https://gitlab.com/nsnam/ns-3-dev/-/archive/ns-3.49/ns-3-dev-ns-3.49.tar.gz"
+  sha256 "da24e895f41f7480e3b80fce0f9eca76923de1ea8848b5fb72cdae5b24b94b79"
   license "GPL-2.0-only"
 
   bottle do
