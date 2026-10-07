@@ -4,7 +4,7 @@ class OpentelemetryCpp < Formula
   url "https://github.com/open-telemetry/opentelemetry-cpp/archive/refs/tags/v1.29.0.tar.gz"
   sha256 "63effc2b0aaef32c9543bd95c8c227f1c80da8248392a6d97e8a2c3ffbcf7ea1"
   license "Apache-2.0"
-  revision 1
+  revision 2
   head "https://github.com/open-telemetry/opentelemetry-cpp.git", branch: "main"
 
   bottle do
@@ -24,12 +24,6 @@ class OpentelemetryCpp < Formula
 
   uses_from_macos "curl"
 
-  on_macos do
-    depends_on "c-ares"
-    depends_on "openssl@3"
-    depends_on "re2"
-  end
-
   fails_with :gcc do
     version "12"
     cause "fails handling PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED"
@@ -43,22 +37,24 @@ class OpentelemetryCpp < Formula
   def install
     (buildpath/"opentelemetry-proto").install resource("opentelemetry-proto")
 
-    ENV.append "LDFLAGS", "-Wl,-undefined,dynamic_lookup" if OS.mac?
-    system "cmake", "-S", ".", "-B", "build",
-                    "-DBUILD_SHARED_LIBS=ON",
-                    "-DCMAKE_CXX_STANDARD=17", # Keep in sync with C++ standard in abseil.rb
-                    "-DCMAKE_INSTALL_RPATH=#{rpath}",
-                    "-DHOMEBREW_ALLOW_FETCHCONTENT=ON",
-                    "-DFETCHCONTENT_FULLY_DISCONNECTED=ON",
-                    "-DFETCHCONTENT_TRY_FIND_PACKAGE_MODE=ALWAYS",
-                    "-DOTELCPP_PROTO_PATH=#{buildpath}/opentelemetry-proto",
-                    "-DWITH_BENCHMARK=OFF",
-                    "-DWITH_ELASTICSEARCH=ON",
-                    "-DWITH_EXAMPLES=OFF",
-                    "-DWITH_OTLP_GRPC=ON",
-                    "-DWITH_OTLP_HTTP=ON",
-                    "-DWITH_PROMETHEUS=ON",
-                    *std_cmake_args
+    args = [
+      "-DBUILD_SHARED_LIBS=ON",
+      "-DCMAKE_CXX_STANDARD=17", # Keep in sync with C++ standard in abseil.rb
+      "-DCMAKE_INSTALL_RPATH=#{rpath}",
+      "-DHOMEBREW_ALLOW_FETCHCONTENT=ON",
+      "-DFETCHCONTENT_FULLY_DISCONNECTED=ON",
+      "-DFETCHCONTENT_TRY_FIND_PACKAGE_MODE=ALWAYS",
+      "-DOTELCPP_PROTO_PATH=#{buildpath}/opentelemetry-proto",
+      "-DWITH_BENCHMARK=OFF",
+      "-DWITH_ELASTICSEARCH=ON",
+      "-DWITH_EXAMPLES=OFF",
+      "-DWITH_OTLP_GRPC=ON",
+      "-DWITH_OTLP_HTTP=ON",
+      "-DWITH_PROMETHEUS=ON",
+    ]
+    args << "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-dead_strip_dylibs" if OS.mac?
+
+    system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end
