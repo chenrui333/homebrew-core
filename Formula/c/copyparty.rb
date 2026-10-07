@@ -8,11 +8,11 @@ class Copyparty < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "df9b7c8f3fa9bb61b287bc17a7b149e7bbb32432422b88ebf0c79c033fb72be4"
-    sha256 cellar: :any, arm64_tahoe:       "dbf673e4b9708a75ee3cbd100c994c5322236f257ad36a03d0f3e6f7e553a998"
-    sha256 cellar: :any, arm64_sequoia:     "90acfabfae7de2ce74c14620405eca9ee961305ff2dd77e2d9687ac60f28e51f"
-    sha256 cellar: :any, arm64_linux:       "26455d6880c3e63365bfd7fc3ed086e26c0f28f3c6fc3eebb7081b1256cfca15"
-    sha256 cellar: :any, x86_64_linux:      "baa314448e7310d36894559e91c757329492820967cf8e91dc43c12633eebe5c"
+    sha256 cellar: :any, arm64_golden_gate: "cf3701b77bd690386c3eebf7d87ade0079f2372316fd6428e7a5b092b123b058"
+    sha256 cellar: :any, arm64_tahoe:       "8c44e01cc179dc1ca9a626111769746f40f902e98604e5977441597e4c8d0d9f"
+    sha256 cellar: :any, arm64_sequoia:     "384e61c21e164f0b657e9d2162a049ab0e41b92e3a483e8e7bb34e52b44a92fc"
+    sha256 cellar: :any, arm64_linux:       "6c297f7abc6d77db9262b80b03c680bc85dcc2b4dcdd2a247052bcbed7b40777"
+    sha256 cellar: :any, x86_64_linux:      "ddb4f128b202155def49d3b4f7eb2a1d958e19101a2fdef73876f1f6adeca3ed"
   end
 
   # `pkgconf` and `rust` are for bcrypt
