@@ -3,12 +3,12 @@ class Httptap < Formula
 
   desc "HTTP request visualizer with phase-by-phase timing breakdown"
   homepage "https://docs.httptap.dev/"
-  url "https://files.pythonhosted.org/packages/73/50/436cbcc5e65cb5b64076386981c92cf0563ce7909d4754c7ff2664fce08c/httptap-0.7.0.tar.gz"
-  sha256 "33499a9e1fe7404b304d50ecc490b0a0462b9f4c78449ad2c3ceb01aa46d1aed"
+  url "https://files.pythonhosted.org/packages/92/6c/6b1f118c33b677d0598c4b7bda37a2d6233bebabc09ee44d2dc46fab3084/httptap-0.8.0.tar.gz"
+  sha256 "b5d620866a4ecb1cfde498353c5dc35d4708de0858eea49474ebdf8b118f19c1"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "30fd87d81b76783cea27ae62923f4f8076d84a744697cfb5b027cc83eb449d03"
+    sha256 cellar: :any_skip_relocation, all: "ef79d374772951885385822454ba30bfd8066701996bb82a70b05df5536cfda7"
   end
 
   depends_on "rust" => :build
