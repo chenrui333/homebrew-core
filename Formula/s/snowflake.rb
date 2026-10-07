@@ -1,8 +1,8 @@
 class Snowflake < Formula
   desc "Pluggable Transport using WebRTC, inspired by Flashproxy"
   homepage "https://www.torproject.org"
-  url "https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/archive/v2.14.1/snowflake-v2.14.1.tar.gz"
-  sha256 "39aa853c9bf966ac606456b4f357631470b4bee970e256a20eab54cba8a55d2f"
+  url "https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/archive/v2.15.1/snowflake-v2.15.1.tar.gz"
+  sha256 "d2577fbded08bc37d9093c26c1ca142d3736137d914da11b0f55f446ba4c7a1f"
   license "BSD-3-Clause"
   head "https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake.git", branch: "main"
 
