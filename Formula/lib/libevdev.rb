@@ -6,8 +6,8 @@ class Libevdev < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any, arm64_linux:  "341e16ad15b34c000d1c50d7ebbadf77ff4482ced4e55d8863032417dce60f03"
-    sha256 cellar: :any, x86_64_linux: "28468dd362b31343eff6116d5943cc7ef917763bb627bb6cab6bc93c5b5d7c95"
+    sha256 cellar: :any, arm64_linux:  "73e7c8138dd0955c482fa9e6fd87bbdfb89a3045b75deb1f4b4fda8a33d69bdd"
+    sha256 cellar: :any, x86_64_linux: "92d31e986391308838c15131b8bc4acb64c0399ea85387cfae58ffacae3261e1"
   end
 
   depends_on "pkgconf" => :build
