@@ -1,7 +1,11 @@
 [
   "apt",
+  "cdxgen",
+  "cyan",
   "dasht",
+  "hermes-agent",
   "hive",
+  "klee",
   "opencoarrays",
   "pake",
   "rpki-client",
