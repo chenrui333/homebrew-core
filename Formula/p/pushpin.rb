@@ -4,6 +4,7 @@ class Pushpin < Formula
   url "https://github.com/fastly/pushpin/releases/download/v1.42.0/pushpin-1.42.0.tar.bz2"
   sha256 "9ac513757b41511d26cde151b61894201903e73ec003877f667e9c2d1307184e"
   license "Apache-2.0"
+  revision 1
   head "https://github.com/fastly/pushpin.git", branch: "main"
 
   bottle do
@@ -19,12 +20,12 @@ class Pushpin < Formula
   depends_on "pkgconf" => :build
   depends_on "rust" => :build
 
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "python@3.14"
   depends_on "qtbase"
   depends_on "zeromq"
 
-  # `cargo update --precise 0.9.114 openssl-sys` for minimum needed to use OpenSSL 4
+  # Update to openssl 0.10.78 and openssl-sys 0.9.114 for minimum needed to use OpenSSL 4
   patch :DATA
 
   allow_network_access! :test
@@ -134,9 +135,21 @@ end
 
 __END__
 diff --git a/Cargo.lock b/Cargo.lock
-index 4f329199..3bf51d94 100644
+index 4f329199..dd3a29fa 100644
 --- a/Cargo.lock
 +++ b/Cargo.lock
+@@ -1146,9 +1146,9 @@ checksum = "0ab1bc2a289d34bd04a330323ac98a1b4bc82c9d9fcb1e66b63caa84da26b575"
+ 
+ [[package]]
+ name = "openssl"
+-version = "0.10.72"
++version = "0.10.78"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "fedfea7d58a1f73118430a55da6a286e7b044961736ce96a16a17068ea25e5da"
++checksum = "f38c4372413cdaaf3cc79dd92d29d7d9f5ab09b51b10dded508fb90bb70b9222"
+ dependencies = [
+  "bitflags 2.9.0",
+  "cfg-if",
 @@ -1178,9 +1178,9 @@ checksum = "ff011a302c396a5197692431fc1948019154afc178baf7d8e37367442a4601cf"
  
  [[package]]
@@ -149,3 +162,16 @@ index 4f329199..3bf51d94 100644
  dependencies = [
   "cc",
   "libc",
+diff --git a/Cargo.toml b/Cargo.toml
+index eec44fd2..1b7c0fc8 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -82,7 +82,7 @@ log = "0.4"
+ miniz_oxide = "0.6"
+ mio = { version = "1", features = ["os-poll", "os-ext", "net"] }
+ notify = "7"
+-openssl = "=0.10.72"
++openssl = "=0.10.78"
+ paste = "1.0"
+ prometheus = { version = "0.13", default-features = false }
+ rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12"] }
