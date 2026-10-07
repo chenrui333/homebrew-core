@@ -1,10 +1,9 @@
 class Far2lTty < Formula
   desc "Unix TTY port of FAR Manager v2 (with NetRocks support)"
   homepage "https://github.com/elfmz/far2l"
-  url "https://github.com/elfmz/far2l/archive/refs/tags/v_2.9.0.tar.gz"
-  sha256 "69a5218fcfd072a2d4b99ecac8363a67d85f2fd67b65243f8ea7b239bb134ed0"
+  url "https://github.com/elfmz/far2l/archive/refs/tags/v_2.9.1.tar.gz"
+  sha256 "a28d647f12b17fce3a89e939ce036fe4ef0d4fb1a9fc7c44fe27d292021522e4"
   license "GPL-2.0-only"
-  revision 4
 
   livecheck do
     url :stable
