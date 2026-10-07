@@ -1,10 +1,9 @@
 class Monetdb < Formula
   desc "Column-store database"
   homepage "https://www.monetdb.org/"
-  url "https://www.monetdb.org/downloads/sources/Dec2025-SP2/MonetDB-11.55.5.tar.xz"
-  sha256 "480c921a45b54c610dee9a17147f0e89ae74c31516b9250e5c8f2371e1bd70c2"
+  url "https://www.monetdb.org/downloads/sources/Dec2025-SP4/MonetDB-11.55.9.tar.xz"
+  sha256 "c2edb5a930fc0c5aaf7fe1cac34be2bb125a1e52ee5fbdf1df9a993cc526cffe"
   license "MPL-2.0"
-  revision 1
   head "https://www.monetdb.org/hg/MonetDB", using: :hg
 
   livecheck do
@@ -43,32 +42,33 @@ class Monetdb < Formula
   deny_network_access!
 
   def install
-    system "cmake", "-S", ".", "-B", "build",
-                    "-DRELEASE_VERSION=ON",
-                    "-DASSERT=OFF",
-                    "-DSTRICT=OFF",
-                    "-DTESTING=OFF",
-                    "-DFITS=OFF",
-                    "-DGEOM=OFF",
-                    "-DNETCDF=OFF",
-                    "-DODBC=OFF",
-                    "-DPY3INTEGRATION=OFF",
-                    "-DRINTEGRATION=OFF",
-                    "-DSHP=OFF",
-                    "-DWITH_BZ2=ON",
-                    "-DWITH_CMOCKA=OFF",
-                    "-DWITH_CURL=ON",
-                    "-DWITH_LZ4=ON",
-                    "-DWITH_LZMA=ON",
-                    "-DWITH_OPENSSL=ON",
-                    "-DWITH_PCRE=ON",
-                    "-DWITH_PROJ=OFF",
-                    "-DWITH_RTREE=OFF",
-                    "-DWITH_SQLPARSE=OFF",
-                    "-DWITH_VALGRIND=OFF",
-                    "-DWITH_XML2=ON",
-                    "-DWITH_ZLIB=ON",
-                    *std_cmake_args
+    args = %w[
+      -DRELEASE_VERSION=ON
+      -DASSERT=OFF
+      -DSTRICT=OFF
+      -DTESTING=OFF
+      -DFITS=OFF
+      -DGEOM=OFF
+      -DNETCDF=OFF
+      -DODBC=OFF
+      -DPY3INTEGRATION=OFF
+      -DRINTEGRATION=OFF
+      -DSHP=OFF
+      -DWITH_BZ2=ON
+      -DWITH_CMOCKA=OFF
+      -DWITH_CURL=ON
+      -DWITH_LZ4=ON
+      -DWITH_LZMA=ON
+      -DWITH_OPENSSL=ON
+      -DWITH_PCRE=ON
+      -DWITH_PROJ=OFF
+      -DWITH_RTREE=OFF
+      -DWITH_SQLPARSE=OFF
+      -DWITH_VALGRIND=OFF
+      -DWITH_XML2=ON
+      -DWITH_ZLIB=ON
+    ]
+    system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
     # remove reference to shims directory from compilation/linking info
     inreplace "build/tools/mserver/monet_version.c", %r{"/[^ ]*/}, "\""
     system "cmake", "--build", "build"
