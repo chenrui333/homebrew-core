@@ -3,10 +3,9 @@ class Dxpy < Formula
 
   desc "DNAnexus toolkit utilities and platform API bindings for Python"
   homepage "https://github.com/dnanexus/dx-toolkit"
-  url "https://files.pythonhosted.org/packages/98/98/7f8504aa4b04172fb73e8226696349111a92221db85016e6baf4e258f319/dxpy-0.415.0.tar.gz"
-  sha256 "62ca97b746e673da5428f0ab1cb2517aaed324173c340b1a2039dbdf5e3befd2"
+  url "https://files.pythonhosted.org/packages/2a/9b/979fd7e0644dc270e91b165dc60c88fc885750aa7665d869ab7e3fd96e2d/dxpy-0.416.0.tar.gz"
+  sha256 "d93bef77f30a4afcef32fba056c9624b6f0c73129360fa02089b7f51736f18a5"
   license "Apache-2.0"
-  revision 2
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "dd3726243c003bc852cd177b1f5e53fa9d0ed0428fdc1a895edd4233fc248270"
@@ -28,13 +27,6 @@ class Dxpy < Formula
   depends_on "certifi" => :no_linkage
   depends_on "cryptography" => :no_linkage
   depends_on "python@3.14"
-  depends_on "s2n"
-
-  on_macos do
-    depends_on "aws-c-compression"
-    depends_on "aws-c-sdkutils"
-    depends_on "openssl@3"
-  end
 
   conflicts_with "deno", because: "both install `dx` binaries"
 
@@ -88,6 +80,8 @@ class Dxpy < Formula
   def install
     ENV["AWS_CRT_BUILD_USE_SYSTEM_LIBCRYPTO"] = "1"
     ENV["AWS_CRT_BUILD_USE_SYSTEM_LIBS"] = "1"
+    # Avoid overlinking to aws-c-* indirect dependencies
+    ENV.append "LDFLAGS", "-Wl,-dead_strip_dylibs" if OS.mac?
 
     virtualenv_install_with_resources
   end
