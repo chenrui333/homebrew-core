@@ -6,13 +6,11 @@ class Ns3 < Formula
   license "GPL-2.0-only"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "02d1e905677625b5440c9689375f85cd88c7332b75335b9fa550c9cf0ee1cd13"
-    sha256               arm64_tahoe:       "7f01602985607329ad35fa27eadcd484c8b8f26a5642c92836c31c297995f9bf"
-    sha256               arm64_sequoia:     "6dfa93ac72c007e371a363cd1956effaa3cd2a542b2dbed2b45c57c38d4d3547"
-    sha256               arm64_sonoma:      "9b9a0e7ae9ac9ffcfa010c55cbb87eb3a77ae702b0e75c945ba24622ceb802f6"
-    sha256               sonoma:            "19e4aafa35b9e75b371921013c70e42404cdc6c9f77fbcb480bc94bb81d9af95"
-    sha256 cellar: :any, arm64_linux:       "86cb6535b65f1f125def0b5a55ebba9e334a9dcf47ec083c2396bd922d6739ba"
-    sha256 cellar: :any, x86_64_linux:      "f55522488a2ee0e0aa53cfe92a392ca7a3e032d2248d3176a571926725fe6f37"
+    sha256 cellar: :any, arm64_golden_gate: "fb65040d542a2f21533f9e0afcd390fe2a436bdbe0f3259651f4b891d73e406c"
+    sha256 cellar: :any, arm64_tahoe:       "d01683a47fd26a044b332e19e3b9d2d60186b64a4da672ccd57ac05a5aac5cbb"
+    sha256 cellar: :any, arm64_sequoia:     "ad22693e94e385f84e5297e3820739a5924f787a08da6a252d997625f3c22050"
+    sha256 cellar: :any, arm64_linux:       "4947b637932d89a9b32e1fd26250e08395d6a647c292a1e735805b38064dad76"
+    sha256 cellar: :any, x86_64_linux:      "0c81810016d928de6580040fc11d7c56ec0edef850d77779f8321abf68bb9af8"
   end
 
   depends_on "boost" => :build
