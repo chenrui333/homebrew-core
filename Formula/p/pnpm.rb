@@ -1,8 +1,8 @@
 class Pnpm < Formula
   desc "Fast, disk space efficient package manager"
   homepage "https://pnpm.io/"
-  url "https://github.com/pnpm/pnpm/archive/refs/tags/v12.9.1.tar.gz"
-  sha256 "2825644fb41a3d8135e877ae67ab435a8f6d2b4fe40390f3b2a3534d7e69c565"
+  url "https://github.com/pnpm/pnpm/archive/refs/tags/v12.10.1.tar.gz"
+  sha256 "397c34bc0b6b17f2aacdbd13a1264a1cd93faadce68eafa0ef9056fdfc565960"
   license "MIT"
   compatibility_version 1
   head "https://github.com/pnpm/pnpm.git", branch: "main"
@@ -22,6 +22,8 @@ class Pnpm < Formula
     sha256 cellar: :any,                 x86_64_linux:      "7123b8ddf5637980ca5f2b46e47af15bcdbbe6277eaf68f020b975f65a8d9d6e"
   end
 
+  depends_on "esbuild" => :build
+  depends_on "node" => :build
   depends_on "rust" => :build
 
   conflicts_with "corepack", because: "both install `pnpm` and `pnpx` binaries"
@@ -31,9 +33,20 @@ class Pnpm < Formula
   def fetch
     rm ".cargo/config.toml"
     system "cargo", "fetch", *std_cargo_fetch_args
+    cd "pnpm/esm-loader" do
+      inreplace "package.json" do |s|
+        s.gsub! '"enhanced-resolve": "catalog:"', '"enhanced-resolve": "5.26.0"'
+        s.gsub! '"esbuild": "catalog:"', "\"esbuild\": \"#{Formula["esbuild"].version}\""
+      end
+      system "npm", "install", "--workspaces=false", "--omit=optional",
+                    *std_npm_args(prefix: false)
+    end
   end
 
   def install
+    ENV["ESBUILD_BINARY_PATH"] = formula_opt_bin("esbuild")/"esbuild"
+    system "node", "pnpm/esm-loader/scripts/bundle-runtime.mjs"
+
     system "cargo", "install", *std_cargo_args(path: "pnpm/crates/cli")
 
     # Upstream ships these beside the binary as shell scripts rather than
