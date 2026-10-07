@@ -6,8 +6,8 @@ class InotifyTools < Formula
   license "GPL-2.0-or-later"
 
   bottle do
-    sha256 cellar: :any, arm64_linux:  "9a6a10c5eceed083b5f851edb11ecc2d44a847179049222d1d853c5c6763763d"
-    sha256 cellar: :any, x86_64_linux: "7115abd26e02cd69c6b21804aa307a6be28434409dda9f9fcdfcb1440980f9ba"
+    sha256 cellar: :any, arm64_linux:  "7ca9491a0af0d525706804a5718282923387992924828b4c2bbd00a5aa85c452"
+    sha256 cellar: :any, x86_64_linux: "9d2d8098be995b21af0e513ab868f05823bacd3e1999a30e98c2de60ed054e23"
   end
 
   depends_on "rust" => :build
