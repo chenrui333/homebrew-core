@@ -3,8 +3,8 @@ class Cfripper < Formula
 
   desc "Library and CLI tool to analyse CloudFormation templates for security issues"
   homepage "https://cfripper.readthedocs.io"
-  url "https://files.pythonhosted.org/packages/7b/61/48e61b6e219578d6ac66fb4ed7411a0fbfee98f5a4026296752aff5abe50/cfripper-1.21.2.tar.gz"
-  sha256 "6e567a9427b8633895024e3a5062e785bb02b0b63b230f88fecb9e354e5064da"
+  url "https://files.pythonhosted.org/packages/0c/54/4e03575ddafc851ef12c66b8a2854cd7b304d3c624f61bc7a3c46e7e6cfd/cfripper-1.22.0.tar.gz"
+  sha256 "adba090dc2ac917538899d5753d930b62558d1b73d5cfb3eb11ac724f89a25e0"
   license "Apache-2.0"
 
   bottle do
@@ -22,13 +22,13 @@ class Cfripper < Formula
   pypi_packages exclude_packages: "pydantic"
 
   resource "boto3" do
-    url "https://files.pythonhosted.org/packages/2a/c4/c68d22d91482898f1294dab7541ad83f8bcf9df83107e6d8436d6e9dbf01/boto3-1.43.107.tar.gz"
-    sha256 "c4e0f1a0295cbb7103f2950128cf88463c076d220080a7d0f127cf834969fc3a"
+    url "https://files.pythonhosted.org/packages/48/59/fb93b6ebd9ad43eb9a58c7a6da51a0fe24ab0c04bc4d534a0bfc5eba7f59/boto3-1.43.108.tar.gz"
+    sha256 "03341f089158368acf83e921aca98b706095322ca52bc4c039a616940aa5ad41"
   end
 
   resource "botocore" do
-    url "https://files.pythonhosted.org/packages/4d/22/3aed44a1e0b9820485124a9ad25e9bccd5539c547ef12827547c3cbeb25f/botocore-1.43.107.tar.gz"
-    sha256 "4a37fa072a00280c746313532d19b00e2dc53f1993222601df104d71d548d5b6"
+    url "https://files.pythonhosted.org/packages/61/16/6b4477f433da2c11193802f538330ce080076c2f38d817ad437ed3cd1465/botocore-1.43.108.tar.gz"
+    sha256 "ee4f75cf3bdbb0da7912e089950e8112f692016539d939312c771499958e6cfd"
   end
 
   resource "cfn-flip" do
