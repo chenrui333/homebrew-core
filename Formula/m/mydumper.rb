@@ -1,10 +1,9 @@
 class Mydumper < Formula
   desc "MySQL logical backup tool"
   homepage "https://github.com/mydumper/mydumper"
-  url "https://github.com/mydumper/mydumper/archive/refs/tags/v1.0.5-1.tar.gz"
-  sha256 "2c2307f1655728b59a6874cf6ccbe85ffea26977fb698eaf62a56976bcf5991f"
+  url "https://github.com/mydumper/mydumper/archive/refs/tags/v1.0.9-1.tar.gz"
+  sha256 "501721d12108004f24e2a9d53d0019499f946e39d374900fb2de34ba2bbecdab"
   license "GPL-3.0-or-later"
-  revision 1
   head "https://github.com/mydumper/mydumper.git", branch: "master"
 
   livecheck do
@@ -28,6 +27,14 @@ class Mydumper < Formula
   depends_on "mariadb-connector-c"
   depends_on "pcre2"
 
+  # Use portable close-on-exec pipes, upstream PR ref, https://github.com/mydumper/mydumper/pull/2363
+  patch do
+    url "https://github.com/mydumper/mydumper/commit/585fc5ab687e6a57694490177d52bc9dda47bed9.patch?full_index=1"
+    sha256 "e46de97c4ae0eb34a4ca6234a8f4fa7f762266d9ada0ea635787242eb0c17921"
+    type :unofficial
+    resolves "https://github.com/mydumper/mydumper/pull/2363"
+  end
+
   deny_network_access!
 
   def install
@@ -47,6 +54,7 @@ class Mydumper < Formula
   end
 
   test do
-    system bin/"mydumper", "--help"
+    assert_match "metadata file was not found",
+                 shell_output("#{bin}/myloader --directory=#{testpath} 2>&1", 1)
   end
 end
