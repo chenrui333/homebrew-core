@@ -14,13 +14,11 @@ class Openssh < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "a6e570a6db2e595e18c9543a499f8079d6aaf85cb2f949ce122bd792c3526018"
-    sha256 arm64_tahoe:       "4c2ccf5627e6f828305f242128b8763bb9360d28ea13a5e3c565a0a8f1a36a1b"
-    sha256 arm64_sequoia:     "32a4774dd72242b4a9edc85ef9ac3da1e0a6b890fc5fe794759b25161c03ccd5"
-    sha256 arm64_sonoma:      "eb91e04da08f67b0b52d5dd6991bf511478ab267ebe8ee3d2532d5cbcd5f3645"
-    sha256 sonoma:            "9c3f633ef50138f4dd704567cf80857d4c17a0f03d451c7ef407be80d93ae988"
-    sha256 arm64_linux:       "f8ba944aeedf80c1260a6b746f73c016a804e95e9f24d4b7df20af5124566641"
-    sha256 x86_64_linux:      "7884435d1290c3f9a890cd55c97dc72b23a6ac657d2772f6b4bbf6f56098c9bc"
+    sha256 arm64_golden_gate: "8baeec2bb77a8645ae5d22c46f412e103f72b57bc6740cac038874a9a4274e4a"
+    sha256 arm64_tahoe:       "dc2c280852ca0254806901b26d5d52ec107cb7ddf40d5d6f90f8085d26eba2df"
+    sha256 arm64_sequoia:     "042e7bf6e6a8d384811cab3ca61160daad4f69f47edcdd34a50f0a521ca08abb"
+    sha256 arm64_linux:       "44d462f90e23eaaeac594951c9023cc4409050d7d12a1863df57fad558f8c592"
+    sha256 x86_64_linux:      "e7976aae0d5fa3b9c1a5305d02a0562f91b9ee7f7479a88431e3922c29688c89"
   end
 
   # Please don't resubmit the keychain patch option. It will never be accepted.
