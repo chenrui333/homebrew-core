@@ -4,6 +4,7 @@ class Mapnik < Formula
   url "https://github.com/mapnik/mapnik/releases/download/v4.3.2/mapnik-v4.3.2.tar.bz2"
   sha256 "1858a9d57f4d2007d717ea84af23bcb32bd984fbc635426b79124fe9f7a682c4"
   license "LGPL-2.1-or-later"
+  revision 1
   head "https://github.com/mapnik/mapnik.git", branch: "master"
 
   livecheck do
@@ -33,7 +34,7 @@ class Mapnik < Formula
   depends_on "libpq"
   depends_on "libtiff"
   depends_on "libxml2"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "proj"
   depends_on "protozero"
   depends_on "sqlite"
