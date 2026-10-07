@@ -1,8 +1,8 @@
 class Seal < Formula
   desc "Easy-to-use homomorphic encryption library"
   homepage "https://github.com/microsoft/SEAL"
-  url "https://github.com/microsoft/SEAL/archive/refs/tags/v4.4.5.tar.gz"
-  sha256 "2ed7528b33c08589cfd0a8e964d8f68ca3fdc5293d25423c6ac6e67526916e06"
+  url "https://github.com/microsoft/SEAL/archive/refs/tags/v4.5.0.tar.gz"
+  sha256 "71bc8384effdc91350040a728319baf7d49732a92faf93b2508bb428b0e780b8"
   license "MIT"
 
   bottle do
@@ -19,6 +19,10 @@ class Seal < Formula
 
   on_linux do
     depends_on "zlib-ng-compat"
+  end
+
+  on_intel do
+    depends_on "cpu_features"
   end
 
   resource "hexl" do
