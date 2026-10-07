@@ -1,8 +1,8 @@
 class Joern < Formula
   desc "Open-source code analysis platform based on code property graphs"
   homepage "https://joern.io/"
-  url "https://github.com/joernio/joern/archive/refs/tags/v4.0.640.tar.gz"
-  sha256 "8996100d3225b50b2fbcfee971176b05d5ba40df8003d05efaa1b5da6a624d5f"
+  url "https://github.com/joernio/joern/archive/refs/tags/v4.0.650.tar.gz"
+  sha256 "0eafbbcd36809c1a1255ec8393cb6707fb0a1f9064700eb317f03be118ad75ae"
   license "Apache-2.0"
 
   livecheck do
@@ -30,7 +30,7 @@ class Joern < Formula
   end
 
   def install
-    system "sbt", "stage"
+    system "sbt", "--server", "stage"
 
     cd "joern-cli/target/universal/stage" do
       rm(Dir["**/*.bat"])
