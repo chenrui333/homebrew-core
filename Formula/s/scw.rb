@@ -1,8 +1,8 @@
 class Scw < Formula
   desc "Command-line Interface for Scaleway"
   homepage "https://www.scaleway.com/en/cli/"
-  url "https://github.com/scaleway/scaleway-cli/archive/refs/tags/v2.64.0.tar.gz"
-  sha256 "80112419dc52b40c1da36b71dd58821fd14da6aa7a5c133ce84f3405d5f95433"
+  url "https://github.com/scaleway/scaleway-cli/archive/refs/tags/v2.65.0.tar.gz"
+  sha256 "60b1da3b4040be8ace2baaaea8dae1f2fa2614424cca0963bc814a6b60471352"
   license "Apache-2.0"
 
   livecheck do
@@ -19,6 +19,14 @@ class Scw < Formula
   end
 
   depends_on "go" => :build
+
+  # Avoid looking for the module root at CLI startup, upstream PR ref, https://github.com/scaleway/scaleway-cli/pull/6379
+  patch do
+    url "https://github.com/scaleway/scaleway-cli/commit/39dc3996fbd9ae8ceef04af41bda8261d11a12b5.patch?full_index=1"
+    sha256 "bf3b72864cb2e93bd8fbb3fef100a6bad2241c91b46f6a2d6179e831bd55e9e9"
+    type :backport
+    resolves "https://github.com/scaleway/scaleway-cli/pull/6379"
+  end
 
   deny_network_access!
 
