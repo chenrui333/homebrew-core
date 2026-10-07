@@ -12,12 +12,11 @@ class Azurehound < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "b451499d6f4066007c4dc4c1939ff6c59e9c8b56121a84fef5d2987cc90331c7"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "b451499d6f4066007c4dc4c1939ff6c59e9c8b56121a84fef5d2987cc90331c7"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "b451499d6f4066007c4dc4c1939ff6c59e9c8b56121a84fef5d2987cc90331c7"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:      "b451499d6f4066007c4dc4c1939ff6c59e9c8b56121a84fef5d2987cc90331c7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "f0c79b9b2df8f36336e0ccad2aa30381184f2ab74a2fa2d17215585ac5c74ea5"
-    sha256 cellar: :any,                 x86_64_linux:      "d21113350ac49a63fdfc644f8e4a65407ebd8c2b905c70269420c7673264a59a"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "0533174698ec77990c5798974a602cb7cbeee68e4646e391c21dcf8df9e9fb43"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "0533174698ec77990c5798974a602cb7cbeee68e4646e391c21dcf8df9e9fb43"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "0533174698ec77990c5798974a602cb7cbeee68e4646e391c21dcf8df9e9fb43"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "a18ec0e4e38d9eb620e84998102dda4acb2d8c2bd319b40498d2a1dd2cd6e24f"
+    sha256 cellar: :any,                 x86_64_linux:      "6399c058ba0d3d2e0211dae34f731a1b9bc2764d7d526986ba8a94c565bfd72d"
   end
 
   depends_on "go" => :build
