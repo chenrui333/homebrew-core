@@ -1,8 +1,8 @@
 class Bazel < Formula
   desc "Google's own build tool"
   homepage "https://bazel.build/"
-  url "https://github.com/bazelbuild/bazel/releases/download/9.2.0/bazel-9.2.0-dist.zip"
-  sha256 "81af02b33128ec1922c6b60212df3fb6150baa96bb33d32ffa020e5fed47fefc"
+  url "https://github.com/bazelbuild/bazel/releases/download/9.3.0/bazel-9.3.0-dist.zip"
+  sha256 "2574404ada2d6dbbda58b02aa88b17c479763790e18cb875078c40c849cf6710"
   license "Apache-2.0"
 
   livecheck do
@@ -52,6 +52,8 @@ class Bazel < Formula
     # Force Bazel to use brewed OpenJDK and PATH
     extra_bazel_args = %w[--tool_java_runtime_version=local_jdk --action_env=PATH --host_action_env=PATH --isatty=no]
     extra_bazel_args << "--macos_minimum_os=#{MacOS.version}" if OS.mac?
+    # Bootstrap skips .bazelrc, which disables apple_support's layering_check that grpc fails
+    extra_bazel_args << "--repo_env=APPLE_SUPPORT_LAYERING_CHECK_BETA=0" if OS.mac?
     ENV.merge! java_home_env.transform_keys(&:to_s)
     # Bazel clears environment variables which breaks superenv shims
     ENV.remove "PATH", Superenv.shims_path
