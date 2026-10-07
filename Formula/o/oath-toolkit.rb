@@ -5,7 +5,7 @@ class OathToolkit < Formula
   mirror "https://download-mirror.savannah.gnu.org/releases/oath-toolkit/oath-toolkit-2.6.14.tar.gz"
   sha256 "8b1da365759f1249be57a82aec6e107f7b57dc77d813f96dc0aaf81624f28971"
   license all_of: ["GPL-3.0-or-later", "LGPL-2.1-or-later"]
-  revision 3
+  revision 4
 
   livecheck do
     url "https://download.savannah.gnu.org/releases/oath-toolkit/"
@@ -35,11 +35,11 @@ class OathToolkit < Formula
 
   depends_on "libxml2"
   depends_on "libxmlsec1"
-  depends_on "openssl@3"
 
   def install
-    system "autoreconf", "--force", "--install", "--verbose" if build.head?
+    ENV.append "LDFLAGS", "-Wl,-dead_strip_dylibs" if OS.mac? # avoid openssl linkage
 
+    system "autoreconf", "--force", "--install", "--verbose" if build.head?
     system "./configure", *std_configure_args
     system "make"
     system "make", "install"
