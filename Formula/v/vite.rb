@@ -6,11 +6,11 @@ class Vite < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_golden_gate: "60cfcebc4778e75f44ba47d7e11fbdd7570ab1f50b662839e37f6bd53acf64b9"
-    sha256 cellar: :any,                 arm64_tahoe:       "60cfcebc4778e75f44ba47d7e11fbdd7570ab1f50b662839e37f6bd53acf64b9"
-    sha256 cellar: :any,                 arm64_sequoia:     "60cfcebc4778e75f44ba47d7e11fbdd7570ab1f50b662839e37f6bd53acf64b9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "3b1ddfbdec92b3670781c99c89540a3df48a4429ad013ccf3cafcd59ecc3c4ff"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "6f1a83282f720e77b0cfab54e553e84983833bd50f813664141c984ffbb4d3bd"
+    sha256 cellar: :any,                 arm64_golden_gate: "e3b5aac7af62d6051cee40bcde3e2c4f9aea10dcd34b27e17ef06450fc1ca2a4"
+    sha256 cellar: :any,                 arm64_tahoe:       "e3b5aac7af62d6051cee40bcde3e2c4f9aea10dcd34b27e17ef06450fc1ca2a4"
+    sha256 cellar: :any,                 arm64_sequoia:     "e3b5aac7af62d6051cee40bcde3e2c4f9aea10dcd34b27e17ef06450fc1ca2a4"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "beed5b3a816654e629c8900db579df89aefb50787f81864bd6f917c78da92258"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "107c2e6e67ade47b02fa69c1707127cb26f7480be5c7253247c0842a60ebf5b4"
   end
 
   depends_on "node"
