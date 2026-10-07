@@ -29,6 +29,7 @@ class Bbot < Formula
   depends_on "pydantic" => :no_linkage
   depends_on "python@3.14"
   depends_on "xxhash"
+  depends_on "yara"
   depends_on "zeromq"
   depends_on "zstd"
 
@@ -345,7 +346,12 @@ class Bbot < Formula
     ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@3")
     ENV["XXHASH_LINK_SO"] = "1"
 
-    venv = virtualenv_install_with_resources without: "zstandard"
+    venv = virtualenv_install_with_resources without: %w[yara-python zstandard]
+
+    resource("yara-python").stage do
+      inreplace "setup.py", "self.dynamic_linking = None", "self.dynamic_linking = True"
+      venv.pip_install Pathname.pwd
+    end
 
     resource("zstandard").stage do
       args = std_pip_args(prefix: false, build_isolation: true)
