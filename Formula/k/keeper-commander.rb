@@ -3,10 +3,9 @@ class KeeperCommander < Formula
 
   desc "Command-line and SDK interface to Keeper Password Manager"
   homepage "https://docs.keeper.io/en/privileged-access-manager/commander-cli/overview"
-  url "https://files.pythonhosted.org/packages/6f/1b/36eb0178d6539eb78edb5878cc23056ac982f69a6f7bf9b0c6c5dad7fc34/keepercommander-18.1.5.tar.gz"
-  sha256 "56fbc0fc3a92af441d3b7a24ff38ada43c42f8d7788c5ca51a36007b349fbbe3"
+  url "https://files.pythonhosted.org/packages/21/01/54dec5689e11ec0be424aac5f6725d439d22ddb542fcd1f1d45c7f8127b3/keepercommander-18.1.7.tar.gz"
+  sha256 "119ab3fa7a2c67743e3fd0608bf7c54908e6537d194a8f04fc07e8aff28ce7ae"
   license "MIT"
-  revision 1
   head "https://github.com/Keeper-Security/Commander.git", branch: "master"
 
   no_autobump! because: "macOS resources cannot be updated on linux CI"
