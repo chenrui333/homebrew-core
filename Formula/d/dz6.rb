@@ -1,8 +1,8 @@
 class Dz6 < Formula
   desc "Fast Vim-inspired TUI hex editor"
   homepage "https://dz6.dev.br"
-  url "https://github.com/mentebinaria/dz6/archive/refs/tags/v0.7.1.tar.gz"
-  sha256 "be984784453a0964ff87d3987e488e1aa5a95bf7938ecec28fd5a3a670293f00"
+  url "https://github.com/mentebinaria/dz6/archive/refs/tags/v0.8.0.tar.gz"
+  sha256 "f995b1e8df20fca7bee48523e35e7bd9ec59f6df8066e342bbe8067176572887"
   license "GPL-3.0-or-later"
 
   bottle do
