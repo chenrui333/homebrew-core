@@ -55,6 +55,9 @@ class Aoe < Formula
   end
 
   test do
+    # Keep the tmux socket out of the shared `/tmp`, where the sandbox blocks connecting to stale ones
+    ENV["TMUX_TMPDIR"] = testpath
+
     assert_match version.to_s, shell_output("#{bin}/aoe --version")
 
     system bin/"aoe", "init", testpath
