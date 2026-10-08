@@ -1,8 +1,8 @@
 class Pyscn < Formula
   desc "Intelligent Python Code Quality Analyzer"
   homepage "https://ludo-technologies.github.io/pyscn/"
-  url "https://github.com/ludo-technologies/pyscn/archive/refs/tags/v1.32.3.tar.gz"
-  sha256 "a30d1a7990feefafd8938933155b3fdbeaad7b9ab379c77c7574cc5402ed446b"
+  url "https://github.com/ludo-technologies/pyscn/archive/refs/tags/v1.32.4.tar.gz"
+  sha256 "faec7f87b030469495038221189d25559aa70943edd5f78bb33d9e4a1620c595"
   license "MIT"
   head "https://github.com/ludo-technologies/pyscn.git", branch: "main"
 
