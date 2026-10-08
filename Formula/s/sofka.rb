@@ -6,11 +6,11 @@ class Sofka < Formula
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "ab88f26d602d805f247605bed18fddd5861b10d5894236de654b15768101d44b"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "70b88900291c517c5a92cf08a6064c503e866433e60cf3c8ccd625541b5c393b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "453ce4334f8c3abe4730ece43f7a11b7faf8ae27f465ef6acff2b9754b4b9077"
-    sha256 cellar: :any,                 arm64_linux:       "5fea44feba405677ee9e20b082f11c624896d32fa8677f0e8c89c6977aa4b58b"
-    sha256 cellar: :any,                 x86_64_linux:      "5a936efd10a55920630a8943a45d46daac8540fff5ebc7c7961040ddf0259dc9"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "5617e3700bf486565e15136dbb31a820f27a9f2658b0a61f8aa0789b10125fc0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "9ebe0a3e0b061a276384e4c29bbce73f2aab5ee0fb248c0d299af67eaba87380"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "98e221cd19f4a9e7dbf72ef3f10d38b308513f2792dc733af1840a3818702821"
+    sha256 cellar: :any,                 arm64_linux:       "d64d309e3a3ba0eefab1b4db91c47ca061e42e43c5d25d68ef50df3151f075de"
+    sha256 cellar: :any,                 x86_64_linux:      "0b415412d5b1e2f7ea0ab8e6300d518581f5496d8a0a2bd25ad54ed355bb9a2b"
   end
 
   depends_on "rust" => :build
