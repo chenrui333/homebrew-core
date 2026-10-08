@@ -1,8 +1,8 @@
 class EasCli < Formula
   desc "Command-line tool for working with Expo Application Services"
   homepage "https://docs.expo.dev/eas/"
-  url "https://registry.npmjs.org/eas-cli/-/eas-cli-24.11.0.tgz"
-  sha256 "2549813f6aee3b65d352d763ac7623e4c8480de492b38d8b5e068e6e6e1733f8"
+  url "https://registry.npmjs.org/eas-cli/-/eas-cli-24.12.0.tgz"
+  sha256 "4510df9253e32ff154c5403b862e3855246a953d20fc493e48f2d88df0688f85"
   license "MIT"
 
   bottle do
