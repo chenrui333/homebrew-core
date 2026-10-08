@@ -1,8 +1,8 @@
 class Catch2 < Formula
   desc "Modern, C++-native, test framework"
   homepage "https://github.com/catchorg/Catch2"
-  url "https://github.com/catchorg/Catch2/archive/refs/tags/v3.16.0.tar.gz"
-  sha256 "0957cae5821b17ce07f0833aaa52b5137643a8382203221f363a8303c109af34"
+  url "https://github.com/catchorg/Catch2/archive/refs/tags/v3.16.1.tar.gz"
+  sha256 "d16bd1b8b2364918bd472cb216394acb93bde6784890df0d91bccfb3f28d777d"
   license "BSL-1.0"
   head "https://github.com/catchorg/Catch2.git", branch: "devel"
 
