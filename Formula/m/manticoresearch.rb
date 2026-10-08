@@ -6,7 +6,6 @@ class Manticoresearch < Formula
   license all_of: [
     "GPL-3.0-or-later",
     "GPL-2.0-only", # wsrep
-    { "GPL-2.0-only" => { with: "x11vnc-openssl-exception" } }, # galera
     { any_of: ["Unlicense", "MIT"] }, # uni-algo (our formula is too new)
   ]
   version_scheme 1
@@ -66,10 +65,9 @@ class Manticoresearch < Formula
   end
 
   # Workarounds for building with Boost 1.89+ and GCC, until fixed upstream:
-  # - galera: disable Boost (Boost.System stub removed in 1.89)
-  #   Issue ref: https://github.com/manticoresoftware/manticoresearch/issues/3673
   # - searchdbuddy: include Boost.Process v1 environment header
   #   (`<boost/process.hpp>` now pulls Process v2 where `environment` is a namespace)
+  #   TODO: Remove in the next release.
   # - sortergroup: drop redundant `using` that GCC rejects as private
   patch :DATA
 
@@ -96,6 +94,7 @@ class Manticoresearch < Formula
       -DCMAKE_REQUIRE_FIND_PACKAGE_xxHash=ON
       -DMYSQL_CONFIG_EXECUTABLE=#{formula_opt_bin("mariadb-connector-c")}/mariadb_config
       -DRE2_LIBRARY=#{formula_opt_lib("re2")/shared_library("libre2")}
+      -DWITH_GALERA=OFF
       -DWITH_ICU_FORCE_STATIC=OFF
       -DWITH_RE2_FORCE_STATIC=OFF
       -DWITH_STEMMER_FORCE_STATIC=OFF
@@ -131,23 +130,6 @@ class Manticoresearch < Formula
 end
 
 __END__
-diff --git a/cmake/galera-imported.cmake.in b/cmake/galera-imported.cmake.in
-index 0ffa9caf1..806c929b4 100644
---- a/cmake/galera-imported.cmake.in
-+++ b/cmake/galera-imported.cmake.in
-@@ -15,9 +15,9 @@ include ( ExternalProject )
- ExternalProject_Add ( galera_populate
- 		URL @GALERA_PLACE@
- 		URL_MD5 @GALERA_SRC_MD5@
--		CMAKE_CACHE_ARGS -DWSREP_PATH:STRING=${wsrep_populate_SOURCE_DIR} -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo -DGALERA_REV:STRING=@GALERA_REV@
-+		CMAKE_CACHE_ARGS -DWSREP_PATH:STRING=${wsrep_populate_SOURCE_DIR} -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo -DGALERA_REV:STRING=@GALERA_REV@ -DWITH_BOOST:BOOL=OFF -DCMAKE_CXX_FLAGS:STRING=-DASIO_DISABLE_BOOST_REGEX=1\ -DBOOST_DATE_TIME_POSIX_TIME_STD_CONFIG=1
- 		BUILD_COMMAND "@CMAKE_COMMAND@" --build . --config RelWithDebInfo
- 		INSTALL_COMMAND "@CMAKE_COMMAND@" --install . --config RelWithDebInfo --prefix "@GALERA_BUILD@"
- 		)
- 
--# file configured from cmake/galera-imported.cmake.in
-\ No newline at end of file
-+# file configured from cmake/galera-imported.cmake.in
 diff --git a/src/searchdbuddy.cpp b/src/searchdbuddy.cpp
 index 39985f6..9c83062 100644
 --- a/src/searchdbuddy.cpp
