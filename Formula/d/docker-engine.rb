@@ -2,8 +2,8 @@ class DockerEngine < Formula
   desc "Pack, ship and run any application as a lightweight container (Daemon)"
   homepage "https://www.docker.com/"
   url "https://github.com/moby/moby.git",
-      tag:      "docker-v29.8.2",
-      revision: "8af9fe3a36bab3e039862a2ab1cef1880c9b4d03"
+      tag:      "docker-v29.9.0",
+      revision: "a5b58c94d334674eae3a3207d4f05417643a90d0"
   license "Apache-2.0"
   head "https://github.com/moby/moby.git", branch: "master"
 
