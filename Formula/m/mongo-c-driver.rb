@@ -1,10 +1,9 @@
 class MongoCDriver < Formula
   desc "C driver for MongoDB"
   homepage "https://github.com/mongodb/mongo-c-driver"
-  url "https://github.com/mongodb/mongo-c-driver/archive/refs/tags/2.5.5.tar.gz"
-  sha256 "0461e130ed73805fc1aff4fb7b7182e88dc1f86fef8812276e4f84e30c07aae5"
+  url "https://github.com/mongodb/mongo-c-driver/archive/refs/tags/2.5.6.tar.gz"
+  sha256 "c5434768381c84e18088078223a8075ed768c82ae6145e30a1f1b5f07cd43dc8"
   license "Apache-2.0"
-  revision 1
   compatibility_version 1
   head "https://github.com/mongodb/mongo-c-driver.git", branch: "master"
 
@@ -30,6 +29,8 @@ class MongoCDriver < Formula
   on_linux do
     depends_on "zlib-ng-compat"
   end
+
+  deny_network_access!
 
   def install
     File.write "VERSION_CURRENT", version.to_s if build.stable?
