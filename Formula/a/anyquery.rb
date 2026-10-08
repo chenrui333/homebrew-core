@@ -1,8 +1,8 @@
 class Anyquery < Formula
   desc "Query anything with SQL"
   homepage "https://anyquery.dev"
-  url "https://github.com/julien040/anyquery/archive/refs/tags/0.5.0.tar.gz"
-  sha256 "9ffd6d41e41f51e5e648442c9c6a1621c6a64183756bb3ef1d4d9ba659c81fd4"
+  url "https://github.com/julien040/anyquery/archive/refs/tags/0.5.1.tar.gz"
+  sha256 "cc9972f442e6df9dbf4274c641dd470ef30058dbbe78c4525c5190eab1ec4f9a"
   license "AGPL-3.0-only"
   head "https://github.com/julien040/anyquery.git", branch: "main"
 
@@ -28,11 +28,13 @@ class Anyquery < Formula
   def install
     ENV["CGO_ENABLED"] = "1" if OS.linux? && Hardware::CPU.arm?
 
+    # TODO: Remove http2legacy once x/net >= 0.55.0: https://github.com/grpc/grpc-go/issues/9206
     tags = %w[
       vtable
       fts5
       sqlite_json
       sqlite_math_functions
+      http2legacy
     ]
     system "go", "build", *std_go_args(tags:)
 
