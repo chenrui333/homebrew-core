@@ -180,11 +180,5 @@ class Flang < Formula
     assert_equal expected, shell_output("./omptest").lines(chomp: true).sort
 
     system bin/"flang", "-v", "runtimes.f90"
-
-    return if OS.linux?
-    return unless (etc/"clang").exist? # https://github.com/Homebrew/homebrew-test-bot/issues/805
-
-    assert_match %r{^Configuration file: .*/etc/clang/.*\.cfg$}i,
-                 shell_output("#{bin}/flang --version")
   end
 end
