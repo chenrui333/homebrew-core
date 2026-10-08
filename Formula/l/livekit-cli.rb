@@ -1,8 +1,8 @@
 class LivekitCli < Formula
   desc "Command-line interface to LiveKit"
   homepage "https://livekit.io"
-  url "https://github.com/livekit/livekit-cli/archive/refs/tags/v2.18.8.tar.gz"
-  sha256 "db9aa392805ffbdd0ae9372edf1a94b0f17bbaa9646bf2f58d24a914e0d5b737"
+  url "https://github.com/livekit/livekit-cli/archive/refs/tags/v2.19.0.tar.gz"
+  sha256 "9e4c82e20c47d2e2841127bdc4e8e1b67f46d9727f3ba31b59f773893922e4d0"
   license "Apache-2.0"
   head "https://github.com/livekit/livekit-cli.git", branch: "main"
 
@@ -36,8 +36,9 @@ class LivekitCli < Formula
     bin.install_symlink "lk" => "livekit-cli"
 
     bash_completion.install "autocomplete/bash_autocomplete" => "lk"
-    fish_completion.install "autocomplete/fish_autocomplete" => "lk.fish"
     zsh_completion.install "autocomplete/zsh_autocomplete" => "_lk"
+    generate_completions_from_executable(bin/"lk", "generate-fish-completion",
+                                         shell_parameter_format: :none, shells: [:fish])
   end
 
   test do
