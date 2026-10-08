@@ -1,8 +1,8 @@
 class BlockGooseCli < Formula
   desc "Open source, extensible AI agent that goes beyond code suggestions"
   homepage "https://goose-docs.ai/"
-  url "https://github.com/aaif-goose/goose/archive/refs/tags/v1.53.0.tar.gz"
-  sha256 "85cc5e76a12e364032df4bec0ed0738a910c3e12ec12731b4405d1fdb18d96ae"
+  url "https://github.com/aaif-goose/goose/archive/refs/tags/v1.54.0.tar.gz"
+  sha256 "5d37e2e67b65514e16eed1df39395320ecead6795b925df16a9dccf4172f37e5"
   license "Apache-2.0"
   head "https://github.com/aaif-goose/goose.git", branch: "main"
 
@@ -34,8 +34,21 @@ class BlockGooseCli < Formula
 
   conflicts_with "goose", because: "both install `goose` binaries"
 
+  # Remove when goose's `llama-cpp-sys-2` pin ships cpp-httplib >= 0.43.1
+  resource "llama-cpp-sys-2" do
+    url "https://static.crates.io/crates/llama-cpp-sys-2/llama-cpp-sys-2-0.1.146.crate"
+    sha256 "9b291e4bc2d10c43cd8dec16d49b6104cb3cb125f596ec380a753a5db1d965dd"
+  end
+
   def install
-    system "cargo", "install", *std_cargo_args(path: "crates/goose-cli")
+    # Backport https://github.com/yhirose/cpp-httplib/commit/02d38251495ed7795305ad5bf34b3e20b9b52156 for OpenSSL 4
+    resource("llama-cpp-sys-2").stage(buildpath/"llama-cpp-sys-2")
+    inreplace "llama-cpp-sys-2/llama.cpp/vendor/cpp-httplib/httplib.cpp",
+              "X509_NAME *name = X509_get_subject_name(cert);",
+              "auto *name = const_cast<X509_NAME *>(X509_get_subject_name(cert));"
+
+    system "cargo", "install", "--config", "patch.crates-io.llama-cpp-sys-2.path=\"#{buildpath}/llama-cpp-sys-2\"",
+                    *std_cargo_args(path: "crates/goose-cli")
 
     generate_completions_from_executable(bin/"goose", "completion", shells: [:bash, :zsh, :fish, :pwsh])
   end
