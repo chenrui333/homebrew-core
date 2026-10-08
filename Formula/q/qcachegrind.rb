@@ -25,6 +25,8 @@ class Qcachegrind < Formula
   depends_on "graphviz"
   depends_on "qtbase"
 
+  deny_network_access!
+
   def install
     args = %w[-config release]
     if OS.mac?
@@ -41,6 +43,47 @@ class Qcachegrind < Formula
       bin.install_symlink prefix/"qcachegrind.app/Contents/MacOS/qcachegrind"
     else
       bin.install "qcachegrind/qcachegrind"
+    end
+  end
+
+  test do
+    (testpath/"callgrind.out.1").write <<~EOS
+      # callgrind format
+      version: 1
+      creator: homebrew
+      pid: 1
+      cmd: ./test
+      events: Ir
+      fl=test.c
+      fn=main
+      3 10
+      cfn=foo
+      calls=1 8
+      4 25
+      fn=foo
+      8 25
+    EOS
+
+    ENV["QT_QPA_PLATFORM"] = "offscreen"
+    ENV["XDG_CONFIG_HOME"] = testpath/".config"
+    pid = spawn bin/"qcachegrind", testpath/"callgrind.out.1"
+    begin
+      if OS.linux?
+        # A successfully loaded profile is added to the recent files list
+        conf = testpath/".config/kde.org/QCachegrind.conf"
+        30.times do
+          break if conf.exist? && conf.read.include?("callgrind.out.1")
+
+          sleep 1
+        end
+        assert_match "#{testpath}/callgrind.out.1", conf.read
+      else
+        sleep 5
+      end
+      assert_nil Process.wait(pid, Process::WNOHANG), "qcachegrind exited unexpectedly"
+    ensure
+      Process.kill("TERM", pid)
+      Process.wait(pid)
     end
   end
 end
