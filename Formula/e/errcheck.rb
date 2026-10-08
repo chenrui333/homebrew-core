@@ -4,7 +4,7 @@ class Errcheck < Formula
   url "https://github.com/kisielk/errcheck/archive/refs/tags/v1.20.0.tar.gz"
   sha256 "d16b7757bf57dea5bbcfce42badd1bbfadd4c112b2da90b4ccaeb81c6c438c1e"
   license "MIT"
-  revision 1
+  revision 2
 
   bottle do
     sha256 cellar: :any_skip_relocation, arm64_golden_gate: "0c10b1d8c0af9943a45b3423ba19d7d215192c18bbc7929beb1b59417c2fe297"
@@ -17,6 +17,13 @@ class Errcheck < Formula
   end
 
   depends_on "go" => [:build, :test]
+
+  patch do
+    url "https://github.com/kisielk/errcheck/commit/82a8baa1a45a73615d0723ce58e5a617e3c4eee0.patch?full_index=1"
+    sha256 "6494c48f4c3246a7af7d8d9d21b247118e5d17f9254b7ffa2e4504a26dcbe31e"
+    type :unofficial
+    resolves "https://github.com/kisielk/errcheck/pull/286"
+  end
 
   deny_network_access!
 
