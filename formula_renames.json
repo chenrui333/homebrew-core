@@ -54,6 +54,7 @@
   "mcp-scan": "snyk-agent-scan",
   "mist": "mist-cli",
   "moar": "moor",
+  "mprocs": "dekit",
   "mps-youtube": "yewtube",
   "mr2": "zoro",
   "mvtools": "vapoursynth-mvtools",
