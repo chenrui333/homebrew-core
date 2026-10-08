@@ -1,8 +1,8 @@
 class Anubis < Formula
   desc "Protect resources from scraper bots"
   homepage "https://anubis.techaro.lol"
-  url "https://github.com/TecharoHQ/anubis/archive/refs/tags/v1.27.0.tar.gz"
-  sha256 "5a3f93d5b763283e2432f2574f30d30434befd5e1788990bd031bdf0696e78b3"
+  url "https://github.com/TecharoHQ/anubis/archive/refs/tags/v1.28.1.tar.gz"
+  sha256 "f7de156f566ad3381b6170a8e581e9026656d63407cee7a412474c4a9e8546cf"
   license "MIT"
   head "https://github.com/TecharoHQ/anubis.git", branch: "main"
 
@@ -23,7 +23,10 @@ class Anubis < Formula
 
   depends_on "brotli" => :build
   depends_on "go" => :build
+  depends_on "lld" => :build # for `wasm-ld`
   depends_on "node" => :build
+  depends_on "rust" => :build
+  depends_on "rust-wasm" => :build
   depends_on "zstd" => :build
   depends_on "webify" => :test
 
@@ -32,6 +35,9 @@ class Anubis < Formula
   end
 
   def install
+    ENV["CARGO_TARGET_WASM32_UNKNOWN_UNKNOWN_LINKER"] = "wasm-ld"
+    ENV.append_to_rustflags "--sysroot #{HOMEBREW_PREFIX}"
+
     system "make", "assets"
     ldflags = "-X github.com/TecharoHQ/anubis.Version=#{version}"
     system "go", "build", *std_go_args(ldflags:), "./cmd/anubis"
