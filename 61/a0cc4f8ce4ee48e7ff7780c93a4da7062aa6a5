@@ -1,0 +1,14 @@
+Formula/f/fluxcd.rb
+  h_9df9c32c3f321d 23-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "61a0cc4f8ce4ee48e7ff7780c93a4da7062aa6a5",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

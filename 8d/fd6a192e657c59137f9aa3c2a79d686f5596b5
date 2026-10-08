@@ -1,0 +1,14 @@
+Formula/c/choose-rust.rb
+  h_9df9c32c3f321d 22-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8dfd6a192e657c59137f9aa3c2a79d686f5596b5",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

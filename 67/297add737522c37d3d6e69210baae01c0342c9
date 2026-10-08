@@ -1,0 +1,19 @@
+Formula/b/bzt.rb
+  s_8c4ad52df1d4fb::t_c8fb6a5091ffea 284-285
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "67297add737522c37d3d6e69210baae01c0342c9",
+  "prompts": {},
+  "sessions": {
+    "s_8c4ad52df1d4fb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cad8-90ad-7a52-8564-f6d2f7bd104b",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

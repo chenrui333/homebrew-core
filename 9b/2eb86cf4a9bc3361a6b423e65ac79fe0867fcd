@@ -1,0 +1,20 @@
+Formula/r/ratex.rb
+  s_20ee2ac03ef1eb::t_1c21adbae6929a 28
+  s_20ee2ac03ef1eb::t_28478957394784 4-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9b2eb86cf4a9bc3361a6b423e65ac79fe0867fcd",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

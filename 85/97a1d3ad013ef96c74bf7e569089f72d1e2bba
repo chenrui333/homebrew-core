@@ -1,0 +1,19 @@
+Formula/t/toml11.rb
+  s_6464c0fe3ad4be::t_21318a9f22e653 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8597a1d3ad013ef96c74bf7e569089f72d1e2bba",
+  "prompts": {},
+  "sessions": {
+    "s_6464c0fe3ad4be": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c46e-63b5-7f73-a9b0-28a1ffa73ceb",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

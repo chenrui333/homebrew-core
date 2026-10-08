@@ -1,0 +1,19 @@
+Formula/d/docfx.rb
+  s_73ebbc70891fbd::t_8383cf1d134d05 40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8aa0eb75d06a8ae7f9500e24e63281971859711b",
+  "prompts": {},
+  "sessions": {
+    "s_73ebbc70891fbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0b7fc-fce0-7a63-9ead-b1d826672235",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

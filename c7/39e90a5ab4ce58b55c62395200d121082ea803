@@ -1,0 +1,19 @@
+Formula/m/moto.rb
+  s_20ee2ac03ef1eb::t_4e8d4e1e49c45f 9,21-22,54-55,59-60,64-65,69-70,74-75,94-95,99-100,119-120,169-170,174-175,204-205,214-215,229-230,239-240,269-270,274-275,279-280
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c739e90a5ab4ce58b55c62395200d121082ea803",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

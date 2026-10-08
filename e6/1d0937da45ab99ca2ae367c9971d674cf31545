@@ -1,0 +1,14 @@
+Formula/d/diskonaut.rb
+  h_9df9c32c3f321d 27-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "e61d0937da45ab99ca2ae367c9971d674cf31545",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

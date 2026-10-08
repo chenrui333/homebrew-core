@@ -1,0 +1,19 @@
+Formula/r/restview.rb
+  s_8c4ad52df1d4fb::t_9b66d23d07ff50 43-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "e2ee3a86f477e68b3cb0624b894a3252220f54ed",
+  "prompts": {},
+  "sessions": {
+    "s_8c4ad52df1d4fb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cad8-90ad-7a52-8564-f6d2f7bd104b",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

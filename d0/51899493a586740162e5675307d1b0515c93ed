@@ -1,0 +1,19 @@
+Formula/k/keeper-commander.rb
+  s_20ee2ac03ef1eb::t_e8a8d4627969fa 9,75-76,80-81,95-96,115-116,120-121,130-131,164,186-187,226-227,251-252,286-287,321-322,326-327,331-332,336-337,341-342
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d051899493a586740162e5675307d1b0515c93ed",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

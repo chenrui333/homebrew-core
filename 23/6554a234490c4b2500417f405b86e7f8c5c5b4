@@ -1,0 +1,19 @@
+Formula/r/redir.rb
+  s_ad8b81d03c7426::t_c1543f972f58cf 20-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "236554a234490c4b2500417f405b86e7f8c5c5b4",
+  "prompts": {},
+  "sessions": {
+    "s_ad8b81d03c7426": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ce53-0500-7a12-84d8-afea73941cb3",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

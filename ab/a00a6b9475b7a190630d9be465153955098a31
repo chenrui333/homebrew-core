@@ -1,0 +1,19 @@
+Formula/s/sysdig.rb
+  s_8c4ad52df1d4fb::t_8a7f681a5af1b3 63-64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "aba00a6b9475b7a190630d9be465153955098a31",
+  "prompts": {},
+  "sessions": {
+    "s_8c4ad52df1d4fb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cad8-90ad-7a52-8564-f6d2f7bd104b",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

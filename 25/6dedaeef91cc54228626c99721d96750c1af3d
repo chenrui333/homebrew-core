@@ -1,0 +1,19 @@
+Formula/f/fltk.rb
+  s_924c595f5566bd::t_da9d72c5c3f1de 46-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "256dedaeef91cc54228626c99721d96750c1af3d",
+  "prompts": {},
+  "sessions": {
+    "s_924c595f5566bd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c72c-9dbe-7690-8ce5-2ed2819c9079",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

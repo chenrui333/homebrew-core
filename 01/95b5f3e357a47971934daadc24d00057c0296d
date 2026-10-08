@@ -1,0 +1,207 @@
+Formula/a/action-validator.rb
+  s_982c42b205fc4b::t_07a8e63b0a9431 25
+Formula/a/ad.rb
+  s_982c42b205fc4b::t_2810eb462f68f8 24
+Formula/a/adrs.rb
+  s_982c42b205fc4b::t_bdc2396c88bb0a 23
+Formula/a/age-plugin-yubikey.rb
+  s_982c42b205fc4b::t_6f99e0cb9654ee 27
+Formula/a/agg.rb
+  s_982c42b205fc4b::t_a9ee39eab5d139 24
+Formula/a/alass.rb
+  s_982c42b205fc4b::t_dfc410c0868b0b 29
+Formula/a/alejandra.rb
+  s_982c42b205fc4b::t_2aa25f438cffad 26
+Formula/a/alevin-fry.rb
+  s_982c42b205fc4b::t_b03812f2194264 24
+Formula/a/asciinema.rb
+  s_982c42b205fc4b::t_711cf78c41df92 24
+Formula/a/ast-grep.rb
+  s_982c42b205fc4b::t_4131dae81164ee 23
+Formula/a/atuin.rb
+  s_982c42b205fc4b::t_cfcb0e889fe848 29
+Formula/b/bashka.rb
+  s_982c42b205fc4b::t_fcbca2c2c70e9b 22
+Formula/b/bat.rb
+  s_982c42b205fc4b::t_6ab4a56bbea860 28
+Formula/b/bazel-diff.rb
+  s_982c42b205fc4b::t_2f549baa810efe 22
+Formula/b/biome.rb
+  s_982c42b205fc4b::t_7ee2d766a325ae 27
+Formula/b/bkt.rb
+  s_982c42b205fc4b::t_37e61b485a958c 26
+Formula/b/bottom.rb
+  s_982c42b205fc4b::t_920343afbdee86 32
+Formula/c/cargo-binstall.rb
+  s_982c42b205fc4b::t_515697552fc79a 32
+Formula/c/cookcli.rb
+  s_982c42b205fc4b::t_859e8a002c3b18 24
+Formula/d/difftastic.rb
+  s_982c42b205fc4b::t_409560254f5158 22
+Formula/d/dua-cli.rb
+  s_982c42b205fc4b::t_6c73faf6140add 26
+Formula/d/dust.rb
+  s_982c42b205fc4b::t_024804939c505f 27
+Formula/d/dysk.rb
+  s_982c42b205fc4b::t_5d6eaf66ab56a0 22
+Formula/e/eza.rb
+  s_982c42b205fc4b::t_8ed6c3d720c686 27
+Formula/f/fakecloud.rb
+  s_982c42b205fc4b::t_a6567856a09eba 29
+Formula/f/fd.rb
+  s_982c42b205fc4b::t_58fc447a096271 26
+Formula/f/fnm.rb
+  s_982c42b205fc4b::t_19c520e68d33c2 34
+Formula/f/fresh-editor.rb
+  s_982c42b205fc4b::t_cb060954a8a462 24
+Formula/g/git-cliff.rb
+  s_982c42b205fc4b::t_1c65a02b220e76 23
+Formula/g/git-delta.rb
+  s_982c42b205fc4b::t_a2b19c8ebfc7cc 31
+Formula/g/googleworkspace-cli.rb
+  s_982c42b205fc4b::t_30bac12f16c540 27
+Formula/g/gping.rb
+  s_982c42b205fc4b::t_07ac3bfe47b34b 42
+Formula/h/helix.rb
+  s_982c42b205fc4b::t_0c477339e2fb29 26
+Formula/h/himalaya.rb
+  s_982c42b205fc4b::t_cd4c8b9299be6c 28
+Formula/h/hyperfine.rb
+  s_982c42b205fc4b::t_419314d62ebc68 24
+Formula/j/jj.rb
+  s_982c42b205fc4b::t_38cb5862c566fd 24
+Formula/j/jscpd.rb
+  s_982c42b205fc4b::t_7febb27f5ccfc5 21
+Formula/j/just.rb
+  s_982c42b205fc4b::t_20e726200b42f8 29
+Formula/l/lisette.rb
+  s_982c42b205fc4b::t_e83b77c586d3f2 27
+Formula/l/lychee.rb
+  s_982c42b205fc4b::t_2210608e7ae08f 26
+Formula/m/mdfried.rb
+  s_982c42b205fc4b::t_dffc1cfb6e1f7e 34
+Formula/n/nickel.rb
+  s_982c42b205fc4b::t_edf42396e55f8d 27
+Formula/n/nono.rb
+  s_982c42b205fc4b::t_3235f64d3918ea 31
+Formula/n/nushell.rb
+  s_982c42b205fc4b::t_7c7da60265f6f0 41
+Formula/o/oxvg.rb
+  s_982c42b205fc4b::t_b858f9b38bc0de 21
+Formula/p/pixi.rb
+  s_982c42b205fc4b::t_bb19c9d8b6d79d 39
+Formula/p/pnpm.rb
+  s_982c42b205fc4b::t_af065f41d64a47 33
+Formula/p/prek.rb
+  s_982c42b205fc4b::t_4bb0d8add16483 22
+Formula/p/procs.rb
+  s_982c42b205fc4b::t_202688cbef9b9a 23
+Formula/p/proxelar.rb
+  s_982c42b205fc4b::t_30c2d624bb0fdd 25
+Formula/p/pup.rb
+  s_982c42b205fc4b::t_0190c23320d0e0 27
+Formula/r/railway.rb
+  s_982c42b205fc4b::t_ae75465da2971b 22
+Formula/r/ratex.rb
+  s_982c42b205fc4b::t_9367bf23c967c5 24
+Formula/r/rbspy.rb
+  s_982c42b205fc4b::t_b903cf8303569d 21
+Formula/r/ripgrep.rb
+  s_982c42b205fc4b::t_d6e63555037049 34
+Formula/r/river.rb
+  s_982c42b205fc4b::t_3848f008efbab0 35
+Formula/r/rtk.rb
+  s_982c42b205fc4b::t_e60285bfd95371 22
+Formula/r/ruff.rb
+  s_982c42b205fc4b::t_d56335274a4234 22
+Formula/r/rumdl.rb
+  s_982c42b205fc4b::t_4ae74f94ad975c 26
+Formula/r/rust-analyzer.rb
+  s_982c42b205fc4b::t_c1622b9d29c738 22
+Formula/r/rustup.rb
+  s_982c42b205fc4b::t_d780958bdf8b2e 35
+Formula/r/rv-r.rb
+  s_982c42b205fc4b::t_ed0bd10015a884 24
+Formula/s/sccache.rb
+  s_982c42b205fc4b::t_d1d5b8e7a2501a 33
+Formula/s/sd.rb
+  s_982c42b205fc4b::t_cd6a23248861d2 23
+Formula/s/sk.rb
+  s_982c42b205fc4b::t_36cd2a217c54bc 28
+Formula/s/sonic.rb
+  s_982c42b205fc4b::t_05708aceed5a5b 24
+Formula/s/starship.rb
+  s_982c42b205fc4b::t_b57b51d4e5db08 31
+Formula/t/taplo.rb
+  s_982c42b205fc4b::t_e7b280da5edc7a 36
+Formula/t/tealdeer.rb
+  s_982c42b205fc4b::t_7b61f4f6fbbd88 28
+Formula/t/tectonic.rb
+  s_982c42b205fc4b::t_80e25217aca9ac 45
+Formula/t/television.rb
+  s_982c42b205fc4b::t_be263a0a416ee1 26
+Formula/t/text-embeddings-inference.rb
+  s_982c42b205fc4b::t_7f44f4c2c422f4 23
+Formula/t/tokei.rb
+  s_982c42b205fc4b::t_2254299f7e4104 28
+Formula/t/topgrade.rb
+  s_982c42b205fc4b::t_4c3a70d61f4865 29
+Formula/t/tree-sitter-cli.rb
+  s_982c42b205fc4b::t_e615647b9a2323 34
+Formula/t/typos-cli.rb
+  s_982c42b205fc4b::t_c6ffbeb6b9ca4a 26
+Formula/t/typst.rb
+  s_982c42b205fc4b::t_db2341730f4ca4 35
+Formula/u/usage.rb
+  s_982c42b205fc4b::t_09964e57fcf3e1 23
+Formula/u/uutils-coreutils.rb
+  s_982c42b205fc4b::t_e8633c2bdd2196 28
+Formula/u/uutils-diffutils.rb
+  s_982c42b205fc4b::t_fb03f49ddf3a37 24
+Formula/u/uutils-findutils.rb
+  s_982c42b205fc4b::t_0ac6e8e786475b 34
+Formula/u/uv.rb
+  s_982c42b205fc4b::t_49dda06b1ff7d0 29
+Formula/v/vtcode.rb
+  s_982c42b205fc4b::t_37cc9df65f5e9c 32
+Formula/w/wasm-component-ld.rb
+  s_982c42b205fc4b::t_56ae475d030a53 31
+Formula/w/wasm-tools.rb
+  s_982c42b205fc4b::t_231270cdbb7a1b 32
+Formula/w/watchexec.rb
+  s_982c42b205fc4b::t_ca2cf230aa8b4f 31
+Formula/w/workmux.rb
+  s_982c42b205fc4b::t_19ae5b48935ebd 22
+Formula/w/worktrunk.rb
+  s_982c42b205fc4b::t_1d5110ddf9f2e5 25
+Formula/w/wstunnel.rb
+  s_982c42b205fc4b::t_c60a3d31a5ce12 30
+Formula/x/xh.rb
+  s_982c42b205fc4b::t_f0974237759a24 24
+Formula/y/yazi.rb
+  s_982c42b205fc4b::t_301d5309b70ec1 31
+Formula/z/zellij.rb
+  s_982c42b205fc4b::t_408de7c49b7680 36
+Formula/z/zizmor.rb
+  s_982c42b205fc4b::t_69805afbb7a625 24
+Formula/z/zoxide.rb
+  s_982c42b205fc4b::t_59503e57075bc2 23
+Formula/z/zuban.rb
+  s_982c42b205fc4b::t_94df940fa28405 35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "0195b5f3e357a47971934daadc24d00057c0296d",
+  "prompts": {},
+  "sessions": {
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

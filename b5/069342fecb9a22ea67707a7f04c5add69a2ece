@@ -1,0 +1,14 @@
+Formula/p/pylyzer.rb
+  h_9df9c32c3f321d 22-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b5069342fecb9a22ea67707a7f04c5add69a2ece",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

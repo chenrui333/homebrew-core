@@ -1,0 +1,28 @@
+Formula/q/qtwebsockets.rb
+  s_982c42b205fc4b::t_309bcea5ed534f 37
+  s_f677e0ca7442ce::t_f897998d138c3a 38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "6fc61c5335ca61c18c031182592c5a66076112e4",
+  "prompts": {},
+  "sessions": {
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    },
+    "s_f677e0ca7442ce": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c9a3-8585-7b02-885d-d002cefe2d61",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

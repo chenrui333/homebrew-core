@@ -1,0 +1,19 @@
+Formula/c/cinecli.rb
+  s_20ee2ac03ef1eb::t_d9e7b124192af9 9,22-23,27-28,32-33,47-48,67-68,72-73,76,86-101
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f85fa6984f0429ece09eb5c7fda6ff6a723f5802",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

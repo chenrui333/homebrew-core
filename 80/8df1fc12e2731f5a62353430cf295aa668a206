@@ -1,0 +1,19 @@
+Formula/g/gyb.rb
+  s_20ee2ac03ef1eb::t_77a324e4cf132f 9-10,34-35,39,44-45,49-50,54-55,59-60,64-65,69-70,74-75,79-80,84-85,89-95,99-100,104-105,109-110,119-120,124-125,133-135,144-145,158-160
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "808df1fc12e2731f5a62353430cf295aa668a206",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

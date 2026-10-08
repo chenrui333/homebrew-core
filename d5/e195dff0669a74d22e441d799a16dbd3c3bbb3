@@ -1,0 +1,19 @@
+Formula/m/mlx.rb
+  s_20ee2ac03ef1eb::t_9dfb131312fd30 14-15,17-18,123-157
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d5e195dff0669a74d22e441d799a16dbd3c3bbb3",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

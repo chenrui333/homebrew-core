@@ -1,0 +1,14 @@
+Formula/f/fcp.rb
+  h_9df9c32c3f321d 18-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "64fc88de255721a320e84d5396afd5943efc721f",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

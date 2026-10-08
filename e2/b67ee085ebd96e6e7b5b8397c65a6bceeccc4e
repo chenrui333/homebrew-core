@@ -1,0 +1,28 @@
+Formula/lib/libcec.rb
+  s_982c42b205fc4b::t_5beda0504ccc6e 22
+  s_6464c0fe3ad4be::t_ed1d37dca7f03c 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "e2b67ee085ebd96e6e7b5b8397c65a6bceeccc4e",
+  "prompts": {},
+  "sessions": {
+    "s_6464c0fe3ad4be": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c46e-63b5-7f73-a9b0-28a1ffa73ceb",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    },
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

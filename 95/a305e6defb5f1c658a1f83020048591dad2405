@@ -1,0 +1,19 @@
+Formula/c/cntlm.rb
+  s_ad8b81d03c7426::t_2bc7d65024c00f 30-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "95a305e6defb5f1c658a1f83020048591dad2405",
+  "prompts": {},
+  "sessions": {
+    "s_ad8b81d03c7426": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ce53-0500-7a12-84d8-afea73941cb3",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

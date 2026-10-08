@@ -1,0 +1,28 @@
+Formula/lib/libplctag.rb
+  s_982c42b205fc4b::t_5959138cc5df07 32
+  s_d9c062dda023f0::t_eb7d3ad1f703d7 33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "afc18e0eabaeb6e8c84b0888985bee2e7f915094",
+  "prompts": {},
+  "sessions": {
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": null
+    },
+    "s_d9c062dda023f0": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c4cf-3e9a-7013-a96b-0fd45954b519",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

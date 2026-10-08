@@ -1,0 +1,19 @@
+Formula/c/commitizen.rb
+  s_20ee2ac03ef1eb::t_5c5e6864a991f4 23-42,48-52,63-67,78-92,103-107,113-127,143-162,173-187,193-197,203-216,218-259
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4eb41c2dc549295e98b2d27699653823bd1b7c03",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

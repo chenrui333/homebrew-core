@@ -1,0 +1,14 @@
+Formula/p/precious.rb
+  h_9df9c32c3f321d 21-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f697ea9cceee4d164f72079c8815aa907810e01b",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

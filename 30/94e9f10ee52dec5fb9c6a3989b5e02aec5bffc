@@ -1,0 +1,19 @@
+Formula/m/mypy.rb
+  s_20ee2ac03ef1eb::t_41194547c1cdce 22-34,40-44,50-54,60-64,70-99,105-123,127-151
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3094e9f10ee52dec5fb9c6a3989b5e02aec5bffc",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

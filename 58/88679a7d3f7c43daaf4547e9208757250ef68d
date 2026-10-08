@@ -1,0 +1,19 @@
+Formula/m/mcp-proxy.rb
+  s_20ee2ac03ef1eb::t_1c81dfce5482b0 9,21-23,26-27,36-37,66-67,81-82,86-87,91-92,96-97,111-112,116-117,121-122
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5888679a7d3f7c43daaf4547e9208757250ef68d",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

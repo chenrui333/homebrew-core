@@ -1,0 +1,19 @@
+Formula/c/corkscrew.rb
+  s_ad8b81d03c7426::t_56890a1393714c 31-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "55a5c99369427d755067a38ab69ae2d21728a4b7",
+  "prompts": {},
+  "sessions": {
+    "s_ad8b81d03c7426": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ce53-0500-7a12-84d8-afea73941cb3",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

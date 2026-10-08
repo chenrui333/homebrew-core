@@ -1,0 +1,22 @@
+Formula/e/envoy.rb
+  s_20ee2ac03ef1eb::t_83fe8e190af6af 18,117-126
+  s_20ee2ac03ef1eb::t_87244b9874b6c9 7-8
+  s_20ee2ac03ef1eb::t_6ab029cb0f5ee8 12,14-15,17
+  s_20ee2ac03ef1eb::t_93fefcb4215e11 19-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "1fa1abbc63574382773002435032ebd988d322c9",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

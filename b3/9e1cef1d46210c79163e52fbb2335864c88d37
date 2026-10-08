@@ -1,0 +1,22 @@
+Formula/g/git-annex.rb
+  s_87e9a83978736d::t_dad1e751e64024 44-45
+  s_87e9a83978736d::t_221727a20e7e25 37-43,46,48-52
+  s_87e9a83978736d::t_9b14225cf9795f 56-58
+  s_87e9a83978736d::t_8772dadfc3f802 4-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b39e1cef1d46210c79163e52fbb2335864c88d37",
+  "prompts": {},
+  "sessions": {
+    "s_87e9a83978736d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10d3b-5cdd-76d0-b05d-4b2d5929cf4c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

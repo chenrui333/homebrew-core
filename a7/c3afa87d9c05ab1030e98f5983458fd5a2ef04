@@ -1,0 +1,19 @@
+Formula/t/translate-toolkit.rb
+  s_20ee2ac03ef1eb::t_9bb8037da5963c 25-46,52-81,87-105,107-127
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a7c3afa87d9c05ab1030e98f5983458fd5a2ef04",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

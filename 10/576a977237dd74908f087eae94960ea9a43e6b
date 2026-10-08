@@ -1,0 +1,22 @@
+Formula/a/agda.rb
+  s_73ebbc70891fbd::t_d074b59fb5dea2 62-63
+  s_73ebbc70891fbd::t_9230cdd7973ca6 60-61
+  s_73ebbc70891fbd::t_50a5b7aba3d7a7 57-59,64,440
+  s_73ebbc70891fbd::t_b95931eb830030 7,55-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "10576a977237dd74908f087eae94960ea9a43e6b",
+  "prompts": {},
+  "sessions": {
+    "s_73ebbc70891fbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0b7fc-fce0-7a63-9ead-b1d826672235",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

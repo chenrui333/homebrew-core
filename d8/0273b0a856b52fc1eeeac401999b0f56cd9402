@@ -1,0 +1,14 @@
+Formula/d/diffr.rb
+  h_9df9c32c3f321d 26-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d80273b0a856b52fc1eeeac401999b0f56cd9402",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+Formula/lib/libayatana-indicator.rb
+  s_564329db5a3670::t_35c23fe54c167d 26-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "bc09ea462284187c1d3048dace12e645630235c7",
+  "prompts": {},
+  "sessions": {
+    "s_564329db5a3670": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c788-661a-7fe3-aeee-40dbe080c603",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+Formula/p/policy_sentry.rb
+  s_20ee2ac03ef1eb::t_ea31bc47f9b5e6 25-44,51-60,71-90,96-100,106-125,141-160,166-175,186-204,206-244
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f9f10bd9df4e27c427c04a8311575d007e67cfad",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

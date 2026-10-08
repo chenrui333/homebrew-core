@@ -1,0 +1,14 @@
+Formula/l/lazyrsync.rb
+  h_9df9c32c3f321d 21-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "71e3bac3fcc25be0cd543ff856dc2933c9a00291",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

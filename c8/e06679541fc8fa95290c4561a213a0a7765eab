@@ -1,0 +1,20 @@
+Formula/t/technitium-dns.rb
+  s_73ebbc70891fbd::t_866d9ecba1e0e0 29,36
+  s_73ebbc70891fbd::t_57ecf7949ee21c 63-65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c8e06679541fc8fa95290c4561a213a0a7765eab",
+  "prompts": {},
+  "sessions": {
+    "s_73ebbc70891fbd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0b7fc-fce0-7a63-9ead-b1d826672235",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+Formula/b/bruno-cli.rb
+  s_61f8aff34e6669::t_a95d2869efb13a 21-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "6a04f186985d46cfd010cbb1282bb325bd661591",
+  "prompts": {},
+  "sessions": {
+    "s_61f8aff34e6669": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0b82b-df94-7d50-83af-42948fa7da1e",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

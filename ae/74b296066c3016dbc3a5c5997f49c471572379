@@ -1,0 +1,19 @@
+Formula/f/fabric.rb
+  s_20ee2ac03ef1eb::t_8c9234a32738d8 29-41,48-52,63-67,73-77,83-87,93-122,128-138,141-167
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ae74b296066c3016dbc3a5c5997f49c471572379",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

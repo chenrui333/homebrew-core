@@ -1,0 +1,19 @@
+Formula/b/behaviortree.cpp.rb
+  s_982c42b205fc4b::t_4efaa9a6d4ec57 24-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "bbbba464b6e8a68b4c660abd94bfc2e5fd81cba7",
+  "prompts": {},
+  "sessions": {
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+Formula/p/pylint.rb
+  s_20ee2ac03ef1eb::t_ffe530fb6c1aec 21-50,56-60,66-85,91-100,106-110,116-125,131-160,166-204,206-244
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "482407c93996a005b50349640849ab27e72b4851",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

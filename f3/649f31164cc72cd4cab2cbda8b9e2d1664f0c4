@@ -1,0 +1,30 @@
+Formula/s/sfml@2.rb
+  s_6d07cc52d9b847::t_b975f21a9811d6 7
+  s_6d07cc52d9b847::t_6f2d3366447afc 40-47
+  s_982c42b205fc4b::t_f8410b4b3771a8 48-49
+  s_6d07cc52d9b847::t_94c05734c72393 71,75-77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f3649f31164cc72cd4cab2cbda8b9e2d1664f0c4",
+  "prompts": {},
+  "sessions": {
+    "s_6d07cc52d9b847": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ce72-9abd-7421-a346-8d34fddd7540",
+        "model": "gpt-6-sol"
+      },
+      "human_author": null
+    },
+    "s_982c42b205fc4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd16-a695-7490-905b-cfd4ccca30c7",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

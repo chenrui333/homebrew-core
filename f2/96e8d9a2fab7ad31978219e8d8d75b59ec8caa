@@ -1,0 +1,19 @@
+Formula/p/physfs.rb
+  s_924c595f5566bd::t_7bf77c54c28750 33-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f296e8d9a2fab7ad31978219e8d8d75b59ec8caa",
+  "prompts": {},
+  "sessions": {
+    "s_924c595f5566bd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c72c-9dbe-7690-8ce5-2ed2819c9079",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

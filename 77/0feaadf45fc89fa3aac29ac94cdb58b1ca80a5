@@ -1,0 +1,19 @@
+Formula/a/aws-c-mqtt.rb
+  s_924c595f5566bd::t_eaf84a117af3e8 28-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "770feaadf45fc89fa3aac29ac94cdb58b1ca80a5",
+  "prompts": {},
+  "sessions": {
+    "s_924c595f5566bd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c72c-9dbe-7690-8ce5-2ed2819c9079",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

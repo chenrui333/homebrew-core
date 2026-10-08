@@ -1,0 +1,19 @@
+Formula/a/aws-c-cal.rb
+  s_924c595f5566bd::t_e6df0fdeba13ac 22-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d21d8c976aff754b6003434a4587db8dc50fcaac",
+  "prompts": {},
+  "sessions": {
+    "s_924c595f5566bd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c72c-9dbe-7690-8ce5-2ed2819c9079",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

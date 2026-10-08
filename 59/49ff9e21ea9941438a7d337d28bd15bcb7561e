@@ -1,0 +1,19 @@
+Formula/d/darker.rb
+  s_20ee2ac03ef1eb::t_ad890de9acdbeb 24-52,59-63,74-108,129-138,144-163,169-188,194-217,219-259
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5949ff9e21ea9941438a7d337d28bd15bcb7561e",
+  "prompts": {},
+  "sessions": {
+    "s_20ee2ac03ef1eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f20e-6f07-75f0-8662-3a1b08a3a7cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

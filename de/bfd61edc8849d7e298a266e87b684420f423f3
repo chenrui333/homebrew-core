@@ -1,0 +1,19 @@
+Formula/lib/libgrape-lite.rb
+  s_564329db5a3670::t_42f4fd3a7d624c 32-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "debfd61edc8849d7e298a266e87b684420f423f3",
+  "prompts": {},
+  "sessions": {
+    "s_564329db5a3670": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c788-661a-7fe3-aeee-40dbe080c603",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}

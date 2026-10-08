@@ -1,0 +1,19 @@
+Formula/w/woof.rb
+  s_ad8b81d03c7426::t_0f278331c470b3 30-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "73f974722c1344b620484726585b50df423ce5ec",
+  "prompts": {},
+  "sessions": {
+    "s_ad8b81d03c7426": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ce53-0500-7a12-84d8-afea73941cb3",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
