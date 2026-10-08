@@ -6,11 +6,11 @@ class HelixDb < Formula
   license "Apache-2.0"
 
   bottle do
-    sha256 arm64_golden_gate: "75dc9b65e145b32fb119ccbf0412713a7902aeab0f880b84ac34fe22d8cae4f5"
-    sha256 arm64_tahoe:       "9067d7acad1eea2b37ed10851c1d6ad47a918f527d5dc0024deaff92b147b423"
-    sha256 arm64_sequoia:     "4473d14dcee17b63bfe67029d9ff6f3ea277427ea920b7dcaf5b2b20c85a326d"
-    sha256 arm64_linux:       "d6ec26b7380ee2ea2f46addee29181fb138114fadfadaafdf0fa73bb1d30478b"
-    sha256 x86_64_linux:      "97f57347ba839b00c67b6390ea827eddd0984e9e26340fe4c3c57ad323f09aab"
+    sha256 arm64_golden_gate: "c3698ed070f4ba3e7c64369ea9a89b00acb149b367eef0d40f2310bcfe20e017"
+    sha256 arm64_tahoe:       "d583c3921a1a0decc004413d470f3cc974739ce005330a7f3af119da9b64dac9"
+    sha256 arm64_sequoia:     "20a1a04083b74315c4306d50e9b8f64df2cc2fc1425d6ac6e07c6f2e954f6688"
+    sha256 arm64_linux:       "d08ca5ab41328de63a1ffccffc907af84814b86cf09030de6e7c215c3dd9cf2f"
+    sha256 x86_64_linux:      "44d5017605a67ef1e133292f15fd3878c0e0c917fd0be543d70a636b9decb5a9"
   end
 
   depends_on "rust"
