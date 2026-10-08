@@ -12,11 +12,11 @@ class Mdfried < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "7e56b5ab30776c4a7d8a2781a4021b35f8c52f063bb48a4b6bb034dafab57731"
-    sha256 cellar: :any, arm64_tahoe:       "8200f4462d736797dd8b7c6bff2aaf8c84e35f6fe4077d996d183d1ccd103c4a"
-    sha256 cellar: :any, arm64_sequoia:     "0647a10c1b056efbd57ca9e0a35375224ce85e71231be509c90ece227cdf9ff0"
-    sha256 cellar: :any, arm64_linux:       "b8ecc6a2d156844ebf351d5f7ee673b05ab81b926545c5110ac033f7d08c0cc6"
-    sha256 cellar: :any, x86_64_linux:      "c159158f8b6583e2cb249bf3d38bdfe7e7f80b4c35ff4ef150afc4c37b0e04c0"
+    sha256 cellar: :any, arm64_golden_gate: "5ff4b9f58c25544fcb4368c03b2b2ab7fe4e027b3cd9cdecb0cf54ed319c930e"
+    sha256 cellar: :any, arm64_tahoe:       "b77aa3add48b98cc0e4573db76155c17972df88b537a7ca743417d3227803f55"
+    sha256 cellar: :any, arm64_sequoia:     "45bd4307c08ed25f4f19d7d5ed7e64606808d7284d59a73c777d7ef8f7b87387"
+    sha256 cellar: :any, arm64_linux:       "5c987a662ea3c0a2f41b48a2c975393692e1a5e4b6aface24d944ba59df06da3"
+    sha256 cellar: :any, x86_64_linux:      "e40051fe56a350062c623b2ce9d8565ba2161927251a7e113067234501a39818"
   end
 
   depends_on "pkgconf" => :build
