@@ -1,8 +1,8 @@
 class Cymbal < Formula
   desc "Language-agnostic code navigation CLI powered by tree-sitter"
   homepage "https://github.com/1broseidon/cymbal"
-  url "https://github.com/1broseidon/cymbal/archive/refs/tags/v0.15.0.tar.gz"
-  sha256 "093a6e49b1e66d65d396bbd3ce391e5e239f725047494b905af54daf60324a54"
+  url "https://github.com/1broseidon/cymbal/archive/refs/tags/v0.17.0.tar.gz"
+  sha256 "b9a988bcb30e638937a6af55c1e5cb0beaa46a72fcfcee9de314dcc955967895"
   license "MIT"
   head "https://github.com/1broseidon/cymbal.git", branch: "main"
 
