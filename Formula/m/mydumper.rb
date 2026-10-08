@@ -13,11 +13,11 @@ class Mydumper < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "d34951037acd5f348f8be1d8b47fd0f21f5964cae87eee3891a7cbb4f0215b36"
-    sha256 cellar: :any, arm64_tahoe:       "68a68149bdb2f8dd91da35fbe9a93dd38856a5224f8f5bef6572167b5f4f4abb"
-    sha256 cellar: :any, arm64_sequoia:     "ac903848c5f5a2559d824bf3d81af8666bf404b5c66b6bb9b9a90a70803f110f"
-    sha256 cellar: :any, arm64_linux:       "fd60d7d271e917ad7588f27218dbb7d6f37442e56bd648de9f307d9c0a256a05"
-    sha256 cellar: :any, x86_64_linux:      "b0aef62a64bce0a9cc293699e99f0f26178242c0f05aa59d8a3f469308336b0d"
+    sha256 cellar: :any, arm64_golden_gate: "bd04bf66fabc1d209cd5e3010a52e5e9cf4dfbec1d090c26ec78a32417d1c0bd"
+    sha256 cellar: :any, arm64_tahoe:       "87fe9ab914c6a01fa54c1601fb7d06a13ca72f19665c8ddd7087100543a05f9c"
+    sha256 cellar: :any, arm64_sequoia:     "45671f9c0d08c96a1e5c3235c5f3c406c6a8688267e7d87fda515acc5ed6e923"
+    sha256 cellar: :any, arm64_linux:       "8197d11ea5baef0004cda0e805ca9f609751bb6204a4d74ba4e81f8b0de079ed"
+    sha256 cellar: :any, x86_64_linux:      "b3e3a1b32959d502c41164e8544adf4f64d8c7fe39a3fc7a16bdcfddb1b719f8"
   end
 
   depends_on "cmake" => :build
