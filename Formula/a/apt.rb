@@ -5,6 +5,7 @@ class Apt < Formula
   url "https://salsa.debian.org/apt-team/apt/-/archive/3.3.3/apt-3.3.3.tar.bz2"
   sha256 "2900914cefd4ee9f6f7c742d47600b27082bf2f917a58072fb9e960a2e1bb214"
   license "GPL-2.0-or-later"
+  revision 1
 
   livecheck do
     url "https://deb.debian.org/debian/pool/main/a/apt/"
@@ -35,7 +36,7 @@ class Apt < Formula
   depends_on "dpkg"
   depends_on :linux
   depends_on "lz4"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "perl"
   depends_on "sequoia-sqv"
   depends_on "systemd"
