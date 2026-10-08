@@ -1,17 +1,17 @@
 class Cymbal < Formula
   desc "Language-agnostic code navigation CLI powered by tree-sitter"
   homepage "https://github.com/1broseidon/cymbal"
-  url "https://github.com/1broseidon/cymbal/archive/refs/tags/v0.15.0.tar.gz"
-  sha256 "093a6e49b1e66d65d396bbd3ce391e5e239f725047494b905af54daf60324a54"
+  url "https://github.com/1broseidon/cymbal/archive/refs/tags/v0.17.0.tar.gz"
+  sha256 "b9a988bcb30e638937a6af55c1e5cb0beaa46a72fcfcee9de314dcc955967895"
   license "MIT"
   head "https://github.com/1broseidon/cymbal.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "d881979a73ba426793999e3a64669438e9e5bd48f8195b2a8e5143b3117e208a"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "41f0ea98d5debe15f917359fb383e23e9787c35b289745aadc7dc28cfafa5cfe"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "285fcea86bd0353a1e5432ba6b15195a35da3e200832ef62206cf14093dffc7b"
-    sha256 cellar: :any,                 arm64_linux:       "2fcd5b31356d314c08a6dbef9e2bfccb3dd117949d58f0183e4b25b5121d0211"
-    sha256 cellar: :any,                 x86_64_linux:      "c7372661d37580741ada346d6a5f033e6478e05f6f4c0ede0b71369e68101d92"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "7d5420dd17a0e588164d534c8e8f074b9d7749cbdb707cae7de7d2392d4229ac"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "365e3625259a97a6b49f0fe5ad796e96281a4fe724eec228e2ac81430bd63cb3"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "d9326478f1dc8536c429e20022b4972edf3fae3247a2ff820e14d6d6d98d6c67"
+    sha256 cellar: :any,                 arm64_linux:       "7ec041d5e4855a614e5268dcb5a694c9252d1b7c3dc1505ab05a625c7b44f18b"
+    sha256 cellar: :any,                 x86_64_linux:      "c4f84b2b1fd624c52a85fbb8dd9dd92a2824084c17e15787aea7483821ab2a0c"
   end
 
   depends_on "go" => :build
