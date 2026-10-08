@@ -1,8 +1,8 @@
 class MongoCDriverAT1 < Formula
   desc "C driver for MongoDB"
   homepage "https://github.com/mongodb/mongo-c-driver"
-  url "https://github.com/mongodb/mongo-c-driver/archive/refs/tags/1.30.12.tar.gz"
-  sha256 "adae21ca3457b1b280b2e844d6aa85d6a781e645b8f85e8e05f1b2c23d6c0280"
+  url "https://github.com/mongodb/mongo-c-driver/archive/refs/tags/1.30.13.tar.gz"
+  sha256 "016e3aff605655ea2c9d01e6d6e44f83cb90c718c223f0569b57b100cd279715"
   license "Apache-2.0"
 
   livecheck do
