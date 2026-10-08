@@ -1,10 +1,9 @@
 class Mydumper < Formula
   desc "MySQL logical backup tool"
   homepage "https://github.com/mydumper/mydumper"
-  url "https://github.com/mydumper/mydumper/archive/refs/tags/v1.0.5-1.tar.gz"
-  sha256 "2c2307f1655728b59a6874cf6ccbe85ffea26977fb698eaf62a56976bcf5991f"
+  url "https://github.com/mydumper/mydumper/archive/refs/tags/v1.0.9-1.tar.gz"
+  sha256 "501721d12108004f24e2a9d53d0019499f946e39d374900fb2de34ba2bbecdab"
   license "GPL-3.0-or-later"
-  revision 1
   head "https://github.com/mydumper/mydumper.git", branch: "master"
 
   livecheck do
@@ -14,11 +13,11 @@ class Mydumper < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "d34951037acd5f348f8be1d8b47fd0f21f5964cae87eee3891a7cbb4f0215b36"
-    sha256 cellar: :any, arm64_tahoe:       "68a68149bdb2f8dd91da35fbe9a93dd38856a5224f8f5bef6572167b5f4f4abb"
-    sha256 cellar: :any, arm64_sequoia:     "ac903848c5f5a2559d824bf3d81af8666bf404b5c66b6bb9b9a90a70803f110f"
-    sha256 cellar: :any, arm64_linux:       "fd60d7d271e917ad7588f27218dbb7d6f37442e56bd648de9f307d9c0a256a05"
-    sha256 cellar: :any, x86_64_linux:      "b0aef62a64bce0a9cc293699e99f0f26178242c0f05aa59d8a3f469308336b0d"
+    sha256 cellar: :any, arm64_golden_gate: "bd04bf66fabc1d209cd5e3010a52e5e9cf4dfbec1d090c26ec78a32417d1c0bd"
+    sha256 cellar: :any, arm64_tahoe:       "87fe9ab914c6a01fa54c1601fb7d06a13ca72f19665c8ddd7087100543a05f9c"
+    sha256 cellar: :any, arm64_sequoia:     "45671f9c0d08c96a1e5c3235c5f3c406c6a8688267e7d87fda515acc5ed6e923"
+    sha256 cellar: :any, arm64_linux:       "8197d11ea5baef0004cda0e805ca9f609751bb6204a4d74ba4e81f8b0de079ed"
+    sha256 cellar: :any, x86_64_linux:      "b3e3a1b32959d502c41164e8544adf4f64d8c7fe39a3fc7a16bdcfddb1b719f8"
   end
 
   depends_on "cmake" => :build
@@ -27,6 +26,14 @@ class Mydumper < Formula
   depends_on "glib"
   depends_on "mariadb-connector-c"
   depends_on "pcre2"
+
+  # Use portable close-on-exec pipes, upstream PR ref, https://github.com/mydumper/mydumper/pull/2363
+  patch do
+    url "https://github.com/mydumper/mydumper/commit/585fc5ab687e6a57694490177d52bc9dda47bed9.patch?full_index=1"
+    sha256 "e46de97c4ae0eb34a4ca6234a8f4fa7f762266d9ada0ea635787242eb0c17921"
+    type :unofficial
+    resolves "https://github.com/mydumper/mydumper/pull/2363"
+  end
 
   deny_network_access!
 
@@ -47,6 +54,7 @@ class Mydumper < Formula
   end
 
   test do
-    system bin/"mydumper", "--help"
+    assert_match "metadata file was not found",
+                 shell_output("#{bin}/myloader --directory=#{testpath} 2>&1", 1)
   end
 end
