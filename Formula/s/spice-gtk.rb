@@ -13,14 +13,11 @@ class SpiceGtk < Formula
   end
 
   bottle do
-    rebuild 4
-    sha256 arm64_golden_gate: "94daa7294ec7bb061de72fa11f8ef6db96932dda6ba58399e477bc8b3863dc21"
-    sha256 arm64_tahoe:       "21eceed114b1e4ffa0448d21508d99d2c93ae878325b9b51c146ced4181a31fd"
-    sha256 arm64_sequoia:     "249a4261f91fe205b61e1636440d889def5f5e4aec5ffd19821caf0a9e743dea"
-    sha256 arm64_sonoma:      "73b27a8348177262ab9e24628a0139163cfbf8cf264457c504ac1ddd145cbf8b"
-    sha256 sonoma:            "aac4c0b6608b911ac73ca8960add7a8bda7f5f3a316f83430b588140c39b011a"
-    sha256 arm64_linux:       "2a66a37b796347b663e8f75fafe1f47589c091b9a5267c2f78fbb361ecb0d906"
-    sha256 x86_64_linux:      "83c56974836f7c0159133c7058c58fd32b087e2e0fcdd1503abf8c3d86bb55a0"
+    sha256 arm64_golden_gate: "9d3e7b6dd550b1a08b31d837f82962fe93541334c66f9acb841ae3833ee59dfc"
+    sha256 arm64_tahoe:       "89e3b0605309b8f94ad5ed0120e3d6609b737a6a31bbd86a365839e902eaf216"
+    sha256 arm64_sequoia:     "9821213b34dd479b0e5c1699e42268a354903e24bc5f493fcfccabc3fd807465"
+    sha256 arm64_linux:       "350350ef031b3300b83ea086a1670504789c47003bcfb046badf8e1efe618d5d"
+    sha256 x86_64_linux:      "4de56e9d5393994287c63794c562d3b6266f27651fe4bd6b696a2cac33d7eeae"
   end
 
   depends_on "gettext" => :build
