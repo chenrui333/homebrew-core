@@ -47,9 +47,9 @@ class Openbao < Formula
     end
 
     ldflags = %W[
-      -X github.com/openbao/openbao/version.fullVersion=#{version}
-      -X github.com/openbao/openbao/version.GitCommit=#{Utils.git_head}
-      -X github.com/openbao/openbao/version.BuildDate=#{time.iso8601}
+      -X github.com/openbao/openbao/v2/internal/version.fullVersion=#{version}
+      -X github.com/openbao/openbao/v2/internal/version.GitCommit=#{Utils.git_head}
+      -X github.com/openbao/openbao/v2/internal/version.CommitDate=#{time.iso8601}
     ]
     tags = %w[testonly ui]
     system "go", "build", *std_go_args(ldflags:, tags:, output: bin/"bao")
@@ -64,6 +64,8 @@ class Openbao < Formula
   end
 
   test do
+    assert_match version.to_s, shell_output("#{bin}/bao version")
+
     addr = "127.0.0.1:#{free_port}"
     ENV["VAULT_DEV_LISTEN_ADDRESS"] = addr
     ENV["VAULT_ADDR"] = "http://#{addr}"
