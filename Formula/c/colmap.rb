@@ -7,11 +7,11 @@ class Colmap < Formula
   revision 2
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "c409e9a23becb7d06c1e95c2b13ff72db84ce57b9add93c51edb507d5b092074"
-    sha256 cellar: :any, arm64_tahoe:       "d1de63a50011e06f7703c62e099bdd238ce19cae490bf83f721c5b5ccbb75410"
-    sha256 cellar: :any, arm64_sequoia:     "fcbb384bf9b1a0d01a56ca3567a0af4dabe121391992fae6f0416e1a2e9ca06d"
-    sha256 cellar: :any, arm64_linux:       "539a35873f7170dbb9ae8f4474762bf76c7a080576e46bd59dc1a11851f81750"
-    sha256 cellar: :any, x86_64_linux:      "453cca671454c37bc7b517d58cda21c282f03d226a1f13c2e705865d10cf3926"
+    sha256 cellar: :any, arm64_golden_gate: "e17b6b14d674c6a34dc32b609aef9bd5d57e69191a5c3e5ae9d57508c4bb4ef2"
+    sha256 cellar: :any, arm64_tahoe:       "8be46148b54419b50b0b861c56175ecc250ee19766dd160883f7354f210f4278"
+    sha256 cellar: :any, arm64_sequoia:     "1836ed5530d63d5fd4405cb8cfee147277d42678dfb3e4332b08babaf147f9ad"
+    sha256 cellar: :any, arm64_linux:       "64f50dc3bfe4249a41144bfd734734a1413b2342452e727c1f3ba933aae75340"
+    sha256 cellar: :any, x86_64_linux:      "f4ff0edde8ea5f0d13e73f190d61c689dfa49c7af9173f377841c52a7d991b0d"
   end
 
   depends_on "cmake" => :build
