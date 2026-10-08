@@ -10,6 +10,7 @@
   "manticoresearch",
   "mysql-client@8.0",
   "mysql-client@8.4",
+  "neomutt",
   "node@22",
   "opencoarrays",
   "opensearch-dashboards",
@@ -19,6 +20,7 @@
   "rpki-client",
   "sapling",
   "texlive",
+  "thors-anvil",
   "tsung",
   "undercutf1"
 ]
