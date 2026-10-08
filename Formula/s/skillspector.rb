@@ -22,10 +22,10 @@ class Skillspector < Formula
   depends_on "cryptography" => :no_linkage
   depends_on "libyaml"
   depends_on "numpy"
-  depends_on "openssl@3"
   depends_on "pydantic" => :no_linkage
   depends_on "python@3.14"
   depends_on "xxhash"
+  depends_on "yara"
   depends_on "zstd"
 
   pypi_packages exclude_packages: %w[certifi cryptography numpy pydantic]
@@ -319,7 +319,12 @@ class Skillspector < Formula
     # Link against the keg rather than the copy vendored in the sdist.
     ENV["XXHASH_LINK_SO"] = "1"
 
-    venv = virtualenv_install_with_resources without: "zstandard"
+    venv = virtualenv_install_with_resources without: %w[yara-python zstandard]
+
+    resource("yara-python").stage do
+      inreplace "setup.py", "self.dynamic_linking = None", "self.dynamic_linking = True"
+      venv.pip_install Pathname.pwd
+    end
 
     # zstandard only uses the system libzstd when told to at build time.
     resource("zstandard").stage do
