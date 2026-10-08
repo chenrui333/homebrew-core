@@ -1,8 +1,8 @@
 class FoxgloveCli < Formula
   desc "Foxglove command-line tool"
   homepage "https://github.com/foxglove/foxglove-cli"
-  url "https://github.com/foxglove/foxglove-cli/archive/refs/tags/v1.0.33.tar.gz"
-  sha256 "a187f4612b5b5fe065c24512689c02cd935993767223c76137f3d528e6a6e845"
+  url "https://github.com/foxglove/foxglove-cli/archive/refs/tags/v2.0.0.tar.gz"
+  sha256 "491085b6ee1e4213ab54e83154fda16a9571d1568cab81d5fa5b334bcb1428f2"
   license "MIT"
   head "https://github.com/foxglove/foxglove-cli.git", branch: "main"
 
@@ -16,19 +16,22 @@ class FoxgloveCli < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:      "2164d17f3e10fce829f84b76c6ee0e3adea053aee576a1743ed5a1307600324d"
   end
 
-  depends_on "go" => :build
+  depends_on "rust" => :build
 
   deny_network_access!
 
   def fetch
-    system "go", "mod", "download", "-C", "foxglove"
+    cd "rust" do
+      system "cargo", "fetch", *std_cargo_fetch_args
+    end
   end
 
   def install
-    cd "foxglove" do
-      system "make", "build", "VERSION=v#{version}"
-      bin.install "foxglove"
+    ENV["FOXGLOVE_VERSION"] = version.to_s
+    cd "rust" do
+      system "cargo", "install", *std_cargo_args
     end
+    mv bin/"foxglove-rust", bin/"foxglove"
   end
 
   test do
