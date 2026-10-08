@@ -12,11 +12,11 @@ class Scrcpy < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "0fbbcce5c43425e9d6d986dc280cfbbf00d8a054571573061062f7147e699e77"
-    sha256 arm64_tahoe:       "e15c53aff881e7d42a6eb941ca0561e36f4f61459ad01241ec3e9358900b2938"
-    sha256 arm64_sequoia:     "477a91ee3ff1ed0e2f1f074d5cc31928681ee8f6e278cfa47727e257b38a9f8b"
-    sha256 arm64_linux:       "303ec2793ed1dfe3792f740e76850df6f3f04bcbd931a39a0c3f565d558dc527"
-    sha256 x86_64_linux:      "e73d14c83073e71158e5874045b6515284a9cf3c9b5a53c8cced9febb8a6d980"
+    sha256 arm64_golden_gate: "9d2b278e630c10b9edea811ca98e24f911a598422a8eac9a8fd1a63a8cc9d54b"
+    sha256 arm64_tahoe:       "2be4dcfa74bed0423ad50e09f0ce1d355a353e0d5797272b7392550729af6246"
+    sha256 arm64_sequoia:     "310036896e90273ac26f052f3c70f8f07cf48a376620bf84fd977fe2a51de34b"
+    sha256 arm64_linux:       "b91a7c891dceca621544edc74327c69832109c85400a3f02322033a8642fd087"
+    sha256 x86_64_linux:      "7874f0753c6dab085c5de2aada26fce3efcfabcb4dd83a704c1d0ea580a412f6"
   end
 
   depends_on "meson" => :build
