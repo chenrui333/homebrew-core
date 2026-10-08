@@ -6,6 +6,14 @@ class Cymbal < Formula
   license "MIT"
   head "https://github.com/1broseidon/cymbal.git", branch: "main"
 
+  bottle do
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "d881979a73ba426793999e3a64669438e9e5bd48f8195b2a8e5143b3117e208a"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "41f0ea98d5debe15f917359fb383e23e9787c35b289745aadc7dc28cfafa5cfe"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "285fcea86bd0353a1e5432ba6b15195a35da3e200832ef62206cf14093dffc7b"
+    sha256 cellar: :any,                 arm64_linux:       "2fcd5b31356d314c08a6dbef9e2bfccb3dd117949d58f0183e4b25b5121d0211"
+    sha256 cellar: :any,                 x86_64_linux:      "c7372661d37580741ada346d6a5f033e6478e05f6f4c0ede0b71369e68101d92"
+  end
+
   depends_on "go" => :build
 
   uses_from_macos "sqlite"
