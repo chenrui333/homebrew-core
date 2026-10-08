@@ -3,8 +3,8 @@ class Flexget < Formula
 
   desc "Multipurpose automation tool for content"
   homepage "https://www.flexget.com"
-  url "https://files.pythonhosted.org/packages/87/cf/8d5d47ab821d5d0ec6ed76176c4a82b3652130a8ac7144c8d4c06b7a6baf/flexget-3.21.4.tar.gz"
-  sha256 "10dcbd257cb4ed932b525b16475e9a1204c07597af94548d84138200a974138a"
+  url "https://files.pythonhosted.org/packages/c0/c6/20be0279ce13c4d151ad09f86612004a2a40328e5db70bb123d43e8e2559/flexget-3.22.0.tar.gz"
+  sha256 "6bef30659e6fc17ebaa4bba9b2c7facc5be5927e5f859484b03be94114e79459"
   license "MIT"
 
   bottle do
@@ -333,8 +333,8 @@ class Flexget < Formula
   end
 
   resource "sqlalchemy" do
-    url "https://files.pythonhosted.org/packages/02/4b/81d972a46c9f1d978af1795e2abc988855c711453552cb45d75f6e4abbf5/sqlalchemy-2.1.3.tar.gz"
-    sha256 "ade5281df06038c6394f532590d592d3381ee5d11b9e0006a2570aef41145118"
+    url "https://files.pythonhosted.org/packages/1f/44/311bac6b6ef81e4dfd0287d04900108b1f5c00c9761dd3c0a2b7b9d0f86b/sqlalchemy-2.1.4.tar.gz"
+    sha256 "7bd7ad604487daa7eab8716471c29a7185f17b5287ce73bb7bc79fea050d8cfd"
   end
 
   resource "tempora" do
@@ -348,8 +348,8 @@ class Flexget < Formula
   end
 
   resource "typer" do
-    url "https://files.pythonhosted.org/packages/16/f7/57713ba479fd405eb76de31404b2c744c289e336b2d999511ebf51e496f7/typer-0.27.2.tar.gz"
-    sha256 "269b7eb9d3c202ca84b4bc9618cb04ebb43d3d4d1e567e4c768607232c05f945"
+    url "https://files.pythonhosted.org/packages/03/51/d33db42cc72ffd8c30777547b42d01f0cbf9d95a770457698d0174b3ed71/typer-0.27.3.tar.gz"
+    sha256 "d0396f770a560ab1b0a8504e13b5f254b728cedb05c61cf0359e944e50ce8901"
   end
 
   resource "typer-slim" do
