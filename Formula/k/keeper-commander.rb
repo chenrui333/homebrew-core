@@ -3,8 +3,8 @@ class KeeperCommander < Formula
 
   desc "Command-line and SDK interface to Keeper Password Manager"
   homepage "https://docs.keeper.io/en/privileged-access-manager/commander-cli/overview"
-  url "https://files.pythonhosted.org/packages/21/01/54dec5689e11ec0be424aac5f6725d439d22ddb542fcd1f1d45c7f8127b3/keepercommander-18.1.7.tar.gz"
-  sha256 "119ab3fa7a2c67743e3fd0608bf7c54908e6537d194a8f04fc07e8aff28ce7ae"
+  url "https://files.pythonhosted.org/packages/86/e6/5f5bad8a216953867f13df1949092894d5e6a93d14328ee571c030171ce8/keepercommander-18.1.8.tar.gz"
+  sha256 "7bbea24a5d3d0184667f5f2b735c942a18807a0b17c0bc38843e75668b3a195a"
   license "MIT"
   head "https://github.com/Keeper-Security/Commander.git", branch: "master"
 
