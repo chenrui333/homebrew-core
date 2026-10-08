@@ -1,10 +1,9 @@
 class Node < Formula
   desc "Open-source, cross-platform JavaScript runtime environment"
   homepage "https://nodejs.org/"
-  url "https://nodejs.org/dist/v26.11.0/node-v26.11.0.tar.xz"
-  sha256 "aaad9242704524109e88d48be7bb7b7943486d931e740a352c02e97e107f18c9"
+  url "https://nodejs.org/dist/v26.11.1/node-v26.11.1.tar.xz"
+  sha256 "2c79a3c1095c7da4c549c84e90b2d28df5479315ab6d0aff9bc71dcf4c9df1e0"
   license "MIT"
-  revision 1
   head "https://github.com/nodejs/node.git", branch: "main"
 
   livecheck do
