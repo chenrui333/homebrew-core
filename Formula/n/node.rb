@@ -12,11 +12,11 @@ class Node < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "227feb0486ba552d51b2b262b53b0c15950b03ac214099d61d45226b4ebdd5e7"
-    sha256 arm64_tahoe:       "e8723f370d99e7d2b9207068261267c8b3bdfa77ac1407e2a5c8b43f1dc43d7d"
-    sha256 arm64_sequoia:     "6bd0f4573a167bbac54a11d7ad9681be379d2d09c078d301ca5b4ca6acadbde1"
-    sha256 arm64_linux:       "d19e4090bcaf1f5058100c5151f52ef8690ae2d22134392984a0afa2a43b9df3"
-    sha256 x86_64_linux:      "7fb0019e5ae78b7bda4cc1929cc1c39835ad026c0bc6ef4e12d320783cfdc6b1"
+    sha256 arm64_golden_gate: "2069278cbae27858ce63ea602b969b5efcc9f23a677ba7a1ea56ce42bbf3d1ae"
+    sha256 arm64_tahoe:       "f348432ab1ac6fa72a7ac5dad7999c74a2911ddf298fb25565816fb3280726c5"
+    sha256 arm64_sequoia:     "a98e1407899f07d4cde3b5b869d1df404b8045d8e594aed3ccf3e73c85872268"
+    sha256 arm64_linux:       "040d84cec0b8506e69613f5419185603da27d89ac8f6133edc7f769bc2c23fdc"
+    sha256 x86_64_linux:      "066e9342fcfbcc22f2b97fddbf868523310c399228dc9b1a69b48790cf4f6921"
   end
 
   depends_on "pkgconf" => :build
