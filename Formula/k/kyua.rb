@@ -1,10 +1,9 @@
 class Kyua < Formula
   desc "Testing framework for infrastructure software"
   homepage "https://github.com/freebsd/kyua"
-  url "https://github.com/freebsd/kyua/releases/download/kyua-0.14.1/kyua-0.14.1.tar.gz"
-  sha256 "3caf30a7e316f4f21c32e1c419ec80371fe113e3eed10ba1db9e6efc7ee15ecb"
+  url "https://github.com/freebsd/kyua/releases/download/kyua-0.15.0/kyua-0.15.0.tar.gz"
+  sha256 "08b0d498d1440c49413ef651ace410ef5bab83d48a2c5024b0a0e500da96d8c4"
   license "BSD-3-Clause"
-  revision 1
   head "https://github.com/freebsd/kyua.git", branch: "master"
 
   livecheck do
@@ -28,6 +27,14 @@ class Kyua < Formula
   depends_on "lutok"
 
   uses_from_macos "sqlite"
+
+  # Fix GCC build of test helpers that lost `static` in 0.15.0
+  patch do
+    url "https://github.com/freebsd/kyua/commit/41222b1393499096a73be5f3b7d9c45b274bbfb6.patch?full_index=1"
+    sha256 "d37fc322a827f511dd1289ae822c81b15429db4e6e27420c1ee96a61e4b909e7"
+    type :unofficial
+    resolves "https://github.com/freebsd/kyua/pull/328"
+  end
 
   def install
     ENV.append "CPPFLAGS", "-I#{formula_opt_include("lua")}/lua"
