@@ -12,13 +12,11 @@ class Aarch64ElfGdb < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "1366102d31c3a3b88e971a09892ef0a6c3c01db76d1176a3adbc8f90c0ca2a5c"
-    sha256 arm64_tahoe:       "c958dd17cd4589be2776d5dc2ea42407e97e8e8fa6144ab6e557715644c700be"
-    sha256 arm64_sequoia:     "ed517cad598f41182e050ebb66bcc10249b520ebb283de167b8b4ef28df9d6fb"
-    sha256 arm64_sonoma:      "b36350487f63d82dfb9f8e73d7d61b92ef10f671ebf1d03040897783a7fe5060"
-    sha256 sonoma:            "a34575014e49cba4ab7744a4318e523906ea3d99ab93b6dd850375102484989e"
-    sha256 arm64_linux:       "2b1f5ab9b9c1d88d884c5c1ede27c64995e093fc1e785608dbcee33a9f893bbb"
-    sha256 x86_64_linux:      "f5093f7b253715bb6a7df45f63f3c491774e7fcd74d79e9fc23c8cfe45aeabf8"
+    sha256 arm64_golden_gate: "503d596f5615aa4347b7130c5b2631f6d82821206e1bdcf35593745075c1569c"
+    sha256 arm64_tahoe:       "35b9a904b49aa5f6a59eaaf18d06c8dd8641be7bf7dcfd9660d2fb535aa048b8"
+    sha256 arm64_sequoia:     "b1ab40dec2e3bf3abd4583555d3212bbf8756c60dfa35f7b88a47223372b4be6"
+    sha256 arm64_linux:       "03b905f671e8bed5ccd761641ea3ac6f072233aa090ac09c9daf01689959daa6"
+    sha256 x86_64_linux:      "f04148decadce870043397548a52b4911281e934bfb0aab662bbd2d9b5602a73"
   end
 
   depends_on "pkgconf" => :build
