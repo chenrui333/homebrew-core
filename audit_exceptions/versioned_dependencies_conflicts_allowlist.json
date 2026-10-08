@@ -16,6 +16,7 @@
   "percona-server@8.4",
   "pyenv-ccache",
   "rpki-client",
+  "sapling",
   "texlive",
   "tsung",
   "undercutf1"
