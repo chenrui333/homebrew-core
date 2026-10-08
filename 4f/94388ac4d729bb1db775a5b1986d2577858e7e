@@ -1,0 +1,15 @@
+Formula/s/subversion.rb
+  h_9df9c32c3f321d 56-59
+  h_9df9c32c3f321d 4-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4f94388ac4d729bb1db775a5b1986d2577858e7e",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
