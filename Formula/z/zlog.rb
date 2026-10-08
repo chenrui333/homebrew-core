@@ -1,8 +1,8 @@
 class Zlog < Formula
   desc "High-performance C logging library"
   homepage "https://github.com/HardySimpson/zlog"
-  url "https://github.com/HardySimpson/zlog/archive/refs/tags/1.2.19.tar.gz"
-  sha256 "475df1b30be64190fd692de834ad4c45510f996188b5ecd4b6e3da2527c74a32"
+  url "https://github.com/HardySimpson/zlog/archive/refs/tags/1.2.20.tar.gz"
+  sha256 "432723ccd9a5b07ec1e4b8cc985d9011d768633b1e4c4facfc0e3e9a7ad5fcf7"
   license "Apache-2.0"
 
   bottle do
