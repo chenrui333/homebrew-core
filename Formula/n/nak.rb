@@ -12,11 +12,11 @@ class Nak < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "7317083b6cf90a1542feafa1b68ae0d32dffde7c346da3405dfb39aac436387b"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "7317083b6cf90a1542feafa1b68ae0d32dffde7c346da3405dfb39aac436387b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "7317083b6cf90a1542feafa1b68ae0d32dffde7c346da3405dfb39aac436387b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "1e62be51d33ae6d30892b3598845816a8c53ae5a8f469b4f41e365fbd69bd900"
-    sha256 cellar: :any,                 x86_64_linux:      "760ca378c6c7337ccf2f155a64f65a7c020ffc4f835377633d1f7759734ff363"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "b464e8d43c6a0c2e90daa8db65691fe8f368c8f3ddcedc18b999f827c7c79d97"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "b464e8d43c6a0c2e90daa8db65691fe8f368c8f3ddcedc18b999f827c7c79d97"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "b464e8d43c6a0c2e90daa8db65691fe8f368c8f3ddcedc18b999f827c7c79d97"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "de7600b60f89a808d9e72e5a0340fe6284d36ae5823046c456d4ffdfc545b04b"
+    sha256 cellar: :any,                 x86_64_linux:      "f5e2e95ce470335798dcd4df87d3713f599d440347dc0dd0fb6d236207adce88"
   end
 
   depends_on "go" => :build
