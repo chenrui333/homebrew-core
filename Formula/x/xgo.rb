@@ -4,6 +4,7 @@ class Xgo < Formula
   url "https://github.com/goplus/xgo/archive/refs/tags/v1.7.5.tar.gz"
   sha256 "aceb20c547645016b4feb33b7e32de79267f4796a0f26832d5b89e7329724afb"
   license "Apache-2.0"
+  revision 1
   head "https://github.com/goplus/xgo.git", branch: "main"
 
   livecheck do
