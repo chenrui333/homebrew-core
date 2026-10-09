@@ -12,12 +12,11 @@ class Knot < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "2c767a1538418d3c7a00414faad8a4f2955d8202e9a0bc1108b8009ba5408b4e"
-    sha256 arm64_tahoe:       "934edd9ccd1c78167d77ea7e7a77cf8d9d37184c4bb20a121c2f1622e90da4f2"
-    sha256 arm64_sequoia:     "4a7c5d66d0f09dcbb2fb4d6f70d8a08e64a850e9beacd4dc3d5a53a611ce289e"
-    sha256 arm64_sonoma:      "ac99730976e7300587bf58f815b49e7266d3abd9d1c208a017083c9af5e88976"
-    sha256 arm64_linux:       "7cbeab3acff3c761059ee2cd12339c1ef779b8bff4c2fdef1543b82f9f50165a"
-    sha256 x86_64_linux:      "3278bfe8e4ec923f261ea819448ffba25085c08e3fe2f0e1e2e2c04fb44de613"
+    sha256 arm64_golden_gate: "f578c26b2282535823b67151af62573ed2ebab6c1984c197fd36240e535b5195"
+    sha256 arm64_tahoe:       "0ea654cb14756536f630fddf6e4bea048fb19fb48183b16f8d88160eb027274d"
+    sha256 arm64_sequoia:     "d5c5b8c0b1e8afcfdccedda6b7df19b53c1cd919ae0b2475474d7b11f2898742"
+    sha256 arm64_linux:       "b069e93413a205e285edbf0ec8c9d78eb01f8a341e36de0e8eb7b34a93a04f18"
+    sha256 x86_64_linux:      "059ad1d2c14cff208545f06dd27ded5c4dfb7c6c66c40326a04f825eecf57848"
   end
 
   head do
