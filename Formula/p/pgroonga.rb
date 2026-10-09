@@ -11,11 +11,11 @@ class Pgroonga < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "3bdf1ca0702137c0e9e5f163f5c28fd8161eb605fe94643eae5021974890cd66"
-    sha256 cellar: :any, arm64_tahoe:       "0157e6102c4d83fbd10cb2c53230873b456db1d1634db200ab0157ebf0f0d4c8"
-    sha256 cellar: :any, arm64_sequoia:     "c9f157043f4c074b8546b00823c148e9f8a8f184108204494ff4d3b18b7b4118"
-    sha256 cellar: :any, arm64_linux:       "91b656670c82d0139339676e3915a299a3357a05aa7bfe94a4b2d6df6d477f0d"
-    sha256 cellar: :any, x86_64_linux:      "74552185fa4d449d60d62c0c2ef72392732fe87f55162f26a0a71c47f863d7e3"
+    sha256 cellar: :any, arm64_golden_gate: "89f79fe5cfa2adda9e83ddffa9375c95c5af62ed6fe08c0330a91d057469814f"
+    sha256 cellar: :any, arm64_tahoe:       "d844291254bd3e72c344e4ace12b392842b06fd619ed6f605bd865aadbbc57ec"
+    sha256 cellar: :any, arm64_sequoia:     "1df0d30ff3abd192dc67f97d7fc5494d8f8f5b4c37429af16156a348602f26f4"
+    sha256 cellar: :any, arm64_linux:       "9bd0cfa92ca4b32d3e14d50dfcd7a094fa71d3eb105fdc27f825485921404ac3"
+    sha256 cellar: :any, x86_64_linux:      "8ce9d7526b1179316c5e9dd81207f40fc2321bb0e0f3f9c651f85850a706a40b"
   end
 
   depends_on "meson" => :build
