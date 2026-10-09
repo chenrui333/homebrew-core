@@ -213,7 +213,6 @@ class Btcli < Formula
   end
 
   test do
-    require "json"
     wallet_path = testpath/"btcli-brew-test"
     test_wallet_name = "brew-test"
     ss58_address = "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty"
