@@ -4,6 +4,7 @@ class Pygit2 < Formula
   url "https://files.pythonhosted.org/packages/9c/11/592cc7854795830a7257ab6025a1fc803b58b0e7bf7d31f619bc7288ed4d/pygit2-1.20.1.tar.gz"
   sha256 "36dff84d237f2b8f18b0b146d6e7c3f99a7bce2da98cc4103a14387f53319f95"
   license "GPL-2.0-only" => { with: "GCC-exception-2.0" }
+  revision 1
   compatibility_version 1
   head "https://github.com/libgit2/pygit2.git", branch: "master"
 
@@ -15,8 +16,8 @@ class Pygit2 < Formula
     sha256 cellar: :any, x86_64_linux:      "dedef89ae1f9d119a1d0fce35f78205ecfe4efcb3430ea4e0efcbdc66b46d831"
   end
 
-  depends_on "python@3.13" => [:build, :test]
   depends_on "python@3.14" => [:build, :test]
+  depends_on "python@3.15" => [:build, :test]
   depends_on "cffi"
   depends_on "libgit2"
 
