@@ -1,8 +1,8 @@
 class Mlkit < Formula
   desc "Compiler for the Standard ML programming language"
   homepage "https://melsman.github.io/mlkit"
-  url "https://github.com/melsman/mlkit/archive/refs/tags/v4.7.24.tar.gz"
-  sha256 "519efe63a8362f7c9411adced5cfa6b9d251ed9cad1eb01c3f195f83452dc905"
+  url "https://github.com/melsman/mlkit/archive/refs/tags/v4.7.25.tar.gz"
+  sha256 "a39033eb870c477e7b121627311f433c5560fba431760be3bd810f4b07dff475"
   license "GPL-2.0-or-later"
   head "https://github.com/melsman/mlkit.git", branch: "master"
 
@@ -44,12 +44,12 @@ class Mlkit < Formula
     # https://github.com/melsman/mlkit/tree/master#native-arm64-on-macos
     if OS.mac? && Hardware::CPU.arm?
       resource("bootstrap").stage("bootstrap")
-      ENV["MLKIT_BOOTSTRAP"] = buildpath/"bootstrap/bin/mlkit"
-      ENV["MLKIT_BOOTSTRAP_SML_LIB"] = buildpath/"bootstrap/lib/mlkit"
-      ENV["MLKIT_BOOTSTRAP_FLAGS"] = "-gc"
       ENV["SML_LIB"] = buildpath
       ENV["DARWIN_NATIVE"] = "1"
-      args = ["--with-compiler=mlkit"]
+      args = [
+        "--with-compiler=#{buildpath}/bootstrap/bin/mlkit",
+        "--with-compiler-lib=#{buildpath}/bootstrap/lib/mlkit",
+      ]
     end
 
     system "sh", "./autobuild"
