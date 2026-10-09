@@ -12,11 +12,11 @@ class Mavsdk < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "a6c519a6015f5b789d8970f0754cd591e636149b697c7a9305c849fc2c7ff2b7"
-    sha256 cellar: :any, arm64_tahoe:       "5e1f9d485671181f509bcfb32a912087ef61ee6205c646db5b7075d627aacd0b"
-    sha256 cellar: :any, arm64_sequoia:     "cc61fd9ab682831c03bd45db8b63cd7448f98354a6f9a11031f992a63f221aa7"
-    sha256               arm64_linux:       "f7b83b35238bc9f80d6e4a9096828aa9a44c4a7792d42e13b85523d43d12176f"
-    sha256               x86_64_linux:      "30761393d5005da76cbe8d33c70746d1f2858294dd94f0e1e413513280e97bf4"
+    sha256 cellar: :any, arm64_golden_gate: "9a650087873b7167a9968b832ce653b969225aedd6e63454e02dd89e9800fb5a"
+    sha256 cellar: :any, arm64_tahoe:       "39313fe807f3dc6ac17a8ca3a8b7016bf40bc8dce351520140c25dc01edfc69b"
+    sha256 cellar: :any, arm64_sequoia:     "0558ac6becdb2709ccd8a3c5f87dd574a896ccf95807987c88c19e620e830a39"
+    sha256               arm64_linux:       "a2aeb6b51b091fe717ccb427659b06fa84c831660c7cafea83f0e84d3e82fc59"
+    sha256               x86_64_linux:      "70f5a18b55821dc6bd40175d2279979c99c2bb601c2b5db8e4c423726baadb0f"
   end
 
   depends_on "asio" => :build
