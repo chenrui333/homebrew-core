@@ -8,6 +8,7 @@ class Texlive < Formula
   mirror "https://ftp.tu-chemnitz.de/pub/tug/historic/systems/texlive/2026/texlive-20260301-source.tar.xz"
   sha256 "cb120d314d3ceb23ac608af17ddd2c623afcf02331f400a0f25eead5b8ac1d70"
   license :cannot_represent
+  revision 1
   compatibility_version 1
   head "https://github.com/TeX-Live/texlive-source.git", branch: "trunk"
 
@@ -64,7 +65,7 @@ class Texlive < Formula
   depends_on "luajit"
   depends_on "mpfr"
   depends_on "openjdk"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "perl"
   depends_on "pixman"
   depends_on "potrace"
@@ -320,8 +321,16 @@ class Texlive < Formula
   end
 
   resource "Net::SSLeay" do
-    url "https://cpan.metacpan.org/authors/id/C/CH/CHRISN/Net-SSLeay-1.94.tar.gz"
-    sha256 "9d7be8a56d1bedda05c425306cc504ba134307e0c09bda4a788c98744ebcd95d"
+    url "https://cpan.metacpan.org/authors/id/C/CH/CHRISN/Net-SSLeay-1.96.tar.gz"
+    sha256 "ab213691685fb2a576c669cbc8d9266f8165a31563ad15b7c4030b94adfc0753"
+
+    # Backport support for OpenSSL 4.0
+    patch do
+      url "https://github.com/radiator-software/p5-net-ssleay/commit/a55abab4a33b040fbd56cc18fde6c257af2928e2.patch?full_index=1"
+      sha256 "dd0fab47cfb05393ba1124f0b3fcbdf43cb346212ca145beed5aa8af9dfbd12d"
+      type :backport
+      resolves "https://github.com/radiator-software/p5-net-ssleay/pull/553"
+    end
   end
 
   resource "IO::Socket::SSL" do
@@ -351,7 +360,7 @@ class Texlive < Formula
     # Install Perl resources
     ENV.prepend_create_path "PERL5LIB", libexec/"lib/perl5"
     ENV["PERL_MM_USE_DEFAULT"] = "1"
-    ENV["OPENSSL_PREFIX"] = formula_opt_prefix("openssl@3")
+    ENV["OPENSSL_PREFIX"] = formula_opt_prefix("openssl@4")
 
     tex_resources = %w[texlive-extra install-tl texlive-texmf]
 
