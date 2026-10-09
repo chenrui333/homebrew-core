@@ -6,6 +6,7 @@ class Overturemaps < Formula
   url "https://files.pythonhosted.org/packages/da/6b/d02503bba3a90fc333d6188b892554bcfccb30b6e3728086fa0fa4c2857f/overturemaps-1.0.2.tar.gz"
   sha256 "e92355dcc2961da0ce95ab9837a59f2d15bcc357be51d0c415ceab3d812fc97d"
   license "MIT"
+  revision 1
   head "https://github.com/OvertureMaps/overturemaps-py.git", branch: "main"
 
   bottle do
@@ -48,8 +49,8 @@ class Overturemaps < Formula
   end
 
   resource "pyarrow" do
-    url "https://files.pythonhosted.org/packages/3d/e3/27f57f80141379d60defe6703eb50a707325706f07fedfd1312c7a751995/pyarrow-25.0.1.tar.gz"
-    sha256 "9150a83248bfed9813ea3c3af74c3856c1984d444aa28e58bf7733b9750ddf6a"
+    url "https://files.pythonhosted.org/packages/ec/34/17c34cb38e5d940e38f0f0d9fdfa0e8a506676409ea9b85aff7e3079f831/pyarrow-26.0.0.tar.gz"
+    sha256 "0cccd36e00ea3afeb52ded61f2721ce71f604853d70c45365c58324eb773d6ae"
   end
 
   resource "pyfiglet" do
