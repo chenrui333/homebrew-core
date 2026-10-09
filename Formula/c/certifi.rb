@@ -39,5 +39,9 @@ class Certifi < Formula
   test do
     output = shell_output("#{python3} -m certifi").chomp
     assert_equal Formula["ca-certificates"].pkgetc/"cert.pem", Pathname(output).realpath
+
+    # Check that the wheel is safe to use on all pythons
+    wheel = prefix/Language::Python.site_packages(python3)/"certifi-#{version}.dist-info/WHEEL"
+    assert_match(/^Tag: py3-none-any$/, wheel.read)
   end
 end
