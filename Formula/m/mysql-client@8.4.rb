@@ -6,6 +6,7 @@ class MysqlClientAT84 < Formula
   url "https://cdn.mysql.com/Downloads/MySQL-8.4/mysql-8.4.11.tar.gz"
   sha256 "eb3051164d625dd346a8203f76e0d5d5d9aec51dbe9d51788e39ec6b3f1394c2"
   license "GPL-2.0-only" => { with: "Universal-FOSS-exception-1.0" }
+  revision 1
 
   livecheck do
     formula "mysql@8.4"
@@ -28,7 +29,7 @@ class MysqlClientAT84 < Formula
   depends_on "pkgconf" => :build
   depends_on "libevent"
   depends_on "libfido2"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "zlib-ng-compat" # Zlib 1.2.13+
   depends_on "zstd"
 
@@ -36,6 +37,13 @@ class MysqlClientAT84 < Formula
 
   on_linux do
     depends_on "libtirpc" => :build
+  end
+
+  # Apply Debian's patch to fix build with OpenSSL 4
+  patch do
+    url "https://salsa.debian.org/mariadb-team/mysql/-/raw/ac6576612c0afddccebf939fccedacc3b97db567/debian/patches/support-openssl4.patch"
+    sha256 "fd0eb6d47ce5aaef43e58240d9884d04b1ee30fd3c57395b405d9400ae136a02"
+    type :unofficial
   end
 
   def install
