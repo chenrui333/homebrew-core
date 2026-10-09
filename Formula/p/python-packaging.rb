@@ -9,8 +9,7 @@ class PythonPackaging < Formula
   revision 1
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, all: "6c52dfd74c69a6fdb4ce844deb483e50b314684713e855793d3528493687054e"
+    sha256 cellar: :any_skip_relocation, all: "58715fc706578d585033b5c41ef23ea5f33e3fcc0e1637431055a880bfc50bbd"
   end
 
   depends_on "python@3.15" => [:build, :test]
