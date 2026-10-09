@@ -22,7 +22,7 @@ class Pyenv < Formula
   end
 
   depends_on "autoconf"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "pkgconf"
   depends_on "readline"
 
