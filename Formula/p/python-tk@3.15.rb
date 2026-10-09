@@ -9,6 +9,14 @@ class PythonTkAT315 < Formula
     formula "python@3.15"
   end
 
+  bottle do
+    sha256 cellar: :any, arm64_golden_gate: "e372315020497c7f3c4da68dadfea43d9f8dcc12444be2f861b0bd37a2d1a61c"
+    sha256 cellar: :any, arm64_tahoe:       "654e10dc8b72b166aa789ad16082a594311f0efedb4e736d733c3a933a6cc086"
+    sha256 cellar: :any, arm64_sequoia:     "4d909bb19929b478e9ef206557d0aefa355fa23454536d650194d82b149523cc"
+    sha256               arm64_linux:       "1a426cd87a6bedaa8dfafc4d9b6b1e0eaa9080695e73751e1ce3e31c36386513"
+    sha256               x86_64_linux:      "1cf732fead9cc132606f8c0395ec31b8f66c01837e67016c994ee2b5a38807c9"
+  end
+
   # https://devguide.python.org/versions/#versions
   deprecate! date: "2031-11-01", because: :deprecated_upstream
   disable! date: "2032-11-01", because: :deprecated_upstream
