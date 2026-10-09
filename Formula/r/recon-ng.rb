@@ -13,14 +13,11 @@ class ReconNg < Formula
   revision 4
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any,                 arm64_golden_gate: "d46aef2e894fd9e0f1996f87d6368094342589c00fe76c4a3246f3f14451ff98"
-    sha256 cellar: :any,                 arm64_tahoe:       "5d0d878d5f6edba6536e509b5bec44ec2e5fd85ec6e0a3785439f98b1f454b90"
-    sha256 cellar: :any,                 arm64_sequoia:     "3d53b980bcba6db9c0fb47fae0ee918218257ba5540f7f1aaaffe6427ca62623"
-    sha256 cellar: :any,                 arm64_sonoma:      "8f66b2989cd5af0973dad3cc2b99eb1bb932cac0d721c42a9cb857d1e236cc11"
-    sha256 cellar: :any,                 sonoma:            "5a578602afee724341f20d120c2d114d4313245c7c3d51ee809b0af1b4ab8ed2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "c9df889447d25ba8cf1935285f191656ba419b82cdccdf321aa1e745878d14eb"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "ebaadd6d0d0f37a068d6c22c938ec40d55433344cc20cef7aaddd5454e3a2f4e"
+    sha256 cellar: :any, arm64_golden_gate: "170649799201ad9fca70d351013a7960872d577e6f8495446565c7be233d75da"
+    sha256 cellar: :any, arm64_tahoe:       "fbbc2562a2bc60dd52b6c54fe94682737ef6c6ff4cd6b87fa034a9aa92ddee85"
+    sha256 cellar: :any, arm64_sequoia:     "cf923031d490c3196648641678505f5d2674e670c78faba48a6864ba3d6b0143"
+    sha256 cellar: :any, arm64_linux:       "f1a6e23d2fab30b1631ee9eba7a3ad8d3ce1818663e59e6a9f348b4378deb382"
+    sha256 cellar: :any, x86_64_linux:      "c51bea20716d3726fcb263285f55a459fabe86412fb12fd70c37f9cb051ba6ce"
   end
 
   depends_on "certifi" => :no_linkage
