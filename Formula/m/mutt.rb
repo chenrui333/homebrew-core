@@ -10,9 +10,9 @@
 class Mutt < Formula
   desc "Mongrel of mail user agents (part elm, pine, mush, mh, etc.)"
   homepage "http://www.mutt.org/"
-  url "https://ftp.osuosl.org/pub/mutt/mutt-2.4.2.tar.gz"
-  mirror "http://ftp.mutt.org/pub/mutt/mutt-2.4.2.tar.gz"
-  sha256 "2703ff1a51a99c3163d4fd998ac22e982bbd5493d512a7c5bde716a8adba0394"
+  url "https://ftp.osuosl.org/pub/mutt/mutt-2.4.3.tar.gz"
+  mirror "http://ftp.mutt.org/pub/mutt/mutt-2.4.3.tar.gz"
+  sha256 "ce9154e3afede622d98b90a22c87d06f32051c930a9afb2b7ef41656c4dbc948"
   license "GPL-2.0-or-later"
 
   livecheck do
