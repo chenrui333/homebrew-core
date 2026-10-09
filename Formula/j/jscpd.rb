@@ -6,11 +6,11 @@ class Jscpd < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "37394ce209acc1236c0e3d6ec93493ea6d28141d16a5b511d2bd05d64fbe8d85"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "e894ff9546a1e5e141b50eb6c695c474947ca45776ed671df47361245efbe8ac"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "f8b536d91b4598698b3a9d591f25fc07999af4b3ffbea96c8bd552f1a92fa861"
-    sha256 cellar: :any,                 arm64_linux:       "e1c4e18c251069c42ae320a42261b49de75b2f6ee962436907c52177a3fc5a82"
-    sha256 cellar: :any,                 x86_64_linux:      "b2734041c4572d9a9e576b7f14c24cb240054161afa918141b9cdb87300399bf"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "264a38eeed978562c8a5d612401074fbafd7db111f8565d52245391c94bec659"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "d5c7fbe810b5c00bd089aaeee54d37654c849e7c4e2f82185776578c3abe517c"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "bc266cd001feccd6a587826ea01cb7f30b5906708442d58a89d6fbac463d2b03"
+    sha256 cellar: :any,                 arm64_linux:       "ae9186df79a239d37ee5c3b4afa739a546eb0d8707778a548c014deec8c427c3"
+    sha256 cellar: :any,                 x86_64_linux:      "b40c53dff460ca73617c653456fe079534cd4884c7af6536621630d2752b03f4"
   end
 
   depends_on "rust" => :build
