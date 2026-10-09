@@ -14,11 +14,11 @@ class SpiceGtk < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "9d3e7b6dd550b1a08b31d837f82962fe93541334c66f9acb841ae3833ee59dfc"
-    sha256 arm64_tahoe:       "89e3b0605309b8f94ad5ed0120e3d6609b737a6a31bbd86a365839e902eaf216"
-    sha256 arm64_sequoia:     "9821213b34dd479b0e5c1699e42268a354903e24bc5f493fcfccabc3fd807465"
-    sha256 arm64_linux:       "350350ef031b3300b83ea086a1670504789c47003bcfb046badf8e1efe618d5d"
-    sha256 x86_64_linux:      "4de56e9d5393994287c63794c562d3b6266f27651fe4bd6b696a2cac33d7eeae"
+    sha256 arm64_golden_gate: "1864f18dbeda602def2ef63a652dd723b23c121f048424d8b58bdcbf21a902b0"
+    sha256 arm64_tahoe:       "ac1200b9df94da7b8038adfda6190681d4b80a62504791df234fe8528ab0c9fb"
+    sha256 arm64_sequoia:     "342a8c77f2fe122518eca2f734612e254d077159bcaeff8949e74dac431949c5"
+    sha256 arm64_linux:       "01a87882c664a6f6e86b78df588de1b11b898be44d11c236982a9cf754b04209"
+    sha256 x86_64_linux:      "bbe92a271ecb4d7559b3547b4c52338e6662f9e0a8b3be9874401f1fb7dad373"
   end
 
   depends_on "gettext" => :build
