@@ -3,10 +3,17 @@ class Jiratui < Formula
 
   desc "Textual User Interface for interacting with Atlassian Jira from your shell"
   homepage "https://jiratui.sh/"
-  url "https://files.pythonhosted.org/packages/ac/4a/36e70a89f425b3b9f1d9a34734c12985798abd8f1c39ebf16e6cdc982e2f/jiratui-1.16.0.tar.gz"
-  sha256 "975d1165e67ba8875a7edeef00a6da557dbdea109d9677ccdd3c768e7420354d"
   license "MIT"
+  revision 1
   head "https://github.com/whyisdifficult/jiratui.git", branch: "main"
+
+  stable do
+    url "https://files.pythonhosted.org/packages/ac/4a/36e70a89f425b3b9f1d9a34734c12985798abd8f1c39ebf16e6cdc982e2f/jiratui-1.16.0.tar.gz"
+    sha256 "975d1165e67ba8875a7edeef00a6da557dbdea109d9677ccdd3c768e7420354d"
+
+    # Backport urllib3 update from https://github.com/whyisdifficult/jiratui/pull/374
+    patch :DATA
+  end
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "5befad6caae5736bf9c337551127a5c60ca2ac10f4b705a80c1894d3a82fa3f4"
@@ -269,8 +276,8 @@ class Jiratui < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz"
-    sha256 "231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c"
+    url "https://files.pythonhosted.org/packages/e3/05/b17359e1cefb4f909b5e40b1b90a496d987258916dbbf88e842c729f510e/urllib3-2.8.0.tar.gz"
+    sha256 "63bf2ead4c879426ebf22ef2a781eeb4aa3b4ae798a0435506f8687fd5bb9b63"
   end
 
   resource "wcwidth" do
@@ -290,7 +297,25 @@ class Jiratui < Formula
   end
 
   test do
+    # TODO: remove with patch
+    refute_match "urllib3", pipe_output("#{libexec}/bin/python -m pip check")
+
     assert_match version.to_s, shell_output("#{bin}/jiratui version")
     assert_match "#{testpath}/.config/jiratui/config.yaml", shell_output("#{bin}/jiratui config")
   end
 end
+
+__END__
+diff --git a/pyproject.toml b/pyproject.toml
+index e7046621..e4fa7237 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -41,7 +41,7 @@ dependencies = [
+     "textual-autocomplete>=4.0.6",
+     "textual-image>=0.13.2,<0.14.0",
+     "textual[syntax]>=8.2.8,<9.0.0",
+-    "urllib3>=2.6.3,<2.8.0",
++    "urllib3>=2.8.0,<2.9.0",
+     "xdg-base-dirs>=6.0.2",
+ ]
+ 
