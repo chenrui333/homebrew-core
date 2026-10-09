@@ -1,17 +1,15 @@
 class Spigot < Formula
   desc "Command-line streaming exact real calculator"
   homepage "https://www.chiark.greenend.org.uk/~sgtatham/spigot/"
-  url "https://www.chiark.greenend.org.uk/~sgtatham/spigot/spigot-20260818.4ef5af3.tar.gz"
-  version "20260818"
-  sha256 "76956c57b12ca4d6b312eb9beb527f4f0b3c087a69938e4c5f0cd6c79f256ff4"
+  url "https://www.chiark.greenend.org.uk/~sgtatham/spigot/spigot-20261009.b2c2295.tar.gz"
+  version "20261009.b2c2295"
+  sha256 "2433c4e1f64248f6ed65aacc79f5607360412e9aca01cd52eabec8a06ec331ae"
   license "MIT"
 
   livecheck do
     url :homepage
-    regex(/href=.*?spigot[._-]v?(\d+(?:\.\d+)*)(?:[._-][\da-z]+)?\.t/i)
+    regex(/href=.*?spigot[._-]v?((?:\d+(?:\.\d+)*)(?:[._-][\da-z]+))\.t/i)
   end
-
-  no_autobump! because: :incompatible_version_format
 
   bottle do
     sha256 cellar: :any_skip_relocation, arm64_golden_gate: "000d44317716f41e5868b02f548d25ed9d33a0e6f0754051222b6ed3f65752f6"
@@ -30,6 +28,8 @@ class Spigot < Formula
   on_linux do
     depends_on "gmp"
   end
+
+  deny_network_access!
 
   def install
     system "cmake", "-S", ".", "-B", "build", *std_cmake_args
