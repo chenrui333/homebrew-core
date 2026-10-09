@@ -2,13 +2,12 @@ class Neovim < Formula
   desc "Ambitious Vim-fork focused on extensibility and agility"
   homepage "https://neovim.io/"
   license "Apache-2.0"
-  revision 1
   compatibility_version 1
   head "https://github.com/neovim/neovim.git", branch: "master"
 
   stable do
-    url "https://github.com/neovim/neovim/archive/refs/tags/v0.12.5.tar.gz"
-    sha256 "a810c95332317bd0017e1ca07e376a8472c79075cbed00fa3737d190a8a0a45a"
+    url "https://github.com/neovim/neovim/archive/refs/tags/v0.12.6.tar.gz"
+    sha256 "8629fdc5eb951daf89a76f68cad12f2f1e03fab0d539150ba3fe6d177d254b7f"
 
     # Keep resources updated according to:
     # https://github.com/neovim/neovim/blob/v#{version}/cmake.deps/deps.txt
