@@ -8,12 +8,11 @@ class SpiceServer < Formula
   head "https://gitlab.freedesktop.org/spice/spice.git", branch: "master"
 
   bottle do
-    rebuild 2
-    sha256 cellar: :any, arm64_golden_gate: "d4d8192eb6b44f8be4e3a078b632552c96e37babb68bdbd016a4030f2fbb5ef8"
-    sha256 cellar: :any, arm64_tahoe:       "369e7eee34a62e07f1453ff10ea53932cd9103d5042f2e3a5cee55dca8aef5ab"
-    sha256 cellar: :any, arm64_sequoia:     "e64d2a5ebef5e1548ce96439a4ed62d7914bec80ab3cfb6a37101989a0c89a0c"
-    sha256 cellar: :any, arm64_linux:       "0d3712e31816c6d091af1f11aac074dbb6d1cd3d283430f7d568255b2b1ae42c"
-    sha256 cellar: :any, x86_64_linux:      "ad95a65263c086fb33453cee6c9452987dc002d85f4b348913eed1f431b00316"
+    sha256 cellar: :any, arm64_golden_gate: "ee519d2b1a6707336149094a3c67985f2645c917af937939db333cd21a3b9c1e"
+    sha256 cellar: :any, arm64_tahoe:       "208555b9383d1016fde6343e6b92d2b5ca89928b7d743675198f921566cebc43"
+    sha256 cellar: :any, arm64_sequoia:     "853367dd10048ed383c9a3544996ff80d40988f19d5312de43d60d628fa3eaac"
+    sha256 cellar: :any, arm64_linux:       "687aa0dc9759407b83f0f256cacbf1b4806c706c955aa1ddca9aee97fb9924cf"
+    sha256 cellar: :any, x86_64_linux:      "aaca9b5de28152a0cb015cddd822fcdc1943372713b968399b7bd7b3c0b8bd8b"
   end
 
   depends_on "spice-protocol" => [:build, :test]
