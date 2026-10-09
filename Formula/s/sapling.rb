@@ -4,6 +4,7 @@ class Sapling < Formula
   url "https://github.com/facebook/sapling/archive/refs/tags/0.2.20260929-102736+288e0c2d.tar.gz"
   sha256 "7a6d3cf76ad2f215946870c28c779fe31b1c514ef23060ff9db1b844c5bc0f74"
   license "GPL-2.0-or-later"
+  revision 1
   head "https://github.com/facebook/sapling.git", branch: "main"
 
   livecheck do
@@ -30,8 +31,8 @@ class Sapling < Formula
   depends_on "gh"
   depends_on "libssh2"
   depends_on "node"
-  depends_on "openssl@3"
-  depends_on "python@3.13"
+  depends_on "openssl@4"
+  depends_on "python@3.13" # remove from versioned_dependencies_conflicts_allowlist when using Python 3.14+
 
   uses_from_macos "llvm" => :build # for libclang
   uses_from_macos "bzip2"
@@ -92,7 +93,7 @@ class Sapling < Formula
     end
 
     ENV["LIBSSH2_SYS_USE_PKG_CONFIG"] = "1"
-    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@3")
+    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@4")
     ENV["PYTHON_SYS_EXECUTABLE"] = ENV["PYO3_PYTHON"] = python3
     ENV["SAPLING_VERSION"] = if build.stable?
       version
@@ -122,8 +123,8 @@ class Sapling < Formula
 
     dylibs = [
       formula_opt_lib("libssh2")/shared_library("libssh2"),
-      formula_opt_lib("openssl@3")/shared_library("libssl"),
-      formula_opt_lib("openssl@3")/shared_library("libcrypto"),
+      formula_opt_lib("openssl@4")/shared_library("libssl"),
+      formula_opt_lib("openssl@4")/shared_library("libcrypto"),
     ]
     dylibs << (formula_opt_lib("curl")/shared_library("libcurl")) if OS.linux?
 
