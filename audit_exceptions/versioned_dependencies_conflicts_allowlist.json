@@ -1,9 +1,7 @@
 [
   "cdxgen",
   "cyan",
-  "dasht",
   "dvisvgm",
-  "hermes-agent",
   "hive",
   "julia",
   "klee",
@@ -14,16 +12,11 @@
   "node@22",
   "opencoarrays",
   "opensearch-dashboards",
-  "pake",
   "pdal",
   "percona-server@8.4",
-  "pushpin",
-  "pyenv-ccache",
-  "rpki-client",
   "rtabmap",
   "sapling",
   "texlive",
   "thors-anvil",
-  "tsung",
   "undercutf1"
 ]
