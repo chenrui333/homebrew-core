@@ -20,7 +20,7 @@ class PythonFreethreading < Formula
   depends_on "pkgconf" => :build
   depends_on "ca-certificates" => :no_linkage
   depends_on "mpdecimal"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "sqlite"
   depends_on "xz"
   depends_on "zstd"
@@ -39,26 +39,16 @@ class PythonFreethreading < Formula
   end
 
   pypi_packages package_name:   "",
-                extra_packages: %w[flit-core pip wheel]
+                extra_packages: %w[flit-core pip]
 
   resource "flit-core" do
     url "https://files.pythonhosted.org/packages/e7/91/add211b38c357bf1b94900b4f79c34661a92be65c0243d2b0a3393c5092d/flit_core-4.1.0.tar.gz"
     sha256 "62e12b63ead8335b37f59fabb977c7167fe476dafb5e41785dfa8c9aff843bc6"
   end
 
-  resource "packaging" do
-    url "https://files.pythonhosted.org/packages/7d/fa/3944b40b07da9ce895c0e6303a5ab7d53da063554f534556b134a54d6093/packaging-26.3.tar.gz"
-    sha256 "94edc256424af38762eb31306eed28beb9f0efc50a8837492c9d6fd6004aed79"
-  end
-
   resource "pip" do
     url "https://files.pythonhosted.org/packages/ae/15/4500e320e6b101ec3b719ae85b697d9940b6cda672bc555bd6016fc60c6f/pip-26.2.1.tar.gz"
     sha256 "f6ad667e89a1fe78046c8f13232b247200f5258d7828f3f7883d660878e0813f"
-  end
-
-  resource "wheel" do
-    url "https://files.pythonhosted.org/packages/d0/20/50ed6bdf27dec98b568a8ae25dc599f35baa3d9709f9e83fd1edb56b9a90/wheel-0.48.0.tar.gz"
-    sha256 "94800765601e9171bf5d58d066e640662842bcedcbab982b2c90787a2c987322"
   end
 
   # Modify default sysconfig to match the brew install layout.
@@ -89,6 +79,7 @@ class PythonFreethreading < Formula
   deny_network_access!
 
   def install
+    openssl = deps.find { |dep| dep.name.start_with?("openssl@") }.name
     # Unset these so that installing pip and setuptools puts them where we want
     # and not into some other Python the user has installed.
     ENV["PYTHONHOME"] = nil
@@ -113,7 +104,7 @@ class PythonFreethreading < Formula
       --datadir=#{share}
       --without-ensurepip
       --enable-loadable-sqlite-extensions
-      --with-openssl=#{formula_opt_prefix("openssl@3")}
+      --with-openssl=#{formula_opt_prefix(openssl)}
       --enable-optimizations
       --with-system-expat
       --with-system-libmpdec
@@ -154,7 +145,7 @@ class PythonFreethreading < Formula
     # `brew install enchant && pip install pyenchant`
     inreplace "./Lib/ctypes/macholib/dyld.py" do |f|
       f.gsub! "DEFAULT_LIBRARY_FALLBACK = [",
-              "DEFAULT_LIBRARY_FALLBACK = [ '#{HOMEBREW_PREFIX}/lib', '#{formula_opt_lib("openssl@3")}',"
+              "DEFAULT_LIBRARY_FALLBACK = [ '#{HOMEBREW_PREFIX}/lib', '#{formula_opt_lib(openssl)}',"
       f.gsub! "DEFAULT_FRAMEWORK_FALLBACK = [", "DEFAULT_FRAMEWORK_FALLBACK = [ '#{HOMEBREW_PREFIX}/Frameworks',"
     end
 
@@ -222,7 +213,7 @@ class PythonFreethreading < Formula
     # Remove the site-packages that Python created in its Cellar.
     rm_r site_packages_cellar.children
 
-    # Prepare a wheel of wheel to install later.
+    # Prepare wheels to install later.
     common_pip_args = %w[
       -v
       --no-deps
@@ -232,15 +223,8 @@ class PythonFreethreading < Formula
     ]
     whl_build = buildpath/"whl_build"
     system python3, "-m", "venv", whl_build
-    %w[flit-core wheel].each do |r|
-      resource(r).stage do
-        system whl_build/"bin/pip3", "install", *common_pip_args, "."
-      end
-    end
-    resource("wheel").stage do
-      system whl_build/"bin/pip3", "wheel", *common_pip_args,
-                                            "--wheel-dir=#{libexec}",
-                                            "."
+    resource("flit-core").stage do
+      system whl_build/"bin/pip3", "install", *common_pip_args, "."
     end
 
     # Replace bundled pip with our own.
@@ -270,7 +254,7 @@ class PythonFreethreading < Formula
     # Bootstrap initial install of pip.
     system python3, "-Im", "ensurepip"
 
-    # Install desired versions of pip, wheel using the version of
+    # Install desired version of pip using the version of
     # pip bootstrapped by ensurepip.
     # Note that while we replaced the ensurepip wheels, there's no guarantee
     # ensurepip actually used them, since other existing installations could
@@ -283,8 +267,7 @@ class PythonFreethreading < Formula
            "--upgrade",
            "--isolated",
            "--target=#{root_site_packages}",
-           bundled/"pip-#{resource("pip").version}-py3-none-any.whl",
-           libexec/"wheel-#{resource("wheel").version}-py3-none-any.whl"
+           bundled/"pip-#{resource("pip").version}-py3-none-any.whl"
 
     # Use brewed ca-certificates PEM file instead of the bundled copy
     certifi = root_site_packages/"pip/_vendor/certifi"
@@ -297,7 +280,6 @@ class PythonFreethreading < Formula
     rmdir root_site_packages/"bin"
 
     rm [bin/"pip", bin/"pip3"]
-    mv bin/"wheel", bin/"wheel#{version.major_minor}t"
     mv bin/"pip#{version.major_minor}", bin/"pip#{version.major_minor}t"
 
     if OS.mac?
