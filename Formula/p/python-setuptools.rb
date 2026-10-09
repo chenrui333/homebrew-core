@@ -40,5 +40,9 @@ class PythonSetuptools < Formula
 
   test do
     system python3, "-c", "import setuptools"
+
+    # Check that the wheel is safe to use on all pythons
+    wheel = prefix/Language::Python.site_packages(python3)/"setuptools-#{version}.dist-info/WHEEL"
+    assert_match(/^Tag: py3-none-any$/, wheel.read)
   end
 end

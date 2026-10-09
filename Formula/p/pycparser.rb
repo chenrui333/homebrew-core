@@ -35,5 +35,9 @@ class Pycparser < Formula
   test do
     examples = pkgshare/"examples"
     system python3, examples/"c-to-c.py", examples/"c_files/basic.c"
+
+    # Check that the wheel is safe to use on all pythons
+    wheel = prefix/Language::Python.site_packages(python3)/"pycparser-#{version}.dist-info/WHEEL"
+    assert_match(/^Tag: py3-none-any$/, wheel.read)
   end
 end

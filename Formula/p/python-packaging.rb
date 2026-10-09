@@ -39,5 +39,9 @@ class PythonPackaging < Formula
       v2 = Version("1.0")
       assert v1 < v2
     PYTHON
+
+    # Check that the wheel is safe to use on all pythons
+    wheel = prefix/Language::Python.site_packages(python3)/"packaging-#{version}.dist-info/WHEEL"
+    assert_match(/^Tag: py3-none-any$/, wheel.read)
   end
 end
