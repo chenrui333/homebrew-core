@@ -1,8 +1,8 @@
 class Wgo < Formula
   desc "Watch arbitrary files and respond with arbitrary commands"
   homepage "https://github.com/bokwoon95/wgo"
-  url "https://github.com/bokwoon95/wgo/archive/refs/tags/v0.7.1.tar.gz"
-  sha256 "4d70bdd313600df64927928dc767c1e1ba980dcbb0da1cf03e9fa8bf4fdc5d55"
+  url "https://github.com/bokwoon95/wgo/archive/refs/tags/v0.7.2.tar.gz"
+  sha256 "71fe38b652f2a9f89f8ba18dbdd5381b35b8f5d3f7dd7eb5c382908a69ff6f93"
   license "MIT"
 
   bottle do
