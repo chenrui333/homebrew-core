@@ -3,8 +3,8 @@ class Pydantic < Formula
 
   desc "Data validation using Python type hints"
   homepage "https://pydantic.dev/docs/validation"
-  url "https://files.pythonhosted.org/packages/53/ef/fc4f868f4e2cee79f863883abffceff107875f569b848507319842d2a681/pydantic-2.13.5.tar.gz"
-  sha256 "51a9c5f7b2f8e636f04c6cada605d9b6a3bf1348fdf945a3d8869b19bba0ee08"
+  url "https://files.pythonhosted.org/packages/6b/fb/6e44b63b26efea1cec48c26d8362313310202ef5ed6e7a52f1669e64e2cd/pydantic-2.14.0.tar.gz"
+  sha256 "8a51a7aaddd60f55566d1f07bdd87b92b463903f39a8f26b71a06314cd1548ae"
   license "MIT"
   version_scheme 1
   compatibility_version 1
@@ -19,8 +19,8 @@ class Pydantic < Formula
   end
 
   depends_on "maturin" => :build
-  depends_on "python@3.13" => [:build, :test]
   depends_on "python@3.14" => [:build, :test]
+  depends_on "python@3.15" => [:build, :test]
   depends_on "rust" => :build
 
   def pythons
@@ -35,8 +35,8 @@ class Pydantic < Formula
   end
 
   resource "pydantic-core" do
-    url "https://files.pythonhosted.org/packages/af/f9/8a06bea35ef8daf588f707784c973a7046e0034c8d8cfb08828eeffb8b75/pydantic_core-2.46.5.tar.gz"
-    sha256 "10416c15b8839ecc4ef4d0885da76da6fd0f67333a0eb8aff6d93c4b8f2910fc"
+    url "https://files.pythonhosted.org/packages/e6/6d/196e8c819e0e934f35a1a33b3530396feadb0af4ca38fe9f995249e55794/pydantic_core-2.50.0.tar.gz"
+    sha256 "84d2d38f7d163c4dec292f379e9de1960c661795442aca6c90d706436cb3749e"
   end
 
   resource "typing-extensions" do
@@ -48,6 +48,8 @@ class Pydantic < Formula
     url "https://files.pythonhosted.org/packages/a3/26/b09b8010994eccc3c09092e6b34058f36a460eea2d4c3e8b910c695975a0/typing_inspection-0.4.4.tar.gz"
     sha256 "547274fa6b0a561ccf549cc9524b999a578e737d015d8709d021f9d0d13bea47"
   end
+
+  allow_network_access! :build
 
   def install
     pythons.each do |python3|
@@ -63,7 +65,20 @@ class Pydantic < Formula
 
   test do
     pythons.each do |python3|
-      system python3, "-c", "import pydantic;"
+      system python3, "-c", <<~PYTHON
+        from pydantic import BaseModel, ValidationError
+
+        class Model(BaseModel):
+            value: int
+
+        assert Model(value="42").model_dump() == {"value": 42}
+        try:
+            Model(value="invalid")
+        except ValidationError as error:
+            assert error.errors()[0]["type"] == "int_parsing"
+        else:
+            raise AssertionError("Invalid input was accepted")
+      PYTHON
     end
   end
 end
