@@ -7,12 +7,11 @@ class Ktexttemplate < Formula
   head "https://invent.kde.org/frameworks/ktexttemplate.git", branch: "master"
 
   bottle do
-    sha256 arm64_golden_gate: "bf471cc5e0eb1cda3f7db8c813aaebd823d80640b5d3758a9b6fd78561afa608"
-    sha256 arm64_tahoe:       "010a562bc13b5a87de5ca434c23e16ae6648aead8ea9f97352fd5e8116cf8c15"
-    sha256 arm64_sequoia:     "bbfc8509dc80a14d06cf882f0e27724c6faa4bc191fb54e242c5a9f3ec98998f"
-    sha256 arm64_sonoma:      "0095d6a8cbe5302ed41fd260c04929565412554d600c67727edfba5c193d5115"
-    sha256 arm64_linux:       "58fe7cdd381e546ea61f1b63a825e1185dae92e90dd11eceee96bce9556f533d"
-    sha256 x86_64_linux:      "92d74f2d662bddee2e5bedd6b6a82bce38c5ad931893e8edb9e42d554c50c6f6"
+    sha256 arm64_golden_gate: "1efd8a37a3a19079628479d64184b475e7e453d5915ada0d61b7a7e8a9a540e5"
+    sha256 arm64_tahoe:       "bbb76b5be86749e81224fcc49c940e7a847b7d4391d4d76e2e5f1e758e9f334e"
+    sha256 arm64_sequoia:     "d4d065835b138c6ac05f43fd4ea639789b3c91c6b178555d259aa796cc3208a2"
+    sha256 arm64_linux:       "eec543b2ad9b1f1bdb742eb249d8b8a3a380a0f2d2788878fcb68d0a8b16d98a"
+    sha256 x86_64_linux:      "2e2feec0895b50c7086ffed558df3639a90b2113a5ee3afea9752f7e128d581c"
   end
 
   depends_on "cmake" => [:build, :test]
