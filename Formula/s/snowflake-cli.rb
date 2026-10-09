@@ -6,6 +6,7 @@ class SnowflakeCli < Formula
   url "https://files.pythonhosted.org/packages/76/ff/f5eae9e3f872e9444d2ac16075366b0dffb9154ef2019c9c3bcf802ca2de/snowflake_cli-3.29.0.tar.gz"
   sha256 "130bd84095247de5fb214ac1c411bed4e474938a16dec4a973e3b7c320c38171"
   license "Apache-2.0"
+  revision 1
   head "https://github.com/snowflakedb/snowflake-cli.git", branch: "main"
 
   bottle do
@@ -259,6 +260,13 @@ class SnowflakeCli < Formula
   resource "snowflake-connector-python" do
     url "https://files.pythonhosted.org/packages/50/43/59d15290329a2385c1827d6717947f25ab2965b9a5a0c39479b5f40c7df4/snowflake_connector_python-4.7.5.tar.gz"
     sha256 "8ad386df2121894e9539be28de08fa15d74370f40bf25bb6275a59eb5e2f0a5d"
+
+    # Backport update for vendored urllib3. Following commit without conflicting DESCRIPTION.md changes
+    # https://github.com/snowflakedb/snowflake-connector-python/commit/31c53141df367da737a15c31010e996c1e71a2fe
+    patch do
+      file "Patches/snowflake-cli/SNOW-4232077.diff"
+      type :backport
+    end
   end
 
   resource "snowflake-core" do
