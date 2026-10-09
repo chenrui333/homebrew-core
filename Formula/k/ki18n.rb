@@ -1,8 +1,8 @@
 class Ki18n < Formula
   desc "KDE Gettext-based UI text internationalization"
   homepage "https://api.kde.org/ki18n-index.html"
-  url "https://download.kde.org/stable/frameworks/6.30/ki18n-6.30.0.tar.xz"
-  sha256 "dfbfc8af89b3bc68810b094bf87746db87c3eeb35b75caeb1882681ebed563bd"
+  url "https://download.kde.org/stable/frameworks/6.31/ki18n-6.31.0.tar.xz"
+  sha256 "9fa271c7a33b856451de1ed3ff105626c2763fbd3b11d3210b02cb30de43f2ba"
   license all_of: [
     "BSD-3-Clause",
     "LGPL-2.0-or-later",
