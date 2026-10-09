@@ -10,13 +10,11 @@ class VsPreview < Formula
   head "https://github.com/Jaded-Encoding-Thaumaturgy/vs-preview.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_golden_gate: "1f8f84208af1eb556214fe23e99b05822bed0ef5d4631d1765d3bfb6c73ef79d"
-    sha256 cellar: :any,                 arm64_tahoe:       "dd12c915ac8d7f5ef5bfe9cd33af9fc2ed07483d2ed59e9239d99ed569b1da9c"
-    sha256 cellar: :any,                 arm64_sequoia:     "95d26a70b6cfe3451413338113d38b50d0a03a1c7cc19753a6d4697802d6a653"
-    sha256 cellar: :any,                 arm64_sonoma:      "0df0dfa6bfe06f4f266a50ec3203c797dcfdf580f670a42036df5ec69a97bd33"
-    sha256 cellar: :any,                 sonoma:            "a7f41a6477ebb6317a04952fc0075cca352d189664837301d25cd757cf23a7a5"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "1e97804631d8682fdbb1f22d4ea8ec7b59b23b7cda63cd50c06d9b8ed998ded3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "7606801d7145e257743999ae28282c5aaba2ccd6a337b17ef63524f9905ccae8"
+    sha256 cellar: :any, arm64_golden_gate: "d84268eb17182d8ff9393486259f3ac822daf6c237454aa87707030902469001"
+    sha256 cellar: :any, arm64_tahoe:       "a221dfba5dbaceb7eb3d3605af42c333b343d2e000eddd4c2f7de64f15f64d5b"
+    sha256 cellar: :any, arm64_sequoia:     "899d494e3ca16b03c97e6a9ea4d4ce328efae5695403c762e3922b658b48422c"
+    sha256 cellar: :any, arm64_linux:       "d8e02e5b8b35333791b78d65d3048233bd5c98944761a58c1254871e003f0ef2"
+    sha256 cellar: :any, x86_64_linux:      "e59eb100764c0bc98a35067d245078b10a68dd172b71dfc04d6690a44a668741"
   end
 
   # "This repository was archived by the owner on May 13, 2026"
