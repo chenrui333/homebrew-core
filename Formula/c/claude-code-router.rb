@@ -6,11 +6,11 @@ class ClaudeCodeRouter < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "679068419a44d4621d4a6b3538bdb9a4725635ad02d356072c1bf070711c2e9f"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "c0e7272fd0f6dd983bfa7206bb234b0ef6c6a52e5b6bbba61fcb5eb58c369cc7"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "aac2b599ec7acdb4e41134d240b6d67f18bbed16a3418674fcd26e982a8c1f43"
-    sha256 cellar: :any,                 arm64_linux:       "066e3b59fd0f4b0762b50d1e7d8feab01754d17679678146a20689e657d2e04b"
-    sha256 cellar: :any,                 x86_64_linux:      "60743f741ffda09220af853380341d8c08bd514b02e5d83e447a414be8c25d02"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "bfcf6540beefd9fcdaac436135429ce3b822eff42d678334210404779134dc3d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "bbacf009be87e982950cbb7c1d36711ed06c8fae78b570751f4a6bc8fd3e28f0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "5d84150bb99bc7b3c694b6205c1c300a5056f3145a3932d356ac73778efff215"
+    sha256 cellar: :any,                 arm64_linux:       "0997899c0260835b6c947919916820bdb7c38a816bb32501a32919e30d71972c"
+    sha256 cellar: :any,                 x86_64_linux:      "9aa91e638a0d2732f4578f25674c27d4f0367e85d8683862e773c9e980e76b54"
   end
 
   depends_on "node"
