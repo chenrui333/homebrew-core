@@ -6,11 +6,11 @@ class McpInspector < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_golden_gate: "7b62c4e796106e59deb6cf0870d6f2f17865e8b7cf5f1f864b8e306c843c203f"
-    sha256 cellar: :any,                 arm64_tahoe:       "777339b3835a262a3627decfad94c7ba6102061fb111c97a5845cf5f1ca5b47f"
-    sha256 cellar: :any,                 arm64_sequoia:     "a2bfb6b098133b23786b0daec680089392661bf49930dc2061a40170370f3313"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "5b4aa31a4cf59812bc15b27f165cca1a97351308906370b122391ddb63825912"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "0e407756b2d2a8daabfddf79f3a4da7204d6e40a1f5ccc85d8cd231ecbf0678b"
+    sha256 cellar: :any,                 arm64_golden_gate: "01d0b331b76c33231541a047fb44e6874c1209ee36e1f3556562c07b5198177b"
+    sha256 cellar: :any,                 arm64_tahoe:       "205a150ae62b1bf5447cab4137842d3ddc6244320c3872b57f8ed297072352d3"
+    sha256 cellar: :any,                 arm64_sequoia:     "d721c1743748b5ff925f0b5ba89ad709a7a70d1e728cae4eafae0f4f0b5e902f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "10004619adfc598b265de7ad73429ad6b62485f61b00c161bb903ef39d142ecf"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "a8013785328e9fced1d7c9a5c0cec5b8e518132757cac46a15e77013416b39d9"
   end
 
   depends_on "node"
