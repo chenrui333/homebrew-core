@@ -1,26 +1,12 @@
 class ApacheArrow < Formula
   desc "Columnar in-memory analytics layer designed to accelerate big data"
   homepage "https://arrow.apache.org/"
+  url "https://www.apache.org/dyn/closer.lua?path=arrow/arrow-26.0.0/apache-arrow-26.0.0.tar.gz"
+  mirror "https://archive.apache.org/dist/arrow/arrow-26.0.0/apache-arrow-26.0.0.tar.gz"
+  sha256 "b153ef472dd89ef4cb84867ca238f2a3a9347d8f4a78913d16ca2201606f0425"
   license "Apache-2.0"
-  revision 9
-  compatibility_version 3
+  compatibility_version 4
   head "https://github.com/apache/arrow.git", branch: "main"
-
-  stable do
-    url "https://www.apache.org/dyn/closer.lua?path=arrow/arrow-25.0.1/apache-arrow-25.0.1.tar.gz"
-    mirror "https://archive.apache.org/dist/arrow/arrow-25.0.1/apache-arrow-25.0.1.tar.gz"
-    sha256 "43d5de0a581f43cf63a2c06b4dcf13b9ff6fcd800f023324596e5781093bc500"
-
-    # Apply commit from Debian maintainer's upstream PR to support CPUs older than SSE4.2.
-    patch do
-      on_intel do
-        url "https://github.com/apache/arrow/commit/d048f71964fe2df5540be2256048eb15f830962b.patch?full_index=1"
-        sha256 "1a6b6924e505f4d1c70a24240e52be90b00aa25b116e7db52fd69f76d2b7e189"
-        type :backport
-        resolves "https://github.com/apache/arrow/pull/50547"
-      end
-    end
-  end
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "92df52e861dc94ea222fbb5153e61deb21cacc83237a5405c2441acd835e5f40"
@@ -40,13 +26,15 @@ class ApacheArrow < Formula
   depends_on "aws-sdk-cpp"
   depends_on "brotli"
   depends_on "grpc"
-  depends_on "llvm@22"
+  depends_on "llvm"
   depends_on "lz4"
   depends_on "openssl@4"
   depends_on "protobuf"
   depends_on "re2"
+  depends_on "simdjson"
   depends_on "snappy"
   depends_on "thrift"
+  depends_on "uriparser"
   depends_on "utf8proc"
   depends_on "zstd"
 
@@ -67,7 +55,7 @@ class ApacheArrow < Formula
 
     args = %W[
       -DCMAKE_INSTALL_RPATH=#{rpath}
-      -DLLVM_ROOT=#{formula_opt_prefix("llvm@22")}
+      -DLLVM_ROOT=#{formula_opt_prefix("llvm")}
       -DARROW_DEPENDENCY_SOURCE=SYSTEM
       -DARROW_ACERO=ON
       -DARROW_COMPUTE=ON
