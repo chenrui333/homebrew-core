@@ -8,11 +8,11 @@ class Schemathesis < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "7b5ce530a6315028b4117fa480a856df9e74fb6a34fd0610c3b3808bf76e02c0"
-    sha256 cellar: :any, arm64_tahoe:       "3fe582ce006d5b08010ffc6670ca8dec4d8678d667de84e3b00c9c44803ce2d7"
-    sha256 cellar: :any, arm64_sequoia:     "98c1b0d4de693e814f1a1f20524e952e1a4a2683e7d0403d6e5d148bb06cdde6"
-    sha256 cellar: :any, arm64_linux:       "10b1b145b5f85b51cf0dfb5e3419d0c6a040d2007827faf71023210d691f4604"
-    sha256 cellar: :any, x86_64_linux:      "176ca7d744812764fe8020e1038030e3a9f03f01b1f7750c75ff40a29058556e"
+    sha256 cellar: :any, arm64_golden_gate: "b6bf70e92bf56331a86b29e273fe866f3cf3401dd7c403bfac4162c01c87cdf4"
+    sha256 cellar: :any, arm64_tahoe:       "2f6303eca4b1c5e9ce200ff1a60b986e795601f126a5b002cb88424644b60f96"
+    sha256 cellar: :any, arm64_sequoia:     "16c15dc88f7bb9f52c8a049c6a713d2c5778e88f42f59644d419c8607f6c6fe6"
+    sha256 cellar: :any, arm64_linux:       "95a874a258900f254d6382dbf9887a51cecc9b30f98e8e3e6832e0f16f954d4d"
+    sha256 cellar: :any, x86_64_linux:      "9faf263d927904f33811d6e97732c8eabf204649a91a01489bd9ecb82defacdd"
   end
 
   depends_on "rust" => :build # for jsonschema-rs
