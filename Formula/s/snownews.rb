@@ -4,7 +4,7 @@ class Snownews < Formula
   url "https://downloads.sourceforge.net/project/snownews/snownews-1.11.tar.gz"
   sha256 "afd4db7c770f461a49e78bc36e97711f3066097b485319227e313ba253902467"
   license "GPL-3.0-only"
-  revision 2
+  revision 3
 
   bottle do
     sha256 arm64_golden_gate: "93c24467f9c5495a955d27376577182ee228a9074d9654f54edc0619dd3db0b3"
@@ -19,7 +19,7 @@ class Snownews < Formula
   depends_on "gettext" => :build
   depends_on "pkgconf" => :build
   depends_on "ncurses"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "curl"
   uses_from_macos "libxml2"
