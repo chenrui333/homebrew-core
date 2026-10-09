@@ -2,12 +2,11 @@ class Liquidsoap < Formula
   desc "Audio and video streaming language"
   homepage "https://www.liquidsoap.info"
   license "GPL-2.0-or-later"
-  revision 1
   head "https://github.com/savonet/liquidsoap.git", branch: "main"
 
   stable do
-    url "https://github.com/savonet/liquidsoap/archive/refs/tags/v2.4.5.tar.gz"
-    sha256 "dc6dee2ef550dbae8f177ae6b0adb88cf789622ad0490176715606aee5b39622"
+    url "https://github.com/savonet/liquidsoap/archive/refs/tags/v2.4.6.tar.gz"
+    sha256 "a88da89382147d5d5923426e07b24b15197a5aaf8424ecf6fc58034d6c6839c2"
 
     # Remove bytes compat library reference (part of stdlib since OCaml 4.07)
     patch do
@@ -15,14 +14,6 @@ class Liquidsoap < Formula
       sha256 "7dc9d38926c3ad35ec5d5b69a1ddae54e82cd1b264eb379228176896f0b48453"
       type :backport
       resolves "https://github.com/savonet/liquidsoap/pull/5239"
-    end
-
-    # Cap camomile below 2.1.0, which changed `Config.Type`
-    patch do
-      url "https://github.com/savonet/liquidsoap/commit/faf9bad3a0f8d94ea119092e94495e3e7b5cddce.patch?full_index=1"
-      sha256 "f89e4ad6ea6a3c3f2b0c931236b4b7213258f695f79621594df80680e2c07dbb"
-      type :cherry_pick
-      resolves "https://github.com/savonet/liquidsoap/commit/faf9bad3a0f8d94ea119092e94495e3e7b5cddce"
     end
   end
 
@@ -47,12 +38,14 @@ class Liquidsoap < Formula
 
   uses_from_macos "curl"
 
+  allow_network_access! :build
+
   def install
     # opam install prompts "Proceed? [Y/n]"; Homebrew's build has no tty to
     # answer it, so without this the build hangs forever.
     ENV["OPAMYES"] = "1"
 
-    # Build as a release, not a dev snapshot: reports "2.4.5" not "2.4.5+dev".
+    # Build as a release, not a dev snapshot.
     ENV["IS_SNAPSHOT"] = "false"
 
     # opam defaults its root to $HOME/.opam; pin it into the build tree so the
@@ -75,7 +68,9 @@ class Liquidsoap < Formula
            "./opam/liquidsoap.opam", "./opam/liquidsoap-lang.opam"
 
     # OCaml ffmpeg bindings; the depends_on "ffmpeg" provides the C libraries.
-    system "opam", "install", "ffmpeg", "--no-depexts"
+    # TODO: Drop liquidsoap.opam's upper bound when the release includes
+    # https://github.com/savonet/liquidsoap/pull/5166.
+    system "opam", "install", "ffmpeg<1.4.0", "--no-depexts"
 
     system "opam", "exec", "--", "dune", "build", "-p", "liquidsoap,liquidsoap-lang"
     system "opam", "exec", "--", "dune", "install", "-p", "liquidsoap,liquidsoap-lang",
