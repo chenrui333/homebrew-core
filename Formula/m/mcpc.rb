@@ -5,6 +5,14 @@ class Mcpc < Formula
   sha256 "f5a99edf633089474e3ca1dbd928c560eac63f1e8a5ff2d6f048b92d0cd4da8c"
   license "Apache-2.0"
 
+  bottle do
+    sha256 cellar: :any,                 arm64_golden_gate: "133aa6123bc71e255a44929aa1b23928a5d6ce5b9a969efcfbe844f315801022"
+    sha256 cellar: :any,                 arm64_tahoe:       "7266522bd1ab9cd9056328cfd8cf7eb3d2623461736bd488f5e0f2ec58d82abd"
+    sha256 cellar: :any,                 arm64_sequoia:     "327ecbc304ff413de5e21406532d578676d1c867dc6b2089af890869f0b20727"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "84650f7bb2578e6b19367083d031917ec7ea5e8170b09be1d1d4455d35aadca2"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "bb24070af515d7ae7ba4d4458c00658147ee18d6139985c3c966b3950b81e1c3"
+  end
+
   depends_on "node"
 
   on_macos do
