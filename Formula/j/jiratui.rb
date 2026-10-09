@@ -16,11 +16,11 @@ class Jiratui < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "5befad6caae5736bf9c337551127a5c60ca2ac10f4b705a80c1894d3a82fa3f4"
-    sha256 cellar: :any, arm64_tahoe:       "f9aaee010dfce325e06c04d15e1ec9fbba9eae14a4f6b5cefe59c3febeee281d"
-    sha256 cellar: :any, arm64_sequoia:     "4ee2e26f29450bb1f9a4126dbf92bae9ed9232a2637707866223e47bbff23076"
-    sha256 cellar: :any, arm64_linux:       "9783402c091d438988826b0198b90fe87ffa82236fe8589edca9ba190d7d3f00"
-    sha256 cellar: :any, x86_64_linux:      "2b78b9de98e5b7b58c1d81f1b948914a378355d0be74be1fc370b7bd72e79365"
+    sha256 cellar: :any, arm64_golden_gate: "6b567aab8c5412c5c4b234fd6ad18da6e2a46537f1fd42956ac842edd9da9a51"
+    sha256 cellar: :any, arm64_tahoe:       "c556befc91568f7ced970df349dcc221b7834bc3502efabd9553fdc2777874b2"
+    sha256 cellar: :any, arm64_sequoia:     "5253096e0f67051ef9cf9aa710779059501f98ca6b6a2bbf6d2ef631fe7fcbda"
+    sha256 cellar: :any, arm64_linux:       "ccb1bfbef44ba871a76f5edc9e44ffcd810e8faa0c0213aef4103269c01482a4"
+    sha256 cellar: :any, x86_64_linux:      "5dcb0f4669637e0b76fa0fd92165c3ff57bfbf23df4d54bbbe52f1d6b098d24d"
   end
 
   depends_on "rust" => :build
