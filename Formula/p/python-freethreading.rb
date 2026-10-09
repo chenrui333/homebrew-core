@@ -1,8 +1,8 @@
 class PythonFreethreading < Formula
   desc "Interpreted, interactive, object-oriented programming language"
   homepage "https://www.python.org/"
-  url "https://www.python.org/ftp/python/3.14.8/Python-3.14.8.tgz"
-  sha256 "a65b20a728f169f4e66ae143f40b1bd3d33c38d770251663f627c9767b79b210"
+  url "https://www.python.org/ftp/python/3.15.0/Python-3.15.0.tgz"
+  sha256 "438596cac081036d3c1d532ab7e7335eeb35567bc961749a0d5797176db0db68"
   license "Python-2.0"
 
   livecheck do
@@ -10,12 +10,11 @@ class PythonFreethreading < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 arm64_golden_gate: "de96ec8574ef2a6f0e9707b93ef16574e96b05c6f37386c3407bf88bcdf22b91"
-    sha256 arm64_tahoe:       "6e912549b20939bdd3af2e2a368a7f1b4065eba821ea0d707a47ddab07e06056"
-    sha256 arm64_sequoia:     "19803a1d8caa67c12f3040d6e3cbbefc91378a1872357950bb6c7d4562804b06"
-    sha256 arm64_linux:       "dc241e177ad06c8cb4118174329b90997c26243cf440edf76dd8a9ffc6bf2daf"
-    sha256 x86_64_linux:      "48476bcf72c455edab1de6f5f01611e7dae7ffc25f43240afaac1bdf53a4c27f"
+    sha256 arm64_golden_gate: "2822cc8ea07ebefc7ba44c420d6aceb5815acc86f052c321f554016e16a40899"
+    sha256 arm64_tahoe:       "e8f498a4472a6d59e09acb6c257c524878071a39f2242f30067293a25b5c0bc5"
+    sha256 arm64_sequoia:     "afcaef4bb89739abc524f585cbb210574151c89f5b894025769c97789a138d30"
+    sha256 arm64_linux:       "9689aebd137972dc217e3d1527010bcf72749b56fa9024a10c74b497f163ba46"
+    sha256 x86_64_linux:      "bcfdf4539da990bf5165d331476d3aae9e8aad8fe9f1f941cd0488be253b8dd8"
   end
 
   depends_on "pkgconf" => :build
@@ -433,15 +432,15 @@ class PythonFreethreading < Formula
     system python3, "-c", "import _zstd"
 
     # tkinter is provided in a separate formula
-    assert_match "ModuleNotFoundError: No module named '_tkinter'",
-                 shell_output("#{python3} -Sc 'import tkinter' 2>&1", 1)
+    assert_match(/ModuleNotFoundError.*_tkinter/,
+                 shell_output("#{python3} -Sc 'import tkinter' 2>&1", 1))
 
     # gdbm is not provided on macOS
     if OS.mac?
-      assert_match "ModuleNotFoundError: No module named '_gdbm'",
-                   shell_output("#{python3} -Sc 'import _gdbm' 2>&1", 1)
-      assert_match "ModuleNotFoundError: No module named '_gdbm'",
-                   shell_output("#{python3} -Sc 'import dbm.gnu' 2>&1", 1)
+      assert_match(/ModuleNotFoundError.*_gdbm/,
+                   shell_output("#{python3} -Sc 'import _gdbm' 2>&1", 1))
+      assert_match(/ModuleNotFoundError.*_gdbm/,
+                   shell_output("#{python3} -Sc 'import dbm.gnu' 2>&1", 1))
     end
 
     # Verify that the selected DBM interface works
