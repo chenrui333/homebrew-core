@@ -1,11 +1,11 @@
 class ApacheArrowGlib < Formula
   desc "GLib bindings for Apache Arrow"
   homepage "https://arrow.apache.org/"
-  url "https://www.apache.org/dyn/closer.lua?path=arrow/arrow-25.0.1/apache-arrow-25.0.1.tar.gz"
-  mirror "https://archive.apache.org/dist/arrow/arrow-25.0.1/apache-arrow-25.0.1.tar.gz"
-  sha256 "43d5de0a581f43cf63a2c06b4dcf13b9ff6fcd800f023324596e5781093bc500"
+  url "https://www.apache.org/dyn/closer.lua?path=arrow/arrow-26.0.0/apache-arrow-26.0.0.tar.gz"
+  mirror "https://archive.apache.org/dist/arrow/arrow-26.0.0/apache-arrow-26.0.0.tar.gz"
+  sha256 "b153ef472dd89ef4cb84867ca238f2a3a9347d8f4a78913d16ca2201606f0425"
   license "Apache-2.0"
-  compatibility_version 2
+  compatibility_version 3
   head "https://github.com/apache/arrow.git", branch: "main"
 
   livecheck do
