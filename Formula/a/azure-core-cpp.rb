@@ -4,6 +4,7 @@ class AzureCoreCpp < Formula
   url "https://github.com/Azure/azure-sdk-for-cpp/archive/refs/tags/azure-core_1.16.4.tar.gz"
   sha256 "25f8badf23c66ae82debd95e0d074d6269b276e5fa2ce5d4d3cff38fda9ab8c2"
   license "MIT"
+  revision 1
   compatibility_version 2
 
   livecheck do
@@ -22,9 +23,17 @@ class AzureCoreCpp < Formula
   end
 
   depends_on "cmake" => :build
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "curl"
+
+  # Fix Linux build with OpenSSL 4.0 where X509 name getters return const
+  patch do
+    url "https://github.com/Azure/azure-sdk-for-cpp/commit/df5f5783fbe525a06b0146fbeea6515d25376cb2.patch?full_index=1"
+    sha256 "f351cc0bcc32523bededc4e1e3099c07ef582a8c4234cbf8e8b60bb4f714920a"
+    type :unofficial
+    resolves "https://github.com/Azure/azure-sdk-for-cpp/pull/7456"
+  end
 
   deny_network_access!
 
