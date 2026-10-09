@@ -6,7 +6,6 @@
   "julia",
   "klee",
   "manticoresearch",
-  "mysql-client@8.0",
   "mysql-client@8.4",
   "neomutt",
   "node@22",
