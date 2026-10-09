@@ -4,6 +4,7 @@ class RpkiClient < Formula
   url "https://ftp.openbsd.org/pub/OpenBSD/rpki-client/rpki-client-9.9.tar.gz"
   sha256 "24985845b7283b071942c9fa44598517461211ee32a690a219ba81a14835e8c8"
   license "ISC"
+  revision 1
 
   livecheck do
     url "https://ftp.openbsd.org/pub/OpenBSD/rpki-client/"
@@ -22,7 +23,7 @@ class RpkiClient < Formula
 
   depends_on "pkgconf" => :build
   depends_on "libretls"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "rsync"
 
   uses_from_macos "expat"
