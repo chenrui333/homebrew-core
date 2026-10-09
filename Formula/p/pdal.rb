@@ -4,7 +4,7 @@ class Pdal < Formula
   url "https://github.com/PDAL/PDAL/releases/download/2.10.2/PDAL-2.10.2-src.tar.bz2"
   sha256 "882b97aa3ae5db682c3b2dc8edef4e29bcc7ecea51c70592e71bc1f34112ad00"
   license "BSD-3-Clause"
-  revision 2
+  revision 3
   compatibility_version 1
   head "https://github.com/PDAL/PDAL.git", branch: "master"
 
@@ -46,6 +46,12 @@ class Pdal < Formula
     depends_on "zlib-ng-compat"
   end
 
+  # Arrow 26 API from PDAL 2.10-maintenance: PDAL/PDAL#5078, PDAL/PDAL#5098, PDAL/PDAL#5100
+  patch do
+    file "Patches/pdal/arrow-26.diff"
+    type :backport
+  end
+
   def install
     args = %w[
       -DWITH_TESTS=OFF
@@ -63,9 +69,7 @@ class Pdal < Formula
     ]
     if OS.linux?
       libunwind = Formula["libunwind"]
-      # TODO: restore once apache-arrow drops keg-only llvm@22, whose libunwind.h shadows this -I in superenv
-      # ENV.append_to_cflags "-I#{libunwind.opt_include}"
-      ENV.prepend_path "HOMEBREW_INCLUDE_PATHS", libunwind.opt_include
+      ENV.append_to_cflags "-I#{libunwind.opt_include}"
       args += %W[
         -DLIBUNWIND_INCLUDE_DIR=#{libunwind.opt_include}
         -DLIBUNWIND_LIBRARY=#{libunwind.opt_lib/shared_library("libunwind")}
