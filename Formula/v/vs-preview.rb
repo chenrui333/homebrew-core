@@ -6,6 +6,7 @@ class VsPreview < Formula
   url "https://files.pythonhosted.org/packages/f2/91/ba18f65f751c63acd9096f719723edefb4c45bd72be77c424a0086028f14/vspreview-0.20.1.tar.gz"
   sha256 "165dc63c6668794216f70a686becaa309b6dd8730db9915ad97f6d190f238274"
   license "Apache-2.0"
+  revision 1
   head "https://github.com/Jaded-Encoding-Thaumaturgy/vs-preview.git", branch: "master"
 
   bottle do
@@ -120,8 +121,8 @@ class VsPreview < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
-    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
+    url "https://files.pythonhosted.org/packages/e3/05/b17359e1cefb4f909b5e40b1b90a496d987258916dbbf88e842c729f510e/urllib3-2.8.0.tar.gz"
+    sha256 "63bf2ead4c879426ebf22ef2a781eeb4aa3b4ae798a0435506f8687fd5bb9b63"
   end
 
   resource "vsjetengine" do
