@@ -7,11 +7,11 @@ class PostgresLanguageServer < Formula
   head "https://github.com/supabase-community/postgres-language-server.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "a0d9837ce8964765785a3e47ebea3cf5d7e1bc611ef39fc4ea0e145abca3f2d0"
-    sha256 cellar: :any, arm64_tahoe:       "3268c42e34509cf954e6187e2b811611cb5ac2959a5479246623845891c2b1ab"
-    sha256 cellar: :any, arm64_sequoia:     "4c9d7b1b5d2e884b07f78f0d09c84425a68c93dc21793f2056dc3195e99c5f1b"
-    sha256 cellar: :any, arm64_linux:       "9c5d1ab7f9bb8f7be8f35e73b73f888272aeeee375d1fec0032b91eef80b1cfe"
-    sha256 cellar: :any, x86_64_linux:      "524b1922a7cc8344c93505117fad204976f5f15dd3f7966230d7f317c0f2d2b7"
+    sha256 cellar: :any, arm64_golden_gate: "f79ca52d48b86bb4ee2a8f71bd1aa52ac54952edc8fe21550757b47b96270793"
+    sha256 cellar: :any, arm64_tahoe:       "786128443aa71154984b1aefcc0e58ce3ed5cdc09a95b8015c5297cf3cb1d5e1"
+    sha256 cellar: :any, arm64_sequoia:     "1afee575995b04b5861d0208e3fa09c657ab9a9823e7a078319b4be0456c8a9d"
+    sha256 cellar: :any, arm64_linux:       "64bcf22025af838a19136cce137d1f4090f9cbc9704f120030e30b60d87b0e89"
+    sha256 cellar: :any, x86_64_linux:      "b31ddff7d355dc8a2e161c1806c86f31e0ab09f8a2617314fcea755a9bee1570"
   end
 
   depends_on "llvm" => :build
