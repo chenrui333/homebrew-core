@@ -4,7 +4,6 @@
   "cyan",
   "dasht",
   "dvisvgm",
-  "efl",
   "hermes-agent",
   "hive",
   "julia",
@@ -24,11 +23,8 @@
   "rpki-client",
   "rtabmap",
   "sapling",
-  "spice-gtk",
-  "spice-server",
   "texlive",
   "thors-anvil",
   "tsung",
-  "undercutf1",
-  "virt-manager"
+  "undercutf1"
 ]
