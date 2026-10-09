@@ -1,8 +1,8 @@
 class Splitrail < Formula
   desc "Real-time token usage tracker and cost monitor for CLI coding agents"
   homepage "https://splitrail.dev/"
-  url "https://github.com/Piebald-AI/splitrail/archive/refs/tags/v3.11.0.tar.gz"
-  sha256 "58c4afd633b57055f0cdc2a4f81788a8245558c2127e5f58194d841f2dbbe1dd"
+  url "https://github.com/Piebald-AI/splitrail/archive/refs/tags/v3.11.1.tar.gz"
+  sha256 "4b375ed0d042a96dd9d2f7802d924cee6fd6f368fbb2399bb93d0c4584d694a9"
   license "MIT"
   head "https://github.com/Piebald-AI/splitrail.git", branch: "main"
 
