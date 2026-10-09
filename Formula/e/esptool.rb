@@ -3,8 +3,8 @@ class Esptool < Formula
 
   desc "ESP8266 and ESP32 serial bootloader utility"
   homepage "https://docs.espressif.com/projects/esptool/en/latest/esp32/"
-  url "https://files.pythonhosted.org/packages/2c/43/1a2ae2dd8ae97bf1ec9991db097e52626d35b57d242f9687c9314eac5b57/esptool-5.4.0.tar.gz"
-  sha256 "fd756598db0a26c9975fa18511b08687c54bf2ce7322ede80cf1f5117dad1f50"
+  url "https://files.pythonhosted.org/packages/6a/c8/15a0d5a80a81d7a33d1bdf4a75db4c3b4334e53ef81f178cd52567acde80/esptool-5.5.0.tar.gz"
+  sha256 "cfc1d1c6d1699427451af1be7335efa835b7974c61ed86d77927d9553c443d57"
   license "GPL-2.0-or-later"
 
   bottle do
@@ -39,8 +39,8 @@ class Esptool < Formula
   end
 
   resource "esp-pylib" do
-    url "https://files.pythonhosted.org/packages/92/bc/a0f0eccc6abc2dfdeae259a83a8296aa6c03729369bf28403dc9ea2f9fc6/esp_pylib-1.1.4.tar.gz"
-    sha256 "dcbd717e8a0d7139d18c28352b637f0ee70fc8e40f0db1c090796c9fad16c89a"
+    url "https://files.pythonhosted.org/packages/c6/af/ebfab3ce5babdf0bc068d13205c3b28a4fe55f41d7cc229e1991f3f07e43/esp_pylib-1.2.0.tar.gz"
+    sha256 "51f0c44a0f7a92fdded9cab54bde92441b22b464f7d684ed179afb57000bed70"
   end
 
   resource "intelhex" do
@@ -84,8 +84,8 @@ class Esptool < Formula
   end
 
   resource "rich-click" do
-    url "https://files.pythonhosted.org/packages/f7/ea/21e4867ea0ef881ffd4c0550fc21a061435e50d6324bcd034396633cbc18/rich_click-1.9.8.tar.gz"
-    sha256 "4008f921da88b5d91646c134ec881c1500e5a6b3f093e90e8f29400e09608371"
+    url "https://files.pythonhosted.org/packages/96/3e/5688fdd83aea416de336582a274f2bc8236b5c261b04c11e17bc262786ad/rich_click-1.9.9.tar.gz"
+    sha256 "324cba7513cd4187ee92b2eef21f071714e45be062458c8b157bd7e0c81103e3"
   end
 
   resource "tibs" do
@@ -94,8 +94,8 @@ class Esptool < Formula
   end
 
   resource "websockets" do
-    url "https://files.pythonhosted.org/packages/18/72/fba934cb3dff7a85d811820efffcd141ddd52b5a2a01637f64551373ff4d/websockets-17.1.tar.gz"
-    sha256 "acfea4c20bf54384883ea33b1240fc1db4f52e190823a4e2b334bc3e8bfca96a"
+    url "https://files.pythonhosted.org/packages/01/89/3f825ab71c242fffb62ea8fe638741c290f62f8d7aadf8125ff897747af3/websockets-17.2.tar.gz"
+    sha256 "36c2fb94c990cc2545143b12690e2de6c16300f9dbe5b4f33fa300cf57dc8792"
   end
 
   def install
