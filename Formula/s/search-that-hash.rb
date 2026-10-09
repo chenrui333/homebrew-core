@@ -10,7 +10,7 @@ class SearchThatHash < Formula
   head "https://github.com/Jayy001/Search-That-Hash.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "42e0c7eb93061ad01c4644c50bce1039d5561830e92cbc12e7a8507e0e3f5360"
+    sha256 cellar: :any_skip_relocation, all: "3e46e9d470cebc59d695ce59a874abbda79e012142cc6e899e033203ef19576f"
   end
 
   deprecate! date: "2026-05-23", because: :unmaintained
