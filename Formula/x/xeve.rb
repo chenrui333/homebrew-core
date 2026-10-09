@@ -1,8 +1,8 @@
 class Xeve < Formula
   desc "Very fast Essential Video Encoder, MPEG-5 EVC (Essential Video Coding)"
   homepage "https://github.com/mpeg5/xeve"
-  url "https://github.com/mpeg5/xeve/archive/refs/tags/v0.7.0.tar.gz"
-  sha256 "f60950d063f52adf11ed7196c0bbb0503fa107b0e43af06bdc81fecc24f2a62e"
+  url "https://github.com/mpeg5/xeve/archive/refs/tags/v0.7.1.tar.gz"
+  sha256 "5d1249212f431816b4723937c9ec8491b45ee1bb75c0f46692deaf7f59fbf19c"
   license "BSD-3-Clause"
   head "https://github.com/mpeg5/xeve.git", branch: "master"
 
