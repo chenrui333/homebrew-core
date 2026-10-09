@@ -16,6 +16,10 @@ on:
     # Every 3 hours from 1 through 23 with an offset of 45 minutes
     - cron: "45 1-23/3 * * *"
 
+concurrency:
+  group: autobump-${{ inputs.formulae && github.run_id || 'scheduled' }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
