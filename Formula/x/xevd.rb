@@ -1,8 +1,8 @@
 class Xevd < Formula
   desc "Very fast Essential Video Decoder, MPEG-5 EVC (Essential Video Coding)"
   homepage "https://github.com/mpeg5/xevd"
-  url "https://github.com/mpeg5/xevd/archive/refs/tags/v0.7.0.tar.gz"
-  sha256 "febfdb532819bbf36b1b04e74d3ef328ad0f0f2db6224ddb7640fce6bd0014f4"
+  url "https://github.com/mpeg5/xevd/archive/refs/tags/v0.8.0.tar.gz"
+  sha256 "258d626fbb6c7ea1677b4fb0ffed3eaca2ec312810d6a76f67359fdc16068472"
   license "BSD-3-Clause"
   head "https://github.com/mpeg5/xevd.git", branch: "master"
 
