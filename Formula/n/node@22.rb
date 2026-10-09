@@ -4,7 +4,7 @@ class NodeAT22 < Formula
   url "https://nodejs.org/dist/v22.23.3/node-v22.23.3.tar.xz"
   sha256 "bd97093e1a1e9243338950c174a693a64d4e0926a9c6ce259962bc58d5e96909"
   license "MIT"
-  revision 1
+  revision 2
   compatibility_version 1
 
   livecheck do
@@ -33,7 +33,6 @@ class NodeAT22 < Formula
   depends_on "icu4c@78"
   depends_on "libnghttp2"
   depends_on "libnghttp3"
-  depends_on "libngtcp2"
   depends_on "libuv"
   depends_on "openssl@3"
   depends_on "simdjson"
@@ -63,7 +62,6 @@ class NodeAT22 < Formula
       --shared-libuv
       --shared-nghttp2
       --shared-nghttp3
-      --shared-ngtcp2
       --shared-openssl
       --shared-simdjson
       --shared-simdutf
@@ -81,8 +79,6 @@ class NodeAT22 < Formula
       --shared-nghttp2-libpath=#{formula_opt_lib("libnghttp2")}
       --shared-nghttp3-includes=#{formula_opt_include("libnghttp3")}
       --shared-nghttp3-libpath=#{formula_opt_lib("libnghttp3")}
-      --shared-ngtcp2-includes=#{formula_opt_include("libngtcp2")}
-      --shared-ngtcp2-libpath=#{formula_opt_lib("libngtcp2")}
       --shared-openssl-includes=#{formula_opt_include("openssl@3")}
       --shared-openssl-libpath=#{formula_opt_lib("openssl@3")}
       --shared-simdjson-includes=#{formula_opt_include("simdjson")}
@@ -109,6 +105,7 @@ class NodeAT22 < Formula
     ignored_shared_flags = %w[
       ada
       http-parser
+      ngtcp2
     ].map { |library| "--shared-#{library}" }
 
     configure_help = Utils.safe_popen_read("./configure", "--help")
