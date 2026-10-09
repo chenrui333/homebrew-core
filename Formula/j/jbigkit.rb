@@ -1,9 +1,9 @@
 class Jbigkit < Formula
   desc "JBIG1 data compression standard implementation"
   homepage "https://www.cl.cam.ac.uk/~mgk25/jbigkit/"
-  url "https://www.cl.cam.ac.uk/~mgk25/jbigkit/download/jbigkit-2.1.tar.gz"
-  mirror "https://deb.debian.org/debian/pool/main/j/jbigkit/jbigkit_2.1.orig.tar.gz"
-  sha256 "de7106b6bfaf495d6865c7dd7ac6ca1381bd12e0d81405ea81e7f2167263d932"
+  url "https://www.cl.cam.ac.uk/~mgk25/jbigkit/download/jbigkit-2.2.tar.gz"
+  mirror "https://deb.debian.org/debian/pool/main/j/jbigkit/jbigkit_2.2.orig.tar.gz"
+  sha256 "3302109c93b7befbffa3cfe8bceb4355f19dea0ee7dcb5f33710b1648bf6645c"
   license "GPL-2.0-or-later"
   head "https://www.cl.cam.ac.uk/~mgk25/git/jbigkit", using: :git, branch: "master"
 
@@ -30,6 +30,8 @@ class Jbigkit < Formula
 
   conflicts_with "netpbm", because: "both install `pbm.5` and `pgm.5` files"
 
+  deny_network_access!
+
   def install
     system "make", "CC=#{ENV.cc}", "CCFLAGS=#{ENV.cflags}"
 
@@ -43,7 +45,7 @@ class Jbigkit < Formula
       (prefix/"src").install Dir["j*.c", "j*.txt"]
       include.install Dir["j*.h"]
     end
-    pkgshare.install "examples", "contrib"
+    pkgshare.install "examples"
   end
 
   test do
