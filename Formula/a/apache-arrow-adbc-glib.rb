@@ -4,7 +4,7 @@ class ApacheArrowAdbcGlib < Formula
   url "https://www.apache.org/dyn/closer.lua?path=arrow/apache-arrow-adbc-24/apache-arrow-adbc-24.tar.gz"
   sha256 "2b4b420937f62f7ae56f46dbd6951a5e4ef0da43158080a58cb44cdd09a8b2e0"
   license "Apache-2.0"
-  revision 1
+  revision 2
   head "https://github.com/apache/arrow-adbc.git", branch: "main"
 
   livecheck do
