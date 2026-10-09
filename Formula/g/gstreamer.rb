@@ -25,11 +25,11 @@ class Gstreamer < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "4b80f4e928a213644aa2bded4f6d909f34118994c7a0f8069c9b8fd31576d2f0"
-    sha256 arm64_tahoe:       "5ca86245b9322351b526bc8f53a8705ef8b651a5d79c374f196adcc2fe921bd6"
-    sha256 arm64_sequoia:     "f44e87a1ef8a298b0f2e423a7101092977ad01a35641085a10607da80f988cf9"
-    sha256 arm64_linux:       "19c3ce129309a0e59ea44fdea09184543df4664b4d5f3daba18e1b9e8b6dca93"
-    sha256 x86_64_linux:      "5560b42b3c7396f365a1fe8d7ab72ae537c5f05fa2c5c15a0d2fee5a53a00ba0"
+    sha256 arm64_golden_gate: "bf79b3d2b57caaece94e5435b2d0741198ad4b91ec98baf104d9a92113ec79a8"
+    sha256 arm64_tahoe:       "581d285f32855aca6cc96f3a76e6853091c8249ad1e6afe60d706814ae56099b"
+    sha256 arm64_sequoia:     "ed31c1148fa87af603e20d46042fa3b0e2c0a985a36cf8f64e521c2244af6440"
+    sha256 arm64_linux:       "a33d08ba182f3ee64cdf260a5d2b81cee03eee80348a4ce0ace19726d0a421b2"
+    sha256 x86_64_linux:      "7c084f3cfce66ee66a4197fa8be39aee98355418839463638e255d0e1d810114"
   end
 
   head do
