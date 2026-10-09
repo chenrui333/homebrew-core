@@ -8,7 +8,7 @@ class MongodbAtlasCli < Formula
 
   livecheck do
     url :stable
-    regex(%r{^atlascli/v?(\d+(?:\.\d+)+)$}i)
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
   bottle do
