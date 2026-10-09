@@ -6,6 +6,7 @@ class Btcli < Formula
   url "https://files.pythonhosted.org/packages/58/5f/fd9ede99e419ec618d5b6e6136b62a94840bd45be3af8bb0ded5f45cfbb4/bittensor_cli-9.23.2.tar.gz"
   sha256 "0770e70cd756328093f32556561faa548a8ea357ddc5726918b9422068d2a25d"
   license "MIT"
+  revision 1
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "f6f3c7f916915220750ebad0dee09a29eaa371f9f09b038eb7d56951f4cb9a86"
@@ -25,7 +26,7 @@ class Btcli < Formula
   depends_on "certifi" => :no_linkage
   depends_on "libyaml"
   depends_on "numpy"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "python@3.14"
   depends_on "xxhash"
 
@@ -76,6 +77,9 @@ class Btcli < Formula
   resource "bittensor-wallet" do
     url "https://files.pythonhosted.org/packages/a0/30/7eb06cfd5d901d2cd3760a8b85d66c7b84f96f03d6d0402b306fdf8b6a2d/bittensor_wallet-4.1.0.tar.gz"
     sha256 "f0f34641a4b9110def9e35fe22498195fcb31d143dc4f76dd9022db374ccd484"
+
+    # https://github.com/RaoFoundation/btwallet/commit/bbbef4a9484679f17fb63ed1ae121b8d7995e170
+    patch :DATA
   end
 
   resource "cyscale" do
@@ -204,8 +208,7 @@ class Btcli < Formula
   end
 
   def install
-    ENV.O0
-    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@3")
+    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@4")
     ENV["XXHASH_LINK_SO"] = "1"
     virtualenv_install_with_resources
 
@@ -274,3 +277,39 @@ class Btcli < Formula
     assert_equal expected_balance, parsed_balance
   end
 end
+
+__END__
+diff --git a/Cargo.lock b/Cargo.lock
+index ad3b0e31b7dca17ef69945ebc425c54fd7cbdfc6..1f1926a2827453a0953e05c3d5229001b93e853a 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -1552,15 +1552,14 @@ checksum = "c08d65885ee38876c4f86fa503fb49d7b507c2b62552df7c70b2fce627e06381"
+ 
+ [[package]]
+ name = "openssl"
+-version = "0.10.66"
++version = "0.10.80"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "9529f4786b70a3e8c61e11179af17ab6188ad8d0ded78c5529441ed39d4bd9c1"
++checksum = "a45fa2aa886c42762255da344f0a0d313e254066c46aad76f300c3d3da62d967"
+ dependencies = [
+  "bitflags 2.6.0",
+  "cfg-if",
+  "foreign-types",
+  "libc",
+- "once_cell",
+  "openssl-macros",
+  "openssl-sys",
+ ]
+@@ -1587,9 +1586,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "openssl-sys"
+-version = "0.9.103"
++version = "0.9.116"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "7f9e8deee91df40a943c71b917e5874b951d32a802526c85721ce3b776c929d6"
++checksum = "f28a22dc7140cda5f096e5e7724a6962ca81a7f8bfd2979f9b18c11af56318c4"
+ dependencies = [
+  "cc",
+  "libc",
