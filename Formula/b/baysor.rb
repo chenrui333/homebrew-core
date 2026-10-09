@@ -4,6 +4,7 @@ class Baysor < Formula
   url "https://github.com/kharchenkolab/Baysor/archive/refs/tags/cpp-0.9.0.tar.gz"
   sha256 "d495e85207a5961bfb4e937f8833973b4230d10b54f883df25e778d9414b2d5c"
   license "MIT"
+  revision 1
   head "https://github.com/kharchenkolab/Baysor.git", branch: "cpp"
 
   livecheck do
