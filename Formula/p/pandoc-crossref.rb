@@ -5,7 +5,7 @@ class PandocCrossref < Formula
   version "0.3.25a"
   sha256 "91712810bf91807869dbda35f5186cd4f39352c6201d5712c8f4ce1ac3691ab5"
   license "GPL-2.0-or-later"
-  revision 1
+  revision 2
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "8baf63bdaf5a90cff63365481afa4de0ed53b9e1678cdb4bf080a1952ed6065f"
@@ -27,10 +27,18 @@ class PandocCrossref < Formula
     depends_on "zlib-ng-compat"
   end
 
-  # Relax the pandoc bound so the filter is compiled against pandoc 3.12
+  # Upstream master commit the next patch is based on, needed for it to apply to the tag
   patch do
-    url "https://github.com/daeho-ro/pandoc-crossref/commit/5709f41df96ab5a7ca6d573e5695d10fc0db2928.patch?full_index=1"
-    sha256 "6ad18e41d5b89dd58cf452ccc83a9a6f1dcbb16562a954c86e328ea0306ec43f"
+    url "https://github.com/lierdakil/pandoc-crossref/commit/5affbc9671a94c5a86f2a37b008ed2fd7d3e6793.patch?full_index=1"
+    sha256 "cdc6c15443e7fc0d9b77360455703f934b7d6d45005416199a679190e91a8069"
+    type :backport
+    resolves "https://github.com/lierdakil/pandoc-crossref/pull/514"
+  end
+
+  # Relax the pandoc bound so the filter is compiled against pandoc 3.12.1
+  patch do
+    url "https://github.com/daeho-ro/pandoc-crossref/commit/1327e621d49481420a798ceabdccbefc16029be3.patch?full_index=1"
+    sha256 "c6ceddaf67c2a895cd617ba98d7d08b42104d928e45be3adfa9a91321cc3e15e"
     type :unofficial
     resolves "https://github.com/lierdakil/pandoc-crossref/pull/514"
   end
