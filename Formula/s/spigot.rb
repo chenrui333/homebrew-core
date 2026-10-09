@@ -12,13 +12,11 @@ class Spigot < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "000d44317716f41e5868b02f548d25ed9d33a0e6f0754051222b6ed3f65752f6"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "b37b94e5aa482448bea2043b50beb8dad8307c379c8f28cb880d9ad8d6c7c1c4"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "31602564396426e3f01028c6df3a35bed19ad80338e11b207bb3906d18c86d95"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:      "e6cd4d5deb1fb7937a24f9d2c5844bd3e6d700a8cce9404bda5530c194ac4d3f"
-    sha256 cellar: :any_skip_relocation, sonoma:            "fc630870fbfc70abc2f39eb6ba8baca3afb2f49d1bddb0755e3291d4755ffd2c"
-    sha256 cellar: :any,                 arm64_linux:       "d970e6a36c3292320dafc36cb1ca8334c7814b2e969263c87f0900176982a26c"
-    sha256 cellar: :any,                 x86_64_linux:      "f7941c183179a21ffaa787385f0ed7dbe8e9575342d1977af14712cb30e95582"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "6b4b302bd7d0b164553345e4e551a0a5776b1be1599593f1b0546445648c45ed"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "818f98f323835497f1deac7da157f6c788042fc816ae15b2fc32764d544c34b3"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "921cfc9e039f02c27304e953a2281aee9c1594238067f842eaa0f0bff5511a74"
+    sha256 cellar: :any,                 arm64_linux:       "f2afc82630c54eb1a392a2c542aba412624a1957517adaf8f2a384c26a479cef"
+    sha256 cellar: :any,                 x86_64_linux:      "b6deee6ef0650b9b50d7bbe17d83ddf9823ed22b38f301c36905ca25620eac41"
   end
 
   depends_on "cmake" => :build
