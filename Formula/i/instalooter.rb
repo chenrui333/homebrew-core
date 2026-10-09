@@ -9,7 +9,7 @@ class Instalooter < Formula
   revision 19
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "0e3363555ffe84689fdc3a1551efd2c01c662b263699fcc632487b8f53441f0a"
+    sha256 cellar: :any_skip_relocation, all: "a5561a3bfd347b5f4d8ac900a8f609db9c6e5122b4d6036782257dd7ffb62c50"
   end
 
   # Last release in 2018, repo description updated as "defunct"
