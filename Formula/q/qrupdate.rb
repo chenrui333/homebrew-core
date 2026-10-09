@@ -1,8 +1,8 @@
 class Qrupdate < Formula
   desc "Fast updates of QR and Cholesky decompositions"
   homepage "https://gitlab.mpi-magdeburg.mpg.de/koehlerm/qrupdate-ng"
-  url "https://gitlab.mpi-magdeburg.mpg.de/koehlerm/qrupdate-ng/-/archive/v1.3.0/qrupdate-ng-v1.3.0.tar.bz2"
-  sha256 "a9bfa9b7dba580859babd89d04e31cfd289e7536b387c17be73bb5d1179273c4"
+  url "https://gitlab.mpi-magdeburg.mpg.de/koehlerm/qrupdate-ng/-/archive/v1.3.1/qrupdate-ng-v1.3.1.tar.bz2"
+  sha256 "3877a52ff7bedd1edd746fed82f8347a8d1c4f48e59ebfbde7841eea79db87ee"
   license "GPL-3.0-or-later"
 
   bottle do
