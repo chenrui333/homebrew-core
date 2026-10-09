@@ -9,6 +9,14 @@ class PythonGdbmAT315 < Formula
     formula "python@3.15"
   end
 
+  bottle do
+    sha256 cellar: :any, arm64_golden_gate: "e06f2187e21c0019fe2a0cc168d51c50f2d9bbe27e53878775e529a831d01771"
+    sha256 cellar: :any, arm64_tahoe:       "6c9455d0be8374e0de2b1a479a65e645cf71635409a19844be3796fa45099bd9"
+    sha256 cellar: :any, arm64_sequoia:     "448f24d71800f9336daa9db0f99246997aebf2e1b5732344d549f46553660305"
+    sha256               arm64_linux:       "b8d3b098e2c54d9ad5cfc3447cdd770d1b7e84f79130c673f3be6cd42c105f5e"
+    sha256               x86_64_linux:      "f04a8a7dce5723f58726d7ad84170573bc2768217643f716542f7b670adfa762"
+  end
+
   # https://devguide.python.org/versions/#versions
   deprecate! date: "2031-11-01", because: :deprecated_upstream
   disable! date: "2032-11-01", because: :deprecated_upstream
