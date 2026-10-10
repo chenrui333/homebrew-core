@@ -17,11 +17,11 @@ class Mypy < Formula
   end
 
   depends_on "rust" => :build # `ast-serialize`
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   resource "ast-serialize" do
-    url "https://files.pythonhosted.org/packages/54/1e/4f6082cdd6e5a29093513e9a3eabc5ed1c5331a9a84386b2fece80a00a48/ast_serialize-0.11.2.tar.gz"
-    sha256 "976a5bd75845d22f4b52905ddf53ab669ef1b14dba7735f5512841a2ef2b5450"
+    url "https://files.pythonhosted.org/packages/c2/1c/7257e6ec9382843915ce475558ce4492ccb5ed39122c256bb369c27e2ebf/ast_serialize-0.12.1.tar.gz"
+    sha256 "5285a390caf1c44368ae270f037f797b91427d138b7d43cad0f1fda4c83518d9"
   end
 
   resource "librt" do
