@@ -4,7 +4,7 @@ class Gcli < Formula
   url "https://github.com/herrhotzenplotz/gcli/archive/refs/tags/v2.13.0.tar.gz"
   sha256 "3dd25f636e439f7af6187248e46f2b4078dffdca4fe2d506d0edb275515d62b4"
   license "BSD-2-Clause"
-  revision 1
+  revision 2
   head "https://github.com/herrhotzenplotz/gcli.git", branch: "trunk"
 
   bottle do
@@ -18,7 +18,7 @@ class Gcli < Formula
   depends_on "pkgconf" => :build
   depends_on "readline" => :build
   depends_on "lowdown"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "bison" => :build
   uses_from_macos "flex" => :build
