@@ -4,6 +4,7 @@ class Nut < Formula
   url "https://github.com/networkupstools/nut/releases/download/v2.8.5/nut-2.8.5.tar.gz"
   sha256 "18bf32e59eb764b13da3c4fa70384926d7fa584cb31d2fe7f137a570633eeec1"
   license "GPL-2.0-or-later"
+  revision 1
 
   livecheck do
     url :stable
@@ -31,7 +32,7 @@ class Nut < Formula
   depends_on "libtool" => :build
   depends_on "pkgconf" => :build
   depends_on "libusb"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   on_linux do
     depends_on "glib"
@@ -71,10 +72,16 @@ class Nut < Formula
       --without-snmp
       --without-wrap
     ]
-    args << if OS.mac?
-      "--with-macosx_ups"
+    if OS.mac?
+      args << "--with-macosx_ups"
     else
-      "--with-udev-dir=#{lib}/udev"
+      args += %W[
+        --with-udev-dir=#{lib}/udev
+        --with-systemdsystemunitdir=#{lib}/systemd/system
+        --with-systemdsystempresetdir=#{lib}/systemd/system-preset
+        --with-systemdshutdowndir=#{lib}/systemd/system-shutdown
+        --with-systemdsysusersdir=#{lib}/sysusers.d
+      ]
     end
 
     system "./configure", *args
