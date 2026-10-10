@@ -15,15 +15,11 @@ class Mercurial < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "960aa831373695324b98783d436d6b9d7d9596d79306b5cae81a24e8ca47be2b"
-    sha256 arm64_tahoe:       "7f52a7affab2e09b5ec08bbafa6d6a4ebc1cf2b37e2b98c90ce686264744bbe7"
-    sha256 arm64_sequoia:     "ffd20e262451e1862f127f8e75d648ecda78bb6589f2b354d559d9df84aa3822"
-    sha256 arm64_sonoma:      "f3f855fe4266ebe8b38c83d5d70fd345997fae94ecef8bf6ffc72bc1bea2dee1"
-    sha256 tahoe:             "c7b9d6bfc7ab3058a5bfb785d4adabd3b8f7f54727d948e799d2c3c9382b8bb7"
-    sha256 sequoia:           "cafcc38e97898eb6e59f55687243975cb4a87f92c961b72a5ab43ae1c35a7a4c"
-    sha256 sonoma:            "84332e34f88fe9c9e6145e6481b5d6b040ba6145c20f467f546c6eed7bad97bc"
-    sha256 arm64_linux:       "a092320a52ba91f68c03739001c8e839ada479e160d089bf910d15feded01832"
-    sha256 x86_64_linux:      "d10aabdfebac0890ed4a50783eaea66569f09b0a0519de3ef4f4c2efdff5f859"
+    sha256 arm64_golden_gate: "d363fcc95236e6edca3bac88da8980df936f0b5463cf756a5a164e7c14de80c5"
+    sha256 arm64_tahoe:       "ebf09fb38004564a0ba4a541fd76311f81e3d6dfbdb62f50500747b83cbb3482"
+    sha256 arm64_sequoia:     "2eb365be6ed29ed8660821e397bd642109e1737dc260985c03c3249c5373a6a5"
+    sha256 arm64_linux:       "d98dadc553aeec645cb1474f907c32eeacfb21a3a1a0dba99a221fdd06fdfdbf"
+    sha256 x86_64_linux:      "1c0d442b34cff0e5d7ad3ecd0e09a6b65b0b4fb5718c6426889166b70bdc6710"
   end
 
   depends_on "python@3.15"
