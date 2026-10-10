@@ -17,7 +17,7 @@ class PythonYq < Formula
   end
 
   depends_on "libyaml"
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   uses_from_macos "jq", since: :sequoia
 
