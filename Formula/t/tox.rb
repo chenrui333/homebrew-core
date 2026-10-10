@@ -15,7 +15,7 @@ class Tox < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:      "55ff696d6047d528f9f8ceff89f39c390ccb6393d25c1b906e746976a1fd9ab4"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   resource "cachetools" do
     url "https://files.pythonhosted.org/packages/31/44/71476a5812da1ddf2c9a3efd31ae76d01480a1cf03ed13ac28aa8f2402e4/cachetools-7.2.1.tar.gz"
