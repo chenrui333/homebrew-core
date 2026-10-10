@@ -1,10 +1,9 @@
 class TinyRemapper < Formula
   desc "Tiny, efficient tool for remapping JAR files using \"Tiny\"-format mappings"
   homepage "https://fabricmc.net/"
-  url "https://maven.fabricmc.net/net/fabricmc/tiny-remapper/0.14.1/tiny-remapper-0.14.1-fat.jar"
-  sha256 "3d54d68fc747e0799f1080833aad2196fae8007ee9d588e5663dbc1258ff544b"
+  url "https://maven.fabricmc.net/net/fabricmc/tiny-remapper/0.15.0/tiny-remapper-0.15.0-fat.jar"
+  sha256 "ca93f562ab05daea928c7b89a355188c068d6154c9f7f485e8704dbaf35bfd44"
   license "LGPL-3.0-only"
-  revision 1
 
   livecheck do
     url "https://maven.fabricmc.net/net/fabricmc/tiny-remapper/maven-metadata.xml"
