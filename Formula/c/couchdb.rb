@@ -1,9 +1,9 @@
 class Couchdb < Formula
   desc "Apache CouchDB database server"
   homepage "https://couchdb.apache.org/"
-  url "https://www.apache.org/dyn/closer.lua?path=couchdb/source/3.5.2/apache-couchdb-3.5.2.tar.gz"
-  mirror "https://archive.apache.org/dist/couchdb/source/3.5.2/apache-couchdb-3.5.2.tar.gz"
-  sha256 "e561102aaadfdda1e499e6e9e12d2473433291b608bcd390bcbcf590bbb6cf68"
+  url "https://www.apache.org/dyn/closer.lua?path=couchdb/source/3.5.3/apache-couchdb-3.5.3.tar.gz"
+  mirror "https://archive.apache.org/dist/couchdb/source/3.5.3/apache-couchdb-3.5.3.tar.gz"
+  sha256 "ae0bb374cc89900d6cb1dfb8d8e80c799186dcf2d143ca886296c230af420896"
   license "Apache-2.0"
 
   bottle do
