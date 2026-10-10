@@ -6,6 +6,7 @@ class HgFastExport < Formula
   url "https://github.com/frej/fast-export/archive/refs/tags/v260405.tar.gz"
   sha256 "23af10aed62096a25f54012e37a16f5137d221f7e862dd559eba1ecf56ff1dbe"
   license "GPL-2.0-or-later"
+  revision 1
   head "https://github.com/frej/fast-export.git", branch: "master"
 
   bottle do
@@ -13,7 +14,7 @@ class HgFastExport < Formula
   end
 
   depends_on "mercurial"
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   def install
     libexec.install "plugins", "pluginloader"
