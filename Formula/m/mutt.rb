@@ -22,11 +22,11 @@ class Mutt < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "fb5a1d999546eb8df575fee776272ed70ab0f347dbe0e3f3239ea304179a4bc2"
-    sha256 arm64_tahoe:       "a5dea152d206a4178c299a8348319868040520464ade6435eed2691d001cf1fc"
-    sha256 arm64_sequoia:     "5cac50648b70f7113acdc4d86ed59b7237d3c2a0223b89fec213215e51cd3c68"
-    sha256 arm64_linux:       "619a1595adf537ac28c7a513d69c1f45a8baedd5451cfaa2d0108cbc8f115c39"
-    sha256 x86_64_linux:      "a84a9fef43f33f7039b449ef6c45817539ca3793eb4f75bf96031b5f3c907ed4"
+    sha256 arm64_golden_gate: "919e6e5ba8d967a2b36270c11a19b2b1f77e6713c4a276342a0f148b7b9a5443"
+    sha256 arm64_tahoe:       "3eb26fc7b2b55bbb084c710489952b428070d952829243538f742b4f916268bf"
+    sha256 arm64_sequoia:     "b0627a57334416c3a042c4a622958099d908dfa472aeafa49eb1f309371e0bf3"
+    sha256 arm64_linux:       "292c17925597fd7c6d17cb5ed73db5ffdd4dd9ed28e434243af4f1f7080780a3"
+    sha256 x86_64_linux:      "6ddb3d4329a6d6d04be1a49709fe21b1dd328f788044b4791cd0e73cb422c52a"
   end
 
   head do
