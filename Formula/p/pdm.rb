@@ -10,11 +10,12 @@ class Pdm < Formula
   head "https://github.com/pdm-project/pdm.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "553937218dce23b93236a9d64eab19abdc3ed1d67187ed0d253fb03f7c6b3c8a"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "9ccf20ac0ea94c13e2b1de7b71a424df03234c84b1ed420458f3ac031eb35ba2"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "8c7889f57ffd456207257bb3e1f932d39edce97be025d14d265b0581750371b9"
-    sha256 cellar: :any,                 arm64_linux:       "e525f0015aa5ee5b53f5938e796bdfcd888404d9564c4428c9879330cedc5fcf"
-    sha256 cellar: :any,                 x86_64_linux:      "45080daaa2b41e9d39c08f610daf1680a48af1e5a56f2e1df91420c42231da28"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "0159ba326198ab26775330c406b09547966c580b1d4fd20536746b2291aa17f2"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "e2e3d44a4a694c2d672688a01d8f13c48457f3167746a24d8b6eba67c02d554d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "c7d30641453fcbedf15ae074fc5f7665612b0cadf7e992753f0827fe3bf29a99"
+    sha256 cellar: :any,                 arm64_linux:       "3a9f0225d566cc212214af224a78718c366d8e2a6b3272b973aac8b0bab5133d"
+    sha256 cellar: :any,                 x86_64_linux:      "0ab5a1fba73cac571f7faac0357aabfc2316e3813e4aacda1e8aaf07b35a2d45"
   end
 
   depends_on "certifi" => :no_linkage
