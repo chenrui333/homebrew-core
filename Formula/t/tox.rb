@@ -8,14 +8,15 @@ class Tox < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "94f295c32f6d48b98db2d54a71026a99466f22086e015a3c7bc42ab1540666d9"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "94f295c32f6d48b98db2d54a71026a99466f22086e015a3c7bc42ab1540666d9"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "94f295c32f6d48b98db2d54a71026a99466f22086e015a3c7bc42ab1540666d9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "55ff696d6047d528f9f8ceff89f39c390ccb6393d25c1b906e746976a1fd9ab4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "55ff696d6047d528f9f8ceff89f39c390ccb6393d25c1b906e746976a1fd9ab4"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "9fad0fee1fd3d59d9b232a90cb069511917160abe717428dce037a2665d8f541"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "9fad0fee1fd3d59d9b232a90cb069511917160abe717428dce037a2665d8f541"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "9fad0fee1fd3d59d9b232a90cb069511917160abe717428dce037a2665d8f541"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "ed3d5b4c86fbbb85e582a4c599cb70dd38aece0b36537d957689d50b71153171"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "ed3d5b4c86fbbb85e582a4c599cb70dd38aece0b36537d957689d50b71153171"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   resource "cachetools" do
     url "https://files.pythonhosted.org/packages/31/44/71476a5812da1ddf2c9a3efd31ae76d01480a1cf03ed13ac28aa8f2402e4/cachetools-7.2.1.tar.gz"
