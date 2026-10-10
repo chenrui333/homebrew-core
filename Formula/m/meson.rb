@@ -11,7 +11,7 @@ class Meson < Formula
   end
 
   depends_on "ninja"
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   def install
     system python3, "-m", "pip", "install", *std_pip_args(build_isolation: true), "."
