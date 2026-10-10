@@ -6,6 +6,7 @@ class RpdsPy < Formula
   url "https://files.pythonhosted.org/packages/42/68/3bd46b8a5e01d3c2ebdf9c5e9497912e3fe0cde02bac21a7130ca866e403/rpds_py-2026.9.1.tar.gz"
   sha256 "4793ef7f78268b124b73fa933440f01d258bbae01de9fa53e9080c9ab0425a12"
   license "MIT"
+  revision 1
   compatibility_version 1
 
   bottle do
@@ -17,8 +18,8 @@ class RpdsPy < Formula
   end
 
   depends_on "maturin" => :build
-  depends_on "python@3.13" => [:build, :test]
   depends_on "python@3.14" => [:build, :test]
+  depends_on "python@3.15" => [:build, :test]
   depends_on "rust" => :build
 
   def pythons
