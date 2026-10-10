@@ -7,11 +7,11 @@ class Webdav < Formula
   head "https://github.com/hacdias/webdav.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "78a1729987453eb7f0b1f753d54deed36f57dda8190896f2c9c8d09051b72ffe"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "78a1729987453eb7f0b1f753d54deed36f57dda8190896f2c9c8d09051b72ffe"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "78a1729987453eb7f0b1f753d54deed36f57dda8190896f2c9c8d09051b72ffe"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "ae43cceabb25b5f900b05c67a25fd43d1065a6e56aea9ae68c4a4638a579b689"
-    sha256 cellar: :any,                 x86_64_linux:      "3a68a691f93bbb73ee30bbac105f931a6ef171309d77b50d96d300968ba48d9d"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "a50b7a66318966c3aa9555248571d937ca36fddf531159215b75ad644c7ad074"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "a50b7a66318966c3aa9555248571d937ca36fddf531159215b75ad644c7ad074"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "a50b7a66318966c3aa9555248571d937ca36fddf531159215b75ad644c7ad074"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "6821ae5fbfdcb5e2e20268b98152d23ebfaf19581a63c7d012b27c465c0f7095"
+    sha256 cellar: :any,                 x86_64_linux:      "ba9d46fce8f6d153ae3ba3cc16adb49f660c4ddfd18d3cfe3df2e08c00717cff"
   end
 
   depends_on "go" => :build
