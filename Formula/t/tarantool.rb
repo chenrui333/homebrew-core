@@ -4,6 +4,7 @@ class Tarantool < Formula
   url "https://hb.bizmrg.com/tarantool_repo/sources/tarantool-3.8.1.tar.gz"
   sha256 "84ba3129bcfc2a7eeb30cea17a955b7b3f96615b960497d5ca60eac1d14fd090"
   license "BSD-2-Clause"
+  revision 1
   version_scheme 1
   head "https://github.com/tarantool/tarantool.git", branch: "master"
 
@@ -26,7 +27,7 @@ class Tarantool < Formula
   depends_on "cmake" => :build
   depends_on "icu4c@78"
   depends_on "libyaml"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "readline"
   depends_on "zstd"
 
@@ -45,7 +46,7 @@ class Tarantool < Formula
       -DCMAKE_INSTALL_LOCALSTATEDIR=#{var}
       -DENABLE_DIST=ON
       -DICU_ROOT=#{icu4c.opt_prefix}
-      -DOPENSSL_ROOT_DIR=#{formula_opt_prefix("openssl@3")}
+      -DOPENSSL_ROOT_DIR=#{formula_opt_prefix("openssl@4")}
       -DREADLINE_ROOT=#{formula_opt_prefix("readline")}
       -DENABLE_BUNDLED_LIBCURL=OFF
       -DENABLE_BUNDLED_LIBUNWIND=OFF
