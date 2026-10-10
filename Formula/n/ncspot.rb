@@ -4,6 +4,7 @@ class Ncspot < Formula
   url "https://github.com/hrkfdn/ncspot/archive/refs/tags/v1.5.0.tar.gz"
   sha256 "08a0be7e099bc40cf087a4ed8665a425c345a0e83019257d7c4affb7a1bbb881"
   license "BSD-2-Clause"
+  revision 1
 
   bottle do
     sha256 cellar: :any_skip_relocation, arm64_golden_gate: "8048054bacc353778d1ddfb3c7f5b3210af57bea57438571daa63fc4a2ef351c"
@@ -19,7 +20,7 @@ class Ncspot < Formula
   uses_from_macos "python" => :build
 
   on_linux do
-    depends_on "openssl@3" # Uses Secure Transport on macOS
+    depends_on "openssl@4" # Uses Secure Transport on macOS
     depends_on "pulseaudio"
   end
 
