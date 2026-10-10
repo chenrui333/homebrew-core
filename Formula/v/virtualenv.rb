@@ -9,14 +9,15 @@ class Virtualenv < Formula
   head "https://github.com/pypa/virtualenv.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "609743625efd190f097e46b23803f12fe04587b8fea6fc60abb9229c2b86683f"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "609743625efd190f097e46b23803f12fe04587b8fea6fc60abb9229c2b86683f"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "609743625efd190f097e46b23803f12fe04587b8fea6fc60abb9229c2b86683f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "f2a1d46e0893c899efe304f4ebde7721773544565219f7dc5c14a5bffad53211"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "f2a1d46e0893c899efe304f4ebde7721773544565219f7dc5c14a5bffad53211"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "b93c98ef69ed6cf562a83bb61b6025524c6aea19af0b1ba0c598ae594b0cfdfd"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "b93c98ef69ed6cf562a83bb61b6025524c6aea19af0b1ba0c598ae594b0cfdfd"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "b93c98ef69ed6cf562a83bb61b6025524c6aea19af0b1ba0c598ae594b0cfdfd"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "a846fa2eb2b2d1255e40671ee4f71959fc287006433bce6df51c52c7535a5e87"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "a846fa2eb2b2d1255e40671ee4f71959fc287006433bce6df51c52c7535a5e87"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   resource "distlib" do
     url "https://files.pythonhosted.org/packages/c9/02/bd72be9134d25ed783ecbbc38a539ffaefbf90c78418c7fb7229600dbac7/distlib-0.4.3.tar.gz"
