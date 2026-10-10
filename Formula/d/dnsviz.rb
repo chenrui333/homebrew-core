@@ -17,17 +17,18 @@ class Dnsviz < Formula
 
   depends_on "bind" => [:build, :test]
   depends_on "pkgconf" => :build
+  depends_on "rust" => :build # for dnspython > uv_build > maturin
   depends_on "swig" => :build
   depends_on "json-c" => :test
   depends_on "cryptography" => :no_linkage
   depends_on "graphviz"
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   pypi_packages extra_packages: ["dnspython", "pygraphviz", "setuptools"]
 
   resource "dnspython" do
-    url "https://files.pythonhosted.org/packages/8c/8b/57666417c0f90f08bcafa776861060426765fdb422eb10212086fb811d26/dnspython-2.8.0.tar.gz"
-    sha256 "181d3c6996452cb1189c4046c61599b84a5a86e099562ffde77d26984ff26d0f"
+    url "https://files.pythonhosted.org/packages/ef/4a/50822184bd67cc6493f0fb6a880749158fcd31ab3fa07409acfd91f9fc85/dnspython-2.9.0.tar.gz"
+    sha256 "b44dc6b18f07a8b1c56676a19fbfdb5209415b046a9cece286baafa87ff3f7f1"
   end
 
   resource "pygraphviz" do
@@ -36,13 +37,17 @@ class Dnsviz < Formula
   end
 
   resource "setuptools" do
-    url "https://files.pythonhosted.org/packages/34/26/f5d29e25ffdb535afef2d35cdb55b325298f96debd670da4c325e08d70f4/setuptools-83.0.0.tar.gz"
-    sha256 "025bccbbf0fa05b6192bc64ae1e7b16e001fd6d6d4d5de03c97b1c1ade523bef"
+    url "https://files.pythonhosted.org/packages/6d/44/f5da03a8ef95d369145c5bb53050e7877c9f3d312e128605fd9504829143/setuptools-84.0.0.tar.gz"
+    sha256 "f4695c21257f0d9b537ec2692c941d02ee143b7cc1276941349a546573b2ef73"
   end
 
   resource "example-com-probe-auth", :test do
     url "https://raw.githubusercontent.com/dnsviz/dnsviz/refs/heads/master/tests/zones/unsigned/example.com-probe-auth.json"
     sha256 "6d75bf4e6289db41f8da6263aed2e0e8c910b8f303e4f065ec7d359997248997"
+
+    livecheck do
+      skip "Test fixture"
+    end
   end
 
   def install
