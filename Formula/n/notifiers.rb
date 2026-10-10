@@ -8,7 +8,7 @@ class Notifiers < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "eddc1ba9e5ff8823383316890bcd67c4033968423fdca771e9cedb5edaf65573"
+    sha256 cellar: :any_skip_relocation, all: "be2cf7305f2ef0da3eaba5f19cdb5cbce7eb66ce39bf03c5a527076d411867e1"
   end
 
   depends_on "certifi" => :no_linkage
