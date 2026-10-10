@@ -17,7 +17,7 @@ class Diffoscope < Formula
 
   depends_on "libarchive"
   depends_on "libmagic" => :no_linkage
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   pypi_packages package_name: "diffoscope[cmdline]"
 
