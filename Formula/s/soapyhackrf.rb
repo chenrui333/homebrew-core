@@ -4,6 +4,7 @@ class Soapyhackrf < Formula
   url "https://github.com/pothosware/SoapyHackRF/archive/refs/tags/soapy-hackrf-0.3.5.tar.gz"
   sha256 "0ef13ac8cf1ec0c0728bdfe8a775e38fd06574418948e3a30ea6794de5d5a06c"
   license "MIT"
+  revision 1
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "28f7e61840ac2710bcc31a1f31df38c61eec9f92e715b0f489fc64daed6dd1cd"
