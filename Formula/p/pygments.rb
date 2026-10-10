@@ -12,7 +12,7 @@ class Pygments < Formula
     sha256 cellar: :any_skip_relocation, all: "54074e6a643ba4c01e54c4243c300a4f6f941ed6340f91b2fb83766bbf5960ce"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   def install
     virtualenv_install_with_resources
