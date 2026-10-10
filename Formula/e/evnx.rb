@@ -6,11 +6,11 @@ class Evnx < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "134fafb5576c79e6b158eb8963b1ff80ccab8016d0172ff8e3507c26d50db240"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "9ecf6333a02de70b63bd6419f52830fe39deccfe367aa7f9cf2e5d8d56df2a11"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "0787fe5215ce331c054c735c008f83fd1b0ee9f9124cd7fc2fe4e4c99aac58fe"
-    sha256 cellar: :any,                 arm64_linux:       "1fca4d12d4e148e13764cc0b28b8f33d7f4ba076ac40ca33d177cf923a3fe92c"
-    sha256 cellar: :any,                 x86_64_linux:      "102dfea9ef0a49c1daf0c1c61230b126d511cd32b29ea5837ac6c44d8ed07792"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "c88808978f032300d27b363c046dcfbd776822c1d54a2be0b209afcff08c17e2"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "56a9c0fe9dfb904ff46964a91f4b09fc78932beaee199455ebb803f349a190c0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "81307cc62480c00bb537a7ab799e6431870c37f718bace773438bef360bc945f"
+    sha256 cellar: :any,                 arm64_linux:       "435c229964d7acdc52027a76a89dea698f99bc0fc5360fc21d85ff146d96a129"
+    sha256 cellar: :any,                 x86_64_linux:      "894b6e9216c90d2c8c78b01d1ce944bd75829b28e89b58e78b7557d2acc6f2c9"
   end
 
   depends_on "rust" => :build
