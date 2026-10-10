@@ -6,7 +6,7 @@ class MysqlAT84 < Formula
   url "https://cdn.mysql.com/Downloads/MySQL-8.4/mysql-8.4.11.tar.gz"
   sha256 "eb3051164d625dd346a8203f76e0d5d5d9aec51dbe9d51788e39ec6b3f1394c2"
   license "GPL-2.0-only" => { with: "Universal-FOSS-exception-1.0" }
-  revision 6
+  revision 7
 
   livecheck do
     url "https://dev.mysql.com/downloads/mysql/8.4.html?tpl=files&os=src&version=8.4",
@@ -33,7 +33,7 @@ class MysqlAT84 < Formula
   depends_on "abseil"
   depends_on "icu4c@78"
   depends_on "lz4"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "protobuf"
   depends_on "zlib-ng-compat" # Zlib 1.2.13+
   depends_on "zstd"
@@ -59,6 +59,13 @@ class MysqlAT84 < Formula
   fails_with :gcc do
     version "9"
     cause "Requires C++20"
+  end
+
+  # Apply Debian's patch to fix build with OpenSSL 4
+  patch do
+    url "https://salsa.debian.org/mariadb-team/mysql/-/raw/ac6576612c0afddccebf939fccedacc3b97db567/debian/patches/support-openssl4.patch"
+    sha256 "fd0eb6d47ce5aaef43e58240d9884d04b1ee30fd3c57395b405d9400ae136a02"
+    type :unofficial
   end
 
   # Patch out check for Homebrew `boost`.
@@ -96,7 +103,7 @@ class MysqlAT84 < Formula
       -DMYSQL_DATADIR=#{datadir}
       -DSYSCONFDIR=#{etc}
       -DBISON_EXECUTABLE=#{formula_opt_bin("bison")}/bison
-      -DOPENSSL_ROOT_DIR=#{formula_opt_prefix("openssl@3")}
+      -DOPENSSL_ROOT_DIR=#{formula_opt_prefix("openssl@4")}
       -DWITH_ICU=#{icu4c.opt_prefix}
       -DWITH_SYSTEM_LIBS=ON
       -DWITH_EDITLINE=system
