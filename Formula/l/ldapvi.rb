@@ -5,6 +5,7 @@ class Ldapvi < Formula
   mirror "http://www.lichteblau.com/download/ldapvi-1.8.tar.gz"
   sha256 "359c84d61198c4b4b62930e21670c077c380a41a121f299313330907967949db"
   license "GPL-2.0-or-later"
+  revision 1
 
   livecheck do
     url :homepage
@@ -25,7 +26,7 @@ class Ldapvi < Formula
 
   depends_on "glib"
   depends_on "libxcrypt" # for crypt.h
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "popt"
   depends_on "readline"
 
