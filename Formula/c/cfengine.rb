@@ -4,6 +4,7 @@ class Cfengine < Formula
   url "https://cfengine-package-repos.s3.amazonaws.com/tarballs/cfengine-community-3.28.0.tar.gz"
   sha256 "03722ab589c00b4e823ee22eb0afef5611b82e4f764fccc37ad3b18a3732c49e"
   license all_of: ["BSD-3-Clause", "GPL-2.0-or-later", "GPL-3.0-only", "LGPL-2.0-or-later"]
+  revision 1
 
   livecheck do
     url "https://cfengine-package-repos.s3.amazonaws.com/release-data/community/releases.json"
@@ -28,7 +29,7 @@ class Cfengine < Formula
 
   depends_on "librsync"
   depends_on "lmdb"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "pcre2"
 
   uses_from_macos "curl", since: :ventura # uses CURLOPT_PROTOCOLS_STR, available since curl 7.85.0
