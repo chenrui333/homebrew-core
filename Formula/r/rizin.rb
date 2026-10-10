@@ -4,7 +4,7 @@ class Rizin < Formula
   url "https://github.com/rizinorg/rizin/releases/download/v0.9.1/rizin-src-v0.9.1.tar.xz"
   sha256 "7ac1cd7daca7afdda742e15478b1f747fc1f813e496fee71839d1e109e543dca"
   license "LGPL-3.0-only"
-  revision 1
+  revision 2
   head "https://github.com/rizinorg/rizin.git", branch: "dev"
 
   bottle do
@@ -25,7 +25,7 @@ class Rizin < Formula
   depends_on "libmagic"
   depends_on "libzip"
   depends_on "lz4"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "pcre2"
   depends_on "tree-sitter"
   depends_on "xxhash"
