@@ -1,10 +1,9 @@
 class VapoursynthBm3d < Formula
   desc "BM3D denoising filter for VapourSynth"
   homepage "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-BM3D"
-  url "https://files.pythonhosted.org/packages/65/83/ecba54a88f9ec1df08a5ad8aa5ef8cd861fff7911018e821dee206b24289/vapoursynth_bm3d-10.1.tar.gz"
-  sha256 "f6cd25142008b1c4843e727bcc3746479198439ac800e258240c6ab0009ea115"
+  url "https://files.pythonhosted.org/packages/5b/16/6f1d0e05ceff921106281db6866d45e1b7eb284f078886e463ca9a1e6566/vapoursynth_bm3d-11.0.tar.gz"
+  sha256 "a1d02dd4bf7e2b5bfaa2b3c6744e5093b225e8562a39d183a6ba239554cd876c"
   license "MIT"
-  revision 1
   head "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-BM3D.git", branch: "master"
 
   bottle do
@@ -24,9 +23,16 @@ class VapoursynthBm3d < Formula
   depends_on "python@3.14"
   depends_on "vapoursynth"
 
+  deny_network_access!
+
   def install
+    (buildpath/"python.ini").write "[binaries]\npython = '#{python3}'\n"
+
     # Work around Homebrew's python prefix patch
-    args = %W[-Dpython.platlibdir=#{prefix/Language::Python.site_packages(python3)}]
+    args = %W[
+      --native-file=python.ini
+      -Dpython.platlibdir=#{prefix/Language::Python.site_packages(python3)}
+    ]
 
     system "meson", "setup", "build", *args, *std_meson_args
     system "meson", "compile", "-C", "build", "--verbose"
@@ -34,6 +40,13 @@ class VapoursynthBm3d < Formula
   end
 
   test do
-    system python3, "-c", "from vapoursynth import core; core.bm3d"
+    system python3, "-c", <<~PYTHON
+      import vapoursynth as vs
+      clip = vs.core.std.BlankClip(width=32, height=32, format=vs.GRAYS, length=1, color=[0.25])
+      filtered = vs.core.bm3d.Basic(clip, sigma=[3])
+      frame = filtered.get_frame(0)
+      assert frame.width == 32 and frame.height == 32
+      assert abs(frame[0][0, 0] - 0.25) < 1e-6
+    PYTHON
   end
 end
