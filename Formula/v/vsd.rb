@@ -26,15 +26,16 @@ class Vsd < Formula
   depends_on "ffmpeg"
 
   on_linux do
-    depends_on "openssl@3"
+    depends_on "openssl@4"
   end
 
   def install
-    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@3")
+    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@4") if OS.linux?
 
-    inreplace "vsd/Cargo.toml", ", path = \"../vsd-mp4\"", ""
+    # Replace rustls + aws-lc with our preferred native TLS backend
+    features = %w[capture license native-tls]
 
-    system "cargo", "install", *std_cargo_args(path: "vsd")
+    system "cargo", "install", "--no-default-features", *std_cargo_args(path: "vsd", features:)
   end
 
   test do
