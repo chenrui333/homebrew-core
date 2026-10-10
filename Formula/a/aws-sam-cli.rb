@@ -6,7 +6,7 @@ class AwsSamCli < Formula
   url "https://files.pythonhosted.org/packages/3a/0d/01f08ea73de187a7e27940b3a447a2da6d3a5d0c57be29c820a771f57307/aws_sam_cli-1.167.0.tar.gz"
   sha256 "e0b446ce2a40fd6dc28d24d889056318fbf45c6037b02458005720c47f0ad57c"
   license "Apache-2.0"
-  revision 1
+  revision 2
   head "https://github.com/aws/aws-sam-cli.git", branch: "develop"
 
   bottle do
