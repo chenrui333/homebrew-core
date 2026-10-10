@@ -14,7 +14,7 @@ class Bagit < Formula
     sha256 cellar: :any_skip_relocation, all: "cd75590862c752f2d6fa722470125ef7eb0c50bcace9dff268adfa600a71123d"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   def install
     virtualenv_install_with_resources
