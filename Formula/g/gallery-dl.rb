@@ -3,8 +3,8 @@ class GalleryDl < Formula
 
   desc "Command-line downloader for image-hosting site galleries and collections"
   homepage "https://codeberg.org/mikf/gallery-dl"
-  url "https://files.pythonhosted.org/packages/15/c1/00bd1712cd24cd5ac5c0267596cce3e17fc580f057b344a68122355643ed/gallery_dl-1.32.15.tar.gz"
-  sha256 "a33192d265d8877d94fd37ac358d5e4ff6955b739b350c8a7077392d2ca4edd5"
+  url "https://files.pythonhosted.org/packages/86/65/9fb8b494ea145a7148e64ab6a577adca0413b0f9e90b422e8349cdb95a2f/gallery_dl-1.32.16.tar.gz"
+  sha256 "bacd7d63423ad45db98704fedafa1302343db6f250f9e9f69a9e142754ed9e37"
   license "GPL-2.0-only"
   head "https://codeberg.org/mikf/gallery-dl.git", branch: "master"
 
@@ -62,8 +62,8 @@ class GalleryDl < Formula
   end
 
   resource "pycryptodomex" do
-    url "https://files.pythonhosted.org/packages/c9/85/e24bf90972a30b0fcd16c73009add1d7d7cd9140c2498a68252028899e41/pycryptodomex-3.23.0.tar.gz"
-    sha256 "71909758f010c82bc99b0abf4ea12012c98962fbf0583c2164f8b84533c2e4da"
+    url "https://files.pythonhosted.org/packages/4c/25/214ea825a9031f5af2c8b2506ee16701a2560d4712165dd00098dd527bcb/pycryptodomex-3.24.0.tar.gz"
+    sha256 "0428f19f13452c6b89bbaf2c530f84f369873811dfa77f0cee0da4f40fb0474f"
   end
 
   resource "pysocks" do
