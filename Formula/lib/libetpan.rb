@@ -4,6 +4,7 @@ class Libetpan < Formula
   url "https://github.com/dinhvh/libetpan/archive/refs/tags/1.10.1.tar.gz"
   sha256 "87bacdc62661a2a7aa5fe9f1f28d2f7c7a53256633ac5129903916c59f80c4c2"
   license "BSD-3-Clause"
+  revision 1
   compatibility_version 2
   head "https://github.com/dinhvh/libetpan.git", branch: "master"
 
@@ -21,7 +22,7 @@ class Libetpan < Formula
   depends_on "automake" => :build
   depends_on "libtool" => :build
   depends_on "pkgconf" => :build
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "cyrus-sasl"
 
