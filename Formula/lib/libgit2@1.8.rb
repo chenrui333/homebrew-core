@@ -4,6 +4,7 @@ class Libgit2AT18 < Formula
   url "https://github.com/libgit2/libgit2/archive/refs/tags/v1.8.7.tar.gz"
   sha256 "a548a2209c3e99d6bb685d843396fff3a7d3ffd8340adb5d8851637cfe8cd134"
   license "GPL-2.0-only" => { with: "GCC-exception-2.0" }
+  revision 1
 
   livecheck do
     url :stable
@@ -29,7 +30,7 @@ class Libgit2AT18 < Formula
   depends_on "libssh2"
 
   on_linux do
-    depends_on "openssl@3" # Uses SecureTransport on macOS.
+    depends_on "openssl@4" # Uses SecureTransport on macOS.
     depends_on "zlib-ng-compat"
   end
 
