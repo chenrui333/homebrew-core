@@ -4,6 +4,7 @@ class XorgServer < Formula
   url "https://www.x.org/releases/individual/xserver/xorg-server-21.1.25.tar.xz"
   sha256 "6ad4e3c7b59a309b32c92e5c15ce1267110f9e13f1ac78da62361a628da1a0eb"
   license all_of: ["MIT", "APSL-2.0"]
+  revision 1
   compatibility_version 1
 
   livecheck do
@@ -61,7 +62,7 @@ class XorgServer < Formula
     depends_on "libtirpc"
     depends_on "libxcvt"
     depends_on "libxshmfence"
-    depends_on "openssl@3"
+    depends_on "openssl@4"
     depends_on "systemd"
 
     resource "xvfb-run" do
@@ -74,6 +75,8 @@ class XorgServer < Formula
       sha256 "7e8e39c98ae006b8ba583b59c8be0419885eaead062c3ae87592854de33e5a00"
     end
   end
+
+  allow_network_access! :test
 
   def install
     # ChangeLog contains some non relocatable strings
