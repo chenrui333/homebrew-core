@@ -1,8 +1,8 @@
 class GrinWallet < Formula
   desc "Official wallet for the cryptocurrency Grin"
   homepage "https://grin.mw"
-  url "https://github.com/mimblewimble/grin-wallet/archive/refs/tags/v5.5.0.tar.gz"
-  sha256 "faa8deebb693cd43d62f4c4c5c598294f7a136929d8dcea1c187656342cae01d"
+  url "https://github.com/mimblewimble/grin-wallet/archive/refs/tags/v5.5.1.tar.gz"
+  sha256 "a044c594c0492cc96b48e6f32080cfbd4e9154229647ed29f16ef5caed033208"
   license "Apache-2.0"
 
   bottle do
@@ -24,8 +24,8 @@ class GrinWallet < Formula
   end
 
   resource "grin" do
-    url "https://github.com/mimblewimble/grin/archive/refs/tags/v5.5.1.tar.gz"
-    sha256 "841a698986ff05768c6d7cdf2e59d44571533522fbcffdab0a0de01c8de1d4a3"
+    url "https://github.com/mimblewimble/grin/archive/refs/tags/v5.5.2.tar.gz"
+    sha256 "df68a9496db18f6f1e6e286a95ecdc5f3d25de38affe9872c650b4b004c1e2d3"
   end
 
   deny_network_access!
