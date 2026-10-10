@@ -9,13 +9,11 @@ class Cpprestsdk < Formula
   head "https://github.com/microsoft/cpprestsdk.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_golden_gate: "7e20659e07f56149bdbb2f64f33d2d3496bdc26a7c2f001b7cae6b6652d468e6"
-    sha256 cellar: :any,                 arm64_tahoe:       "b3490b01defba37b82b788cef763a32d394ac72a3036fb80f7c85b717cf3e9e4"
-    sha256 cellar: :any,                 arm64_sequoia:     "326dec0d7be0b1004f74ee9b4909445a519412778ca302ce9b1c21273c1e1494"
-    sha256 cellar: :any,                 arm64_sonoma:      "53d492f25bbae3750a7ceae18b47273988b261b038af74946728def83eb54957"
-    sha256 cellar: :any,                 sonoma:            "d7304db7e5240b7cbacde6ae229c233ccb89bb77d5b7756d48ea662c8448a7d8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "6241e1c9cccd4b2ecc7bdb739a3c90aaafb0823455b1348d093db9f6270ea500"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "810d1b3b84f31d6a55dc8fa8f2b757a97dd4d2f2479a7a1d34da7b0069dce398"
+    sha256 cellar: :any, arm64_golden_gate: "9ea1345fb85aa7b276fba2a470fea191786be21a4771c605d07bc8bc36f0bf16"
+    sha256 cellar: :any, arm64_tahoe:       "bd5d0a3b380f3349bde364b87358b70b2cd1957b564225272f15557d3eec25c3"
+    sha256 cellar: :any, arm64_sequoia:     "5a5c4d8f9df5749653618a7f1b3186f4f3005fc28acffcee25e99a8c72cfe23b"
+    sha256 cellar: :any, arm64_linux:       "8d8db6f1654f6ac66d93c77ffa17cfb52df62192fd4a557789868f7c7b602ba8"
+    sha256 cellar: :any, x86_64_linux:      "ee9c25335f5ab8cb90eb4a4eed4ea28ce5362b2686b7cd5e28f4e887b5bf6f1a"
   end
 
   # https://github.com/microsoft/cpprestsdk/commit/7c3f8782e36303c896d1b75a9d23160d4e76b4c7
