@@ -1,0 +1,20 @@
+Formula/m/mlkit.rb
+  s_cda539916c0d9f::t_9c54b3acb147f4 49-52
+  s_cda539916c0d9f::t_3682ef7c2b5765 4-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "21edf99f7ea137390a18c5426163925e161691b2",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
