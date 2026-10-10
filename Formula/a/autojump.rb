@@ -8,8 +8,8 @@ class Autojump < Formula
   head "https://github.com/wting/autojump.git", branch: "master"
 
   bottle do
-    rebuild 7
-    sha256 cellar: :any_skip_relocation, all: "2a5206b6e787350ca32d8e9adbf7b336dc794ff95b54a1da6ba968db261892b3"
+    rebuild 8
+    sha256 cellar: :any_skip_relocation, all: "2e91a76c910c3ef7afdf39371eb866c2e75f8be696b71bb42f81ce6727bab1a9"
   end
 
   depends_on "python@3.15"
