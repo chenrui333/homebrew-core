@@ -2,7 +2,7 @@ class Barman < Formula
   include Language::Python::Virtualenv
 
   desc "Backup and Recovery Manager for PostgreSQL"
-  homepage "https://www.pgbarman.org/"
+  homepage "https://pgbarman.org/"
   url "https://files.pythonhosted.org/packages/eb/8c/b225bca1623a6370885f005e2f575f5f13c5c790eb9bef6695299efca4dd/barman-3.20.1.tar.gz"
   sha256 "cac6542ac7a8f7cf2a7892807509d78dd24346a021afc24a7c3ec5b1626cc636"
   license "GPL-3.0-or-later"
@@ -19,7 +19,7 @@ class Barman < Formula
 
   depends_on "rust" => :build # for uv_build > maturin
   depends_on "libpq"
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   resource "psycopg2" do
     url "https://files.pythonhosted.org/packages/91/81/6ea19b8b28feb9405c8c87a307776614d6e404bdb98467d1ce10a39d2c1d/psycopg2-2.9.13.tar.gz"
