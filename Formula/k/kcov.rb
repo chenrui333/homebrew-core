@@ -2,7 +2,7 @@ class Kcov < Formula
   desc "Code coverage tester for compiled programs, Python, and shell scripts"
   homepage "https://simonkagstrom.github.io/kcov/"
   license "GPL-2.0-or-later"
-  revision 1
+  revision 2
   head "https://github.com/SimonKagstrom/kcov.git", branch: "master"
 
   stable do
@@ -39,7 +39,7 @@ class Kcov < Formula
   depends_on "pkgconf" => :build
 
   depends_on "dwarfutils"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "python" => :build
   uses_from_macos "curl"
@@ -48,6 +48,8 @@ class Kcov < Formula
     depends_on "elfutils"
     depends_on "zlib-ng-compat"
   end
+
+  allow_network_access! :test
 
   def install
     system "cmake", "-S", ".", "-B", "build", "-DSPECIFY_RPATH=ON", *std_cmake_args
