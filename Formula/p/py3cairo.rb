@@ -8,11 +8,11 @@ class Py3cairo < Formula
   compatibility_version 1
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "ae8f55dd424356ded6562878fb0551b83673d2f8276b797383a27ae23e8d7419"
-    sha256 cellar: :any, arm64_tahoe:       "dd941b47d3fa4fc667dc1404455cae42e67c96ea1bff1bd95932a2b5ac1c0bae"
-    sha256 cellar: :any, arm64_sequoia:     "ce9d1133f153dea3cd011c383ff5cb0d4d8690491c6a89e22be799134dd0be7f"
-    sha256 cellar: :any, arm64_linux:       "43ee113c1a613f0df8112691bc3756f70d573b65ab2733c40950be2ec48ae611"
-    sha256 cellar: :any, x86_64_linux:      "16ee81bb6982f87fcb49eed4233a6517181e809ae6795fa87ae29fa286b5a3f4"
+    sha256 cellar: :any, arm64_golden_gate: "f655280ba2f9f284b43ab39f3c6a2400d2844a7b1ce0a4c7386e3fb67e03c666"
+    sha256 cellar: :any, arm64_tahoe:       "b514f1c006f63711ab230bf3833a5a29d18221777250ec51b6fe2269eb42e874"
+    sha256 cellar: :any, arm64_sequoia:     "3bede70c829760bf17e9fa3d66969d3789c85e0927f23b97f07ecc3a2cdc8063"
+    sha256 cellar: :any, arm64_linux:       "a0542258cdfa629cffa2c343751d851280de15d1fae37b948e64404a3f337de0"
+    sha256 cellar: :any, x86_64_linux:      "cdb5fc354213e7e8e3738a403908677a44f087a6a91e85f623ff0616e51726c3"
   end
 
   depends_on "meson" => :build
