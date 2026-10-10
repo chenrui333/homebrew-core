@@ -14,7 +14,7 @@ class Asciidoc < Formula
   end
 
   depends_on "docbook"
-  depends_on "python@3.14"
+  depends_on "python@3.15"
   depends_on "source-highlight"
 
   uses_from_macos "libxml2"
