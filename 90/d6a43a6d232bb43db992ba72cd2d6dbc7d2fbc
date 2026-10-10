@@ -1,0 +1,20 @@
+Formula/j/jbigkit.rb
+  s_cda539916c0d9f::t_58235b08a916a2 33-34,48
+  s_cda539916c0d9f::t_73ea9a1b5b7772 4-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "90d6a43a6d232bb43db992ba72cd2d6dbc7d2fbc",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
