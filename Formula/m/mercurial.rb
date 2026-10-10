@@ -6,6 +6,7 @@ class Mercurial < Formula
   url "https://www.mercurial-scm.org/release/mercurial-7.2.4.tar.gz"
   sha256 "85839e0f39e6cb893a88932aa36ef661759f3c5c5de4551ad26bd9df53cb71a2"
   license "GPL-2.0-or-later"
+  revision 1
   compatibility_version 1
 
   livecheck do
@@ -25,7 +26,16 @@ class Mercurial < Formula
     sha256 x86_64_linux:      "d10aabdfebac0890ed4a50783eaea66569f09b0a0519de3ef4f4c2efdff5f859"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
+
+  # Backport to support Python 3.15 with OpenSSL 4
+  patch do
+    url "https://foss.heptapod.net/mercurial/mercurial-devel/-/commit/5f775798ca43e215b6b190a88733ad8751beb90c.diff"
+    sha256 "67d80601f03b08b7691511094647bdd2b6b438edcd09ecdcf1e1150b5b1216c9"
+    type :backport
+  end
+
+  allow_network_access! :build
 
   def install
     system python3, "-m", "pip", "install", *std_pip_args(build_isolation: true), "."
