@@ -1,8 +1,8 @@
 class TypescriptLanguageServer < Formula
   desc "Language Server Protocol implementation for TypeScript wrapping tsserver"
   homepage "https://github.com/typescript-language-server/typescript-language-server"
-  url "https://registry.npmjs.org/typescript-language-server/-/typescript-language-server-6.0.1.tgz"
-  sha256 "85eabb9251d85d3798b247b2bc0895ca111d866bfbf59533f64b2461b0d8649f"
+  url "https://registry.npmjs.org/typescript-language-server/-/typescript-language-server-6.0.2.tgz"
+  sha256 "d225b223a8a4764ecbd94bdba85d2ef185eaa7b9842a1a31c38c2bbe7f2fe9b9"
   license all_of: ["MIT", "Apache-2.0"]
 
   bottle do
