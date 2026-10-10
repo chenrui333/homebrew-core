@@ -1,0 +1,19 @@
+Formula/c/cubejs-cli.rb
+  s_cda539916c0d9f::t_6e91ca71ca0bbd 4-5,22-27,29-30,39-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9d6ea67a0aca4f7321f927095747269e3fb4720a",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
