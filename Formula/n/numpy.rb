@@ -9,12 +9,11 @@ class Numpy < Formula
   head "https://github.com/numpy/numpy.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "76cb4bdb653776e822fccb8937866410f82ea44dbd8b614603e3ea099b977fb5"
-    sha256 cellar: :any, arm64_tahoe:       "bdcfe1be445140cfcb65a43bb8f99981a482cb43ad7dbc4a76ffc22a62f66ac5"
-    sha256 cellar: :any, arm64_sequoia:     "3a29ad16b006dd043b9e6241bb7dde3760a7c1ad53a66b8ddd8163bb6532816b"
-    sha256 cellar: :any, arm64_sonoma:      "1dc2d1e20c18507d3e5fc8f06ffb970de14f28d2e1da064b365c526c08c55a96"
-    sha256 cellar: :any, arm64_linux:       "b99c2ae58c9289d0ba396ee27fd47b67c4d6a8b5ea277ec2383821a5b219104c"
-    sha256 cellar: :any, x86_64_linux:      "1198f57045ae41ff962b09393c35a7bad9d077b3bb596985d26756ccc23c9fc7"
+    sha256 cellar: :any, arm64_golden_gate: "a96dc2725e8139668d0d14e909e67f8158b48fad5bf1251d23c645e7aa619665"
+    sha256 cellar: :any, arm64_tahoe:       "009fb161cc194dcefacfac3013dc2a1a82ca878d58f721e6f81cc46a4c3ed29d"
+    sha256 cellar: :any, arm64_sequoia:     "d2082c65b8bba6319e9a9bc4357a051190aad6b88c6a320a6670da08c848f70b"
+    sha256 cellar: :any, arm64_linux:       "5fd1b6887f862829d4bc71b3a06c6a912cc17c689c53b3ce906e62fc8a478b3f"
+    sha256 cellar: :any, x86_64_linux:      "a3e79e950870f6ccdecab7b7526e7058dd556245afbb1f3b35a85adb7aed73c0"
   end
 
   depends_on "gcc" => :build # for gfortran
