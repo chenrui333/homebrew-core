@@ -4,6 +4,7 @@ class Numpy < Formula
   url "https://files.pythonhosted.org/packages/13/01/11703282db468b85f6f7b8c7f22d058de5970d5c7e60a3a8aaa313c3de36/numpy-2.5.3.tar.gz"
   sha256 "df2d5874ff183595a4ba404edd04f6bd9b5505c1d7708573f6a6c17489a67563"
   license "BSD-3-Clause"
+  revision 1
   compatibility_version 1
   head "https://github.com/numpy/numpy.git", branch: "main"
 
@@ -19,8 +20,8 @@ class Numpy < Formula
   depends_on "gcc" => :build # for gfortran
   depends_on "meson" => :build
   depends_on "ninja" => :build
-  depends_on "python@3.13" => [:build, :test]
   depends_on "python@3.14" => [:build, :test]
+  depends_on "python@3.15" => [:build, :test]
   depends_on "openblas"
 
   on_linux do
