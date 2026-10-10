@@ -1,10 +1,9 @@
 class Pdftoipe < Formula
   desc "Reads arbitrary PDF files and generates an XML file readable by Ipe"
   homepage "https://github.com/otfried/ipe-tools"
-  url "https://github.com/otfried/ipe-tools/archive/refs/tags/v7.2.29.2.tar.gz"
-  sha256 "c8de0dc7eb8fa959c96539fb19ebfb8e16f459e9b4ef9259aeb30b76072cd083"
+  url "https://github.com/otfried/ipe-tools/archive/refs/tags/v7.3.1.1.tar.gz"
+  sha256 "93bf863b757d7b7e29096b99cfb46fae8d354476b3c8ccb855e314ef792ba081"
   license "GPL-2.0-or-later"
-  revision 7
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "eab950e03cf807d0a4b4c48c95b9415b849a44473d090f8d3c2ad02548d86855"
@@ -16,14 +15,6 @@ class Pdftoipe < Formula
 
   depends_on "pkgconf" => :build
   depends_on "poppler"
-
-  # Workaround for poppler 26.06.
-  patch do
-    url "https://github.com/otfried/ipe-tools/commit/3875da3ae31515dad4f2aa7ac5f59f2c2f70c32c.patch?full_index=1"
-    sha256 "15369effacfa0df2559049a1dcc01f20036b0a158bb3059c6ce333287549de7a"
-    type :backport
-    resolves "https://github.com/otfried/ipe-tools/pull/82"
-  end
 
   def install
     cd "pdftoipe" do
