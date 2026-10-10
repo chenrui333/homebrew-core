@@ -1,10 +1,9 @@
 class Errcheck < Formula
   desc "Finds silently ignored errors in Go code"
   homepage "https://github.com/kisielk/errcheck"
-  url "https://github.com/kisielk/errcheck/archive/refs/tags/v1.20.0.tar.gz"
-  sha256 "d16b7757bf57dea5bbcfce42badd1bbfadd4c112b2da90b4ccaeb81c6c438c1e"
+  url "https://github.com/kisielk/errcheck/archive/refs/tags/v1.30.0.tar.gz"
+  sha256 "0c7b3bfdc9cc659d87c6ed72eb8980e4740e2990a6243a6e67743394ea1c20ff"
   license "MIT"
-  revision 2
 
   bottle do
     sha256 cellar: :any_skip_relocation, arm64_golden_gate: "ea2313fc0835034a5804d0940ae1f208f60db51b4f2e52ef890e0736aa970e86"
@@ -15,13 +14,6 @@ class Errcheck < Formula
   end
 
   depends_on "go" => [:build, :test]
-
-  patch do
-    url "https://github.com/kisielk/errcheck/commit/82a8baa1a45a73615d0723ce58e5a617e3c4eee0.patch?full_index=1"
-    sha256 "6494c48f4c3246a7af7d8d9d21b247118e5d17f9254b7ffa2e4504a26dcbe31e"
-    type :unofficial
-    resolves "https://github.com/kisielk/errcheck/pull/286"
-  end
 
   deny_network_access!
 
