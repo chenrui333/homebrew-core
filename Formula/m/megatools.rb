@@ -4,6 +4,7 @@ class Megatools < Formula
   url "https://xff.cz/megatools/builds/megatools-1.11.5.20250706.tar.gz"
   sha256 "51f78a03748a64b1066ce28a2ca75d98dbef5f00fe9789dc894827f9a913b362"
   license "GPL-2.0-or-later" => { with: "cryptsetup-OpenSSL-exception" }
+  revision 1
 
   livecheck do
     url "https://xff.cz/megatools/builds/"
@@ -27,7 +28,7 @@ class Megatools < Formula
   depends_on "pkgconf" => :build
 
   depends_on "glib"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "curl", since: :ventura # needs curl >= 7.85.0
 
