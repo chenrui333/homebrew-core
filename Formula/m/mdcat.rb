@@ -4,6 +4,7 @@ class Mdcat < Formula
   url "https://github.com/BIRSAx2/mdcat/archive/refs/tags/mdcat-2.18.0.tar.gz"
   sha256 "a0db6cfb5623396d78420778a077360d3c53fc0252cab28f76af657ddcf0c232"
   license "MPL-2.0"
+  revision 1
   head "https://github.com/BIRSAx2/mdcat.git", branch: "main"
 
   bottle do
@@ -21,7 +22,7 @@ class Mdcat < Formula
   uses_from_macos "curl"
 
   on_linux do
-    depends_on "openssl@3"
+    depends_on "openssl@4"
   end
 
   deny_network_access!
