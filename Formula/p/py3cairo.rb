@@ -4,6 +4,7 @@ class Py3cairo < Formula
   url "https://github.com/pygobject/pycairo/releases/download/v1.29.2/pycairo-1.29.2.tar.gz"
   sha256 "3e69fff74fe64f5ba2dfa31f67c6bdf26413342574047437d2ac520d35e9a489"
   license any_of: ["LGPL-2.1-only", "MPL-1.1"]
+  revision 1
   compatibility_version 1
 
   bottle do
@@ -17,8 +18,8 @@ class Py3cairo < Formula
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
-  depends_on "python@3.13" => [:build, :test]
   depends_on "python@3.14" => [:build, :test]
+  depends_on "python@3.15" => [:build, :test]
   depends_on "cairo"
 
   def pythons
