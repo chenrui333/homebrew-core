@@ -4,6 +4,7 @@ class Fnox < Formula
   url "https://github.com/jdx/fnox/archive/refs/tags/v1.39.0.tar.gz"
   sha256 "21669929b2517e7b5425263c75c5f055220126cac1720b40549c316c92db77a9"
   license "MIT"
+  revision 1
   head "https://github.com/jdx/fnox.git", branch: "main"
 
   bottle do
@@ -17,10 +18,12 @@ class Fnox < Formula
   depends_on "pkgconf" => :build
   depends_on "rust" => :build
   depends_on "age" => :test
-  depends_on "openssl@3"
+  depends_on "openssl@4"
+  depends_on "sqlcipher"
   depends_on "usage"
 
   on_linux do
+    depends_on "aws-lc"
     depends_on "systemd" # libudev
   end
 
@@ -31,8 +34,10 @@ class Fnox < Formula
   end
 
   def install
-    # Ensure that the `openssl` crate picks up the intended library.
-    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@3")
+    ENV["AWS_LC_SYS_USE_SYSTEM"] = "1" if OS.linux?
+    ENV["LIBSQLITE3_SYS_USE_PKG_CONFIG"] = "1"
+    ENV["OPENSSL_NO_VENDOR"] = "1"
+    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@4") if OS.mac?
 
     system "cargo", "install", *std_cargo_args
 
