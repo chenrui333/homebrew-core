@@ -1,8 +1,8 @@
 class LettaCode < Formula
   desc "Memory-first coding agent"
   homepage "https://docs.letta.com/letta-code"
-  url "https://registry.npmjs.org/@letta-ai/letta-code/-/letta-code-0.34.8.tgz"
-  sha256 "238e31ace79211a974cbd357938cb74d15dde2d9b9e27676ff07c741fe5cf2cd"
+  url "https://registry.npmjs.org/@letta-ai/letta-code/-/letta-code-0.34.9.tgz"
+  sha256 "c314fd71219d8fc272c673bdfeca0d92ba862b866081b5c74ebff1d056a77309"
   license "Apache-2.0"
 
   bottle do
@@ -32,38 +32,45 @@ class LettaCode < Formula
     end
   end
 
+  allow_network_access! :build
+
   def install
     system "npm", "install", *std_npm_args
     bin.install_symlink libexec.glob("bin/*")
 
+    # Include nested copies installed by letta-agent-sdk.
     # Remove ripgrep pre-built binaries
     node_modules = libexec/"lib/node_modules/@letta-ai/letta-code/node_modules"
-    rm_r(node_modules.glob("@vscode/ripgrep-*"))
-    rm_r(node_modules/"@vscode/ripgrep") # keeping separate from previous rm_r to fail if missing
+    rm_r(node_modules.glob("**/@vscode/ripgrep-*").sort.reverse)
+    rm_r(node_modules.glob("**/@vscode/ripgrep").sort.reverse)
 
     # Remove Electron-only sharp fork with x86_64-only pre-built binaries
-    rm_r(node_modules/"@janhapke")
+    rm_r(node_modules.glob("**/@janhapke").sort.reverse)
 
     # Replace node-pty pre-built binaries
-    cd node_modules/"node-pty" do
-      rm_r(["prebuilds", "third_party"])
-      system "npm", "run", "install"
+    node_modules.glob("**/node-pty").each do |pty|
+      cd pty do
+        rm_r(["prebuilds", "third_party"])
+        system "npm", "run", "install"
+      end
     end
 
     # Replace sharp pre-built binaries
-    rm_r(node_modules.glob("@img/sharp-*"))
+    rm_r(node_modules.glob("**/@img/sharp-*").sort.reverse)
     resource("node-gyp").stage do
       system "npm", "install", *std_npm_args(prefix: buildpath/"node-gyp")
       ENV.append_path "NODE_PATH", buildpath/"node-gyp/lib/node_modules"
     end
-    cd node_modules/"sharp" do
-      ENV["SHARP_FORCE_GLOBAL_LIBVIPS"] = "1"
-      system "npm", "run", "build"
-      rm_r("src/build/Release/obj.target")
+    node_modules.glob("**/sharp").each do |sharp_dir|
+      cd sharp_dir do
+        ENV["SHARP_FORCE_GLOBAL_LIBVIPS"] = "1"
+        system "npm", "run", "build"
+        rm_r("src/build/Release/obj.target")
 
-      # help letta.js find source-built sharp
-      sharp = Pathname.pwd.glob("src/build/Release/sharp-*.node").first
-      (node_modules/"@img"/sharp.basename(".node")).install_symlink sharp => "sharp.node"
+        # help letta.js find source-built sharp
+        sharp = Pathname.pwd.glob("src/build/Release/sharp-*.node").first
+        (sharp_dir.parent/"@img"/sharp.basename(".node")).install_symlink sharp => "sharp.node"
+      end
     end
   end
 
