@@ -7,7 +7,7 @@ class FfmpegAT28 < Formula
   # to configure to activate them. In this case, FFmpeg's license changes to GPL v2+.
   # Passing `--enable-version3` changes the license to GPL v3+.
   license "GPL-3.0-or-later"
-  revision 8
+  revision 9
 
   livecheck do
     url "https://ffmpeg.org/olddownload.html"
@@ -50,7 +50,7 @@ class FfmpegAT28 < Formula
   depends_on "libvorbis"
   depends_on "libvpx"
   depends_on "opencore-amr"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "opus"
   depends_on "rtmpdump"
   depends_on "sdl12-compat"
@@ -67,6 +67,13 @@ class FfmpegAT28 < Formula
   on_linux do
     depends_on "alsa-lib"
     depends_on "zlib-ng-compat"
+  end
+
+  # Backport fix for newer binutils
+  patch do
+    url "https://github.com/FFmpeg/FFmpeg/commit/effadce6c756247ea8bae32dc13bb3e6f464f0eb.patch?full_index=1"
+    sha256 "9800c708313da78d537b61cfb750762bb8ad006ca9335b1724dbbca5669f5b24"
+    type :backport
   end
 
   def install
