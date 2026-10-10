@@ -9,11 +9,12 @@ class Athenacli < Formula
   revision 2
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "85eaea0d865a41d6c88d4b3c054d4d2054249f8db70052996fe1222e2b95fbcb"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "04441fe488e15e27377bb3fff9bdcd7f7e5a254fed8bd26487f7472b1a19e731"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "35ae975070f7ab57defd021f955ac9a52d250fc4c83c37da97b9c54daaae7f32"
-    sha256 cellar: :any,                 arm64_linux:       "20a927850697e9ddcf138b7a5e3bfeddc0971abe13c14af0113d7ca3e464bf8b"
-    sha256 cellar: :any,                 x86_64_linux:      "d0c49cccc3ba19fb188a658feeaa3b1beab8760853813f7ab3ab9c6d5cde15df"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "9d1da87816be085826a1861a7f42818770c73b609ed4de18232bd4c3ecb86f7c"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "c732e71dc8d982a98e31783ce782db0fbe133c5c68af65aece29f33ed95c60cf"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "25abffd57043fbdda312668037e0899b6293969836e43f996ba27f6b0d99fc5d"
+    sha256 cellar: :any,                 arm64_linux:       "791dfcb96185caa70bcbba6925e1147e015ddff772fc74fef8c778255774515c"
+    sha256 cellar: :any,                 x86_64_linux:      "7478c9f88d8a5efcc336b957079ff5d12f43ab8752e601e3c77c1fda1237013e"
   end
 
   depends_on "python@3.15"
