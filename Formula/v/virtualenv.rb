@@ -16,7 +16,7 @@ class Virtualenv < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:      "f2a1d46e0893c899efe304f4ebde7721773544565219f7dc5c14a5bffad53211"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   resource "distlib" do
     url "https://files.pythonhosted.org/packages/c9/02/bd72be9134d25ed783ecbbc38a539ffaefbf90c78418c7fb7229600dbac7/distlib-0.4.3.tar.gz"
