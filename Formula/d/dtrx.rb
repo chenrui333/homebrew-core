@@ -13,7 +13,7 @@ class Dtrx < Formula
 
   # Include a few common decompression handlers in addition to the python dep
   depends_on "p7zip"
-  depends_on "python@3.14"
+  depends_on "python@3.15"
   depends_on "xz"
 
   uses_from_macos "zip" => :test
