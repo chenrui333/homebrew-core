@@ -8,11 +8,11 @@ class Fnox < Formula
   head "https://github.com/jdx/fnox.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "d8a0e7e713caa73daf1e2d58db2b0982806076540fd66d819aacb65d48fd157c"
-    sha256 cellar: :any, arm64_tahoe:       "78f07bb60a2f77d7edb22f62b0c048cb14c1fc07c8dca4bca675ae597dcaec3d"
-    sha256 cellar: :any, arm64_sequoia:     "6a3c702545d02f9cb72dd7b5a02b1e6629c48ec5062f24be87a9c36690114a31"
-    sha256 cellar: :any, arm64_linux:       "e553915d7b53ae5e174413665bd45b4041d86a9bdf83841882d9692818ed9a96"
-    sha256 cellar: :any, x86_64_linux:      "ccae0702190e1a1b6310504e0394e456d45da5904445cafc156c36716adb170e"
+    sha256 cellar: :any, arm64_golden_gate: "7e634880bb6086d437e0cf3ff5389db279d46ed6458ab66e9629849babbbc6d2"
+    sha256 cellar: :any, arm64_tahoe:       "68992fc04475d20ef800954ae98573232860c32a7d28b285663bbe45ce91b102"
+    sha256 cellar: :any, arm64_sequoia:     "5a8accba03935e73b28162736139436cb0683227215ea02efd16e142f3507e08"
+    sha256 cellar: :any, arm64_linux:       "e3e1f1abab3f82bea47a38a9d80b50dd9ed336f7ec40f0b7f2efc0c983bfdde4"
+    sha256 cellar: :any, x86_64_linux:      "a4a18e2b471a48939fa48dbae70c7a48368dbb8a0958989fc6330a8ea6ae8ab2"
   end
 
   depends_on "pkgconf" => :build
