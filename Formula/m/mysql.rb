@@ -14,11 +14,11 @@ class Mysql < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "1e00b03ad84817ebf0ecaa2714cc5de9df640150a10178e8ccd64ef999eb1086"
-    sha256 arm64_tahoe:       "e26294c8531b96db90671aa6de1b56fcb3dc3dfd0d552ac1f819d1d7e8ccaab7"
-    sha256 arm64_sequoia:     "4b06b5b2a10c156a7a07a41fb661d58a4c6e1736f881f07b1c7af6ed13803363"
-    sha256 arm64_linux:       "38d4ab7c9d98add8fd53e1ab28921df1795cb941eb92e61461b4b7fe02ac1841"
-    sha256 x86_64_linux:      "08a0bd7faa007aec7725ff8c4ecf3d9f5433e3cd51616560d248b50bc89be9a6"
+    sha256 arm64_golden_gate: "ebe505361b50d58f951d5dbf3a6ce45ddf4a4160d5cb21e2abd033509c71c598"
+    sha256 arm64_tahoe:       "5e7eb267efe81c469fe344924a40220a2a9897af0798b0bab2d4daee8f70ce3a"
+    sha256 arm64_sequoia:     "2d8cc59cc82d275549ff091afb631e5114b115e71e886971fd63d4d684ec3ced"
+    sha256 arm64_linux:       "c616a966e3d84d17db8abcb27b75fe58695e70fb4da891dd9560ac769eed0304"
+    sha256 x86_64_linux:      "1558dc149823e8edb06951403f8f700742fc23d742e928658364951024de4454"
   end
 
   depends_on "bison" => :build
