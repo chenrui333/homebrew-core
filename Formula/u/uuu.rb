@@ -4,6 +4,7 @@ class Uuu < Formula
   url "https://github.com/nxp-imx/mfgtools/releases/download/uuu_1.5.243/uuu_source-uuu_1.5.243.tar.gz"
   sha256 "dee3be0f337c631bf93232f5ea42440f07782ce005c9219a14731d66bbe83658"
   license "BSD-3-Clause"
+  revision 1
   head "https://github.com/nxp-imx/mfgtools.git", branch: "master"
 
   livecheck do
@@ -26,7 +27,7 @@ class Uuu < Formula
   depends_on "pkgconf" => :build
 
   depends_on "libusb"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "tinyxml2"
   depends_on "zstd"
 
