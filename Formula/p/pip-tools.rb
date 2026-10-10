@@ -12,7 +12,7 @@ class PipTools < Formula
     sha256 cellar: :any_skip_relocation, all: "d3a1a8fa0151b2d42b8f9a42744016fd33f8bdf209a08d4ea855e3d4722b0c34"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   resource "build" do
     url "https://files.pythonhosted.org/packages/bd/67/4898a44ea4f3f8e213b0954ec0aa0a16971d62a6212d6ea3931e97115b99/build-1.6.1.tar.gz"
