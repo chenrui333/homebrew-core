@@ -4,6 +4,7 @@ class Rtl433 < Formula
   url "https://github.com/merbanan/rtl_433/archive/refs/tags/25.12.tar.gz"
   sha256 "d283ec7a41a02d398e8918b20b65df3bf684cf4478371830662004005dadcdd2"
   license "GPL-2.0-or-later"
+  revision 1
   head "https://github.com/merbanan/rtl_433.git", branch: "master"
 
   bottle do
@@ -20,7 +21,7 @@ class Rtl433 < Formula
   depends_on "pkgconf" => :build
   depends_on "librtlsdr"
   depends_on "libusb"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   resource "homebrew-test_cu8", :test do
     url "https://raw.githubusercontent.com/merbanan/rtl_433_tests/038234077f4d8b9022759430da1154d2c3631344/tests/oregon_scientific/uvr128/g001_433.92M_250k.cu8"
