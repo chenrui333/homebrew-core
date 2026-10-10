@@ -4,6 +4,7 @@ class Strongswan < Formula
   url "https://download.strongswan.org/strongswan-6.1.0.tar.bz2"
   sha256 "fe6c97481298767213cfc2e9a1da29fdd8018d481ff4cb9cf0283099654f20d4"
   license "GPL-2.0-or-later"
+  revision 1
 
   livecheck do
     url "https://download.strongswan.org/"
@@ -30,7 +31,7 @@ class Strongswan < Formula
   end
 
   depends_on "pkgconf" => :build
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "curl"
 
