@@ -4,14 +4,15 @@ class Pycparser < Formula
   url "https://files.pythonhosted.org/packages/ac/d3/eb1d3bc30dda12f7e69640ae2ac8cb10240b71fb73024ad528b7d2ae73da/pycparser-3.1.tar.gz"
   sha256 "b3fc6dec06a8b2fefa0ed4ff92285306a5e3be9987bc5603c9edbdc4e492418f"
   license "BSD-3-Clause"
+  revision 1
   compatibility_version 1
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "457b36633734e2432724b009c6a2cbf1e4b96ef12b6f1d4b1376f70972f3110b"
+    sha256 cellar: :any_skip_relocation, all: "c008a84b1a89712d6f194b5e3dfd8ed76f08b5ecb2d197571dd8445ae2bf2955"
   end
 
   depends_on "python-setuptools" => :build
-  depends_on "python@3.14" => [:build, :test]
+  depends_on "python@3.15" => [:build, :test]
 
   deny_network_access!
 
