@@ -23,12 +23,11 @@ class Liquidsoap < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 arm64_golden_gate: "a82aa143b74fa434070e3bf00b479cc5ecd5cd1589ff61160956daeb799e5114"
-    sha256 arm64_tahoe:       "d197a4de8dacf6e6fb801ea84f9914cd9c151a29f3337b197bdcd5381369fa69"
-    sha256 arm64_sequoia:     "8e7d87772bf6c1ee613277bc6e090bc5256be73f1613790d45eef215bcbe4e15"
-    sha256 arm64_linux:       "93cfb9b1361ef150afaa0177be5010272147a3a3e709076ce095cfaa2c8baae4"
-    sha256 x86_64_linux:      "f7947b32cde2d5974bb3bec4653f9bcbea0efa06578ad9f3754b340fd21d3998"
+    sha256 arm64_golden_gate: "8da59f128f2acbd15f8ef3fc35bb428d9b7f768872076b8be9e628c4e8f3d77c"
+    sha256 arm64_tahoe:       "c70998fb9ff3c2b969f60965d041dfd6fd89501b7be979ad4df5940756409323"
+    sha256 arm64_sequoia:     "117f18b6eade5c588742d639188758c6863bd4cf8f5b8def453c71c0af48474a"
+    sha256 arm64_linux:       "3e10060cb61360ec71c5670d67cecbf0fb60681a8a555dd5e3b1744f133b6c5d"
+    sha256 x86_64_linux:      "40c92d79c6bb594efd4aafcab60d552156364655f287b2429eedfc741ba242be"
   end
 
   depends_on "ocaml" => :build
