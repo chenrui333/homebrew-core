@@ -7,11 +7,11 @@ class Moor < Formula
   head "https://github.com/walles/moor.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "92cf78d4330b519ab92a5fa5c5129d34231925d755aa45889627cfc56c2bb4f6"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "92cf78d4330b519ab92a5fa5c5129d34231925d755aa45889627cfc56c2bb4f6"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "92cf78d4330b519ab92a5fa5c5129d34231925d755aa45889627cfc56c2bb4f6"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "f625532d45886642ab031d91324e5e171ecff7c3f0072344b205ada1d444039d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "19f0f0e12f743e8bc522490918babc779c38ea976c2b628156c727b636ef19ef"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "08a463e950c5d5b019a44e33839d084941492dff993e6f6f63f2e06433566762"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "08a463e950c5d5b019a44e33839d084941492dff993e6f6f63f2e06433566762"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "08a463e950c5d5b019a44e33839d084941492dff993e6f6f63f2e06433566762"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "e158cf2395360538d01f007fb0eba24edf1aca17a87f06b61c323e5513183fb5"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "390cc1b9e17ec130f45f5022f351c5c75700a1efd2ed91c7a5e1aac129bca2c0"
   end
 
   depends_on "go" => :build
