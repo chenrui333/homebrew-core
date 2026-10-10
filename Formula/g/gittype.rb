@@ -7,13 +7,11 @@ class Gittype < Formula
   head "https://github.com/unhappychoice/gittype.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "96af52b2fadc614fd94b1b8be57ad6522af3091c660df2ed1536640835eb6bba"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "d25786eb5e9a1431d0a3c654794be20e0add8e415ff138add4b28d5cb7ba5e64"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "0a5be98c0648d29b245eaf21bf5c53d2eca1df28924f3997e07b142fa984f503"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:      "6d9f4c8ecd3da5106b6abac736660b4bb01de10aa0559ecece51b67df1e099e7"
-    sha256 cellar: :any_skip_relocation, sonoma:            "7c769693c7288944e0a47f76c58e26c21bee74afaef9a688f1b7204c4225368b"
-    sha256 cellar: :any,                 arm64_linux:       "eca2aece39f389743868cc80d7b2ceb6abae3756fe2a2a1fd01b27e61b059664"
-    sha256 cellar: :any,                 x86_64_linux:      "17c440e6cb4e53556dec56d694c46785c17a7530d23156c9bb74b02b009e7d46"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "6106a00bd2c68edf9a7ed508e65aac5e761066ea98b409fa053648de05682c71"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "daf35c11a015224e02ffa675665a61c41121c92a1aa172bdcb7019456d894f63"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "cad5bf09fb5f416be3fdf2d08f41e065ed8524f61ae874a94a2e19422d5e9efe"
+    sha256 cellar: :any,                 arm64_linux:       "51890981b8ad6b55207e1874784c6b98ff065207ac5ddbca56fea88cbf907942"
+    sha256 cellar: :any,                 x86_64_linux:      "ec17919046a57032bcfe142b88a9a8b8e4b04aaac5c2fb3d094d377abe778c90"
   end
 
   depends_on "pkgconf" => :build
