@@ -5,6 +5,7 @@ class Libtrace < Formula
   version "4.0.34"
   sha256 "b3e73b9ca6757094047295937ab4d834155a0c64674f499132b56e8f81f8fcc9"
   license all_of: ["GPL-2.0-or-later", "LGPL-3.0-or-later"]
+  revision 1
 
   livecheck do
     url :stable
@@ -28,7 +29,7 @@ class Libtrace < Formula
   depends_on "automake" => :build
   depends_on "libtool" => :build
   depends_on "pkgconf" => :build
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "wandio"
 
   uses_from_macos "bison" => :build
