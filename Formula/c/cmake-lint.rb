@@ -12,7 +12,7 @@ class CmakeLint < Formula
     sha256 cellar: :any_skip_relocation, all: "37812acbfd761cf26c9e8f96c3a71a89d458b3e8973f3a9d5b97eb9757236871"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   def install
     virtualenv_install_with_resources
