@@ -4,6 +4,7 @@ class Ettercap < Formula
   url "https://github.com/Ettercap/ettercap/archive/refs/tags/v0.8.4.1.tar.gz"
   sha256 "210a535138772ee67f5946ef61efe3bba31413d0f241a11d953fb553cacbbacd"
   license "GPL-2.0-or-later"
+  revision 1
   head "https://github.com/Ettercap/ettercap.git", branch: "master"
 
   bottle do
@@ -23,7 +24,7 @@ class Ettercap < Formula
   depends_on "libmaxminddb"
   depends_on "libnet"
   depends_on "ncurses"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "pcre2"
 
   uses_from_macos "bison" => :build
