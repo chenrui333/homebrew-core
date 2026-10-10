@@ -9,8 +9,12 @@ class Yapf < Formula
   head "https://github.com/google/yapf.git", branch: "main"
 
   bottle do
-    rebuild 2
-    sha256 cellar: :any_skip_relocation, all: "55fb914de2771f27f304ac0b8fcdd5da19472f19ab59f9eacd8431e8dbaa4ec7"
+    rebuild 3
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "d1e9f095627274f0c0616a87c9650647c9c86a7ee9e2bc5c7908e61f871dbd55"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "d1e9f095627274f0c0616a87c9650647c9c86a7ee9e2bc5c7908e61f871dbd55"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "d1e9f095627274f0c0616a87c9650647c9c86a7ee9e2bc5c7908e61f871dbd55"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "6e09e1ebdfbcdcdc8783506e0e08bc0df6480578cb6485a17789024bbf50b516"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "6e09e1ebdfbcdcdc8783506e0e08bc0df6480578cb6485a17789024bbf50b516"
   end
 
   depends_on "python@3.15"
