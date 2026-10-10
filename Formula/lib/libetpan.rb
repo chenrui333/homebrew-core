@@ -28,14 +28,21 @@ class Libetpan < Formula
     depends_on "zlib-ng-compat"
   end
 
-  def install
-    # autoconf 2.71+ probes -std=gnu23 first on modern compilers, which rejects K&R. Force gnu17.
-    ENV.append "CFLAGS", "-std=gnu17"
+  deny_network_access!
 
-    if OS.mac?
-      # Keep macOS-native TLS (CFNetwork/Security) compiled in.
-      ENV.append "CPPFLAGS", "-DHAVE_CFNETWORK=1"
-      ENV.append "LDFLAGS", "-framework CoreFoundation -framework CoreServices -framework Security"
+  def install
+    if build.stable?
+      odie "Remove workarounds!" if version > "1.10.1"
+
+      # autoconf 2.71+ probes -std=gnu23 first on modern compilers, which rejects K&R. Force gnu17.
+      ENV.append "CFLAGS", "-std=gnu17"
+
+      # https://github.com/dinhvh/libetpan/commit/9919beeea09850364ea966b0d9fb640858bd2b27
+      if OS.mac?
+        # Keep macOS-native TLS (CFNetwork/Security) compiled in.
+        ENV.append "CPPFLAGS", "-DHAVE_CFNETWORK=1"
+        ENV.append "LDFLAGS", "-framework CoreFoundation -framework CoreServices -framework Security"
+      end
     end
 
     system "./autogen.sh", "--disable-db", "--disable-silent-rules", *std_configure_args
