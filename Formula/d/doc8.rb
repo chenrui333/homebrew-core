@@ -10,7 +10,8 @@ class Doc8 < Formula
   head "https://github.com/PyCQA/doc8.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "7d4573d3ab94153d219dbb6b880afe137ef540fe236de2c44278c4d7829cf705"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, all: "b245ad59690256035fa27e2e98202870938e1d058c6ead2c46406cc64216db17"
   end
 
   depends_on "python@3.15"
