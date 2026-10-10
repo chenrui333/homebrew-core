@@ -34,6 +34,7 @@ jobs:
     container:
       image: ghcr.io/homebrew/brew:main
     env:
+      HOMEBREW_DEVELOPER: 1
       GNUPGHOME: /tmp/gnupghome
     steps:
       - name: Set up Homebrew
