@@ -3,8 +3,8 @@ class Vsview < Formula
 
   desc "Next-generation VapourSynth previewer"
   homepage "https://jaded-encoding-thaumaturgy.github.io/vs-view/"
-  url "https://files.pythonhosted.org/packages/92/b1/98dfc148c277e07ecd35cf17b5718eb2db5063f1a0c4e24c2f3286586fd2/vsview-0.12.0.tar.gz"
-  sha256 "191ea7cadbf998aef7b07658ab58ce9deb69d21c59634017c7c368efec01a6f9"
+  url "https://files.pythonhosted.org/packages/e4/1c/e1eac58c9a8df00de8a91235e00921dbbd6116a0c68c50e4949c9e0d9081/vsview-0.12.1.tar.gz"
+  sha256 "0c00a25539488fd059786c762ffec022c9e3c8dbf9ec5d1a1afac912b6963afc"
   license all_of: [
     "EUPL-1.2",
     all_of: ["MIT", "Apache-2.0", "ISC", "OFL-1.1"], # src/vsview/assets/
@@ -137,8 +137,8 @@ class Vsview < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/42/23/4a86fc741c38c5b69792a4ef954b281afa69bea9f083f881de1b0d23bc07/platformdirs-4.12.3.tar.gz"
-    sha256 "427fc0bb321ae0c5b037fa03238ca74820437be162e78b4848c4d4055b9b766c"
+    url "https://files.pythonhosted.org/packages/90/a1/d5f9002a70298c64a789779077d8dd90c10aa1f47fe40c86802df874f2a6/platformdirs-4.12.4.tar.gz"
+    sha256 "63743c02414e755de4e31b8f68125c1407495b86c5a006e203c01ff8b9924250"
   end
 
   resource "pluggy" do
