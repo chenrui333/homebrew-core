@@ -11,13 +11,11 @@ class KimiCli < Formula
   no_autobump! because: "macOS resources cannot be updated on linux CI"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "ad4b3293a28e0d16b03240cd657cbfc4beebd4447af65b989f112e2476bac293"
-    sha256 cellar: :any, arm64_tahoe:       "05c426f8182298ff221b65d4db594957ad9e64371f346ba82fd85a707a117adb"
-    sha256 cellar: :any, arm64_sequoia:     "ce121fb6512b066e7c2fa8e369e0071b6ef0657a716d22fb160c01f3b90d1bde"
-    sha256 cellar: :any, arm64_sonoma:      "bb5607d53504301cd267eb88f16c9ecb04d92d5dc4ace1469e18b46ea0559398"
-    sha256 cellar: :any, sonoma:            "d63ff3561cadf9c8102ddc98914a5360d008dbcc4564f10891aa46ad3bce5653"
-    sha256 cellar: :any, arm64_linux:       "0f1d8f052e7fafc913c3308f2867c08adb98c823538cd85dfd5869280bef048e"
-    sha256 cellar: :any, x86_64_linux:      "02891606f6a923c14222216736e28151db7cb26cd7d063b627af438beb7cabc4"
+    sha256 cellar: :any, arm64_golden_gate: "9a98d485d34f5de5392fe82824737e5c592d76fb8bd9aff6ae57a2259ff76d53"
+    sha256 cellar: :any, arm64_tahoe:       "f3fa771b17c4c6a66563292a1bb20b2003ec0e292b52e75d1770d8ee56830b2c"
+    sha256 cellar: :any, arm64_sequoia:     "6788d3bf3e08c28c60332fb53f4a72f61c07d172586030d4b7fc3bbf2c71eebf"
+    sha256 cellar: :any, arm64_linux:       "20220e1cb56dcfebf7d9f216aa247acf01baf6d8152c9c23d1b32ed093b78649"
+    sha256 cellar: :any, x86_64_linux:      "180a87f5830cc33cf9d93055ef223a4108915a9f8e6714550a323171e6e41458"
   end
 
   # Deprecated upstream: https://github.com/MoonshotAI/kimi-cli#readme
