@@ -1,10 +1,11 @@
 class Makepkg < Formula
   desc "Compile and build packages suitable for installation with pacman"
-  homepage "https://wiki.archlinux.org/index.php/makepkg"
+  homepage "https://wiki.archlinux.org/title/Makepkg"
   url "https://gitlab.archlinux.org/pacman/pacman.git",
       tag:      "v7.1.0",
       revision: "5683f8477a0afcc6b331766175a83445b2dcfe89"
   license "GPL-2.0-or-later"
+  revision 1
   head "https://gitlab.archlinux.org/pacman/pacman.git", branch: "master"
 
   bottle do
@@ -24,10 +25,11 @@ class Makepkg < Formula
   depends_on "fakeroot"
   depends_on "gettext" # runs gettext command
   depends_on "libarchive"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "m4" => :build
   uses_from_macos "python" => :build
+  uses_from_macos "curl"
   uses_from_macos "libxslt"
 
   on_sonoma :or_older do
