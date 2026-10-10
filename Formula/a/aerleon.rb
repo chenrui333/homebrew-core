@@ -17,13 +17,13 @@ class Aerleon < Formula
   end
 
   depends_on "libyaml"
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   conflicts_with "cgrep", because: "both install `cgrep` binaries"
 
   resource "absl-py" do
-    url "https://files.pythonhosted.org/packages/d0/4f/d79676ab82f2e42fc3611618139f13a9c4c31d0cff4b486982047679a802/absl_py-2.5.0.tar.gz"
-    sha256 "0c996f25c0490700fadabe6351630f6111534fa0ae252cc6d2014ea3b141135f"
+    url "https://files.pythonhosted.org/packages/1f/1d/58e2b5a6e4d703ccb2a029943d665974cb3d5a4fb2b3e3675dd03a9df10e/absl_py-2.5.1.tar.gz"
+    sha256 "286e71c82c1a38e75bbcf185f9b37d0305ad7786535107cb49bf4df9ff2e1f95"
   end
 
   resource "pyyaml" do
