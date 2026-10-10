@@ -197,9 +197,9 @@ jobs:
                 - Formula/lib/libxml++@5.rb
                 - Formula/o/openssl@4.rb
                 - Formula/p/postgresql@18.rb
-                - Formula/p/python@3.14.rb
-                - Formula/p/python-gdbm@3.14.rb
-                - Formula/p/python-tk@3.14.rb
+                - Formula/p/python@3.15.rb
+                - Formula/p/python-gdbm@3.15.rb
+                - Formula/p/python-tk@3.15.rb
 
             - label: boost
               path: Formula/.+
@@ -332,6 +332,7 @@ jobs:
             - label: CI-parallel-dependents
               path: "Formula/.+/(\
                 cabal-install|\
+                certifi|\
                 docbook-xsl|\
                 erlang|\
                 gettext|\
@@ -343,6 +344,7 @@ jobs:
                 ocaml-findlib|\
                 openjdk|\
                 openssl@3|\
+                openssl@4|\
                 pkgconf|\
                 python@3.14|\
                 rust|\
