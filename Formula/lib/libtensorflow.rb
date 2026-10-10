@@ -1,9 +1,12 @@
 class Libtensorflow < Formula
+  include Language::Python::Virtualenv
+
   desc "C interface for Google's OS library for Machine Intelligence"
   homepage "https://www.tensorflow.org/"
   url "https://github.com/tensorflow/tensorflow/archive/refs/tags/v2.21.0.tar.gz"
   sha256 "ef3568bb4865d6c1b2564fb5689c19b6b9a5311572cd1f2ff9198636a8520921"
   license "Apache-2.0"
+  revision 1
 
   bottle do
     rebuild 2
@@ -15,15 +18,26 @@ class Libtensorflow < Formula
   end
 
   depends_on "bazel@7" => :build
-  depends_on "numpy" => :build
+  depends_on "meson" => :build
+  depends_on "ninja" => :build
   depends_on "python@3.13" => :build # Python 3.14 support: https://github.com/tensorflow/tensorflow/issues/102890
+  depends_on "openblas"
 
   on_macos do
     depends_on "gnu-getopt" => :build
   end
 
   on_linux do
+    depends_on "patchelf" => :build
     depends_on "vim" => :build # for xxd, TODO: try to remove in next release
+  end
+
+  pypi_packages package_name:   "",
+                extra_packages: "numpy"
+
+  resource "numpy" do
+    url "https://files.pythonhosted.org/packages/13/01/11703282db468b85f6f7b8c7f22d058de5970d5c7e60a3a8aaa313c3de36/numpy-2.5.3.tar.gz"
+    sha256 "df2d5874ff183595a4ba404edd04f6bd9b5505c1d7708573f6a6c17489a67563"
   end
 
   resource "homebrew-test-model", :test do
@@ -32,6 +46,9 @@ class Libtensorflow < Formula
   end
 
   def install
+    venv = virtualenv_create(libexec, python3)
+    venv.pip_install resources.reject(&:test?)
+
     optflag = ENV["HOMEBREW_OPTFLAGS"].presence
     optflag ||= if Hardware::CPU.arm? && OS.mac?
       "-mcpu=apple-m1"
@@ -39,7 +56,7 @@ class Libtensorflow < Formula
       "-march=native"
     end
     ENV["CC_OPT_FLAGS"] = optflag
-    ENV["PYTHON_BIN_PATH"] = python3
+    ENV["PYTHON_BIN_PATH"] = venv.root/"bin/python"
     ENV["USE_DEFAULT_PYTHON_LIB_PATH"] = "1"
     ENV["TF_NEED_CUDA"] = "0"
     ENV["TF_NEED_MPI"] = "0"
