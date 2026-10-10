@@ -4,6 +4,7 @@ class Certifi < Formula
   url "https://files.pythonhosted.org/packages/a3/c2/24167ea9858356b47a87a50d39908bfdb72ceeefe0041586e704e5376b3a/certifi-2026.7.22.tar.gz"
   sha256 "741e2c3b351ddf169a738da9f2c048608ff7f2c5cc02f1ebc6b118bb090d5d55"
   license "MPL-2.0"
+  revision 1
   compatibility_version 1
 
   bottle do
@@ -12,7 +13,7 @@ class Certifi < Formula
   end
 
   depends_on "python-setuptools" => :build
-  depends_on "python@3.14" => [:build, :test]
+  depends_on "python@3.15" => [:build, :test]
   depends_on "ca-certificates" => :no_linkage
 
   deny_network_access!
