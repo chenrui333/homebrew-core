@@ -13,7 +13,7 @@ class Compiledb < Formula
     sha256 cellar: :any_skip_relocation, all: "7f6e5ece68a904147b3799e19de9f2cc9fbb6a53240ac3292bb7c10d8bdc1158"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   resource "bashlex" do
     url "https://files.pythonhosted.org/packages/76/60/aae0bb54f9af5e0128ba90eb83d8d0d506ee8f0475c4fdda3deeda20b1d2/bashlex-0.18.tar.gz"
@@ -21,8 +21,8 @@ class Compiledb < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/76/d4/81420972a676e8ffea40450d8c8c92943e7218a78fe9b64359836cc9876b/click-8.4.2.tar.gz"
-    sha256 "9a6cea6e60b17ebe0a44c5cc636d94f09bd66142c1cd7d8b4cd731c4917a15f6"
+    url "https://files.pythonhosted.org/packages/c7/0e/7fa0ef50764b67090eca4114772a2abf8b6148198475e54c660b97caeee6/click-8.5.0.tar.gz"
+    sha256 "ba0d2089de75ea0310e2dde03160e6ca10009947fb95a182f9b54021bb272e34"
   end
 
   def install
