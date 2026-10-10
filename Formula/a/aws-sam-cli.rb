@@ -10,11 +10,11 @@ class AwsSamCli < Formula
   head "https://github.com/aws/aws-sam-cli.git", branch: "develop"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "4ca975bd46efb980048bf92378d843e1fa69e117b5d69a117138a6531c00793e"
-    sha256 cellar: :any, arm64_tahoe:       "97bd84de52297cde31158b1a1c247ce628ae00e03954d102a61a614d16c72629"
-    sha256 cellar: :any, arm64_sequoia:     "6e20d9391c41e3cb2b9df8d548dcc07c9b0991835c8bd671ae6b1efe47a5746d"
-    sha256 cellar: :any, arm64_linux:       "37d42a54bc096d4881429d82e4af15602c132da059c05f5cd092879d28e8c0f3"
-    sha256 cellar: :any, x86_64_linux:      "572fb0cfdc626cafdd706df126623398a8f7ab3ce20af46390fdb3c21afbc2dd"
+    sha256 cellar: :any, arm64_golden_gate: "8121b93e5cc5820de1fdac57d5b0765e4068234a084c046c1d1875fbb6de5dd4"
+    sha256 cellar: :any, arm64_tahoe:       "daedfffb7a23813bdbb0a31e532a984a5375bb3982f442ef356d86bde1ba33fa"
+    sha256 cellar: :any, arm64_sequoia:     "0284e6d64f9e03544783d74e44a2301b986cc00e472e4cc3c365e2c7dad24b8e"
+    sha256 cellar: :any, arm64_linux:       "a0a66fde9faa4098ecfd93d55b88468c42d962d3dba8dc83ef34e0b16b1cf25c"
+    sha256 cellar: :any, x86_64_linux:      "5185cca6e2bf4eeb1f450ef06ee67896e26633f1ab4092925779f9a0a25c83ff"
   end
 
   depends_on "go" => :build
