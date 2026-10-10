@@ -1,8 +1,8 @@
 class Scrutineer < Formula
   desc "Security through scrutiny"
   homepage "https://github.com/alpha-omega-security/scrutineer"
-  url "https://github.com/alpha-omega-security/scrutineer/archive/refs/tags/v2026.09.26.1.tar.gz"
-  sha256 "62227311efe1f547831ee31b597bfd0b469832382a93fad72d779c46d5e8b499"
+  url "https://github.com/alpha-omega-security/scrutineer/archive/refs/tags/v2026.10.10.1.tar.gz"
+  sha256 "ef9fa95047157272368b5ee56e8b1d59d15994ce2539002079e92727ab3cd008"
   license "MIT"
   head "https://github.com/alpha-omega-security/scrutineer.git", branch: "main"
 
