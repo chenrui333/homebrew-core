@@ -4,6 +4,7 @@ class Nmail < Formula
   url "https://github.com/d99kris/nmail/archive/refs/tags/v5.16.4.tar.gz"
   sha256 "5e563291964d60d4c73aef6e1d7067958960be4a9e99c1c3735dde82c5166dbe"
   license "MIT"
+  revision 1
   head "https://github.com/d99kris/nmail.git", branch: "master"
 
   bottle do
@@ -17,7 +18,7 @@ class Nmail < Formula
   depends_on "cmake" => :build
   depends_on "libmagic"
   depends_on "ncurses"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
   depends_on "xapian"
 
   uses_from_macos "curl"
