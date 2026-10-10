@@ -9,13 +9,12 @@ class PythonLspServer < Formula
   head "https://github.com/python-lsp/python-lsp-server.git", branch: "develop"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "b0f52562521ba1da492c77cd2f3a1940c2d022ea42fc456d43abf5da82c7f3e4"
-    sha256 cellar: :any, arm64_tahoe:       "77f9224701cc2726b82468010c7be759b42aa7046cbe66e4bf7375a9a04f4405"
-    sha256 cellar: :any, arm64_sequoia:     "0924c5c2065bf74fa6ad320205db5625c7b5c8819cb4bbff3417c20147bbab7d"
-    sha256 cellar: :any, arm64_sonoma:      "e3a4936fb69c0cb780c63fb7150cda747cee0c964fe3e3cd1510c43b04851227"
-    sha256 cellar: :any, sonoma:            "7274117aed79ee4bd4718fbc5268c774b28b4db74b4cb83322e3eaba80ba2bbe"
-    sha256 cellar: :any, arm64_linux:       "d579a36049a67cd0db8fe06138f3d7ad6b262a9ec836db1f4beb4232aa354cac"
-    sha256 cellar: :any, x86_64_linux:      "b3da653aea754e3e2b664c00283fb11f0cc21067e36faf24f8af7d7df335ddb9"
+    rebuild 1
+    sha256 cellar: :any, arm64_golden_gate: "c303c3933ad89a40f0d1892f52134d808c61fa989f841af24bc716bcfad2bae8"
+    sha256 cellar: :any, arm64_tahoe:       "34c8fd407bf65e1e64250402fa1d89da34c865f7285b49f4e76034f362a78509"
+    sha256 cellar: :any, arm64_sequoia:     "d19675b470c3bd939f6a1840b3f268dcb3ee91560fef7d039f57b4492aa9419a"
+    sha256 cellar: :any, arm64_linux:       "c322dbbcffec37ee7418bb7ecfc0282c5785f97a1339c6231fc1871e94737f1f"
+    sha256 cellar: :any, x86_64_linux:      "d7b18144d6b950c7ab8c760192703b9a9cab67ee1ac656dac77c075c7063c10d"
   end
 
   depends_on "rust" => :build
