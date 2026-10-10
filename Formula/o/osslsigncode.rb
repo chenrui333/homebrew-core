@@ -4,6 +4,7 @@ class Osslsigncode < Formula
   url "https://github.com/mtrojnar/osslsigncode/archive/refs/tags/2.14.tar.gz"
   sha256 "0f033fd6069387d2e489fbd2187e62f624764eb8c2758ee94e3e793e5150b5c5"
   license "GPL-3.0-or-later"
+  revision 1
 
   bottle do
     sha256 cellar: :any, arm64_golden_gate: "62c51ee37f5365606ae68213d2a6c23d4955996fbcbbf1ab87550ed3674f5eb5"
@@ -16,7 +17,7 @@ class Osslsigncode < Formula
   end
 
   depends_on "cmake" => :build
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "curl"
   uses_from_macos "python"
