@@ -1,8 +1,8 @@
 class Libmikmod < Formula
   desc "Portable sound library"
   homepage "https://mikmod.sourceforge.net/"
-  url "https://downloads.sourceforge.net/project/mikmod/libmikmod/3.3.14/libmikmod-3.3.14.tar.gz"
-  sha256 "dffd82b8f254c3489c32098da831f33eac7136843d1e7ccb802f1254ad5b4219"
+  url "https://downloads.sourceforge.net/project/mikmod/libmikmod/3.3.15/libmikmod-3.3.15.tar.gz"
+  sha256 "dc27b338154b8f88dc9e6317196d42c6abc13bf63c4e055257a18d4e38e1afa2"
   license "LGPL-2.0-or-later"
 
   livecheck do
