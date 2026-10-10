@@ -9,11 +9,12 @@ class B2Tools < Formula
   revision 1
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "9d061dc32c99f15c53aa17f0ea5a3a31bf7457b3a96a5821b4d523ac7cab07da"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "9d061dc32c99f15c53aa17f0ea5a3a31bf7457b3a96a5821b4d523ac7cab07da"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "9d061dc32c99f15c53aa17f0ea5a3a31bf7457b3a96a5821b4d523ac7cab07da"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "17b65b364642b6aede0991a572233671325b454006a49a4910b019a5acaf3bf6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "17b65b364642b6aede0991a572233671325b454006a49a4910b019a5acaf3bf6"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "397d52f1767f28bf4d81d985cb7a0b8425631f0dfad5b8e40a33635029113f46"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "397d52f1767f28bf4d81d985cb7a0b8425631f0dfad5b8e40a33635029113f46"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "397d52f1767f28bf4d81d985cb7a0b8425631f0dfad5b8e40a33635029113f46"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "506793caf01009c3934b3bf78d43b8aea745f613735e0913770064621f4a8f66"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "506793caf01009c3934b3bf78d43b8aea745f613735e0913770064621f4a8f66"
   end
 
   depends_on "certifi"
