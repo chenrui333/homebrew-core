@@ -9,8 +9,8 @@ class Fprettify < Formula
   head "https://github.com/fortran-lang/fprettify.git", branch: "master"
 
   bottle do
-    rebuild 5
-    sha256 cellar: :any_skip_relocation, all: "fdd5b8e9dc7618159259e688b329a44ea1c6f5be9bc615f98d6c29128e07dd2d"
+    rebuild 6
+    sha256 cellar: :any_skip_relocation, all: "2eed8e7434178165e755f3a4862a8b79e045d89b08754c9e7abccfd918b4c5b1"
   end
 
   depends_on "gcc" => :test
