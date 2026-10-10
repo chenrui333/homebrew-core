@@ -7,8 +7,7 @@ class PythonSetuptools < Formula
   revision 1
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, all: "b5f7d984dcb5d2180af1b14f93998a0ad3a54a365b0a5d9eb3c4e46805ee2815"
+    sha256 cellar: :any_skip_relocation, all: "9cd96a30c56de22eb09bf74bc17e433f5a721b97da006ba49d71f1eeac8752a5"
   end
 
   depends_on "python@3.15" => [:build, :test]
