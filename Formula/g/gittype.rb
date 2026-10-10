@@ -1,8 +1,8 @@
 class Gittype < Formula
   desc "CLI code-typing game that turns your source code into typing challenges"
   homepage "https://github.com/unhappychoice/gittype"
-  url "https://github.com/unhappychoice/gittype/archive/refs/tags/v0.10.2.tar.gz"
-  sha256 "0a07bba8acc5bd95b0dfe2212c1f220abfb5181782502feecaaab14a5cccb6d5"
+  url "https://github.com/unhappychoice/gittype/archive/refs/tags/v0.10.3.tar.gz"
+  sha256 "49d734b079854549380e4048ac1894112736c5b8fb848957ab1e2d3d6cd4a534"
   license "MIT"
   head "https://github.com/unhappychoice/gittype.git", branch: "main"
 
@@ -24,7 +24,19 @@ class Gittype < Formula
     depends_on "zlib-ng-compat"
   end
 
+  deny_network_access!
+
+  def fetch
+    system "cargo", "fetch", *std_cargo_fetch_args
+  end
+
   def install
+    # TODO: Remove when Rust's trait solver no longer hangs compiling the Shaku module.
+    # https://github.com/rust-lang/rust/issues/151723
+    # Upstream uses Rust 1.98.1: https://github.com/unhappychoice/gittype/commit/eed13acb1520925f46ff118f2e401b82d3e40cbe
+    ENV["RUSTC_BOOTSTRAP"] = "1"
+    ENV.append "RUSTFLAGS", "-Znext-solver=no"
+
     system "cargo", "install", *std_cargo_args
   end
 
