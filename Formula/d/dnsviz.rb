@@ -8,11 +8,12 @@ class Dnsviz < Formula
   license "GPL-2.0-or-later"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "8e48b3e7cb89aa85550f66524d85ed5950756c0431402824a5d9406c4f8c01f1"
-    sha256 cellar: :any, arm64_tahoe:       "42faff5f1b61dbd115b70a7def664786ceeb6a97ac85bed19a143d0d9a1cd23d"
-    sha256 cellar: :any, arm64_sequoia:     "43772acbfda4f9fee812c2437f529bafafcdaa41b4d25579e20f322e5dd5148e"
-    sha256 cellar: :any, arm64_linux:       "e6dc72330fa9cd5f3c46c263098a658cf89d1e1e2810248e90992c4aa6d88f16"
-    sha256 cellar: :any, x86_64_linux:      "18d33a674437e289bb28cb78e0677be2729eb7194f35b0273b3f76731fa43d79"
+    rebuild 1
+    sha256 cellar: :any, arm64_golden_gate: "9c0fe85faca1c39f39a0f6f095674faaa5e38374887e827aadb1a66e78dfbd9b"
+    sha256 cellar: :any, arm64_tahoe:       "d62abc01ab3f338c19d104ad364ed8b409341baf55695042e33d7e898e380de0"
+    sha256 cellar: :any, arm64_sequoia:     "67f433fbbd71572f0863a2788216f95d5446667478919bec2d3782e086d5e9be"
+    sha256 cellar: :any, arm64_linux:       "283453170a5296c8ce9cee0837a0977ddc6d011ac8f885b2e13fcfe0517cc139"
+    sha256 cellar: :any, x86_64_linux:      "6e8f91c8af7a24a9de3abbe56e70754a3d7a7a5422f6b38d0b5072d82908cf13"
   end
 
   depends_on "bind" => [:build, :test]
