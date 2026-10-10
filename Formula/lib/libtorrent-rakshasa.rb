@@ -4,6 +4,7 @@ class LibtorrentRakshasa < Formula
   url "https://github.com/rakshasa/libtorrent/archive/refs/tags/v0.16.25.tar.gz"
   sha256 "c0390ef3454e9456aadb21f704eac6ef659bccc2b3ceb8215f59f1ef30735a14"
   license "GPL-2.0-or-later"
+  revision 1
 
   livecheck do
     url :stable
@@ -22,7 +23,7 @@ class LibtorrentRakshasa < Formula
   depends_on "automake" => :build
   depends_on "libtool" => :build
   depends_on "pkgconf" => :build
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "curl"
 
