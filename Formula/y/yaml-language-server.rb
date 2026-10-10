@@ -6,7 +6,7 @@ class YamlLanguageServer < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "95147b6dae35f642565e3eba26225dd26e169c84b402610ea14536bc11a6829c"
+    sha256 cellar: :any_skip_relocation, all: "07b4e8ca028900fc31f8834d5a7f076b84d841fdb6478e3c2f6d66833b4cfc9a"
   end
 
   depends_on "node"
