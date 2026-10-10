@@ -16,11 +16,11 @@ class Pylint < Formula
   end
 
   depends_on "rust" => :build # for `isort`
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   resource "astroid" do
-    url "https://files.pythonhosted.org/packages/8d/7e/7c85d2b8549730e089bd984678a7efb64c510a5f09b4f0d9987a8354a80c/astroid-4.3.3.tar.gz"
-    sha256 "d03854b09d92c08e18d8e7d9185d393961186ed0747136d8fcb2d1c008a504ec"
+    url "https://files.pythonhosted.org/packages/2d/87/5732fa68bf100a095cfcbd108f919220d995db99e1a7502b8119a869fd62/astroid-4.3.4.tar.gz"
+    sha256 "d515a105722b72098bbe82d430d65e635f742b6cbac3bdfaf8b7c188b87c5e39"
   end
 
   resource "dill" do
@@ -44,8 +44,8 @@ class Pylint < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/17/c8/721b3855fe457da514fe249247d404b9b39c5d16532278f70ebaa6acf18b/platformdirs-4.12.2.tar.gz"
-    sha256 "eab5f70271a490ef74618bb314fbb86e3c7e82fa3b9c922c2ea0e0a1a155d329"
+    url "https://files.pythonhosted.org/packages/90/a1/d5f9002a70298c64a789779077d8dd90c10aa1f47fe40c86802df874f2a6/platformdirs-4.12.4.tar.gz"
+    sha256 "63743c02414e755de4e31b8f68125c1407495b86c5a006e203c01ff8b9924250"
   end
 
   resource "tomlkit" do
