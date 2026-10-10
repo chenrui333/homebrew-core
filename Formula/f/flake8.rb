@@ -12,7 +12,7 @@ class Flake8 < Formula
     sha256 cellar: :any_skip_relocation, all: "d66e8f966c5d03fd1a6330bcabb59086cdb95f97aa798073c5cd31b353e4ca2f"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   resource "mccabe" do
     url "https://files.pythonhosted.org/packages/e7/ff/0ffefdcac38932a54d2b5eed4e0ba8a408f215002cd178ad1df0f2806ff8/mccabe-0.7.0.tar.gz"
@@ -25,8 +25,8 @@ class Flake8 < Formula
   end
 
   resource "pyflakes" do
-    url "https://files.pythonhosted.org/packages/6e/07/587d938ce8ffea54aa23337c4a827a72c27a3a994b4346899682704af588/pyflakes-4.0.0.tar.gz"
-    sha256 "492b27735181e3d4a6acfc08738948b666bf3e696781854ea6e0d8540d566d52"
+    url "https://files.pythonhosted.org/packages/2c/1b/3ba8bd62723cfe1b651c4e4b89b33767fce7a08bb800491cf1d3dd3a7716/pyflakes-4.0.3.tar.gz"
+    sha256 "94762a3a5a343a79b28754f96c554bce057a592a4896907d73f0369fe824e053"
   end
 
   def install
