@@ -4,6 +4,7 @@ class Isync < Formula
   url "https://downloads.sourceforge.net/project/isync/isync/1.5.1/isync-1.5.1.tar.gz"
   sha256 "28cc90288036aa5b6f5307bfc7178a397799003b96f7fd6e4bd2478265bb22fa"
   license "GPL-2.0-or-later"
+  revision 1
 
   bottle do
     rebuild 2
@@ -23,13 +24,22 @@ class Isync < Formula
   end
 
   depends_on "berkeley-db@5"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "cyrus-sasl"
 
   on_linux do
     depends_on "zlib-ng-compat"
   end
+
+  # Backport fix for OpenSSL 4
+  # https://sourceforge.net/p/isync/isync/ci/bdd9ff8d931236e1926a58cb44bd2644e4538217/
+  patch do
+    file "Patches/isync/openssl-4.diff"
+    type :backport
+  end
+
+  deny_network_access!
 
   def install
     system "./autogen.sh" if build.head?
