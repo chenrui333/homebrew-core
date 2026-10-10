@@ -10,13 +10,12 @@ class Ccm < Formula
   head "https://github.com/apache/cassandra-ccm.git", branch: "trunk"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "e895d4b37b6f0e91759bb27932e93259c642f4a68810f781e46a5271a71eb719"
-    sha256 cellar: :any, arm64_tahoe:       "67b755e68216edfdcbe945e3644c4a5cbab93b4f7b6f8cdc0a66dcb6955717bc"
-    sha256 cellar: :any, arm64_sequoia:     "891677994e9c63ddcf5b86405b86d8dfcce0b0c7a4c35857cb344dd23a29921d"
-    sha256 cellar: :any, arm64_sonoma:      "3891e530c85afeedbc5b09a4186744102c06ab98aab885fe4f28106a2ea0b8da"
-    sha256 cellar: :any, sonoma:            "465c9976007d204f33c9877c66ea5380311604f6429c3ad444c5633482bbd9a1"
-    sha256 cellar: :any, arm64_linux:       "a6dc7168ca471aa9a9f069d7e7eccfff655ccf31d4971bd194eaddd639a9b60e"
-    sha256 cellar: :any, x86_64_linux:      "229e27e99a7ab2d46e2b87de628f52095a68cb5f08dcd0b66ff3ba775e10251f"
+    rebuild 1
+    sha256 cellar: :any, arm64_golden_gate: "a36db15b07cbbaf04ddaf5777e3bd68557349c25ca8bf96997198c9d9bd4272c"
+    sha256 cellar: :any, arm64_tahoe:       "8ad9d0dd645885a99d1d34192dbcb7d0d4228c26adeb02ea6ecb34cb227745cf"
+    sha256 cellar: :any, arm64_sequoia:     "8aa02394c7ea97b739c35f85ae6224819ade3ba6a11ebe459071ad45a0c521dd"
+    sha256 cellar: :any, arm64_linux:       "b3d957ddaa8058ac27d59e01b16122babf205998f39170d3660705aa348d3871"
+    sha256 cellar: :any, x86_64_linux:      "878ccebb83f15fbc7c49c82c88e383036dfa029b97bc7fb3bde866104694a2be"
   end
 
   depends_on "libev"
