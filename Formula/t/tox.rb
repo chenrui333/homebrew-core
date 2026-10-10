@@ -3,17 +3,16 @@ class Tox < Formula
 
   desc "Generic Python virtualenv management and test command-line tool"
   homepage "https://tox.wiki/en/latest/"
-  url "https://files.pythonhosted.org/packages/cd/be/9a8d33841569fa73f998d22dfd4b614427072e7cb88cd14951670d9402d5/tox-4.64.10.tar.gz"
-  sha256 "7482b96fefe1e4b49e406a9a62b25b415690bec2cebe9cc0cd59e38af88ce671"
+  url "https://files.pythonhosted.org/packages/41/05/a79f2c293f5b5b2188978b4e8b60d12c64277662de1254184769f3e96571/tox-4.65.0.tar.gz"
+  sha256 "582c4adba07b8fbeca1454b528a512dfc66c19635154289c7032555dbc72d56c"
   license "MIT"
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "9fad0fee1fd3d59d9b232a90cb069511917160abe717428dce037a2665d8f541"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "9fad0fee1fd3d59d9b232a90cb069511917160abe717428dce037a2665d8f541"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "9fad0fee1fd3d59d9b232a90cb069511917160abe717428dce037a2665d8f541"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "ed3d5b4c86fbbb85e582a4c599cb70dd38aece0b36537d957689d50b71153171"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "ed3d5b4c86fbbb85e582a4c599cb70dd38aece0b36537d957689d50b71153171"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "6c85b4eb51367d9b857073c6e36bd69cacef045c636cf432528d8792901e5985"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "6c85b4eb51367d9b857073c6e36bd69cacef045c636cf432528d8792901e5985"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "6c85b4eb51367d9b857073c6e36bd69cacef045c636cf432528d8792901e5985"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "ff2f8b61958933ce4929208b7458a9006dc007581d98598d4a22bc7e4276db8b"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "ff2f8b61958933ce4929208b7458a9006dc007581d98598d4a22bc7e4276db8b"
   end
 
   depends_on "python@3.15"
@@ -34,8 +33,8 @@ class Tox < Formula
   end
 
   resource "filelock" do
-    url "https://files.pythonhosted.org/packages/53/e4/34efcb869715cf299e47d1ac7b2624d2bcb6f2d3dffc2f0abe8417f65ab2/filelock-4.0.12.tar.gz"
-    sha256 "cf42711a7ac791818b299fab0332a088c65aeeefa36290de98db92c434303b0c"
+    url "https://files.pythonhosted.org/packages/4c/58/6fd434bec86eff7c38a3168454cb132b762b2bea9b3ac094101a2f7bc32a/filelock-4.1.0.tar.gz"
+    sha256 "ad7f724afef953e731b1cc39bcd3a09166d72ed7fcdf29e6e88b1c3235c6715d"
   end
 
   resource "packaging" do
