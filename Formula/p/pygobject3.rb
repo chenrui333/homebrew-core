@@ -4,6 +4,7 @@ class Pygobject3 < Formula
   url "https://download.gnome.org/sources/pygobject/3.58/pygobject-3.58.1.tar.gz"
   sha256 "4c80598ade17fbaa7798e01a25d0bf29ce109740786026a074c5c62bb3e79d23"
   license "LGPL-2.1-or-later"
+  revision 1
   compatibility_version 1
 
   bottle do
@@ -17,8 +18,8 @@ class Pygobject3 < Formula
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
-  depends_on "python@3.13" => [:build, :test]
   depends_on "python@3.14" => [:build, :test]
+  depends_on "python@3.15" => [:build, :test]
 
   depends_on "cairo"
   depends_on "glib"
