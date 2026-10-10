@@ -7,13 +7,11 @@ class VapoursynthBm3d < Formula
   head "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-BM3D.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "561a1a41c9959e571b1d54030bb789350192070b729c0b51fc5147042be9d54c"
-    sha256 cellar: :any, arm64_tahoe:       "ab6f04f6c19a12c93db8c21a75c6b8f5bf2eded72ee3bbf17bb664002c15a680"
-    sha256 cellar: :any, arm64_sequoia:     "0cfc85062a2cb1ccfbba44e28cc714e1a7529a1abc59472e2a70f6742ff04ac9"
-    sha256 cellar: :any, arm64_sonoma:      "20f00b073e2243a147bde3cf910ca95b1b3407b1807d2413f633ef37c1974a03"
-    sha256 cellar: :any, sonoma:            "cb91156d287ef75a47e3ce0ca3f1b870af2b82f7cae432f0cfcaae1d948f1b4a"
-    sha256               arm64_linux:       "b0943031a534cba652e42a5a33ad4d52de40586195e3b22e14ac1bd628817f80"
-    sha256               x86_64_linux:      "d1e499cc1ae84d17684d1898ca282803dc3661fb89f3574e8f63a89f37e90210"
+    sha256 cellar: :any, arm64_golden_gate: "a5e60dde90038691650f7c53f381df99785318179f20b23ac8ba7db293ef0298"
+    sha256 cellar: :any, arm64_tahoe:       "d3b873d6c2906cbeeef57a6841800d0246b13ce44a1788a31bac833bf003aee9"
+    sha256 cellar: :any, arm64_sequoia:     "f517d09ad1bd774e0b90c25b363412b2de491ad3fcedf2d701f443c9a0284e5f"
+    sha256 cellar: :any, arm64_linux:       "63c157268ec452547c8b08d73d6e658880b8df2799260a2647dae401a3ff2cf3"
+    sha256 cellar: :any, x86_64_linux:      "f51c018381b52974e446e5a7b2713a7b4580c50045be062abf1c713e51a803c5"
   end
 
   depends_on "meson" => :build
