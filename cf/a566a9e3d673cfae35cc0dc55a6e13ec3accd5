@@ -1,0 +1,19 @@
+Formula/k/kitex.rb
+  s_cda539916c0d9f::t_6ae06c21b23e29 4-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cfa566a9e3d673cfae35cc0dc55a6e13ec3accd5",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
