@@ -4,6 +4,7 @@ class Emqx < Formula
   url "https://github.com/emqx/emqx/archive/refs/tags/v5.8.8.tar.gz"
   sha256 "5861d8d32c4934175ca3d01c691ea679ac1a7903a1faee72027f6484d3085c89"
   license "Apache-2.0"
+  revision 1
 
   bottle do
     rebuild 1
@@ -28,7 +29,7 @@ class Emqx < Formula
   depends_on "erlang@26" => :build
   depends_on "freetds"   => :build
   depends_on "libtool"   => :build
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "curl"       => :build
   uses_from_macos "unzip"      => :build
