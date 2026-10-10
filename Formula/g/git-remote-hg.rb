@@ -6,7 +6,7 @@ class GitRemoteHg < Formula
   url "https://github.com/felipec/git-remote-hg/archive/refs/tags/v0.7.tar.gz"
   sha256 "ada593c2462bed5083ab0fbd50b9406b8e83b04a6c882de80483e7c77ce8bf07"
   license "GPL-2.0-only"
-  revision 2
+  revision 3
   head "https://github.com/felipec/git-remote-hg.git", branch: "master"
 
   bottle do
@@ -16,7 +16,7 @@ class GitRemoteHg < Formula
 
   depends_on "asciidoctor" => :build
   depends_on "mercurial"
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   conflicts_with "git-cinnabar", because: "both install `git-remote-hg` binaries"
 
