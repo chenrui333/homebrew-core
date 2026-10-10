@@ -5,7 +5,7 @@ class Cpprestsdk < Formula
   url "https://github.com/microsoft/cpprestsdk/archive/refs/tags/v2.10.19.tar.gz"
   sha256 "4b0d14e5bfe77ce419affd253366e861968ae6ef2c35ae293727c1415bd145c8"
   license "MIT"
-  revision 4
+  revision 5
   head "https://github.com/microsoft/cpprestsdk.git", branch: "master"
 
   bottle do
@@ -25,7 +25,7 @@ class Cpprestsdk < Formula
   depends_on "cmake" => :build
   depends_on "pkgconf" => :build
   depends_on "boost"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   # Apply FreeBSD patches for libc++ >= 19 needed in Xcode 16.3
   on_sequoia :or_newer do
@@ -55,10 +55,6 @@ class Cpprestsdk < Formula
     end
   end
 
-  on_linux do
-    depends_on "zlib-ng-compat"
-  end
-
   # Apply vcpkg patch to support Boost 1.87.0+
   patch do
     url "https://raw.githubusercontent.com/microsoft/vcpkg/566f9496b7e00ee0cc00aca0ab90493d122d148a/ports/cpprestsdk/fix-asio-error.patch"
@@ -80,7 +76,7 @@ class Cpprestsdk < Formula
                     # Disable websockets feature due to https://github.com/zaphoyd/websocketpp/issues/1157
                     # Needs upstream response and fix in `websocketpp` formula (do not use bundled copy)
                     "-DCPPREST_EXCLUDE_WEBSOCKETS=ON",
-                    "-DOPENSSL_ROOT_DIR=#{formula_opt_prefix("openssl@3")}",
+                    "-DOPENSSL_ROOT_DIR=#{formula_opt_prefix("openssl@4")}",
                     *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
@@ -96,8 +92,8 @@ class Cpprestsdk < Formula
       }
     CPP
     system ENV.cxx, "test.cc", "-std=c++11",
-                    "-I#{formula_opt_include("boost")}", "-I#{formula_opt_include("openssl@3")}", "-I#{include}",
-                    "-L#{formula_opt_lib("boost")}", "-L#{formula_opt_lib("openssl@3")}", "-L#{lib}",
+                    "-I#{formula_opt_include("boost")}", "-I#{formula_opt_include("openssl@4")}", "-I#{include}",
+                    "-L#{formula_opt_lib("boost")}", "-L#{formula_opt_lib("openssl@4")}", "-L#{lib}",
                     "-lssl", "-lcrypto", "-lboost_random", "-lboost_chrono", "-lboost_thread",
                     "-lboost_filesystem", "-lcpprest",
                     "-o", "test_cpprest"
