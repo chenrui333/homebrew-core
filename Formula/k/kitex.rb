@@ -1,10 +1,21 @@
 class Kitex < Formula
   desc "Golang RPC framework for microservices"
   homepage "https://www.cloudwego.io/docs/kitex/"
-  url "https://github.com/cloudwego/kitex/archive/refs/tags/v0.16.3.tar.gz"
-  sha256 "89a82cb1e86b2c8f7cdee8d73ba243674d159c22a23d33c398291a5cfd79b725"
   license "Apache-2.0"
   head "https://github.com/cloudwego/kitex.git", branch: "main"
+
+  stable do
+    url "https://github.com/cloudwego/kitex/archive/refs/tags/v0.16.4.tar.gz"
+    sha256 "db369c6387af3d29e1037adf31edf556356502b1e406bc056b448c24acce18fa"
+
+    # Fix the reported version, upstream PR ref, https://github.com/cloudwego/kitex/pull/2009
+    patch do
+      url "https://github.com/chenrui333/kitex/commit/e136273bd4fce56882cc3f59efa5cbf55170892f.patch?full_index=1"
+      sha256 "17bb2821c34139f8111e921b261f696d80aab95888abc44beee3158c59aee9d9"
+      type :unofficial
+      resolves "https://github.com/cloudwego/kitex/pull/2009"
+    end
+  end
 
   livecheck do
     url :stable
@@ -35,8 +46,7 @@ class Kitex < Formula
   end
 
   test do
-    output = shell_output("#{bin}/kitex --version 2>&1")
-    assert_match "v#{version}", output
+    assert_match "v#{version}", shell_output("#{bin}/kitex --version 2>&1")
 
     thriftfile = testpath/"test.thrift"
     thriftfile.write <<~EOS
