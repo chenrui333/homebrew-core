@@ -12,10 +12,10 @@ class Autojump < Formula
     sha256 cellar: :any_skip_relocation, all: "2a5206b6e787350ca32d8e9adbf7b336dc794ff95b54a1da6ba968db261892b3"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   def install
-    python_bin = formula_opt_libexec("python@3.14")/"bin"
+    python_bin = formula_opt_libexec("python@3.15")/"bin"
     system python_bin/"python", "install.py", "-d", prefix, "-z", zsh_completion
 
     # ensure uniform bottles
