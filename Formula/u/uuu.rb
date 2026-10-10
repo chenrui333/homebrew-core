@@ -14,13 +14,11 @@ class Uuu < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "75ad90a91fda68974deabe15b2d40c2d9c834b67d047774e79882d24f96de1d1"
-    sha256 arm64_tahoe:       "4647654b18285ec907a87f85da36b8ec63cf7c22836f45815c0a0ceacf1f8e36"
-    sha256 arm64_sequoia:     "b40e7e680e9d7e1b2f416e2e6e1c7c1c4ecf04a30ec1744da19119dd1b570634"
-    sha256 arm64_sonoma:      "89a11b1316b94142eba3efa3286dde5384fcec4710f8000e7105b1a8dcdb2fea"
-    sha256 sonoma:            "2fd66ee2db00c408a5d62a0cf3ec3d8dd6db445057e9fe11bddb56ba0e7a22da"
-    sha256 arm64_linux:       "129e2c8078ebe4f17a6536b26784fcf149994cb8a16643f2027c640341dc67fe"
-    sha256 x86_64_linux:      "f3cbcdd779051e500329b6588600fc0241667164281d8361bbc0c0bec95ddf38"
+    sha256 arm64_golden_gate: "cfba502f9184d051f13623d2c88669ece9028fcd852bb68c81d5fccc4b0dd838"
+    sha256 arm64_tahoe:       "383cb763767f508e112b6bd619e81a4b6779b1b1068e4321a10388f924f5f1bf"
+    sha256 arm64_sequoia:     "2e85d56d8536dc2b0e21e19aca7c04a3897b68bc09cf0af84358a4acea1a28ed"
+    sha256 arm64_linux:       "079a7c4fdab45b3e6fc32c3916b3b08272ce0f90ebed2a4c7f29cf91fdc28986"
+    sha256 x86_64_linux:      "16efd6cdeed716671e490ceee4c5e273b24c40dd60dba810750f53f73a3eab59"
   end
 
   depends_on "cmake" => :build
