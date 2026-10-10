@@ -4,7 +4,7 @@ class Limesuite < Formula
   url "https://github.com/myriadrf/LimeSuite/archive/refs/tags/v23.11.0.tar.gz"
   sha256 "fd8a448b92bc5ee4012f0ba58785f3c7e0a4d342b24e26275318802dfe00eb33"
   license "Apache-2.0"
-  revision 1
+  revision 2
 
   bottle do
     sha256                               arm64_golden_gate: "c73f5876fe9bd5309a6fbe5d1f6078992b3d2f8e8d73e066034ec09fac593f9d"
