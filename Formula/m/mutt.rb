@@ -14,6 +14,7 @@ class Mutt < Formula
   mirror "http://ftp.mutt.org/pub/mutt/mutt-2.4.3.tar.gz"
   sha256 "ce9154e3afede622d98b90a22c87d06f32051c930a9afb2b7ef41656c4dbc948"
   license "GPL-2.0-or-later"
+  revision 1
 
   livecheck do
     url "http://www.mutt.org/download.html"
@@ -44,7 +45,7 @@ class Mutt < Formula
   depends_on "libidn2"
   depends_on "lmdb"
   depends_on "ncurses"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   uses_from_macos "bzip2"
   uses_from_macos "cyrus-sasl"
@@ -81,7 +82,7 @@ class Mutt < Formula
       --with-idn2
       --with-lmdb
       --with-sasl
-      --with-ssl=#{formula_opt_prefix("openssl@3")}
+      --with-ssl=#{formula_opt_prefix("openssl@4")}
     ]
 
     configure = build.head? ? "./prepare" : "./configure"
