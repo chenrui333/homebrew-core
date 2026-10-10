@@ -1,8 +1,8 @@
 class Serpl < Formula
   desc "Simple terminal UI for search and replace"
   homepage "https://github.com/yassinebridi/serpl"
-  url "https://github.com/yassinebridi/serpl/archive/refs/tags/0.3.10.tar.gz"
-  sha256 "1e6c56c9ecd1024c0bbc2eae293229f9fd90af715591bb4f02be0b164f3ccfc2"
+  url "https://github.com/yassinebridi/serpl/archive/refs/tags/0.3.11.tar.gz"
+  sha256 "e28cdbffd92640bf73486a13c0b36406514811694bf721d3ab7f459c107ae439"
   license "MIT"
 
   bottle do
