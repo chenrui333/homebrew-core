@@ -9,12 +9,11 @@ class Libtensorflow < Formula
   revision 1
 
   bottle do
-    rebuild 2
-    sha256 cellar: :any,                 arm64_golden_gate: "608043ba636c34b13b604c5eaf9fcf3f3ab2ffe6a4dd59e8a5c4f9fe33bcddfc"
-    sha256 cellar: :any,                 arm64_tahoe:       "e30c7e633dd48606523ef247d765af4da4a171bde174dd765b1f9a75d364d253"
-    sha256 cellar: :any,                 arm64_sequoia:     "7eec009c5a3ba94e8e4146d2fb776db98a5187e35242a1d480d0df4bb24076f5"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "2db70d228c438a1c29095f355ef567dfba73d2938381f0494b695e36a6295459"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "2a5029ecf30a3694cddd932e66b6d6379ed8d573daecc54535fd082feba6601f"
+    sha256 cellar: :any, arm64_golden_gate: "120736ceb03358fc1f6ca553a337b83588172627bf649504832806e1d3f9ac2f"
+    sha256 cellar: :any, arm64_tahoe:       "34100fc36d361127dea8feffca407159ef40669d5b21f8e19825c505cdfafc0c"
+    sha256 cellar: :any, arm64_sequoia:     "4f66d7fb898069c20d778c24ab6d107bf4ad922374a6af7d92b5a9c8c5a36bc2"
+    sha256 cellar: :any, arm64_linux:       "5caaa8079fc81c3f06cfbf452fa33e01da15dac5eb3016b59b3ee7c5c9982cfa"
+    sha256 cellar: :any, x86_64_linux:      "fb113a6e5290eab1c62fe1b10fefb26608d42e1a0dcb388eba9d6ae75a6aa0cd"
   end
 
   depends_on "bazel@7" => :build
