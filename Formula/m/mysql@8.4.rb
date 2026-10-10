@@ -15,11 +15,11 @@ class MysqlAT84 < Formula
   end
 
   bottle do
-    sha256 arm64_golden_gate: "b306443fd470a77fe971a8c0d73ba8f67299f9d8dd742e31da0e37996004ec9d"
-    sha256 arm64_tahoe:       "cfdd96121d7ebfcb3170128da5ca9a0fe48166d90a031e17e0f2a4f60605ba46"
-    sha256 arm64_sequoia:     "9b07f4d2e067e57b92fe8c282ce75da387e71747f8e41acf2f3289710feddd82"
-    sha256 arm64_linux:       "98447dff2d3eff1cbf7657e0a0a85ac37821cadc958c31042656ef5a12003e1c"
-    sha256 x86_64_linux:      "490f9955d65829dc8698e85669feb6a2be1134bfcaf6cb2c120630ec6062710a"
+    sha256 arm64_golden_gate: "f0849839c1c1ab1bd514be39c7192ff28e525a1a461e7924a7b2e1aa6b203b5e"
+    sha256 arm64_tahoe:       "281cff7ee37830908f35e4c36f57f66e14760b2ebe91d8cda4f538424585371d"
+    sha256 arm64_sequoia:     "88c1d662b11082b2cc82be2318f3ef1f5a61d61442b21ce5a56a19928b7518dd"
+    sha256 arm64_linux:       "df26661c6984e04aceb32a14bab23ce65fa6923f7a72c03b16fe0eb4f853a088"
+    sha256 x86_64_linux:      "0043238d5cecb5cd8617959bc8711c47c9324f6fe2be5a7797252700e6839c9d"
   end
 
   keg_only :versioned_formula
