@@ -18,7 +18,7 @@ class TrashCli < Formula
 
   keg_only :shadowed_by_macos
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   conflicts_with "macos-trash", because: "both install a `trash` binary"
   conflicts_with "osx-trash", because: "both install a `trash` binary"
