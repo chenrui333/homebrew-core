@@ -4,6 +4,7 @@ class Cmusfm < Formula
   url "https://github.com/Arkq/cmusfm/archive/refs/tags/v0.5.0.tar.gz"
   sha256 "17aae8fc805e79b367053ad170854edceee5f4c51a9880200d193db9862d8363"
   license "GPL-3.0-or-later"
+  revision 1
 
   bottle do
     sha256 cellar: :any_skip_relocation, arm64_golden_gate: "e7a85bafcb6e2ac40850d0f999beff820176d707ad9bc40b5d420093234fa431"
@@ -29,7 +30,7 @@ class Cmusfm < Formula
   uses_from_macos "curl"
 
   on_linux do
-    depends_on "openssl@3"
+    depends_on "openssl@4"
   end
 
   def install
