@@ -1,0 +1,19 @@
+Formula/l/letta-code.rb
+  s_cda539916c0d9f::t_49d61d48535da2 4-5,35-36,41,44-45,48,51-55,59,64-68,70-73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4f6448981c27dfddf1e8dac3143af5bb54c6bb7e",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
