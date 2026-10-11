@@ -1,0 +1,19 @@
+Formula/k/khal.rb
+  s_cda539916c0d9f::t_1f74211994fc40 9,16,83-92,94-96,132-133,138-141
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7b6e04cb161273ee36c0f7b2edc22535ff71033a",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
