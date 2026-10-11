@@ -1,0 +1,20 @@
+.github/workflows/publish-commit-bottles.yml
+  s_601f800b2ceb69::t_717968f83c45d8 489,491,510-530,535-553,565-566
+  s_601f800b2ceb69::t_a262180cb673b2 531-534
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "415148f41078cc32c94119ff09e8a3756cdfb22c",
+  "prompts": {},
+  "sessions": {
+    "s_601f800b2ceb69": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12c2a-7079-7272-91e8-7beec8f56622",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
