@@ -6,12 +6,11 @@ class GrinWallet < Formula
   license "Apache-2.0"
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "4ed02d4fbaec1df37883d93751d45ec6b287e959a62075e9757e28dc60cbd970"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "d96c21b3a5460e1f0408a2047b1fc484e4074daf9de5776484395ebedab2d8e1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "d63c9f8a494c6f4087c1a4612ae14fde97a1f8d89126d1ba1978324201b5912d"
-    sha256 cellar: :any,                 arm64_linux:       "839f63ee589971f0b35131de3edb60df0fa5319e426d8b2d9065b29df3e82866"
-    sha256 cellar: :any,                 x86_64_linux:      "bf6d8f17048485bc3a7732258956cd3d77d4daa917c1c4ed061db98b7e155cc7"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "6e01b91580dfec6677f10837ebc8f02c4684fbf7c849c3a1c9c2dabb3a701263"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "1c6e48938b1c77b6d37745316e794c1984c17b8ecce41809511d99541bc4ff52"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "2d20e01f799e91beb3b67305ccf6c82e169829fb98af5a5af2d72ef2c6fef68e"
+    sha256 cellar: :any,                 arm64_linux:       "c72edd8da323d10e186f60a1c53cc86e3038d4716237c93ddcd6660d18a7979c"
+    sha256 cellar: :any,                 x86_64_linux:      "fce81743dd97a483c75c3abc138379dbdb589cc42c4483367b35211b442abbeb"
   end
 
   depends_on "pkgconf" => :build
