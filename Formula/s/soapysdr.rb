@@ -8,14 +8,11 @@ class Soapysdr < Formula
   head "https://github.com/pothosware/SoapySDR.git", branch: "master"
 
   bottle do
-    rebuild 5
-    sha256                               arm64_golden_gate: "f6c7550e5c1454908c669a1d1858c6a43efaea2cea6398b962a2a18af79bb5c9"
-    sha256                               arm64_tahoe:       "d10703185cc1b8b3312bdbc0621131238980f07481bab599dcc498a06e1c1106"
-    sha256                               arm64_sequoia:     "a57f1047d84abdf6272e01276e21ca325a0ca8b5aa716fba5fd91f9b4bedcf44"
-    sha256                               arm64_sonoma:      "635b13fc20043aaee3de8be3c111caef4eb8213643ea04257b6ca7834ccddd49"
-    sha256 cellar: :any,                 sonoma:            "c2b21d678a8d0d0f785d8257a32c7d48a7992adef5b6a7c14e6cd4e34d79cf3b"
-    sha256                               arm64_linux:       "b92128272614278c0799f954abebd5cb9404ded017babda7f8a5767ffb60e8de"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "c37220d056fd15397e731350bf2078625e70b50baf9033db994aa2a18e5f9f62"
+    sha256               arm64_golden_gate: "3469254e475fe092bdecc175945e7cc4ff34d85467f3b0b2e6251102e99607e1"
+    sha256               arm64_tahoe:       "fba3e96fa13388d32a5cc49143bf70759155a0a13c9e49b5868337c4e99e65d8"
+    sha256               arm64_sequoia:     "b8358cb10b130a3049118b94ff30d34e8009bf3e254d83ecf334fb67cf9660ff"
+    sha256               arm64_linux:       "27fd6309c60ae3e93a0b6f4021f9305ec4ddd437cc2680fbb0b729f5206753fa"
+    sha256 cellar: :any, x86_64_linux:      "bfff74ca26f2f85dfe71381ffa8df93b0324e666ff4d2428dad6cfc1d2bc3765"
   end
 
   depends_on "cmake" => :build
