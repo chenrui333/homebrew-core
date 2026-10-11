@@ -4,13 +4,14 @@ class Soapyremote < Formula
   url "https://github.com/pothosware/SoapyRemote/archive/refs/tags/soapy-remote-0.5.3.tar.gz"
   sha256 "de5bdf209dc93bf7c341077e1e21353037fc387e7c6a9ee41eace3390669dcc1"
   license "BSL-1.0"
+  revision 1
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "1e81605f29ac8beb96c1792a94ff8b699f7877fd8e5cfe5915487e4308471b99"
-    sha256 cellar: :any, arm64_tahoe:       "f8491c93d515099d719dfa0634ed2bda81dba4025f702537f0d0b2519bdcc83c"
-    sha256 cellar: :any, arm64_sequoia:     "e8e3c3c4a8c806d410eb6fbd044f801d289fb192106aa5c3d7b7452afb79e184"
-    sha256 cellar: :any, arm64_linux:       "2d37d79ce06179e400defacf5c71e0d4bf89674036cadec068e5907cd6e406dd"
-    sha256 cellar: :any, x86_64_linux:      "8826b60bef79250f443be41b6c54c1e238373269bd81cd1a214df1c0e6fecc5d"
+    sha256 cellar: :any, arm64_golden_gate: "959e8c989590505c99f5689c2ad84e6a320a71d467c7932cdb8e40eb4db9030f"
+    sha256 cellar: :any, arm64_tahoe:       "55e369064ec119a4dfa60c431cd91731f5b18c297370f7b8d3b5788130f91d09"
+    sha256 cellar: :any, arm64_sequoia:     "feb1662facc60fb7d3b6a75500b688700887ddcfbf1559b3e31d519a39e27139"
+    sha256 cellar: :any, arm64_linux:       "b01873eb5becf5e4e601abf7ba8ada34d697ef0014496291889b86b5750846dc"
+    sha256 cellar: :any, x86_64_linux:      "129c00a601d93b2fb46e25a6dd46d73016de1ccddf828658e09ce390d560215f"
   end
 
   depends_on "cmake" => :build

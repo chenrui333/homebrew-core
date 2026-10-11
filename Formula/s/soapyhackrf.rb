@@ -4,13 +4,14 @@ class Soapyhackrf < Formula
   url "https://github.com/pothosware/SoapyHackRF/archive/refs/tags/soapy-hackrf-0.3.5.tar.gz"
   sha256 "0ef13ac8cf1ec0c0728bdfe8a775e38fd06574418948e3a30ea6794de5d5a06c"
   license "MIT"
+  revision 1
 
   bottle do
-    sha256 cellar: :any, arm64_golden_gate: "28f7e61840ac2710bcc31a1f31df38c61eec9f92e715b0f489fc64daed6dd1cd"
-    sha256 cellar: :any, arm64_tahoe:       "0fabe82eb80d27a728a541cdd1608fb4a7f74dffab13386c532bfa9128376552"
-    sha256 cellar: :any, arm64_sequoia:     "a8e66cb597300c5f0ce0cc51d4692a449acd819a1ea6d1259dd7c8ff69280f5c"
-    sha256 cellar: :any, arm64_linux:       "7433cd304fe9480be0178456d8344d5f0d685bdaa84c020a61236cc68a554e5e"
-    sha256 cellar: :any, x86_64_linux:      "0ffed3d9c9f52df2556ac68044f580553a5021610fb5dd0b3d313773195a33ad"
+    sha256 cellar: :any, arm64_golden_gate: "1d5bf30e18eaa40c2323af3b8a7465b7fdcb7345220ec849d471dd47e17722b3"
+    sha256 cellar: :any, arm64_tahoe:       "75dcf5f5a534104f184ce65153ba4d526f5391215bcb03a01e8dd96bb1c8e7ab"
+    sha256 cellar: :any, arm64_sequoia:     "4296fa789a891773e8e9cabe22490c27256a50817d4b930edd404cff8ff54733"
+    sha256 cellar: :any, arm64_linux:       "1b77e89175bfe20e8b72a70269cddc2d246eba423e5c83ad14f4d167378f41a6"
+    sha256 cellar: :any, x86_64_linux:      "19a38fce66f86f8e4127458b556b764f1354456b0b2c9c93de70891beb621abe"
   end
 
   depends_on "cmake" => :build
