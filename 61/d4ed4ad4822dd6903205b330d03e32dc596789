@@ -1,0 +1,19 @@
+Formula/j/jiratui.rb
+  s_cda539916c0d9f::t_daf21dbe974404 6-7,112-113,277-278
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "61d4ed4ad4822dd6903205b330d03e32dc596789",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
