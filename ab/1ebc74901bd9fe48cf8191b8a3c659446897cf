@@ -1,0 +1,14 @@
+Formula/l/lolcrab.rb
+  h_9df9c32c3f321d 23-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ab1ebc74901bd9fe48cf8191b8a3c659446897cf",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
