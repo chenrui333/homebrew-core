@@ -1,8 +1,8 @@
 class Ccusage < Formula
   desc "CLI tool for analyzing Claude Code usage from local JSONL files"
   homepage "https://github.com/ccusage/ccusage"
-  url "https://github.com/ccusage/ccusage/archive/refs/tags/v20.0.28.tar.gz"
-  sha256 "c3f388f9e93c84a21c13204dff0727a9d18fba3ad9c06a703764181611732cc3"
+  url "https://github.com/ccusage/ccusage/archive/refs/tags/v20.0.29.tar.gz"
+  sha256 "7004d0b8986fbeb66cc777b2d50983604798d2345faf0b3ad5772a240dc1e9b1"
   license "MIT"
 
   bottle do
@@ -16,9 +16,9 @@ class Ccusage < Formula
   depends_on "rust" => :build
 
   resource "litellm-pricing-json" do
-    url "https://raw.githubusercontent.com/BerriAI/litellm/d6db8e8744e36e970989aad2bb66b1b518355175/model_prices_and_context_window.json"
-    version "d6db8e8744e36e970989aad2bb66b1b518355175"
-    sha256 "83c752b8e9016a6200d4dc7bd857e9815f4213204f315ae44f06b40823ab849d"
+    url "https://raw.githubusercontent.com/BerriAI/litellm/541e3ed5305a530ebef74d5684d3aca2632c1009/model_prices_and_context_window.json"
+    version "541e3ed5305a530ebef74d5684d3aca2632c1009"
+    sha256 "9142d8a7a80cfd3f32aa797286157ca9ac81addabbca40ff043051052a2d4482"
 
     # Fetch the latest available resource
     livecheck do
