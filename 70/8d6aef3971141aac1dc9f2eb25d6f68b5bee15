@@ -1,0 +1,19 @@
+Formula/n/nessie.rb
+  s_cda539916c0d9f::t_8fb4f429b9e94d 4-5,20-34,37-38,54,58-62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "708d6aef3971141aac1dc9f2eb25d6f68b5bee15",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
