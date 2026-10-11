@@ -1,0 +1,19 @@
+Formula/c/codecov-cli.rb
+  s_cda539916c0d9f::t_7ced2e1f9ccfaa 9-10,23,72-73,75-77,86-94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "88a0b009c074ff181c4a82652b8cbdde8bd6d18f",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
