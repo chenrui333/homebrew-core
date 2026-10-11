@@ -1,0 +1,14 @@
+Formula/r/rm-improved.rb
+  h_9df9c32c3f321d 35-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "14aaa643026deae6d9a2befc32538096a3136ab7",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
