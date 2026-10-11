@@ -1,0 +1,14 @@
+Formula/k/kalker.rb
+  h_9df9c32c3f321d 22-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "48d47795981fe204637f96a6847ab1405ce7e0be",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
