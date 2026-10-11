@@ -1,0 +1,19 @@
+Formula/n/noodle.rb
+  s_cda539916c0d9f::t_f21b847c66b56a 1-64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "88e40935eae6117ee625551910a2cd70a8f2f011",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
