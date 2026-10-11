@@ -12,7 +12,7 @@ class Nanoflann < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "2343c024772f583c687fa0a222a7248a623383eac9ec49c46b7be430f35e9409"
+    sha256 cellar: :any_skip_relocation, all: "6873d724da1b64d58dc080c51cb51a4ab894df8ffe9e4387681e82273b3d4f83"
   end
 
   depends_on "cmake" => :build
