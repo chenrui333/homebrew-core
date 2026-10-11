@@ -1,0 +1,19 @@
+Formula/u/unitycatalog.rb
+  s_cda539916c0d9f::t_27b946fc07c4c2 4-5,26-28,30,56-72,77-79
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f782db5ec5b752d0b94363cba3dcd4ca146e522d",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
