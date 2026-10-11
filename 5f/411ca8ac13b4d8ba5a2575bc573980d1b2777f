@@ -1,0 +1,19 @@
+Formula/o/onnxruntime.rb
+  s_cda539916c0d9f::t_ee493c4ea2a236 4-5,59-60,90-99
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5f411ca8ac13b4d8ba5a2575bc573980d1b2777f",
+  "prompts": {},
+  "sessions": {
+    "s_cda539916c0d9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12375-1fdc-7011-a957-eb9ec749a317",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
