@@ -1,0 +1,14 @@
+Formula/s/svlint.rb
+  h_9df9c32c3f321d 21-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f3ca7221d157256815530c5e766aa6060a0975b8",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
