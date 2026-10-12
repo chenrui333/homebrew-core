@@ -1,0 +1,14 @@
+Formula/h/hurl.rb
+  h_9df9c32c3f321d 38-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4abd1490534077555feceff4dffe07880286b139",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
