@@ -1,0 +1,14 @@
+Formula/h/havn.rb
+  h_9df9c32c3f321d 18-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c32a16910dafcc19baab66fb03bee6b5de347aab",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
