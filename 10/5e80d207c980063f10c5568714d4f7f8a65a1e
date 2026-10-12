@@ -1,0 +1,14 @@
+Formula/l/leaf-proxy.rb
+  h_9df9c32c3f321d 24-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "105e80d207c980063f10c5568714d4f7f8a65a1e",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
