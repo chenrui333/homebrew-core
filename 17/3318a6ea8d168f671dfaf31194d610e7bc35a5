@@ -1,0 +1,14 @@
+Formula/f/fortitude.rb
+  h_9df9c32c3f321d 25-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "173318a6ea8d168f671dfaf31194d610e7bc35a5",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
