@@ -1,0 +1,14 @@
+Formula/e/eureka.rb
+  h_9df9c32c3f321d 27-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bf38aa2ef21c94abd48dc48619be10f6b6fac906",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
