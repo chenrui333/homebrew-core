@@ -1,0 +1,14 @@
+Formula/o/opendoor.rb
+  h_9df9c32c3f321d 6-7,9,15,40-47,63-64,67-68,73-88,96-98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2e69d8752ca30f42eab2d12545c10883af3e1876",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
