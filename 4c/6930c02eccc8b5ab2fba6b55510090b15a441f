@@ -1,0 +1,14 @@
+Formula/m/miniserve.rb
+  h_9df9c32c3f321d 20-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4c6930c02eccc8b5ab2fba6b55510090b15a441f",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
