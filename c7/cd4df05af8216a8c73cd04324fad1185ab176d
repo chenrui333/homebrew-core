@@ -1,0 +1,14 @@
+Formula/h/hickory-dns.rb
+  h_9df9c32c3f321d 24-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c7cd4df05af8216a8c73cd04324fad1185ab176d",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
