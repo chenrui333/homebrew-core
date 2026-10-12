@@ -1,0 +1,14 @@
+Formula/u/urx.rb
+  h_9df9c32c3f321d 19-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "12bf94e961cb43c55d60e18c6a92e823595b402f",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
