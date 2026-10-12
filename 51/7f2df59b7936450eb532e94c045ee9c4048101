@@ -1,0 +1,14 @@
+Formula/h/http-server-rs.rb
+  h_9df9c32c3f321d 33-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "517f2df59b7936450eb532e94c045ee9c4048101",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
