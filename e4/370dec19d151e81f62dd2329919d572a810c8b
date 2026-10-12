@@ -1,0 +1,14 @@
+Formula/d/dum.rb
+  h_9df9c32c3f321d 24-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e4370dec19d151e81f62dd2329919d572a810c8b",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
