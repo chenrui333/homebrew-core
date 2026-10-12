@@ -1,0 +1,14 @@
+Formula/d/dynaconf.rb
+  h_9df9c32c3f321d 9,15,18-21,26,28-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "035d231fb1a82a0dd0c3359623ebc90f2948b6a2",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
