@@ -1,0 +1,14 @@
+Formula/s/somo.rb
+  h_9df9c32c3f321d 18-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2581b82d7ec8a678b80a0a36d3f458a45b9e1665",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
