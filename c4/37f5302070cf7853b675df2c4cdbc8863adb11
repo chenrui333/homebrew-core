@@ -1,0 +1,14 @@
+Formula/s/static-web-server.rb
+  h_9df9c32c3f321d 19-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c437f5302070cf7853b675df2c4cdbc8863adb11",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
