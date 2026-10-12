@@ -1,0 +1,14 @@
+Formula/v/viu.rb
+  h_9df9c32c3f321d 21-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c3ad3da3a90bc97fe237441df749a057a26055d2",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
