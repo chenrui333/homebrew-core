@@ -1,0 +1,14 @@
+Formula/w/wally.rb
+  h_9df9c32c3f321d 30-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a5e88d8198f0a48b64c5bd2cfdd55eb77b18a175",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
