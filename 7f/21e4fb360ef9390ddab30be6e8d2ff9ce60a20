@@ -1,0 +1,14 @@
+Formula/s/svgbob.rb
+  h_9df9c32c3f321d 23-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7f21e4fb360ef9390ddab30be6e8d2ff9ce60a20",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
