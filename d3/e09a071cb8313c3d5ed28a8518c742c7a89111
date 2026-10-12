@@ -1,0 +1,14 @@
+Formula/c/cargo-depgraph.rb
+  h_9df9c32c3f321d 30-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d3e09a071cb8313c3d5ed28a8518c742c7a89111",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
