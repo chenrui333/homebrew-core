@@ -1,0 +1,14 @@
+Formula/f/feluda.rb
+  h_9df9c32c3f321d 33-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f1d05cc6133b7e32a8b0dbed5523f25d9bc22804",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
