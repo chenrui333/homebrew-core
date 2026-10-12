@@ -1,0 +1,14 @@
+Formula/c/comrak.rb
+  h_9df9c32c3f321d 19-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "61f0279551735ef2b4938b90d13021f447e8aa07",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
