@@ -1,0 +1,14 @@
+Formula/t/tuc.rb
+  h_9df9c32c3f321d 23-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7209fcd81b1446a601fb4a6d83d0b4fc07a16699",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
