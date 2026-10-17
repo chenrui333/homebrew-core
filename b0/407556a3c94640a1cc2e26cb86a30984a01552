@@ -1,0 +1,16 @@
+Formula/d/draco.rb
+  h_9df9c32c3f321d 7
+target/build-report.json
+  h_9df9c32c3f321d 1-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b0407556a3c94640a1cc2e26cb86a30984a01552",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
