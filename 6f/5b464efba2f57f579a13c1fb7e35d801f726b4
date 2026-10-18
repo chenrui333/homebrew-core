@@ -1,0 +1,15 @@
+Formula/s/syswatch.rb
+  h_9df9c32c3f321d 4-5,27,29-33,39
+  h_9df9c32c3f321d 28,34,36-37,42-43,45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6f5b464efba2f57f579a13c1fb7e35d801f726b4",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
