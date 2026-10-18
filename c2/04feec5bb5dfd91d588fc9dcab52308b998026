@@ -1,0 +1,14 @@
+Formula/o/odin.rb
+  h_9df9c32c3f321d 9,74-80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c204feec5bb5dfd91d588fc9dcab52308b998026",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
