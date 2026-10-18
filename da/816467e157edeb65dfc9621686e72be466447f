@@ -1,0 +1,14 @@
+Formula/b/bqlog.rb
+  h_9df9c32c3f321d 1-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "da816467e157edeb65dfc9621686e72be466447f",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
