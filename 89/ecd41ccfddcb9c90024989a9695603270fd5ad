@@ -1,0 +1,14 @@
+Formula/o/oasdiff.rb
+  h_9df9c32c3f321d 16-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "89ecd41ccfddcb9c90024989a9695603270fd5ad",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
