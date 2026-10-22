@@ -1,0 +1,14 @@
+Formula/w/watchexec.rb
+  h_9df9c32c3f321d 37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2a5f23ee92823d5f351c91e1692e6c6a63ebc156",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
