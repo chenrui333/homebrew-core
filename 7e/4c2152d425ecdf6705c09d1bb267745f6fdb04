@@ -1,0 +1,14 @@
+Formula/d/dufs.rb
+  h_9df9c32c3f321d 27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7e4c2152d425ecdf6705c09d1bb267745f6fdb04",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
