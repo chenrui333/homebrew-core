@@ -1,0 +1,14 @@
+Formula/a/av1an.rb
+  h_9df9c32c3f321d 58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d8b5b2f0fa556857fb536e84f04d32c233462ad2",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
