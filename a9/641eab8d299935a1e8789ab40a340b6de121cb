@@ -1,0 +1,14 @@
+Formula/o/opencode.rb
+  h_9df9c32c3f321d 90
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a9641eab8d299935a1e8789ab40a340b6de121cb",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
