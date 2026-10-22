@@ -1,0 +1,14 @@
+Formula/e/erdtree.rb
+  h_9df9c32c3f321d 34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "93e21d9e980d11bea2bd3849f88679ecf147685c",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
