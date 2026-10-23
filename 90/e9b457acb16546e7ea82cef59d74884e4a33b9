@@ -1,0 +1,14 @@
+Formula/k/kubernetes-mcp-server.rb
+  h_9df9c32c3f321d 4-5,36-37,61-64,66-68,71-74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "90e9b457acb16546e7ea82cef59d74884e4a33b9",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
