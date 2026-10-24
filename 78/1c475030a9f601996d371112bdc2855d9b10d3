@@ -1,0 +1,14 @@
+Formula/o/onednn.rb
+  h_9df9c32c3f321d 4-5,27-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "781c475030a9f601996d371112bdc2855d9b10d3",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
