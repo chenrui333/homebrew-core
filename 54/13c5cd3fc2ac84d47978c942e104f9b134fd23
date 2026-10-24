@@ -1,0 +1,14 @@
+Formula/w/wildfly-as.rb
+  h_9df9c32c3f321d 4-5,46-47,96-97,99,133-135,137,141
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5413c5cd3fc2ac84d47978c942e104f9b134fd23",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
