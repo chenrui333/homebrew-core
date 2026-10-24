@@ -1,0 +1,14 @@
+Formula/e/erpc.rb
+  h_9df9c32c3f321d 1-65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7f2cab36978a7b6f24ee6c277d6b50cf4f4d1f5c",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
