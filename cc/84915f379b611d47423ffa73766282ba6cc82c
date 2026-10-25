@@ -1,0 +1,14 @@
+Formula/c/chipmunk-physics.rb
+  h_9df9c32c3f321d 5,12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cc84915f379b611d47423ffa73766282ba6cc82c",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
