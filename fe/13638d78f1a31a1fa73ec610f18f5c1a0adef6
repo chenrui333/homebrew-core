@@ -1,0 +1,15 @@
+Formula/n/nextdenovo.rb
+  h_9df9c32c3f321d 1-10,12-98
+  h_9df9c32c3f321d 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fe13638d78f1a31a1fa73ec610f18f5c1a0adef6",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
