@@ -1,0 +1,14 @@
+Formula/g/gitea-importer.rb
+  h_9df9c32c3f321d 1-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "12e54181465531482077080707f39fede29d7632",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
