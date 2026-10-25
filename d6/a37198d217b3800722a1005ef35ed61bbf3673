@@ -1,0 +1,14 @@
+Formula/lib/libvorbis.rb
+  h_9df9c32c3f321d 33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d6a37198d217b3800722a1005ef35ed61bbf3673",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
