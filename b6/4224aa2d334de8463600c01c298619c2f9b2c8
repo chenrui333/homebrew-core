@@ -1,0 +1,14 @@
+Formula/q/qwen-code.rb
+  h_9df9c32c3f321d 4-5,19-21,33-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b64224aa2d334de8463600c01c298619c2f9b2c8",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
