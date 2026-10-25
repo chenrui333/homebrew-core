@@ -1,0 +1,14 @@
+Formula/s/synergy-core.rb
+  h_9df9c32c3f321d 17-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0a30742998f3c25176bcf05e61d6ee5b3e3ff607",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
