@@ -1,0 +1,14 @@
+Formula/s/slivar.rb
+  h_9df9c32c3f321d 1-114
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5dae182a40fd1254bd000ed43db44b9e28dfb458",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
