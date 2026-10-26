@@ -1,0 +1,14 @@
+Formula/p/pymupdf.rb
+  h_9df9c32c3f321d 4-5,21-31,33-34,36,40-45,56-57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "33860dc8e08b74a176008c9935b1125e401d5efb",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
