@@ -1,0 +1,15 @@
+Formula/i/iodine.rb
+  h_9df9c32c3f321d 4-5,20-22,29-31,36-37
+  h_9df9c32c3f321d 35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "390f99a2770a0296844351491d87b53a54883afb",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
