@@ -1,0 +1,14 @@
+Formula/t/tarlz.rb
+  h_9df9c32c3f321d 4-6,34-36,38-39,41-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "05a0f15aa8ed721316356c96f06ccf82112e3f2c",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
