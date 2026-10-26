@@ -1,0 +1,16 @@
+Formula/a/avisynthplus.rb
+  h_9df9c32c3f321d 4-5,36-38
+style_exceptions/runtime_cpu_detection_allowlist.json
+  h_9df9c32c3f321d 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c63d0a19c6ae70515d975ded8d142bb0644f0a3f",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
