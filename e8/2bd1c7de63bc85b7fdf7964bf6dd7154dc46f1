@@ -1,0 +1,14 @@
+Formula/m/manticoresearch.rb
+  h_9df9c32c3f321d 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e82bd1c7de63bc85b7fdf7964bf6dd7154dc46f1",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
