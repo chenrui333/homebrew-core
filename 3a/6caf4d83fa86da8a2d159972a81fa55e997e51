@@ -1,0 +1,14 @@
+Formula/s/sourcery.rb
+  h_9df9c32c3f321d 4-5,45-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3a6caf4d83fa86da8a2d159972a81fa55e997e51",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
