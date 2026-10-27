@@ -1,0 +1,16 @@
+Formula/m/molecule.rb
+  h_9df9c32c3f321d 9,23,43-50
+Formula/a/ansible.rb
+  h_9df9c32c3f321d 643-650
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "478135b63d6cf1fcb887625ef19932ef87ba3126",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
