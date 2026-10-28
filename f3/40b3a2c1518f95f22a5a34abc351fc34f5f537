@@ -1,0 +1,14 @@
+Formula/y/yt-dlp.rb
+  h_9df9c32c3f321d 6-7,25,46-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f340b3a2c1518f95f22a5a34abc351fc34f5f537",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
