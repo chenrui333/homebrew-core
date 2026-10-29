@@ -1,0 +1,14 @@
+Formula/e/et.rb
+  h_9df9c32c3f321d 4-5,48-50,65-67,69-75,78-80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "25ca63a8d1f3bd85d350725bea752d4e85acfba7",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
