@@ -1,0 +1,14 @@
+Formula/o/ollama.rb
+  h_9df9c32c3f321d 5-6,33-38,45-46,200-243
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "da3bd3895dca581ced8da9b99c9e1cb16fc13c69",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
