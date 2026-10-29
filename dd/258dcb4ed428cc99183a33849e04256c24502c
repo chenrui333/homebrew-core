@@ -1,0 +1,14 @@
+Formula/b/bitcoin.rb
+  h_9df9c32c3f321d 4-5,66-67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "dd258dcb4ed428cc99183a33849e04256c24502c",
+  "prompts": {},
+  "humans": {
+    "h_9df9c32c3f321d": {
+      "author": "Rui Chen <rui@chenrui.dev>"
+    }
+  }
+}
