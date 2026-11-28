@@ -53,10 +53,11 @@ class Qrcp < Formula
       }
     JSON
 
-    spawn bin/"qrcp", "-c", testpath/"config.json", "--path", "testing", testpath/"test_data.txt"
-    sleep 1
+    with_test_process(bin/"qrcp", "-c", testpath/"config.json", "--path", "testing", testpath/"test_data.txt") do
+      sleep 1
 
-    # User-Agent header needed in order for curl to be able to receive file
-    assert_equal data, shell_output("curl -H \"User-Agent: Mozilla\" #{server_url}")
+      # User-Agent header needed in order for curl to be able to receive file
+      assert_equal data, shell_output("curl -H \"User-Agent: Mozilla\" #{server_url}")
+    end
   end
 end
