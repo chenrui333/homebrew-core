@@ -46,9 +46,10 @@ class Libcoap < Formula
 
   test do
     port = free_port
-    spawn bin/"coap-server", "-p", port.to_s
-    sleep 1
-    output = shell_output("#{bin}/coap-client -B 5 -m get coap://localhost:#{port}")
-    assert_match "This is a test server made with libcoap", output
+    with_test_process(bin/"coap-server", "-p", port.to_s) do
+      sleep 1
+      output = shell_output("#{bin}/coap-client -B 5 -m get coap://localhost:#{port}")
+      assert_match "This is a test server made with libcoap", output
+    end
   end
 end
