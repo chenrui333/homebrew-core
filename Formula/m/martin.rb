@@ -43,10 +43,11 @@ class Martin < Formula
     system "sqlite3 #{mbtiles} < #{sqlfile}"
 
     port = free_port
-    spawn bin/"martin", mbtiles, "-l", "127.0.0.1:#{port}"
-    sleep 3
-    output = shell_output("curl -s 127.0.0.1:#{port}")
-    assert_match "Martin server is running.", output
+    with_test_process(bin/"martin", mbtiles, "-l", "127.0.0.1:#{port}") do
+      sleep 3
+      output = shell_output("curl -s 127.0.0.1:#{port}")
+      assert_match "Martin server is running.", output
+    end
 
     system bin/"mbtiles", "summary", mbtiles
   end
