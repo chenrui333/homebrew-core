@@ -52,9 +52,10 @@ class Smartdns < Formula
       local-ttl 3
       address /example.com/1.2.3.4
     CONF
-    spawn sbin/"smartdns", "run", "-c", testpath/"smartdns.conf"
-    sleep 2
-    output = shell_output("dig @127.0.0.1 -p #{port} example.com.")
-    assert_match("example.com.\t\t3\tIN\tA\t1.2.3.4", output)
+    with_test_process(sbin/"smartdns", "run", "-c", testpath/"smartdns.conf") do
+      sleep 2
+      output = shell_output("dig @127.0.0.1 -p #{port} example.com.")
+      assert_match("example.com.\t\t3\tIN\tA\t1.2.3.4", output)
+    end
   end
 end
