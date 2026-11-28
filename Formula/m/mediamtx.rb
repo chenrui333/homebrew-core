@@ -49,14 +49,13 @@ class Mediamtx < Formula
     assert_match version.to_s, shell_output("#{bin}/mediamtx --help")
 
     mediamtx_api = "127.0.0.1:#{port}"
-    pid = spawn({ "MTX_API" => "yes", "MTX_APIADDRESS" => mediamtx_api }, bin/"mediamtx", pkgetc/"mediamtx.yml")
-    sleep 3
+    with_test_process("env", "MTX_API=yes", "MTX_APIADDRESS=#{mediamtx_api}",
+                      bin/"mediamtx", pkgetc/"mediamtx.yml") do
+      sleep 3
 
-    # Check API output matches configuration
-    curl_output = shell_output("curl --silent http://#{mediamtx_api}/v3/config/global/get")
-    assert_match "\"apiAddress\":\"#{mediamtx_api}\"", curl_output
-  ensure
-    Process.kill("TERM", pid)
-    Process.wait pid
+      # Check API output matches configuration
+      curl_output = shell_output("curl --silent http://#{mediamtx_api}/v3/config/global/get")
+      assert_match "\"apiAddress\":\"#{mediamtx_api}\"", curl_output
+    end
   end
 end
