@@ -52,13 +52,10 @@ class Supervisor < Formula
       serverurl=unix://supervisor.sock
     INI
 
-    begin
-      pid = spawn bin/"supervisord", "--nodaemon", "-c", "sd.ini"
+    with_test_process(bin/"supervisord", "--nodaemon", "-c", "sd.ini") do
       sleep 3
       output = shell_output("#{bin}/supervisorctl -c sd.ini version")
       assert_match version.to_s, output
-    ensure
-      Process.kill "TERM", pid
     end
   end
 end
