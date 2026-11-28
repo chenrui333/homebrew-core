@@ -48,24 +48,28 @@ class Ehco < Formula
 
     # run tcp server
     server_port = free_port
-    server = TCPServer.new(server_port)
-    server_pid = fork do
-      session = server.accept
-      session.puts "Hello world!"
-      session.close
+    server_pid = TCPServer.open(server_port) do |server|
+      fork do
+        session = server.accept
+        session.puts "Hello world!"
+        session.close
+      end
     end
     sleep 1
 
     # run ehco server
     listen_port = free_port
-    ehco_pid = spawn bin/"ehco", "-l", "localhost:#{listen_port}", "-r", "localhost:#{server_port}"
-    sleep 1
+    with_test_process(bin/"ehco", "-l", "localhost:#{listen_port}", "-r", "localhost:#{server_port}") do
+      sleep 1
 
-    TCPSocket.open("localhost", listen_port) do |sock|
-      assert_match "Hello world!", sock.gets
+      TCPSocket.open("localhost", listen_port) do |sock|
+        assert_match "Hello world!", sock.gets
+      end
     end
   ensure
-    Process.kill "TERM", ehco_pid if ehco_pid
-    Process.kill "TERM", server_pid if server_pid
+    if server_pid
+      Process.kill "TERM", server_pid
+      Process.wait(server_pid)
+    end
   end
 end
