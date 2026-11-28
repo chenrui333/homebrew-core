@@ -61,8 +61,9 @@ class Telnetd < Formula
   test do
     assert_match "usage: telnetd", shell_output("#{sbin}/telnetd usage 2>&1", 1)
     port = free_port.to_s
-    spawn sbin/"telnetd", "-debug", port
-    sleep 2
-    system "nc", "-vz", "127.0.0.1", port
+    with_test_process(sbin/"telnetd", "-debug", port) do
+      sleep 2
+      system "nc", "-vz", "127.0.0.1", port
+    end
   end
 end
