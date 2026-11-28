@@ -79,14 +79,12 @@ class Libgosu < Formula
       # SDL3 fails if no video driver is available and "dummy"
       # workaround doesn't work as libgosu needs OpenGL support in video driver
       IO.pipe do |read_io, write_io|
-        pid = spawn(formula_opt_bin("xorg-server")/"Xvfb", "-displayfd", write_io.fileno.to_s, write_io => write_io)
-        write_io.close
-        ENV["DISPLAY"] = ":#{read_io.read.strip}"
-        system "./test"
-      ensure
-        if pid
-          Process.kill "TERM", pid
-          Process.wait pid
+        xvfb = formula_opt_bin("xorg-server")/"Xvfb"
+        fd = write_io.fileno.to_s
+        with_test_process(xvfb, "-displayfd", fd, write_io => write_io) do
+          write_io.close
+          ENV["DISPLAY"] = ":#{read_io.read.strip}"
+          system "./test"
         end
       end
     else
