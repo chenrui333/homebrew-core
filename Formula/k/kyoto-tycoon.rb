@@ -67,9 +67,10 @@ class KyotoTycoon < Formula
     LUA
     port = free_port
 
-    spawn bin/"ktserver", "-port", port.to_s, "-scr", testpath/"test.lua"
-    sleep 10
+    with_test_process(bin/"ktserver", "-port", port.to_s, "-scr", testpath/"test.lua") do
+      sleep 10
 
-    assert_match "Homebrew\tCool", shell_output("#{bin}/ktremotemgr script -port #{port} echo Homebrew Cool 2>&1")
+      assert_match "Homebrew\tCool", shell_output("#{bin}/ktremotemgr script -port #{port} echo Homebrew Cool 2>&1")
+    end
   end
 end
