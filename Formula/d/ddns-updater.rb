@@ -34,7 +34,9 @@ class DdnsUpdater < Formula
   end
 
   test do
-    system "#{bin}/ddns-updater >log.txt & pid=$!; sleep 3; kill $pid || true"
+    with_test_process(bin/"ddns-updater", out: "log.txt") do
+      sleep 3
+    end
     assert_match "INFO reading JSON config from file data/config.json", File.read(testpath/"log.txt")
     assert_match "INFO Shutdown successful", File.read(testpath/"log.txt")
     assert_match "{}", File.read(testpath/"data/config.json")
