@@ -31,11 +31,12 @@ class Iperf < Formula
   end
 
   test do
-    server = IO.popen("#{bin}/iperf --server")
-    sleep 1
-    assert_match "Bandwidth", pipe_output("#{bin}/iperf --client 127.0.0.1 --time 1")
-  ensure
-    Process.kill("SIGINT", server.pid)
-    Process.wait(server.pid)
+    IO.pipe do |_stdout, writer|
+      with_test_process(bin/"iperf", "--server", out: writer, signal: "INT") do
+        writer.close
+        sleep 1
+        assert_match "Bandwidth", pipe_output("#{bin}/iperf --client 127.0.0.1 --time 1")
+      end
+    end
   end
 end
