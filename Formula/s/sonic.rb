@@ -46,19 +46,17 @@ class Sonic < Formula
     inreplace "config.cfg", "[::1]:1491", "0.0.0.0:#{port}"
     inreplace "config.cfg", "#{var}/sonic", "."
 
-    pid = spawn bin/"sonic"
-    sleep 10
-    TCPSocket.open("localhost", port) do |sock|
-      assert_match "CONNECTED", sock.gets
-      sock.puts "START ingest SecretPassword"
-      assert_match "STARTED ingest protocol(1)", sock.gets
-      sock.puts 'PUSH messages user:0dcde3a6 conversation:71f3d63b "Hello world!"'
-      assert_match "OK", sock.gets
-      sock.puts "QUIT"
-      assert_match "ENDED", sock.gets
+    with_test_process(bin/"sonic") do
+      sleep 10
+      TCPSocket.open("localhost", port) do |sock|
+        assert_match "CONNECTED", sock.gets
+        sock.puts "START ingest SecretPassword"
+        assert_match "STARTED ingest protocol(1)", sock.gets
+        sock.puts 'PUSH messages user:0dcde3a6 conversation:71f3d63b "Hello world!"'
+        assert_match "OK", sock.gets
+        sock.puts "QUIT"
+        assert_match "ENDED", sock.gets
+      end
     end
-  ensure
-    Process.kill "TERM", pid
-    Process.wait pid
   end
 end
