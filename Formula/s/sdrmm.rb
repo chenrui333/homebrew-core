@@ -45,15 +45,11 @@ class Sdrmm < Formula
     assert_match(/\[ok\s*\] Device backends/, shell_output("#{bin}/sdrmm --doctor"))
 
     port = free_port
-    pid = spawn bin/"sdrmm", "--bind", "127.0.0.1:#{port}"
-    begin
+    with_test_process(bin/"sdrmm", "--bind", "127.0.0.1:#{port}") do
       url = "http://127.0.0.1:#{port}"
       status = shell_output("curl -fsS --retry 30 --retry-delay 1 --retry-all-errors #{url}/api/status")
       assert_equal version.to_s, JSON.parse(status)["version"]
       assert_match '<div id="root"', shell_output("curl -fsS #{url}/")
-    ensure
-      Process.kill "TERM", pid
-      Process.wait pid
     end
   end
 end
