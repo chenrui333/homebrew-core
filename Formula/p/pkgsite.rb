@@ -53,28 +53,25 @@ class Pkgsite < Formula
       func Hello() string { return "hi" }
     GO
 
-    pid = spawn bin/"pkgsite", "-http", "127.0.0.1:#{port}", "-cache", testmod_path
-
-    Timeout.timeout(60) do
-      loop do
-        TCPSocket.new("127.0.0.1", port).close
-        break
-      rescue Errno::ECONNREFUSED
-        sleep 0.2
+    with_test_process(bin/"pkgsite", "-http", "127.0.0.1:#{port}", "-cache", testmod_path) do |pid|
+      Timeout.timeout(60) do
+        loop do
+          TCPSocket.new("127.0.0.1", port).close
+          break
+        rescue Errno::ECONNREFUSED
+          sleep 0.2
+        end
       end
+
+      raise "pkgsite exited unexpectedly" if Process.waitpid(pid, Process::WNOHANG)
+
+      package_output = shell_output("curl -s http://127.0.0.1:#{port}/v1/package/example.com/testmod")
+      assert_match '"modulePath":"example.com/testmod"', package_output
+
+      symbols_output = shell_output("curl -s http://127.0.0.1:#{port}/v1/symbols/example.com/testmod")
+      assert_match '"name":"Hello"', symbols_output
+      assert_match '"kind":"Function"', symbols_output
+      assert_match "func Hello() string", symbols_output
     end
-
-    raise "pkgsite exited unexpectedly" if Process.waitpid(pid, Process::WNOHANG)
-
-    package_output = shell_output("curl -s http://127.0.0.1:#{port}/v1/package/example.com/testmod")
-    assert_match '"modulePath":"example.com/testmod"', package_output
-
-    symbols_output = shell_output("curl -s http://127.0.0.1:#{port}/v1/symbols/example.com/testmod")
-    assert_match '"name":"Hello"', symbols_output
-    assert_match '"kind":"Function"', symbols_output
-    assert_match "func Hello() string", symbols_output
-  ensure
-    Process.kill("TERM", pid)
-    Process.wait(pid)
   end
 end
