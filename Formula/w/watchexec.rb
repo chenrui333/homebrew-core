@@ -40,12 +40,15 @@ class Watchexec < Formula
   end
 
   test do
-    o = IO.popen("#{bin}/watchexec -1 --postpone -- echo 'saw file change'")
-    sleep 15
-    touch "test"
-    sleep 15
-    Process.kill("TERM", o.pid)
-    assert_match "saw file change", o.read
+    IO.pipe do |stdout, writer|
+      with_test_process(bin/"watchexec", "-1", "--postpone", "--", "echo", "saw file change", out: writer) do
+        writer.close
+        sleep 15
+        touch "test"
+        sleep 15
+      end
+      assert_match "saw file change", stdout.read
+    end
 
     assert_match version.to_s, shell_output("#{bin}/watchexec --version")
   end
