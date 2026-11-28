@@ -51,12 +51,12 @@ class Rqlite < Formula
       quit
     SQL
 
-    spawn bin/"rqlited", "-http-addr", "localhost:#{port}",
-                         "-raft-addr", "localhost:#{free_port}",
-                         testpath
-    sleep 5
-    assert_match "foo", pipe_output("#{bin}/rqlite -p #{port}", test_sql, 0)
-    assert_match "Statements/sec", shell_output("#{bin}/rqbench -a localhost:#{port} 'SELECT 1'")
+    args = ["-http-addr", "localhost:#{port}", "-raft-addr", "localhost:#{free_port}", testpath]
+    with_test_process(bin/"rqlited", *args) do
+      sleep 5
+      assert_match "foo", pipe_output("#{bin}/rqlite -p #{port}", test_sql, 0)
+      assert_match "Statements/sec", shell_output("#{bin}/rqbench -a localhost:#{port} 'SELECT 1'")
+    end
     assert_match "Version v#{version}", shell_output("#{bin}/rqlite -v")
   end
 end
