@@ -40,11 +40,9 @@ class Toxiproxy < Formula
     assert_match version.to_s, shell_output("#{bin}/toxiproxy-cli --version")
 
     proxy_port = free_port
-    fork { system bin/"toxiproxy-server", "--port", proxy_port.to_s }
-
     upstream_port = free_port
 
-    fork do
+    upstream_pid = fork do
       server = TCPServer.new(upstream_port)
       body = "Hello Homebrew"
       loop do
@@ -58,14 +56,21 @@ class Toxiproxy < Formula
       end
     end
 
-    sleep 3
+    with_test_process(bin/"toxiproxy-server", "--port", proxy_port.to_s) do
+      sleep 3
 
-    listen_port = free_port
-    system bin/"toxiproxy-cli", "--host", "127.0.0.1:#{proxy_port}", "create",
-                                "--listen", "127.0.0.1:#{listen_port}",
-                                "--upstream", "127.0.0.1:#{upstream_port}",
-                                "hello-homebrew"
+      listen_port = free_port
+      system bin/"toxiproxy-cli", "--host", "127.0.0.1:#{proxy_port}", "create",
+                                  "--listen", "127.0.0.1:#{listen_port}",
+                                  "--upstream", "127.0.0.1:#{upstream_port}",
+                                  "hello-homebrew"
 
-    assert_equal "Hello Homebrew", shell_output("curl -s http://127.0.0.1:#{listen_port}/")
+      assert_equal "Hello Homebrew", shell_output("curl -s http://127.0.0.1:#{listen_port}/")
+    end
+  ensure
+    if upstream_pid
+      Process.kill("TERM", upstream_pid)
+      Process.wait(upstream_pid)
+    end
   end
 end
