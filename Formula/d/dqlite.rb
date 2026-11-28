@@ -52,16 +52,25 @@ class Dqlite < Formula
       db1 = free_port
       api2 = free_port
       db2 = free_port
-      out1 = IO.popen("./test --db #{lo}:#{db1} --api #{lo}:#{api1}")
-      sleep 3
-      out2 = IO.popen("./test --db #{lo}:#{db2} --api #{lo}:#{api2} --join #{lo}:#{db1}")
-      sleep 3
-      assert_match "done", shell_output("curl -X PUT -d my-value http://#{lo}:#{api1}/my-key")
-      sleep 1
-      Process.kill("TERM", out1.pid)
-      sleep 1
-      assert_match "my-value", shell_output("curl http://#{lo}:#{api2}/my-key")
-      Process.kill("TERM", out2.pid)
+      args1 = ["--db", "#{lo}:#{db1}", "--api", "#{lo}:#{api1}"]
+      args2 = ["--db", "#{lo}:#{db2}", "--api", "#{lo}:#{api2}", "--join", "#{lo}:#{db1}"]
+      IO.pipe do |_stdout1, writer1|
+        with_test_process("./test", *args1, out: writer1) do |primary_pid|
+          writer1.close
+          sleep 3
+          IO.pipe do |_stdout2, writer2|
+            with_test_process("./test", *args2, out: writer2) do
+              writer2.close
+              sleep 3
+              assert_match "done", shell_output("curl -X PUT -d my-value http://#{lo}:#{api1}/my-key")
+              sleep 1
+              Process.kill("TERM", primary_pid)
+              sleep 1
+              assert_match "my-value", shell_output("curl http://#{lo}:#{api2}/my-key")
+            end
+          end
+        end
+      end
     end
   end
 end
