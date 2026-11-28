@@ -52,13 +52,10 @@ class Lume < Formula
 
     # Test management HTTP server
     port = free_port
-    pid = spawn bin/"lume", "serve", "--port", port.to_s
-    sleep 5
-    begin
+    with_test_process(bin/"lume", "serve", "--port", port.to_s) do
+      sleep 5
       # Serves 404 Not found if no machines created
       assert_match %r{^HTTP/\d(.\d)? (200|404)}, shell_output("curl -si localhost:#{port}/lume").lines.first
-    ensure
-      Process.kill "SIGTERM", pid
     end
   end
 end
