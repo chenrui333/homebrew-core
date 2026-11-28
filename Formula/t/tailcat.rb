@@ -36,26 +36,23 @@ class Tailcat < Formula
     server_log = testpath/"server_log"
     payload = "hello from homebrew"
 
-    server_pid = fork do
-      ENV["TS_DEBUG_TAILCAT_LOCAL_DERP"] = "1"
-      ENV["TAILCAT_ADDR_FILE"] = addr_file.to_s
-      exec bin/"tailcat", "--key=new", derpmap_url,
-           out: server_stdout.to_s, err: server_log.to_s
+    env = %W[TS_DEBUG_TAILCAT_LOCAL_DERP=1 TAILCAT_ADDR_FILE=#{addr_file}]
+    args = [*env, bin/"tailcat", "--key=new", derpmap_url]
+    with_test_process("/usr/bin/env", *args, out: server_stdout.to_s, err: server_log.to_s) do |server_pid|
+      blob = nil
+      60.times do
+        blob = addr_file.read.chomp if addr_file.exist?
+        break unless blob.to_s.empty?
+
+        sleep 0.5
+      end
+      refute_empty blob.to_s, "timed out waiting for the server address"
+
+      pipe_output("#{bin}/tailcat --key=new #{derpmap_url} #{blob}", payload, 0)
+
+      Process.wait(server_pid)
+      assert_predicate $CHILD_STATUS, :success?, "server exited #{$CHILD_STATUS}: #{server_log.read}"
+      assert_equal payload, server_stdout.read
     end
-
-    blob = nil
-    60.times do
-      blob = addr_file.read.chomp if addr_file.exist?
-      break unless blob.to_s.empty?
-
-      sleep 0.5
-    end
-    refute_empty blob.to_s, "timed out waiting for the server address"
-
-    pipe_output("#{bin}/tailcat --key=new #{derpmap_url} #{blob}", payload, 0)
-
-    Process.wait(server_pid)
-    assert_predicate $CHILD_STATUS, :success?, "server exited #{$CHILD_STATUS}: #{server_log.read}"
-    assert_equal payload, server_stdout.read
   end
 end
