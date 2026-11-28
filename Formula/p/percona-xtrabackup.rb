@@ -144,8 +144,7 @@ class PerconaXtrabackup < Formula
     assert_match "Failed to connect to MySQL server", output
 
     system mysql_bin/"mysqld", *mysqld_args, "--initialize-insecure"
-    pid = spawn(mysql_bin/"mysqld", *mysqld_args)
-    begin
+    with_test_process(mysql_bin/"mysqld", *mysqld_args) do |pid|
       sleep 5
       output = shell_output("#{bin}/xtrabackup #{xtrabackup_args.join(" ")} 2>&1")
       refute_match "[ERROR]", output
@@ -153,7 +152,7 @@ class PerconaXtrabackup < Formula
       assert_path_exists testpath/"backup/xtrabackup_info"
     ensure
       system mysql_bin/"mysqladmin", *mysqladmin_args, "shutdown"
-      Process.kill "TERM", pid
+      Process.wait(pid)
     end
   end
 end
