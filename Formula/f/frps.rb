@@ -43,13 +43,14 @@ class Frps < Formula
     assert_match version.to_s, shell_output("#{bin}/frps -v")
     assert_match "Flags", shell_output("#{bin}/frps --help")
 
-    read, write = IO.pipe
-    fork do
-      exec bin/"frps", out: write
-    end
-    sleep 3
+    IO.pipe do |read, write|
+      with_test_process(bin/"frps", out: write) do
+        write.close
+        sleep 3
 
-    output = read.gets
-    assert_match "frps uses command line arguments for config", output
+        output = read.gets
+        assert_match "frps uses command line arguments for config", output
+      end
+    end
   end
 end
