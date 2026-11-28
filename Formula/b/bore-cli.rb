@@ -32,11 +32,13 @@ class BoreCli < Formula
   end
 
   test do
-    _, stdout, wait_thr = Open3.popen2("#{bin}/bore server")
-    assert_match "server listening", stdout.gets("\n")
+    IO.pipe do |stdout, writer|
+      with_test_process(bin/"bore", "server", out: writer) do
+        writer.close
+        assert_match "server listening", stdout.gets("\n")
+      end
+    end
 
     assert_match version.to_s, shell_output("#{bin}/bore --version")
-  ensure
-    Process.kill("TERM", wait_thr.pid)
   end
 end
