@@ -29,14 +29,11 @@ class Progress < Formula
   end
 
   test do
-    pid = spawn "/bin/dd", "if=/dev/urandom", "of=foo", "bs=512", "count=1048576"
-    sleep 1
-    begin
+    with_test_process("/bin/dd", "if=/dev/urandom", "of=foo", "bs=512", "count=1048576", signal: "KILL") do
+      sleep 1
       assert_match "dd", shell_output(bin/"progress")
-    ensure
-      Process.kill 9, pid
-      Process.wait pid
-      rm "foo"
     end
+  ensure
+    rm "foo" if File.exist?("foo")
   end
 end
