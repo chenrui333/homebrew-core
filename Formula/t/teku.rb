@@ -40,10 +40,11 @@ class Teku < Formula
       --p2p-enabled=false
       --data-path=#{testpath}
     ]
-    spawn bin/"teku", *test_args
-    sleep 15
+    with_test_process(bin/"teku", *test_args) do
+      sleep 15
 
-    output = shell_output("curl -sS -XGET http://127.0.0.1:#{rest_port}/eth/v1/node/syncing")
-    assert_match "is_syncing", output
+      output = shell_output("curl -sS -XGET http://127.0.0.1:#{rest_port}/eth/v1/node/syncing")
+      assert_match "is_syncing", output
+    end
   end
 end
