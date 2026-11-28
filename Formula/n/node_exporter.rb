@@ -62,8 +62,9 @@ class NodeExporter < Formula
   test do
     assert_match "node_exporter", shell_output("#{bin}/node_exporter --version 2>&1")
 
-    spawn bin/"node_exporter"
-    sleep 2
-    assert_match "# HELP", shell_output("curl -s localhost:9100/metrics")
+    with_test_process(bin/"node_exporter") do
+      sleep 2
+      assert_match "# HELP", shell_output("curl -s localhost:9100/metrics")
+    end
   end
 end
