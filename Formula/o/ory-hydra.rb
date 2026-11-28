@@ -58,11 +58,12 @@ class OryHydra < Formula
           port: #{admin_port}
     YAML
 
-    spawn bin/"hydra", "serve", "all", "--config", testpath/"config.yaml"
-    sleep 20
+    with_test_process(bin/"hydra", "serve", "all", "--config", testpath/"config.yaml") do
+      sleep 20
 
-    endpoint = "http://127.0.0.1:#{admin_port}/"
-    output = shell_output("#{bin}/hydra list clients --endpoint #{endpoint}")
-    assert_match "CLIENT ID\tCLIENT SECRET", output
+      endpoint = "http://127.0.0.1:#{admin_port}/"
+      output = shell_output("#{bin}/hydra list clients --endpoint #{endpoint}")
+      assert_match "CLIENT ID\tCLIENT SECRET", output
+    end
   end
 end
