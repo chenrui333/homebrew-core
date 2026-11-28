@@ -38,8 +38,9 @@ class Webify < Formula
 
   test do
     port = free_port
-    spawn bin/"webify", "-addr=:#{port}", "cat"
-    sleep 1
-    assert_equal "Homebrew", shell_output("curl -s -d Homebrew http://localhost:#{port}")
+    with_test_process(bin/"webify", "-addr=:#{port}", "cat", signal: "-TERM", pgroup: true) do
+      sleep 1
+      assert_equal "Homebrew", shell_output("curl -s -d Homebrew http://localhost:#{port}")
+    end
   end
 end
