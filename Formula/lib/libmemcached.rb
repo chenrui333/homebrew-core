@@ -83,9 +83,12 @@ class Libmemcached < Formula
 
     memcached = formula_opt_bin("memcached")/"memcached"
     port = free_port
-    io = IO.popen("#{memcached} -l 127.0.0.1 -p #{port}")
-    sleep 1
-    system "./test", port
-    Process.kill "TERM", io.pid
+    IO.pipe do |_stdout, writer|
+      with_test_process(memcached, "-l", "127.0.0.1", "-p", port.to_s, out: writer) do
+        writer.close
+        sleep 1
+        system "./test", port
+      end
+    end
   end
 end
