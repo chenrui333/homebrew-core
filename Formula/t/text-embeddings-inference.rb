@@ -38,11 +38,13 @@ class TextEmbeddingsInference < Formula
 
   test do
     port = free_port
-    spawn bin/"text-embeddings-router", "-p", port.to_s, "--model-id", "sentence-transformers/all-MiniLM-L6-v2"
+    model = "sentence-transformers/all-MiniLM-L6-v2"
 
     data = '{"inputs":"What is Deep Learning?"}'
     header = "Content-Type: application/json"
     retries = "--retry 5 --retry-connrefused"
-    assert_match "[[", shell_output("curl 127.0.0.1:#{port}/embed -X POST -d '#{data}' -H '#{header}' #{retries}")
+    with_test_process(bin/"text-embeddings-router", "-p", port.to_s, "--model-id", model) do
+      assert_match "[[", shell_output("curl 127.0.0.1:#{port}/embed -X POST -d '#{data}' -H '#{header}' #{retries}")
+    end
   end
 end
