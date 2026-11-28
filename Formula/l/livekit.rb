@@ -39,9 +39,10 @@ class Livekit < Formula
   test do
     http_port = free_port
     random_key = "R4AA2dwX3FrMbyY@My3X&Hsmz7W)LuQy"
-    spawn bin/"livekit-server", "--keys", "test: #{random_key}", "--config-body", "port: #{http_port}"
-    sleep 3
-    assert_match "OK", shell_output("curl -s http://localhost:#{http_port}")
+    with_test_process(bin/"livekit-server", "--keys", "test: #{random_key}", "--config-body", "port: #{http_port}") do
+      sleep 3
+      assert_match "OK", shell_output("curl -s http://localhost:#{http_port}")
+    end
 
     output = shell_output("#{bin}/livekit-server --version")
     assert_match "livekit-server version #{version}", output
