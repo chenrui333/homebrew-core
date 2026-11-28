@@ -55,8 +55,9 @@ class YubikeyAgent < Formula
 
   test do
     socket = testpath/"yubikey-agent.sock"
-    spawn bin/"yubikey-agent", "-l", socket
-    sleep 1
-    assert_path_exists socket
+    with_test_process(bin/"yubikey-agent", "-l", socket) do
+      sleep 1
+      assert_path_exists socket
+    end
   end
 end
