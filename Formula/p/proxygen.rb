@@ -62,10 +62,9 @@ class Proxygen < Formula
 
   test do
     port = free_port
-    pid = spawn(bin/"proxygen_echo", "--http_port", port.to_s)
-    sleep 30
-    system "curl", "-v", "http://localhost:#{port}"
-  ensure
-    Process.kill "TERM", pid
+    with_test_process(bin/"proxygen_echo", "--http_port", port.to_s) do
+      sleep 30
+      system "curl", "-v", "http://localhost:#{port}"
+    end
   end
 end
