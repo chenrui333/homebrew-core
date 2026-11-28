@@ -34,12 +34,10 @@ class StripeMock < Formula
     assert_match version.to_s, shell_output("#{bin}/stripe-mock version")
 
     sock = testpath/"stripe-mock.sock"
-    pid = spawn(bin/"stripe-mock", "-http-unix", sock)
-
-    sleep 5
-    assert_path_exists sock
-    assert_predicate sock, :socket?
-  ensure
-    Process.kill "TERM", pid
+    with_test_process(bin/"stripe-mock", "-http-unix", sock) do
+      sleep 5
+      assert_path_exists sock
+      assert_predicate sock, :socket?
+    end
   end
 end
