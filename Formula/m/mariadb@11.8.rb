@@ -190,13 +190,13 @@ class MariadbAT118 < Formula
       "--basedir=#{prefix}", "--datadir=#{testpath}/mysql", "--tmpdir=#{testpath}/tmp",
       "--auth-root-authentication-method=normal"
     port = free_port
-    fork do
-      system bin/"mysqld", "--no-defaults", "--user=#{ENV["USER"]}",
-        "--datadir=#{testpath}/mysql", "--port=#{port}", "--tmpdir=#{testpath}/tmp"
+    args = %W[--no-defaults --user=#{ENV["USER"]} --datadir=#{testpath}/mysql --port=#{port} --tmpdir=#{testpath}/tmp]
+    with_test_process(bin/"mysqld", *args) do |pid|
+      sleep 5
+      assert_match "information_schema",
+        shell_output("#{bin}/mysql --port=#{port} --user=root --password= --execute='show databases;'")
+      system bin/"mysqladmin", "--port=#{port}", "--user=root", "--password=", "shutdown"
+      Process.wait(pid)
     end
-    sleep 5
-    assert_match "information_schema",
-      shell_output("#{bin}/mysql --port=#{port} --user=root --password= --execute='show databases;'")
-    system bin/"mysqladmin", "--port=#{port}", "--user=root", "--password=", "shutdown"
   end
 end
