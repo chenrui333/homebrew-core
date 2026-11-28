@@ -73,16 +73,17 @@ class TrezorBridge < Formula
 
   test do
     # start the server with the USB disabled and enable UDP interface instead
-    server = IO.popen("#{bin}/trezord-go -u=false -e 21324")
-    sleep 1
+    IO.pipe do |_stdout, writer|
+      with_test_process(bin/"trezord-go", "-u=false", "-e", "21324", out: writer, signal: "INT") do
+        writer.close
+        sleep 1
 
-    output = shell_output("curl -s -X POST -H 'Origin: https://test.trezor.io' http://localhost:21325/")
-    assert_equal version.to_s, JSON.parse(output)["version"]
+        output = shell_output("curl -s -X POST -H 'Origin: https://test.trezor.io' http://localhost:21325/")
+        assert_equal version.to_s, JSON.parse(output)["version"]
 
-    assert_match "[]",
-        shell_output("curl -s -X POST -H 'Origin: https://test.trezor.io' http://localhost:21325/enumerate")
-  ensure
-    Process.kill("SIGINT", server.pid)
-    Process.wait(server.pid)
+        assert_match "[]",
+          shell_output("curl -s -X POST -H 'Origin: https://test.trezor.io' http://localhost:21325/enumerate")
+      end
+    end
   end
 end
