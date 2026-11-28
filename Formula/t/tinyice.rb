@@ -52,15 +52,11 @@ class Tinyice < Formula
       }
     JSON
 
-    pid = spawn bin/"tinyice", chdir: testpath
-    sleep 3
+    with_test_process(bin/"tinyice", chdir: testpath) do
+      sleep 3
 
-    begin
       output = shell_output("curl -s --fail http://127.0.0.1:#{port}/")
       assert_match("TinyIce", output)
-    ensure
-      Process.kill "TERM", pid
-      Process.wait pid
     end
   end
 end
