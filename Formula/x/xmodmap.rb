@@ -33,14 +33,11 @@ class Xmodmap < Formula
   test do
     IO.pipe do |read_io, write_io|
       xvfb = formula_opt_bin("xorg-server")/"Xvfb"
-      pid = spawn(xvfb, "-displayfd", write_io.fileno.to_s, "-listen", "tcp", write_io => write_io)
-      write_io.close
-      ENV["DISPLAY"] = ":#{read_io.read.strip}"
-      assert_match "pointer buttons defined", shell_output("#{bin}/xmodmap -pp")
-    ensure
-      if pid
-        Process.kill "TERM", pid
-        Process.wait pid
+      fd = write_io.fileno.to_s
+      with_test_process(xvfb, "-displayfd", fd, "-listen", "tcp", write_io => write_io) do
+        write_io.close
+        ENV["DISPLAY"] = ":#{read_io.read.strip}"
+        assert_match "pointer buttons defined", shell_output("#{bin}/xmodmap -pp")
       end
     end
   end
