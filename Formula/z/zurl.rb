@@ -64,12 +64,13 @@ class Zurl < Formula
       timeout=10
     INI
 
-    server = TCPServer.new("127.0.0.1", port)
-    server_pid = fork do
-      loop do
-        socket = server.accept
-        socket.print "HTTP/1.1 200 OK\r\nContent-Length: 13\r\n\r\ntest response"
-        socket.close
+    server_pid = TCPServer.open("127.0.0.1", port) do |server|
+      fork do
+        loop do
+          socket = server.accept
+          socket.print "HTTP/1.1 200 OK\r\nContent-Length: 13\r\n\r\ntest response"
+          socket.close
+        end
       end
     end
 
@@ -101,12 +102,12 @@ class Zurl < Formula
     flags = shell_output("pkg-config --cflags --libs libzmq").chomp.split
     system ENV.cc, "test.c", *flags, "-lzmq", "-o", "test"
 
-    pid = spawn bin/"zurl", "--config=#{conffile}"
-    begin
+    with_test_process(bin/"zurl", "--config=#{conffile}") do
       system "./test"
-    ensure
-      Process.kill("TERM", pid, server_pid)
-      Process.wait(pid)
+    end
+  ensure
+    if server_pid
+      Process.kill("TERM", server_pid)
       Process.wait(server_pid)
     end
   end
