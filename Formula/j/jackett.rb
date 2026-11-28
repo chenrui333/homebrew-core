@@ -70,14 +70,10 @@ class Jackett < Formula
 
     port = free_port
 
-    pid = spawn bin/"jackett", "-d", testpath, "-p", port.to_s
-
-    begin
+    with_test_process(bin/"jackett", "-d", testpath, "-p", port.to_s) do
       sleep 15
-      assert_match "<title>Jackett</title>", shell_output("curl -b cookiefile -c cookiefile -L --silent http://localhost:#{port}")
-    ensure
-      Process.kill "TERM", pid
-      Process.wait pid
+      command = "curl -b cookiefile -c cookiefile -L --silent http://localhost:#{port}"
+      assert_match "<title>Jackett</title>", shell_output(command)
     end
   end
 end
