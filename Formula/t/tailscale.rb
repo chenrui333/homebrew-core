@@ -73,8 +73,9 @@ class Tailscale < Formula
     assert_match version.to_s, version_text
     assert_match(/commit: [a-f0-9]{40}/, version_text)
 
-    spawn bin/"tailscaled", "-tun=userspace-networking", "-socket=#{testpath}/tailscaled.socket"
-    sleep 2
-    assert_match "Logged out.", shell_output("#{bin}/tailscale --socket=#{testpath}/tailscaled.socket status", 1)
+    with_test_process(bin/"tailscaled", "-tun=userspace-networking", "-socket=#{testpath}/tailscaled.socket") do
+      sleep 2
+      assert_match "Logged out.", shell_output("#{bin}/tailscale --socket=#{testpath}/tailscaled.socket status", 1)
+    end
   end
 end
