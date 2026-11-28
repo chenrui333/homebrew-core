@@ -82,15 +82,13 @@ class Wxmaxima < Formula
     return if OS.mac?
 
     IO.pipe do |read_io, write_io|
-      pid = spawn(formula_opt_bin("xorg-server")/"Xvfb", "-displayfd", write_io.fileno.to_s, write_io => write_io)
-      write_io.close
-      ENV["DISPLAY"] = ":#{read_io.read.strip}"
-      assert_match "wxMaxima #{version}", shell_output("#{wxmaxima} --version 2>&1").chomp
-      assert_match "extra Maxima arguments", shell_output("#{wxmaxima} --help 2>&1", 1)
-    ensure
-      if pid
-        Process.kill "TERM", pid
-        Process.wait pid
+      xvfb = formula_opt_bin("xorg-server")/"Xvfb"
+      fd = write_io.fileno.to_s
+      with_test_process(xvfb, "-displayfd", fd, write_io => write_io) do
+        write_io.close
+        ENV["DISPLAY"] = ":#{read_io.read.strip}"
+        assert_match "wxMaxima #{version}", shell_output("#{wxmaxima} --version 2>&1").chomp
+        assert_match "extra Maxima arguments", shell_output("#{wxmaxima} --help 2>&1", 1)
       end
     end
   end
