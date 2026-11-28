@@ -73,12 +73,11 @@ class Wxlua < Formula
       print(wxlua.wxLUA_VERSION_STRING)
     LUA
 
-    xvfb_pid = spawn formula_opt_bin("xorg-server")/"Xvfb", ":1"
-    ENV["DISPLAY"] = ":1"
-    sleep 10
+    with_test_process(formula_opt_bin("xorg-server")/"Xvfb", ":1") do
+      ENV["DISPLAY"] = ":1"
+      sleep 10
 
-    assert_match "wxLua #{version}", shell_output("#{lua.bin}/lua example.wx.lua")
-  ensure
-    Process.kill("TERM", xvfb_pid) if xvfb_pid
+      assert_match "wxLua #{version}", shell_output("#{lua.bin}/lua example.wx.lua")
+    end
   end
 end
