@@ -38,21 +38,20 @@ class Dtm < Formula
     http_port = free_port
     grpc_port = free_port
 
-    dtm_pid = spawn({ "HTTP_PORT" => http_port.to_s, "GRPC_PORT" => grpc_port.to_s }, bin/"dtm")
-    # sleep to let dtm get its wits about it
-    sleep 5
-    metrics_output = shell_output("curl -s localhost:#{http_port}/api/metrics")
-    assert_match "# HELP dtm_server_info The information of this dtm server.", metrics_output
+    env = %W[HTTP_PORT=#{http_port} GRPC_PORT=#{grpc_port}]
+    with_test_process("/usr/bin/env", *env, bin/"dtm", signal: "HUP") do
+      # sleep to let dtm get its wits about it
+      sleep 5
+      metrics_output = shell_output("curl -s localhost:#{http_port}/api/metrics")
+      assert_match "# HELP dtm_server_info The information of this dtm server.", metrics_output
 
-    all_json = JSON.parse(shell_output("curl -s localhost:#{http_port}/api/dtmsvr/all"))
-    next_position = all_json["next_position"]
-    transactions = all_json["transactions"]
-    assert_instance_of String, next_position
-    assert_instance_of Array, transactions
-    assert_empty next_position
-    assert_empty transactions
-  ensure
-    # clean up the dtm process before we leave
-    Process.kill("HUP", dtm_pid)
+      all_json = JSON.parse(shell_output("curl -s localhost:#{http_port}/api/dtmsvr/all"))
+      next_position = all_json["next_position"]
+      transactions = all_json["transactions"]
+      assert_instance_of String, next_position
+      assert_instance_of Array, transactions
+      assert_empty next_position
+      assert_empty transactions
+    end
   end
 end
