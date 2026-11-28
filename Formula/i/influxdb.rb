@@ -61,18 +61,13 @@ class Influxdb < Formula
   test do
     port = free_port
     host = "http://localhost:#{port}"
-    pid = spawn bin/"influxdb3", "serve",
-                          "--node-id", "node1",
-                          "--object-store", "file",
-                          "--data-dir", testpath/"influxdb_data",
-                          "--http-bind", "0.0.0.0:#{port}"
+    args = ["--node-id", "node1", "--object-store", "file", "--data-dir", testpath/"influxdb_data",
+            "--http-bind", "0.0.0.0:#{port}"]
+    with_test_process(bin/"influxdb3", "serve", *args) do
+      sleep 5
 
-    sleep 5
-
-    curl_output = shell_output("curl --silent --head #{host}")
-    assert_match "401 Unauthorized", curl_output
-  ensure
-    Process.kill "TERM", pid
-    Process.wait pid
+      curl_output = shell_output("curl --silent --head #{host}")
+      assert_match "401 Unauthorized", curl_output
+    end
   end
 end
