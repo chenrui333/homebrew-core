@@ -210,14 +210,13 @@ class PerconaServerAT84 < Formula
     ]
 
     system bin/"mysqld", *mysqld_args, "--initialize-insecure"
-    pid = spawn(bin/"mysqld", *mysqld_args)
-    begin
+    with_test_process(bin/"mysqld", *mysqld_args) do |pid|
       sleep 5
       output = shell_output("#{bin}/mysql #{client_args.join(" ")} --execute='show databases;'")
       assert_match "information_schema", output
     ensure
       system bin/"mysqladmin", *client_args, "shutdown"
-      Process.kill "TERM", pid
+      Process.wait(pid)
     end
   end
 end
