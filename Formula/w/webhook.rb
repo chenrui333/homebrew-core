@@ -42,11 +42,13 @@ class Webhook < Formula
     YAML
 
     port = free_port
-    spawn bin/"webhook", "-hooks", "hooks.yaml", "-port", port.to_s
-    sleep 1
+    args = ["-hooks", "hooks.yaml", "-port", port.to_s]
+    with_test_process(bin/"webhook", *args, signal: "-TERM", pgroup: true) do
+      sleep 1
 
-    system "curl", "localhost:#{port}/hooks/test"
-    sleep 1
-    assert_equal testpath.to_s, (testpath/"out.txt").read.chomp
+      system "curl", "localhost:#{port}/hooks/test"
+      sleep 1
+      assert_equal testpath.to_s, (testpath/"out.txt").read.chomp
+    end
   end
 end
