@@ -115,13 +115,15 @@ class PerlDbdMysql < Formula
     PERL
 
     system mysql.bin/"mysqld", *mysqld_args, "--initialize-insecure"
-    pid = spawn(mysql.bin/"mysqld", *mysqld_args)
-    with_env(PERL5LIB: libexec/"lib/perl5") do
-      sleep 5
-      assert_equal "1,Tim\n2,Jochen\n", shell_output("#{perl} test.pl")
-    ensure
-      system mysql.bin/"mysqladmin", "--port=#{port}", "--socket=#{socket}", "--user=root", "--password=", "shutdown"
-      Process.kill "TERM", pid
+    with_test_process(mysql.bin/"mysqld", *mysqld_args) do |pid|
+      with_env(PERL5LIB: libexec/"lib/perl5") do
+        sleep 5
+        assert_equal "1,Tim\n2,Jochen\n", shell_output("#{perl} test.pl")
+      ensure
+        system mysql.bin/"mysqladmin", "--port=#{port}", "--socket=#{socket}", "--user=root",
+                                       "--password=", "shutdown"
+        Process.wait(pid)
+      end
     end
   end
 end
