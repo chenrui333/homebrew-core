@@ -32,9 +32,10 @@ class SoftServe < Formula
   test do
     assert_match version.to_s, shell_output("#{bin}/soft --version")
 
-    pid = spawn bin/"soft", "serve"
-    sleep 1
-    Process.kill("TERM", pid)
+    with_test_process(bin/"soft", "serve") do
+      sleep 1
+    end
+
     assert_path_exists testpath/"data/soft-serve.db"
     assert_path_exists testpath/"data/hooks/update.sample"
   end
