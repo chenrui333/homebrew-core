@@ -50,20 +50,25 @@ class Seaweedfs < Formula
     master_grpc_port = free_port
     volume_grpc_port = free_port
 
-    spawn bin/"weed", "master", "-ip=127.0.0.1", "-port=#{master_port}", "-port.grpc=#{master_grpc_port}",
-          "-mdir=#{testpath}"
-    spawn bin/"weed", "volume", "-ip=127.0.0.1", "-port=#{volume_port}", "-port.grpc=#{volume_grpc_port}",
-          "-dir=#{testpath}", "-master=127.0.0.1:#{master_port}.#{master_grpc_port}"
-    sleep 30
+    master_args = %W[-ip=127.0.0.1 -port=#{master_port} -port.grpc=#{master_grpc_port} -mdir=#{testpath}]
+    volume_args = %W[
+      -ip=127.0.0.1 -port=#{volume_port} -port.grpc=#{volume_grpc_port}
+      -dir=#{testpath} -master=127.0.0.1:#{master_port}.#{master_grpc_port}
+    ]
+    with_test_process(bin/"weed", "master", *master_args) do
+      with_test_process(bin/"weed", "volume", *volume_args) do
+        sleep 30
 
-    # Upload a test file. Volumes are created lazily, so grow one first.
-    system "curl", "-s", "http://localhost:#{master_port}/vol/grow?count=1&replication=000"
-    fid = JSON.parse(shell_output("curl -s http://localhost:#{master_port}/dir/assign"))["fid"]
-    system "curl", "-F", "file=@#{test_fixtures("test.png")}", "http://localhost:#{volume_port}/#{fid}"
+        # Upload a test file. Volumes are created lazily, so grow one first.
+        system "curl", "-s", "http://localhost:#{master_port}/vol/grow?count=1&replication=000"
+        fid = JSON.parse(shell_output("curl -s http://localhost:#{master_port}/dir/assign"))["fid"]
+        system "curl", "-F", "file=@#{test_fixtures("test.png")}", "http://localhost:#{volume_port}/#{fid}"
 
-    # Download and validate uploaded test file against the original
-    expected_sum = Digest::SHA256.hexdigest(File.read(test_fixtures("test.png")))
-    actual_sum = Digest::SHA256.hexdigest(shell_output("curl http://localhost:#{volume_port}/#{fid}"))
-    assert_equal expected_sum, actual_sum
+        # Download and validate uploaded test file against the original
+        expected_sum = Digest::SHA256.hexdigest(File.read(test_fixtures("test.png")))
+        actual_sum = Digest::SHA256.hexdigest(shell_output("curl http://localhost:#{volume_port}/#{fid}"))
+        assert_equal expected_sum, actual_sum
+      end
+    end
   end
 end
