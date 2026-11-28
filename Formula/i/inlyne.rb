@@ -58,25 +58,22 @@ class Inlyne < Formula
     # Rendering needs a window server, which the macOS test sandbox does not provide
     return if OS.mac?
 
-    pids = []
-    # Not using xvfb-run which can leave behind processes running after test
     IO.pipe do |read_io, write_io|
-      pids << spawn(formula_opt_bin("xorg-server")/"Xvfb", "-displayfd", write_io.fileno.to_s, write_io => write_io)
-      write_io.close
-      ENV["DISPLAY"] = ":#{read_io.read.strip}"
-    end
-    ENV["FONTCONFIG_FILE"] = Formula["fontconfig"].etc/"fonts/fonts.conf"
-    ENV["INLYNE_LOG"] = "cosmic_text::font::system::std=trace,cosmic_text::shape=trace"
-    ENV["NO_COLOR"] = "1"
+      with_test_process(formula_opt_bin("xorg-server")/"Xvfb", "-displayfd", write_io.fileno.to_s,
+                        write_io => write_io) do
+        write_io.close
+        ENV["DISPLAY"] = ":#{read_io.read.strip}"
+        read_io.close
+        ENV["FONTCONFIG_FILE"] = Formula["fontconfig"].etc/"fonts/fonts.conf"
+        ENV["INLYNE_LOG"] = "cosmic_text::font::system::std=trace,cosmic_text::shape=trace"
+        ENV["NO_COLOR"] = "1"
 
-    output_log = testpath/"output.log"
-    pids << spawn(bin/"inlyne", test_markdown, [:out, :err] => output_log.to_s)
-    sleep 5
-    assert_match(/style: Italic.*\n.*'lorem'/, output_log.read)
-  ensure
-    pids&.reverse_each do |pid|
-      Process.kill "TERM", pid
-      Process.wait pid
+        output_log = testpath/"output.log"
+        with_test_process(bin/"inlyne", test_markdown, [:out, :err] => output_log.to_s) do
+          sleep 5
+          assert_match(/style: Italic.*\n.*'lorem'/, output_log.read)
+        end
+      end
     end
   end
 end
