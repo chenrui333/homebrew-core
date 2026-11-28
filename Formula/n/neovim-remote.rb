@@ -54,21 +54,20 @@ class NeovimRemote < Formula
     socket = testpath/"nvimsocket"
     file = testpath/"test.txt"
 
-    nvim = spawn(
-      formula_opt_bin("neovim")/"nvim", "--headless", "-i", "NONE", "-u", "NONE", "--listen", socket, file,
-      [:out, :err] => "/dev/null"
-    )
-    sleep 1 until socket.exist? && socket.socket?
+    args = ["--headless", "-i", "NONE", "-u", "NONE", "--listen", socket, file]
+    with_test_process(formula_opt_bin("neovim")/"nvim", *args, [:out, :err] => File::NULL) do |nvim|
+      sleep 1 until socket.exist? && socket.socket?
 
-    str = "Hello from neovim-remote!"
-    system bin/"nvr", "--servername", socket, "--remote-send", "i#{str}<ESC>:write<CR>"
-    assert_equal str, file.read.chomp
-    assert_equal Process.kill(0, nvim), 1
+      str = "Hello from neovim-remote!"
+      system bin/"nvr", "--servername", socket, "--remote-send", "i#{str}<ESC>:write<CR>"
+      assert_equal str, file.read.chomp
+      assert_equal Process.kill(0, nvim), 1
 
-    system bin/"nvr", "--servername", socket, "--remote-send", ":quit<CR>"
+      system bin/"nvr", "--servername", socket, "--remote-send", ":quit<CR>"
 
-    # Test will be terminated by the timeout
-    # if `:quit` was not sent correctly
-    Process.wait nvim
+      # Test will be terminated by the timeout
+      # if `:quit` was not sent correctly
+      Process.wait nvim
+    end
   end
 end
