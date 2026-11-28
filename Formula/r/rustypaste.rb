@@ -43,8 +43,7 @@ class Rustypaste < Formula
               'address = "127.0.0.1:8000"',
               %Q(address = "#{address}")
 
-    begin
-      server = spawn bin/"rustypaste"
+    with_test_process(bin/"rustypaste") do
       sleep 1
 
       file = "awesome.txt"
@@ -52,9 +51,6 @@ class Rustypaste < Formula
       (testpath/file).write text
       url = shell_output("curl -F file=@#{file} http://#{address}").chomp
       assert_equal text, shell_output("curl #{url}")
-    ensure
-      Process.kill "TERM", server
-      Process.wait server
     end
   end
 end
