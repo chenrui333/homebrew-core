@@ -38,11 +38,9 @@ class Weaviate < Formula
 
   test do
     port = free_port
-    pid = spawn bin/"weaviate", "--host", "0.0.0.0", "--port", port.to_s, "--scheme", "http"
-    sleep 10
-    assert_match version.to_s, shell_output("curl localhost:#{port}/v1/meta")
-  ensure
-    Process.kill "TERM", pid
-    Process.wait pid
+    with_test_process(bin/"weaviate", "--host", "0.0.0.0", "--port", port.to_s, "--scheme", "http") do
+      sleep 10
+      assert_match version.to_s, shell_output("curl localhost:#{port}/v1/meta")
+    end
   end
 end
