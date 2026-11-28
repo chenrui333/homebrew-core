@@ -62,10 +62,7 @@ class Traefik < Formula
         dashboard = true
     TOML
 
-    begin
-      pid = fork do
-        exec bin/"traefik", "--configfile=#{testpath}/traefik.toml"
-      end
+    with_test_process(bin/"traefik", "--configfile=#{testpath}/traefik.toml", signal: "KILL") do
       sleep 8
       cmd_ui = "curl -sIm3 -XGET http://127.0.0.1:#{http_port}/"
       assert_match "404 Not Found", shell_output(cmd_ui)
@@ -76,9 +73,6 @@ class Traefik < Formula
       # Make sure webui assets for dashboard are present at expected destination
       cmd_ui = "curl -XGET http://127.0.0.1:#{ui_port}/dashboard/"
       assert_match "<title>Traefik Proxy</title>", shell_output(cmd_ui)
-    ensure
-      Process.kill(9, pid)
-      Process.wait(pid)
     end
 
     assert_match version.to_s, shell_output("#{bin}/traefik version 2>&1")
