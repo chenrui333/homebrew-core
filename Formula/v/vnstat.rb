@@ -65,13 +65,12 @@ class Vnstat < Formula
     inreplace "vnstat.conf", ";DatabaseDir", "DatabaseDir"
     (testpath/"var/db/vnstat").mkpath
 
-    begin
-      stat = IO.popen("#{bin}/vnstatd --nodaemon --config vnstat.conf")
-      sleep 1
-    ensure
-      Process.kill "SIGINT", stat.pid
-      Process.wait stat.pid
+    IO.pipe do |stdout, writer|
+      with_test_process(bin/"vnstatd", "--nodaemon", "--config", "vnstat.conf", out: writer, signal: "INT") do
+        writer.close
+        sleep 1
+      end
+      assert_match "Info: Monitoring", stdout.read
     end
-    assert_match "Info: Monitoring", stat.read
   end
 end
