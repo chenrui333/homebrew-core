@@ -42,8 +42,9 @@ class Meilisearch < Formula
 
   test do
     port = free_port
-    spawn bin/"meilisearch", "--http-addr", "127.0.0.1:#{port}"
-    output = shell_output("curl --silent --retry 5 --retry-connrefused 127.0.0.1:#{port}/version")
-    assert_match version.to_s, output
+    with_test_process(bin/"meilisearch", "--http-addr", "127.0.0.1:#{port}") do
+      output = shell_output("curl --silent --retry 5 --retry-connrefused 127.0.0.1:#{port}/version")
+      assert_match version.to_s, output
+    end
   end
 end
