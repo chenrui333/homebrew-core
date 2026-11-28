@@ -25,9 +25,10 @@ class Microsocks < Formula
 
   test do
     port = free_port
-    spawn bin/"microsocks", "-p", port.to_s
-    sleep 2
-    output = shell_output("curl --socks5 0.0.0.0:#{port} https://brew.sh")
-    assert_match "The Package Manager for Everywhere", output
+    with_test_process(bin/"microsocks", "-p", port.to_s) do
+      sleep 2
+      output = shell_output("curl --socks5 0.0.0.0:#{port} https://brew.sh")
+      assert_match "The Package Manager for Everywhere", output
+    end
   end
 end
