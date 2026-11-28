@@ -45,7 +45,6 @@ class Cortex < Formula
   end
 
   test do
-    require "open3"
     require "timeout"
 
     port = free_port
@@ -77,22 +76,24 @@ class Cortex < Formula
           path:  #{testpath}/data/alerts
     YAML
 
-    Open3.popen3(
-      bin/"cortex", "-config.file=cortex.yaml",
-                    "-server.grpc-listen-port=#{free_port}"
-    ) do |_, _, stderr, wait_thr|
-      Timeout.timeout(5) do
-        stderr.each do |line|
-          refute_match "level=error", line
-          # It is important to wait for this line. Finishing the test too early
-          # may shadow errors that only occur when modules are fully loaded.
-          break if line.include? "Cortex started"
+    args = %W[-config.file=cortex.yaml -server.grpc-listen-port=#{free_port}]
+    IO.pipe do |_stdout, stdout_writer|
+      IO.pipe do |stderr, stderr_writer|
+        with_test_process(bin/"cortex", *args, out: stdout_writer, err: stderr_writer) do
+          stdout_writer.close
+          stderr_writer.close
+          Timeout.timeout(5) do
+            stderr.each do |line|
+              refute_match "level=error", line
+              # It is important to wait for this line. Finishing the test too early
+              # may shadow errors that only occur when modules are fully loaded.
+              break if line.include? "Cortex started"
+            end
+            output = shell_output("curl -s http://localhost:#{port}/services")
+            assert_match "Running", output
+          end
         end
-        output = shell_output("curl -s http://localhost:#{port}/services")
-        assert_match "Running", output
       end
-    ensure
-      Process.kill "TERM", wait_thr.pid
     end
   end
 end
